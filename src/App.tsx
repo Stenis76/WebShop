@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/header";
+import Menu from "./components/menu";
 import {
   Box,
   Button,
@@ -9,14 +10,15 @@ import {
   Layer,
   ResponsiveContext
 } from "grommet";
-import { FormClose, Cart } from "grommet-icons";
+import { FormClose } from "grommet-icons";
 
 import SHOP_DATA from "./shop.data";
 
 const theme = {
   global: {
     colors: {
-      brand: "#49516f"
+      brand: "#373737",
+      mainText: "#FEFFFF"
     },
     font: {
       family: "Roboto",
@@ -54,22 +56,18 @@ function App() {
     else localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
   };
 
-  console.log(collections);
+  const showSidebarOnClick = () => {
+    setShowSidebar(!showSidebar);
+  };
 
   return (
     <Grommet theme={theme} full>
       <ResponsiveContext.Consumer>
         {size => (
           <Box fill>
-            <Header>
-              <Heading level="3" margin="none">
-                My App
-              </Heading>
-              <Button
-                icon={<Cart />}
-                onClick={() => setShowSidebar(!showSidebar)}
-              />
-            </Header>
+            <Header showSidebarOnClick={showSidebarOnClick} />
+            <Menu />
+
             <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
               <Box flex align="center" justify="center">
                 {collections

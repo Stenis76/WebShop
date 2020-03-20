@@ -1,7 +1,10 @@
 import React from "react";
-import { Box } from "grommet";
+import { Box, Button, Heading } from "grommet";
+import { Cart } from "grommet-icons";
 
-interface Iprops {}
+interface Iprops {
+  showSidebarOnClick: () => void;
+}
 
 const Header = (props: Iprops) => {
   return (
@@ -15,7 +18,12 @@ const Header = (props: Iprops) => {
       elevation="medium"
       style={{ zIndex: 1 }}
       {...props}
-    />
+    >
+      <Heading level="3" margin="none" style={{ fontFamily: `ONEDAY` }}>
+        ADAM FREDICK
+      </Heading>
+      <Button icon={<Cart />} onClick={props.showSidebarOnClick} />
+    </Box>
   );
 };
 

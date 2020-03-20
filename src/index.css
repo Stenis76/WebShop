@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "ONEDAY";
+  src: local("ONEDAY"), url(./fonts/ONEDAY.ttf) format("truetype");
+}
+
+body {
+  font-family: "ONEDAY";
+}
