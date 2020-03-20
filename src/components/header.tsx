@@ -3,7 +3,7 @@ import { Box } from "grommet";
 
 interface Iprops {}
 
-const AppBar = (props: Iprops) => {
+const Header = (props: Iprops) => {
   return (
     <Box
       tag="header"
@@ -19,4 +19,4 @@ const AppBar = (props: Iprops) => {
   );
 };
 
-export default AppBar;
+export default Header;

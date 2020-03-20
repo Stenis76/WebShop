@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import AppBar from "./components/appbar";
+import React, { useState, useEffect } from "react";
+import Header from "./components/header";
 import {
   Box,
   Button,
@@ -10,6 +10,8 @@ import {
   ResponsiveContext
 } from "grommet";
 import { FormClose, Cart } from "grommet-icons";
+
+import SHOP_DATA from "./shop.data";
 
 const theme = {
   global: {
@@ -24,14 +26,42 @@ const theme = {
   }
 };
 
+type Item = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+};
+
+type Collection = {
+  id: number;
+  title: string;
+  routeName: string;
+  items: Item[];
+};
+
 function App() {
-  const [showSidebar, setShowSidebar] = useState<boolean>(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [collections, setCollections] = useState<Collection[]>();
+
+  useEffect(() => {
+    syncWithLocalStorage();
+  }, []);
+
+  const syncWithLocalStorage = () => {
+    const localstorageItems = localStorage.getItem("collection");
+    if (localstorageItems) setCollections(JSON.parse(localstorageItems));
+    else localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
+  };
+
+  console.log(collections);
+
   return (
     <Grommet theme={theme} full>
       <ResponsiveContext.Consumer>
         {size => (
           <Box fill>
-            <AppBar>
+            <Header>
               <Heading level="3" margin="none">
                 My App
               </Heading>
@@ -39,10 +69,19 @@ function App() {
                 icon={<Cart />}
                 onClick={() => setShowSidebar(!showSidebar)}
               />
-            </AppBar>
+            </Header>
             <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
               <Box flex align="center" justify="center">
-                app body
+                {collections
+                  ? collections.map(collection =>
+                      collection.items.map(item => (
+                        <li key={item.id}>
+                          <img src={item.imageUrl} alt="" />
+                          <h2>{item.name}</h2>
+                        </li>
+                      ))
+                    )
+                  : null}
               </Box>
               {!showSidebar || size !== "small" ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
