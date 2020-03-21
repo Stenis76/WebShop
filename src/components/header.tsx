@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Button, Heading } from "grommet";
-import { Cart } from "grommet-icons";
-
+import { Box, Button, Heading, TextInput, FormField } from "grommet";
+import { Cart, Search } from "grommet-icons";
+import SearchBar from "./search-bar";
 interface Iprops {
   showSidebarOnClick: () => void;
 }
@@ -22,7 +22,13 @@ const Header = (props: Iprops) => {
       <Heading level="3" margin="none" style={{ fontFamily: `ONEDAY` }}>
         ADAM FREDICK
       </Heading>
-      <Button icon={<Cart />} onClick={props.showSidebarOnClick} />
+      <Box direction="row">
+        <FormField>
+          <TextInput placeholder="Sök produkter" size="small" />
+        </FormField>
+        <Button icon={<Search />} onClick={() => {}} />
+        <Button icon={<Cart />} onClick={props.showSidebarOnClick} />
+      </Box>
     </Box>
   );
 };

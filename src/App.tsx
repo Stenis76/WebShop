@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/header";
 import Menu from "./components/menu";
+import Directory from "./components/directory";
 import {
   Box,
   Button,
@@ -68,8 +69,14 @@ function App() {
             <Header showSidebarOnClick={showSidebarOnClick} />
             <Menu />
 
-            <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-              <Box flex align="center" justify="center">
+            <Box
+              direction="row"
+              flex
+              overflow={{ horizontal: "hidden" }}
+              pad="large"
+            >
+              {/*Items kommer inte ut första gången man går in om LS är tomt.*/}
+              {/* {<Box flex align="center" justify="center">
                 {collections
                   ? collections.map(collection =>
                       collection.items.map(item => (
@@ -80,7 +87,8 @@ function App() {
                       ))
                     )
                   : null}
-              </Box>
+              </Box>} */}
+              <Directory />
               {!showSidebar || size !== "small" ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box
