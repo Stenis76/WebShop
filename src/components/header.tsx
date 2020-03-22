@@ -1,7 +1,9 @@
 import React from "react";
-import { Box } from "grommet";
-
-interface Iprops {}
+import { Box, Button, Heading, TextInput, FormField } from "grommet";
+import { Cart, Search } from "grommet-icons";
+interface Iprops {
+  showSidebarOnClick: () => void;
+}
 
 const Header = (props: Iprops) => {
   return (
@@ -15,7 +17,23 @@ const Header = (props: Iprops) => {
       elevation="medium"
       style={{ zIndex: 1 }}
       {...props}
-    />
+    >
+      <Heading
+        level="3"
+        margin="none"
+        style={{ fontFamily: `ONEDAY` }}
+        size="large"
+      >
+        ADAM FREDICK
+      </Heading>
+      <Box direction="row">
+        <FormField>
+          <TextInput placeholder="Sök produkter" size="medium" />
+        </FormField>
+        <Button icon={<Search />} onClick={() => {}} />
+        <Button icon={<Cart />} onClick={props.showSidebarOnClick} />
+      </Box>
+    </Box>
   );
 };
 
