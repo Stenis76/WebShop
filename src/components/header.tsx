@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Button, Heading, TextInput, FormField } from "grommet";
 import { Cart, Search } from "grommet-icons";
-import SearchBar from "./search-bar";
 interface Iprops {
   showSidebarOnClick: () => void;
 }

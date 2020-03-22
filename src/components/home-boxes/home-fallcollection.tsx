@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Paragraph } from "grommet";
-import FallCollection from "../../assets/fallcollection.jpg";
+import FallCollection from "../../assets/images/fallcollection.jpg";
 
 const HomeSale = () => {
   return (

@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "ONEDAY";
-  src: local("ONEDAY"), url(./fonts/ONEDAY.ttf) format("truetype");
+  src: local("ONEDAY"), url(./assets/fonts/ONEDAY.ttf) format("truetype");
 }
 
 body {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Paragraph } from "grommet";
-import SaleImage from "../../assets/sale.jpg";
+import SaleImage from "../../assets/images/sale.jpg";
 
 const HomeSale = () => {
   return (

@@ -3,8 +3,7 @@ import HomeHeader from "../components/home-boxes/home-header";
 import HomeCollection from "../components/home-boxes/home-collection";
 import HomeSale from "../components/home-boxes/home-sale";
 import FallCollection from "../components/home-boxes/home-fallcollection";
-import { Grid, Box, Paragraph, Text } from "grommet";
-import FallCollectionImage from "../assets/fallcollection.jpg";
+import { Grid } from "grommet";
 
 const Home = () => {
   return (

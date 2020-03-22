@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Paragraph } from "grommet";
-import WideImage from "../../assets/manwithshirtwide.jpg";
+import WideImage from "../../assets/images/manwithshirtwide.jpg";
 
 const HomeHeader = () => {
   return (

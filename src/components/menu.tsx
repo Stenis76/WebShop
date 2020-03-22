@@ -5,15 +5,15 @@ const Menu = () => {
   return (
     <Box direction="row" justify="between" elevation="xsmall" pad="small">
       <Nav direction="row" background="mainText">
-        <Text margin={{ left: "small" }} size="small">
+        <Text margin={{ left: "small" }} size="medium">
           MENS
         </Text>
-        <Text size="small">WOMENS</Text>
-        <Text size="small">HATS</Text>
-        <Text size="small">JACKETS</Text>
-        <Text size="small">SNEAKERS</Text>
+        <Text size="medium">WOMENS</Text>
+        <Text size="medium">HATS</Text>
+        <Text size="medium">JACKETS</Text>
+        <Text size="medium">SNEAKERS</Text>
       </Nav>
-      <Text size="small">Sign in / Register</Text>
+      <Text size="medium">Sign in / Register</Text>
     </Box>
   );
 };
