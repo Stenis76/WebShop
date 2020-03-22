@@ -4,24 +4,26 @@ import WideImage from "../../assets/manwithshirtwide.jpg";
 
 const HomeHeader = () => {
   return (
-    <Box gridArea="header">
-      <img
-        src={WideImage}
-        alt="WideImage"
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          height: "100%",
-          position: "relative"
-        }}
-      />
+    <Box gridArea="header" style={{ position: "relative" }}>
+      <Box fill>
+        <img
+          src={WideImage}
+          alt="WideImage"
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%"
+          }}
+        />
+      </Box>
       <Paragraph
         size="xxlarge"
         style={{
+          margin: 0,
           position: "absolute",
           color: "#FEFFFF",
-          paddingLeft: "1.5rem",
-          paddingTop: "1.5rem"
+          left: "1rem",
+          bottom: "1rem"
         }}
       >
         Become a <span style={{ color: "#ffc29e" }}>member</span>

@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, Paragraph } from "grommet";
-import Collection from "../../assets/collection.jpg";
+import FallCollection from "../../assets/fallcollection.jpg";
 
-const HomeCollection = () => {
+const HomeSale = () => {
   return (
-    <Box gridArea="collection" style={{ position: "relative" }}>
+    <Box gridArea="fallCollection" style={{ position: "relative" }}>
       <Box fill>
         <img
-          src={Collection}
-          alt="WideImage"
+          src={FallCollection}
+          alt="SaleImage"
           style={{
             objectFit: "cover",
             width: "100%",
@@ -22,19 +22,18 @@ const HomeCollection = () => {
           margin: 0,
           padding: "0.5rem",
           position: "absolute",
-          color: "#ffc29e",
-          right: "1rem",
-          bottom: "1rem",
+          color: "#FEFFFF",
+          left: "38%",
+          bottom: "2rem",
           backgroundColor: "rgba(0, 0, 0, 0.6)",
           fontStyle: "italic"
         }}
       >
-        ADAM
-        <br /> FREDICK
-        <br /> <span style={{ color: "#FEFFFF" }}>collection</span>
+        <span style={{ color: "#ffc29e" }}>Fall Collection</span>
+        <br /> coming soon
       </Paragraph>
     </Box>
   );
 };
 
-export default HomeCollection;
+export default HomeSale;

@@ -1,8 +1,9 @@
 import React from "react";
 import HomeHeader from "../components/home-boxes/home-header";
 import HomeCollection from "../components/home-boxes/home-collection";
+import HomeSale from "../components/home-boxes/home-sale";
+import FallCollection from "../components/home-boxes/home-fallcollection";
 import { Grid, Box, Paragraph, Text } from "grommet";
-import SaleImage from "../assets/sale.jpg";
 import FallCollectionImage from "../assets/fallcollection.jpg";
 
 const Home = () => {
@@ -22,29 +23,8 @@ const Home = () => {
     >
       <HomeHeader />
       <HomeCollection />
-
-      <Box gridArea="sale">
-        <img
-          src={SaleImage}
-          alt="SaleImage"
-          style={{
-            objectFit: "cover",
-            width: "100%",
-            height: "100%"
-          }}
-        />
-      </Box>
-      <Box gridArea="fallCollection">
-        <img
-          src={FallCollectionImage}
-          alt="FallCollectionImage"
-          style={{
-            objectFit: "cover",
-            width: "100%",
-            height: "100%"
-          }}
-        />
-      </Box>
+      <HomeSale />
+      <FallCollection />
     </Grid>
   );
 };

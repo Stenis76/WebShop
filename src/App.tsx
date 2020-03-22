@@ -72,7 +72,7 @@ function App() {
               direction="row"
               flex
               overflow={{ horizontal: "hidden" }}
-              pad="xlarge"
+              pad="large"
             >
               {/*Items kommer inte ut första gången man går in om LS är tomt.*/}
               {/* {<Box flex align="center" justify="center">
