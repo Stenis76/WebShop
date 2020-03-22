@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Abel|Viaoda+Libre&display=swap");
+
 @font-face {
   font-family: "ONEDAY";
   src: local("ONEDAY"), url(./fonts/ONEDAY.ttf) format("truetype");

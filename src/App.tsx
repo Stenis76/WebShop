@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/header";
 import Menu from "./components/menu";
-import Directory from "./components/directory";
+import Home from "./pages/home";
 import {
   Box,
   Button,
   Collapsible,
-  Heading,
   Grommet,
   Layer,
   ResponsiveContext
@@ -22,7 +21,7 @@ const theme = {
       mainText: "#FEFFFF"
     },
     font: {
-      family: "Roboto",
+      family: "Abel",
       size: "18px",
       height: "20px"
     }
@@ -73,7 +72,7 @@ function App() {
               direction="row"
               flex
               overflow={{ horizontal: "hidden" }}
-              pad="large"
+              pad="xlarge"
             >
               {/*Items kommer inte ut första gången man går in om LS är tomt.*/}
               {/* {<Box flex align="center" justify="center">
@@ -88,7 +87,7 @@ function App() {
                     )
                   : null}
               </Box>} */}
-              <Directory />
+              <Home />
               {!showSidebar || size !== "small" ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box

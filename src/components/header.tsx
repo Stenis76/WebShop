@@ -19,12 +19,17 @@ const Header = (props: Iprops) => {
       style={{ zIndex: 1 }}
       {...props}
     >
-      <Heading level="3" margin="none" style={{ fontFamily: `ONEDAY` }}>
+      <Heading
+        level="3"
+        margin="none"
+        style={{ fontFamily: `ONEDAY` }}
+        size="large"
+      >
         ADAM FREDICK
       </Heading>
       <Box direction="row">
         <FormField>
-          <TextInput placeholder="Sök produkter" size="small" />
+          <TextInput placeholder="Sök produkter" size="medium" />
         </FormField>
         <Button icon={<Search />} onClick={() => {}} />
         <Button icon={<Cart />} onClick={props.showSidebarOnClick} />
