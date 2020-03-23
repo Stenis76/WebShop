@@ -1,5 +1,6 @@
 import React from "react";
 import { Nav, Text, Box } from "grommet";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (
@@ -11,7 +12,9 @@ const Menu = () => {
         <Text size="medium">WOMENS</Text>
         <Text size="medium">HATS</Text>
         <Text size="medium">JACKETS</Text>
-        <Text size="medium">SNEAKERS</Text>
+        <Link to="/shop/sneakers">
+          <Text size="medium">SNEAKERS</Text>
+        </Link>
       </Nav>
       <Text size="medium">Sign in / Register</Text>
     </Box>

@@ -1,9 +1,7 @@
 import React from "react";
 import { Box, Button, Heading, TextInput, FormField } from "grommet";
 import { Cart, Search } from "grommet-icons";
-interface Iprops {
-  showSidebarOnClick: () => void;
-}
+interface Iprops {}
 
 const Header = (props: Iprops) => {
   return (
@@ -31,7 +29,7 @@ const Header = (props: Iprops) => {
           <TextInput placeholder="Sök produkter" size="medium" />
         </FormField>
         <Button icon={<Search />} onClick={() => {}} />
-        <Button icon={<Cart />} onClick={props.showSidebarOnClick} />
+        <Button icon={<Cart />} />
       </Box>
     </Box>
   );
