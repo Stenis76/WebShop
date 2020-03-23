@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useContext } from "react";
 import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import CartContext from "../contexts/cartContext/context";
 
 interface IProps extends RouteComponentProps {}
 
 const Shop: FC<IProps> = ({ match }) => {
   const [items, setItems] = useState([]);
+  const { addItemToCart } = useContext(CartContext);
   const { category } = useParams();
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const Shop: FC<IProps> = ({ match }) => {
           <h2>{item.name}</h2>
           <img src={item.imageUrl} alt="" />
           <span>{item.price * 10} kr</span>
+          <button onClick={() => addItemToCart(item)}>Add to cart</button>
         </li>
       ))}
     </ul>

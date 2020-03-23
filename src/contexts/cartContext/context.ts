@@ -2,8 +2,8 @@ import React from "react";
 
 interface IState {
   cart: any[];
-  addItemToCart: () => void;
-  removeItemFromCart: () => void;
+  addItemToCart: (item: object) => void;
+  removeItemFromCart: (itemId: number) => void;
 }
 
 export default React.createContext<IState>({
