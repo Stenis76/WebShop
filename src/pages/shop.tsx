@@ -1,8 +1,45 @@
+
 import React, { FC, useEffect, useState, useContext } from "react";
 import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
 import CartContext from "../contexts/cartContext/context";
 
 interface IProps extends RouteComponentProps {}
+
+/*
+import React from "react";
+import { Grid, Box } from "grommet";
+import Directory from "../components/directory";
+
+interface Iprops {
+  collection: any;
+}
+
+const Shop = (props: Iprops) => {
+  console.log(props.collection);
+
+  return (
+    <Grid
+      fill
+      responsive={true}
+      areas={[
+        { name: "directory", start: [0, 0], end: [0, 0] },
+        { name: "main", start: [1, 0], end: [1, 0] }
+      ]}
+      columns={["small", "flex"]}
+      rows={["flex"]}
+      gap="small"
+    >
+      <Directory />
+      <Box gridArea="main" background="brand" />
+
+        <Switch>
+          <Route path="/shop/sneakers" />
+        </Switch>
+  
+    </Grid>
+  );
+};
+*/
 
 const Shop: FC<IProps> = ({ match }) => {
   const [items, setItems] = useState([]);
