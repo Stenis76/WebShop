@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
 import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
+import Shop from "./pages/shop";
 import {
   Box,
   Button,
@@ -87,7 +89,16 @@ function App() {
                     )
                   : null}
               </Box>} */}
-              <Home />
+
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route path="/shop/:category">
+                  <Shop />
+                </Route>
+              </Switch>
+
               {!showSidebar || size !== "small" ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box

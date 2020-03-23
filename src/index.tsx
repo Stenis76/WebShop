@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./assets/fonts/ONEDAY.ttf";
@@ -8,9 +9,11 @@ import "./index.css";
 import ApplicationContextProvider from "./contexts";
 
 ReactDOM.render(
-  <ApplicationContextProvider>
-    <App />
-  </ApplicationContextProvider>,
+  <BrowserRouter>
+    <ApplicationContextProvider>
+      <App />
+    </ApplicationContextProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
