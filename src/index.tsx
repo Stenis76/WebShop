@@ -5,7 +5,14 @@ import * as serviceWorker from "./serviceWorker";
 import "./assets/fonts/ONEDAY.ttf";
 import "./index.css";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import ApplicationContextProvider from "./contexts";
+
+ReactDOM.render(
+  <ApplicationContextProvider>
+    <App />
+  </ApplicationContextProvider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
