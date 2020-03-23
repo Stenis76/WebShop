@@ -1,9 +1,8 @@
-
 import React, { FC, useEffect, useState, useContext } from "react";
-import { withRouter, RouteComponentProps, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CartContext from "../contexts/cartContext/context";
 
-interface IProps extends RouteComponentProps {}
+interface IProps {}
 
 /*
 import React from "react";
@@ -41,7 +40,7 @@ const Shop = (props: Iprops) => {
 };
 */
 
-const Shop: FC<IProps> = ({ match }) => {
+const Shop: FC<IProps> = () => {
   const [items, setItems] = useState([]);
   const { addItemToCart } = useContext(CartContext);
   const { category } = useParams();
@@ -58,8 +57,6 @@ const Shop: FC<IProps> = ({ match }) => {
     }
   }, [category]);
 
-  console.log(items);
-
   return (
     <ul>
       {items.map((item: any) => (
@@ -74,4 +71,4 @@ const Shop: FC<IProps> = ({ match }) => {
   );
 };
 
-export default withRouter(Shop);
+export default Shop;
