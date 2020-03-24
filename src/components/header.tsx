@@ -6,6 +6,7 @@ interface Iprops {}
 const Header = (props: Iprops) => {
   return (
     <Box
+      height="8vh"
       tag="header"
       direction="row"
       align="center"

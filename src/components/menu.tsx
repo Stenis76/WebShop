@@ -4,7 +4,14 @@ import { Nav, Text, Box } from "grommet";
 
 const Menu = () => {
   return (
-    <Box direction="row" justify="between" elevation="xsmall" pad="small">
+    <Box
+      height="5vh"
+      direction="row"
+      justify="between"
+      align="center"
+      elevation="xsmall"
+      pad="small"
+    >
       <Nav direction="row" background="mainText">
         <Text margin={{ left: "small" }} size="medium">
           <Link to="/shop/mens">MENS</Link>
