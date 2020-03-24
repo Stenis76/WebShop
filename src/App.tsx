@@ -62,13 +62,15 @@ function App() {
       <Grommet theme={theme} full>
         <Header />
         <Menu />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route
-            path="/shop"
-            render={props => <Shop {...props} collection={collections} />}
-          />
-        </Switch>
+        <Box height="87vh" pad="large">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route
+              path="/shop"
+              render={props => <Shop {...props} collection={collections} />}
+            />
+          </Switch>
+        </Box>
       </Grommet>
     </Router>
   );
