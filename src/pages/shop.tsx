@@ -1,48 +1,15 @@
-import React, { FC, useEffect, useState, useContext } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CartContext from "../contexts/cartContext/context";
+
+import { Grid, Box } from "grommet";
+import Directory from "../components/directory";
+import Item from "../components/item";
 
 interface IProps {}
 
-/*
-import React from "react";
-import { Grid, Box } from "grommet";
-import Directory from "../components/directory";
-
-interface Iprops {
-  collection: any;
-}
-
-const Shop = (props: Iprops) => {
-  console.log(props.collection);
-
-  return (
-    <Grid
-      fill
-      responsive={true}
-      areas={[
-        { name: "directory", start: [0, 0], end: [0, 0] },
-        { name: "main", start: [1, 0], end: [1, 0] }
-      ]}
-      columns={["small", "flex"]}
-      rows={["flex"]}
-      gap="small"
-    >
-      <Directory />
-      <Box gridArea="main" background="brand" />
-
-        <Switch>
-          <Route path="/shop/sneakers" />
-        </Switch>
-  
-    </Grid>
-  );
-};
-*/
-
 const Shop: FC<IProps> = () => {
   const [items, setItems] = useState([]);
-  const { addItemToCart } = useContext(CartContext);
+
   const { category } = useParams();
 
   useEffect(() => {
@@ -58,16 +25,34 @@ const Shop: FC<IProps> = () => {
   }, [category]);
 
   return (
-    <ul>
-      {items.map((item: any) => (
-        <li key={item.id}>
-          <h2>{item.name}</h2>
-          <img src={item.imageUrl} alt="" />
-          <span>{item.price * 10} kr</span>
-          <button onClick={() => addItemToCart(item)}>Add to cart</button>
-        </li>
-      ))}
-    </ul>
+    <Grid
+      fill
+      responsive={true}
+      areas={[
+        { name: "directory", start: [0, 0], end: [0, 0] },
+        { name: "main", start: [1, 0], end: [1, 0] }
+      ]}
+      columns={["medium", "flex"]}
+      rows={["flex"]}
+      gap="small"
+    >
+      <Directory />
+
+      <Box
+        style={{
+          gridArea: "main",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          margin: "small",
+          justifyContent: "center"
+        }}
+      >
+        {items.map((item: any) => (
+          <Item key={item.id} item={item} />
+        ))}
+      </Box>
+    </Grid>
   );
 };
 
