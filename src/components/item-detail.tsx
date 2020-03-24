@@ -1,4 +1,4 @@
-m viewimport React from "react";
+import React from "react";
 import { Box, Text, Layer, Heading, Image } from "grommet";
 
 interface Iprops {
