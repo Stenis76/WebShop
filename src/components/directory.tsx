@@ -4,9 +4,9 @@ import { Heading, Box, Select, Stack, Text, RangeSelector } from "grommet";
 
 const Directory = () => {
   const { category } = useParams();
-  const [size, setSize] = React.useState("medium");
-  const [season, setSeason] = React.useState("summer");
-  const [values, setPrice] = React.useState([3, 7]);
+  const [size, setSize] = React.useState("");
+  const [season, setSeason] = React.useState("");
+  const [values, setPrice] = React.useState([30, 900]);
 
   return (
     <Box fill align="center" background="dark-3">
