@@ -21,11 +21,13 @@ const Item = (props: Iprops) => {
       background={url}
       margin="small"
     >
-      <h2>{props.item.name}</h2>
-      <span>{props.item.price * 10} kr</span>
-      <button onClick={() => addItemToCart(props.item)}>Add to cart</button>
-
+      <Button onClick={() => addItemToCart(props.item)} label="Add to cart" />
       <Button label="show" onClick={() => setShow(true)} />
+      <Box>
+        <h2>{props.item.name}</h2>
+        <span>{props.item.price * 10} kr</span>
+      </Box>
+
       {show && (
         <Layer
           onEsc={() => setShow(false)}

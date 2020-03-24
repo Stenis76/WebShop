@@ -14,23 +14,35 @@ const Menu = () => {
     >
       <Nav direction="row" background="mainText">
         <Text margin={{ left: "small" }} size="medium">
-          <Link to="/shop/mens">MENS</Link>
+          <Link className="link" to="/shop/mens">
+            MENS
+          </Link>
         </Text>
         <Text size="medium">
-          <Link to="/shop/womens">WOMENS</Link>
+          <Link className="link" to="/shop/womens">
+            WOMENS
+          </Link>
         </Text>
         <Text size="medium">
-          <Link to="/shop/hats">HATS</Link>
+          <Link className="link" to="/shop/hats">
+            HATS
+          </Link>
         </Text>
         <Text size="medium">
-          <Link to="/shop/jackets">JACKETS</Link>
+          <Link className="link" to="/shop/jackets">
+            JACKETS
+          </Link>
         </Text>
         <Text size="medium">
-          <Link to="/shop/sneakers">SNEAKERS</Link>
+          <Link className="link" to="/shop/sneakers">
+            SNEAKERS
+          </Link>
         </Text>
       </Nav>
       <Text size="medium">
-        <Link to="/sign-in-sign-up">Sign in / Register</Link>
+        <Link className="link" to="/sign-in-sign-up">
+          Sign in / Register
+        </Link>
       </Text>
     </Box>
   );

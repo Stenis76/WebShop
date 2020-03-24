@@ -26,9 +26,8 @@ const HomeHeader = () => {
           bottom: "1rem"
         }}
       >
-        Become a <span style={{ color: "#ffc29e" }}>member</span>
-        <br></br> and get <span style={{ color: "#ffc29e" }}>FREE</span>{" "}
-        shipping
+        <span style={{ color: "#ffc29e" }}>ADAM FREDICK COLLECTION</span>
+        <br />- fashion for everyone
       </Paragraph>
     </Box>
   );

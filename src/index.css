@@ -8,3 +8,12 @@
 body {
   font-family: "ONEDAY";
 }
+
+.link {
+  color: #373737;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

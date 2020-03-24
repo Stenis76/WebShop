@@ -5,8 +5,7 @@ import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
 import Shop from "./pages/shop";
-import { Grommet } from "grommet";
-import { FormClose } from "grommet-icons";
+import { Grommet, Box } from "grommet";
 
 import SHOP_DATA from "./shop.data";
 
@@ -54,10 +53,12 @@ function App() {
     <Grommet theme={theme} full>
       <Header />
       <Menu />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/shop/:category" component={Shop} />} />
-      </Switch>
+      <Box height="87vh" pad="large">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/shop/:category" component={Shop} />} />
+        </Switch>
+      </Box>
     </Grommet>
   );
 }
