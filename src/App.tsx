@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+
 import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
 import Shop from "./pages/shop";
-import {
-  Box,
-  Button,
-  Collapsible,
-  Grommet,
-  Layer,
-  ResponsiveContext
-} from "grommet";
+import { Grommet } from "grommet";
 import { FormClose } from "grommet-icons";
 
 import SHOP_DATA from "./shop.data";
@@ -45,34 +39,26 @@ type Collection = {
 };
 
 function App() {
-  const [collections, setCollections] = useState<Collection[]>();
-
   useEffect(() => {
     syncWithLocalStorage();
   }, []);
 
   const syncWithLocalStorage = () => {
-    const localstorageItems = localStorage.getItem("collection");
-    if (localstorageItems) setCollections(JSON.parse(localstorageItems));
-    else localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
+    const localstorageCollections = localStorage.getItem("collection");
+    if (!localstorageCollections) {
+      localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
+    }
   };
 
   return (
-    <Router>
-      <Grommet theme={theme} full>
-        <Header />
-        <Menu />
-        <Box height="87vh" pad="large">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route
-              path="/shop"
-              render={props => <Shop {...props} collection={collections} />}
-            />
-          </Switch>
-        </Box>
-      </Grommet>
-    </Router>
+    <Grommet theme={theme} full>
+      <Header />
+      <Menu />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/shop/:category" component={Shop} />} />
+      </Switch>
+    </Grommet>
   );
 }
 
