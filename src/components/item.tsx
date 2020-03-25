@@ -13,19 +13,39 @@ const Item = (props: Iprops) => {
   const [show, setShow] = React.useState(false);
   return (
     <Box
-      width="small"
+      width="medium"
       height="medium"
       round="small"
       align="center"
-      justify="center"
+      justify="end"
       background={url}
       margin="small"
     >
-      <Button onClick={() => addItemToCart(props.item)} label="Add to cart" />
-      <Button label="show" onClick={() => setShow(true)} />
-      <Box>
-        <h2>{props.item.name}</h2>
-        <span>{props.item.price * 10} kr</span>
+      <Box
+        direction="row"
+        background="rgba(255,255,255,0.8)"
+        width="100%"
+        height="30%"
+        justify="evenly"
+        align="center"
+      >
+        <Box direction="column" justify="between">
+          <h3>{props.item.name}</h3>
+          <span>{props.item.price * 10} kr</span>
+        </Box>
+        <Box direction="column" justify="between">
+          <Button
+            onClick={() => addItemToCart(props.item)}
+            label="Add to cart"
+            margin="small"
+            size="medium"
+          />
+          <Button
+            label="Show details"
+            onClick={() => setShow(true)}
+            size="medium"
+          />
+        </Box>
       </Box>
 
       {show && (
