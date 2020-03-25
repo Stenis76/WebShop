@@ -13,19 +13,44 @@ const Item = (props: Iprops) => {
   const [show, setShow] = React.useState(false);
   return (
     <Box
-      width="small"
+      width="medium"
       height="medium"
       round="small"
       align="center"
-      justify="center"
+      justify="end"
       background={url}
       margin="small"
     >
-      <h2>{props.item.name}</h2>
-      <span>{props.item.price * 10} kr</span>
-      <button onClick={() => addItemToCart(props.item)}>Add to cart</button>
+      <Box
+        direction="row"
+        background="rgba(255,255,255,0.8)"
+        width="100%"
+        height="30%"
+        justify="evenly"
+        align="center"
+      >
+        <Box direction="column" justify="between">
+          <h3>{props.item.name}</h3>
+          <span>{props.item.price * 10} kr</span>
+        </Box>
+        <Box direction="column" align="end">
+          <Button
+            primary
+            onClick={() => addItemToCart(props.item)}
+            label="Add to cart"
+            margin="small"
+            color="buttonBg"
+          />
+          <Button
+            alignSelf="center"
+            plain
+            color="#c96d36"
+            label="Product details"
+            onClick={() => setShow(true)}
+          />
+        </Box>
+      </Box>
 
-      <Button label="show" onClick={() => setShow(true)} />
       {show && (
         <Layer
           onEsc={() => setShow(false)}

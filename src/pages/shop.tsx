@@ -45,7 +45,8 @@ const Shop: FC<IProps> = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           margin: "small",
-          justifyContent: "center"
+          justifyContent: "center",
+          overflowY: "scroll"
         }}
       >
         {items.map((item: any) => (

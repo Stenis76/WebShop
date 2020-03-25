@@ -16,23 +16,6 @@ const HomeCollection = () => {
           }}
         />
       </Box>
-      <Paragraph
-        size="medium"
-        style={{
-          margin: 0,
-          padding: "0.5rem",
-          position: "absolute",
-          color: "#ffc29e",
-          right: "1rem",
-          bottom: "1rem",
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          fontStyle: "italic"
-        }}
-      >
-        ADAM
-        <br /> FREDICK
-        <br /> <span style={{ color: "#FEFFFF" }}>collection</span>
-      </Paragraph>
     </Box>
   );
 };
