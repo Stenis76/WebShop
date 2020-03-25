@@ -33,7 +33,9 @@ const Directory = () => {
           placeholder="Size"
           onChange={({ option }) => setSize(option)}
         />
-        <Text style={{ color: "#c96d36" }}>Clear</Text>
+        <Text style={{ color: "#c96d36" }} onClick={({}) => setSize("")}>
+          Clear
+        </Text>
       </Box>
       <Box
         direction="row"
@@ -48,7 +50,9 @@ const Directory = () => {
           placeholder="Season"
           onChange={({ option }) => setSeason(option)}
         />
-        <Text style={{ color: "#c96d36" }}>Clear</Text>
+        <Text style={{ color: "#c96d36" }} onClick={({}) => setSeason("")}>
+          Clear
+        </Text>
       </Box>
       <hr />
       <br />

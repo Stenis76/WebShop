@@ -13,7 +13,9 @@ const theme = {
   global: {
     colors: {
       brand: "#373737",
-      mainText: "#FEFFFF"
+      mainText: "#FEFFFF",
+      buttonBg: "#373737",
+      copper: "#ffc29e"
     },
     font: {
       family: "Abel",

@@ -33,17 +33,20 @@ const Item = (props: Iprops) => {
           <h3>{props.item.name}</h3>
           <span>{props.item.price * 10} kr</span>
         </Box>
-        <Box direction="column" justify="between">
+        <Box direction="column" align="end">
           <Button
+            primary
             onClick={() => addItemToCart(props.item)}
             label="Add to cart"
             margin="small"
-            size="medium"
+            color="buttonBg"
           />
           <Button
-            label="Show details"
+            alignSelf="center"
+            plain
+            color="#c96d36"
+            label="Product details"
             onClick={() => setShow(true)}
-            size="medium"
           />
         </Box>
       </Box>
