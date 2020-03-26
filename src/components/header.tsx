@@ -1,19 +1,23 @@
-import React, { useContext } from "react";
+import { Box, Button, Heading, TextInput, FormField, Layer, Stack, Text } from "grommet";
 import CartContext from "../contexts/cartContext/context";
-import {
-  Box,
-  Button,
-  Heading,
-  TextInput,
-  FormField,
-  Stack,
-  Text
-} from "grommet";
 import { Cart, Search } from "grommet-icons";
+import MyCart from "./cart";
 interface Iprops {}
 
+interface Istate {
+  setOpen(): boolean;
+}
+
 const Header = (props: Iprops) => {
+
   const { cart } = useContext(CartContext);
+
+  const [open, setOpen] = React.useState();
+
+  const onOpen = () => setOpen(true);
+
+  const onClose = () => setOpen(undefined);
+
   return (
     <Box
       height="8vh"
@@ -39,10 +43,11 @@ const Header = (props: Iprops) => {
         <FormField>
           <TextInput placeholder="Sök produkter" size="medium" />
         </FormField>
+
         <Button
           margin={{ right: "medium" }}
           icon={<Search />}
-          onClick={() => {}}
+          onClick={onOpen}
         />
         {cart.length != 0 ? (
           <Stack anchor="top-right" margin={{ right: "medium" }}>
@@ -58,7 +63,13 @@ const Header = (props: Iprops) => {
             <Cart size="large" />
           </Stack>
         )}
+
       </Box>
+      {open && (
+        <Layer position="top-right" onClickOutside={onClose}>
+          <MyCart />
+        </Layer>
+      )}
     </Box>
   );
 };
