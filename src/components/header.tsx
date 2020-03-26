@@ -1,9 +1,19 @@
 import React from "react";
-import { Box, Button, Heading, TextInput, FormField } from "grommet";
+import { Box, Button, Heading, TextInput, FormField, Layer } from "grommet";
 import { Cart, Search } from "grommet-icons";
+import MyCart from "./cart";
 interface Iprops {}
 
+interface Istate {
+  setOpen(): boolean;
+}
+
 const Header = (props: Iprops) => {
+  const [open, setOpen] = React.useState();
+
+  const onOpen = () => setOpen(true);
+
+  const onClose = () => setOpen(undefined);
   return (
     <Box
       height="8vh"
@@ -30,8 +40,13 @@ const Header = (props: Iprops) => {
           <TextInput placeholder="Sök produkter" size="medium" />
         </FormField>
         <Button icon={<Search />} onClick={() => {}} />
-        <Button icon={<Cart />} />
+        <Button icon={<Cart />} onClick={onOpen} />
       </Box>
+      {open && (
+        <Layer position="top-right" onClickOutside={onClose}>
+          <MyCart />
+        </Layer>
+      )}
     </Box>
   );
 };
