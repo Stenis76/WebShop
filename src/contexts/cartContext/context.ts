@@ -2,7 +2,7 @@ import React from "react";
 
 interface IState {
   cart: any[];
-  addItemToCart: (item: object) => void;
+  addItemToCart: (item: object, itemComponent: any) => void;
   removeItemFromCart: (itemId: number) => void;
 }
 

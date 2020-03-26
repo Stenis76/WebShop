@@ -1,9 +1,19 @@
-import React from "react";
-import { Box, Button, Heading, TextInput, FormField } from "grommet";
+import React, { useContext } from "react";
+import CartContext from "../contexts/cartContext/context";
+import {
+  Box,
+  Button,
+  Heading,
+  TextInput,
+  FormField,
+  Stack,
+  Text
+} from "grommet";
 import { Cart, Search } from "grommet-icons";
 interface Iprops {}
 
 const Header = (props: Iprops) => {
+  const { cart } = useContext(CartContext);
   return (
     <Box
       height="8vh"
@@ -29,8 +39,25 @@ const Header = (props: Iprops) => {
         <FormField>
           <TextInput placeholder="Sök produkter" size="medium" />
         </FormField>
-        <Button icon={<Search />} onClick={() => {}} />
-        <Button icon={<Cart />} />
+        <Button
+          margin={{ right: "medium" }}
+          icon={<Search />}
+          onClick={() => {}}
+        />
+        {cart.length != 0 ? (
+          <Stack anchor="top-right" margin={{ right: "medium" }}>
+            <Cart size="large" />
+            <Box background="#76FEB3" pad={{ horizontal: "xsmall" }} round>
+              <Text weight="bold" size="medium">
+                {cart.length}
+              </Text>
+            </Box>
+          </Stack>
+        ) : (
+          <Stack margin={{ right: "medium" }}>
+            <Cart size="large" />
+          </Stack>
+        )}
       </Box>
     </Box>
   );

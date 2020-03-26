@@ -36,7 +36,7 @@ const Item = (props: Iprops) => {
         <Box direction="column" align="end">
           <Button
             primary
-            onClick={() => addItemToCart(props.item)}
+            onClick={(event: any) => addItemToCart(props.item, event.target)}
             label="Add to cart"
             margin="small"
             color="buttonBg"
