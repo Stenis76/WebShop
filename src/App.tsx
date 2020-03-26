@@ -32,12 +32,12 @@ type Item = {
   price: number;
 };
 
-type Collection = {
-  id: number;
-  title: string;
-  routeName: string;
-  items: Item[];
-};
+// type Collection = {
+//   id: number;
+//   title: string;
+//   routeName: string;
+//   items: Item[];
+// };
 
 function App() {
   useEffect(() => {

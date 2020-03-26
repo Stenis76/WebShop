@@ -17,3 +17,7 @@ body {
 .link:hover {
   text-decoration: underline;
 }
+
+.itemAdded {
+  visibility: visible;
+}
