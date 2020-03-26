@@ -5,6 +5,7 @@ import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
 import Shop from "./pages/shop";
+import Checkout from "./pages/checkout";
 import { Grommet, Box } from "grommet";
 
 import SHOP_DATA from "./shop.data";
@@ -58,7 +59,8 @@ function App() {
       <Box height="87vh" pad="large">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/shop/:category" component={Shop} />} />
+          <Route path="/shop/:category" component={Shop} />
+          <Route path="/checkout" component={Checkout} />
         </Switch>
       </Box>
     </Grommet>
