@@ -8,14 +8,8 @@ interface Iprops {
 }
 const MyCart = (props: Iprops) => {
   return (
-    <Box height="xlarge" overflow="auto">
-      <Button
-        fill={false}
-        plain={false}
-        icon={<Close />}
-        onClick={props.closeCart}
-      />
-
+    <Box align="center" height="xlarge">
+      <Button alignSelf="end" icon={<Close />} onClick={props.closeCart} />
       <Heading margin="small" size="3">
         Your Shopping Cart
       </Heading>

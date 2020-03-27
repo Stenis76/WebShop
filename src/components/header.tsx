@@ -11,7 +11,7 @@ import {
 } from "grommet";
 import CartContext from "../contexts/cartContext/context";
 import { Cart, Search } from "grommet-icons";
-import MyCart from "./cart";
+import MyCart from "./myCart";
 interface Iprops {}
 
 const Header = (props: Iprops) => {
