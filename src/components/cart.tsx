@@ -2,24 +2,22 @@ import React from "react";
 import { Box, Button, Heading } from "grommet";
 import { Close } from "grommet-icons";
 import { Link } from "react-router-dom";
+import CartItems from "./cart-items";
 
 interface Iprops {
   closeCart: any;
 }
 const MyCart = (props: Iprops) => {
   return (
-    <Box height="xlarge" overflow="auto">
-      <Button
-        fill={false}
-        plain={false}
-        icon={<Close />}
-        onClick={props.closeCart}
-      />
+    <Box align="center" height="xlarge" overflow="auto">
+      <Button alignSelf="end" icon={<Close />} onClick={props.closeCart} />
 
       <Heading margin="small" size="3">
         Your Shopping Cart
       </Heading>
-      <Box pad="xlarge">Cart</Box>
+      <Box pad="medium" width="20vw">
+        <CartItems />
+      </Box>
       <Link to="/Checkout">
         <Button
           margin="medium"
