@@ -6,11 +6,12 @@ import Menu from "./components/menu";
 import Home from "./pages/home";
 import Shop from "./pages/shop";
 import Checkout from "./pages/checkout";
-import { Grommet, Box } from "grommet";
+import { Grommet, Box, grommet } from "grommet";
+import { deepMerge } from "grommet/utils";
 
 import SHOP_DATA from "./shop.data";
 
-const theme = {
+const myTheme = {
   global: {
     colors: {
       brand: "#373737",
@@ -23,6 +24,33 @@ const theme = {
       size: "18px",
       height: "20px"
     }
+  },
+  formField: {
+    label: {
+      color: "blue",
+      size: "medium",
+      margin: "xsmall"
+    },
+    border: {
+      position: "outer",
+      side: "all"
+    },
+    disabled: {
+      background: {
+        color: "status-disabled",
+        opacity: true
+      }
+    },
+    content: {
+      pad: "small"
+    },
+    error: {
+      background: {
+        color: "status-critical",
+        opacity: "weak"
+      }
+    },
+    margin: "none"
   }
 };
 
@@ -53,7 +81,7 @@ function App() {
   };
 
   return (
-    <Grommet theme={theme} full>
+    <Grommet theme={deepMerge(grommet, myTheme)} full>
       <Header />
       <Menu />
       <Box height="87vh" pad="large">
