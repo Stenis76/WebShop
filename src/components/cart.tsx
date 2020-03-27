@@ -1,20 +1,33 @@
 import React from "react";
-import { Box, Button, Heading, Text, FormField, Layer } from "grommet";
+import { Box, Button, Heading } from "grommet";
 import { Close } from "grommet-icons";
+import { Link } from "react-router-dom";
 
 interface Iprops {
-  click: any;
+  closeCart: any;
 }
-const MyCart = () => {
+const MyCart = (props: Iprops) => {
   return (
     <Box height="xlarge" overflow="auto">
-      <Button fill={false} plain={false} icon={<Close />} onClick={() => {}} />
+      <Button
+        fill={false}
+        plain={false}
+        icon={<Close />}
+        onClick={props.closeCart}
+      />
 
       <Heading margin="small" size="3">
         Your Shopping Cart
       </Heading>
       <Box pad="xlarge">Cart</Box>
-      <Button margin="medium" primary label="Proceed to checkout" />
+      <Link to="/Checkout">
+        <Button
+          margin="medium"
+          primary
+          label="Proceed to checkout"
+          onClick={props.closeCart}
+        />
+      </Link>
     </Box>
   );
 };

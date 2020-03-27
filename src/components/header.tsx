@@ -54,7 +54,7 @@ const Header = (props: Iprops) => {
           icon={<Search />}
           onClick={() => {}}
         />
-        {cart.length != 0 ? (
+        {cart.length !== 0 ? (
           <Stack anchor="top-right" margin={{ right: "medium" }}>
             <Cart size="large" onClick={onOpen} />
             <Box background="#76FEB3" pad={{ horizontal: "xsmall" }} round>
@@ -71,7 +71,7 @@ const Header = (props: Iprops) => {
       </Box>
       {open && (
         <Layer position="top-right" onClickOutside={onClose}>
-          <MyCart />
+          <MyCart closeCart={onClose} />
         </Layer>
       )}
     </Box>
