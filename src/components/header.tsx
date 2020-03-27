@@ -71,7 +71,7 @@ const Header = (props: Iprops) => {
       </Box>
       {open && (
         <Layer position="top-right" onClickOutside={onClose}>
-          <MyCart />
+          <MyCart closeCart={onClose} />
         </Layer>
       )}
     </Box>
