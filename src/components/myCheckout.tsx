@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Accordion, AccordionPanel, Text } from "grommet";
 
 const MyCheckOut = () => {
