@@ -19,8 +19,8 @@ const Home = () => {
     medium: [
       { name: "header", start: [0, 0], end: [2, 1] },
       { name: "collection", start: [0, 0], end: [0, 1] },
-      { name: "sale", start: [1, 1], end: [1, 1] }
-      // { name: "fallCollection", start: [2, 1], end: [2, 1] }
+      { name: "sale", start: [1, 1], end: [1, 1] },
+      { name: "fallCollection", start: [2, 1], end: [2, 1] }
     ],
     large: [
       { name: "header", start: [1, 0], end: [2, 1] },

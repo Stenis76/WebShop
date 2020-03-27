@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Accordion, AccordionPanel, Text } from "grommet";
-import LabelFormField from "./labelFormField";
+import ContactFormField from "./contactFormField";
 
 const MyCheckOut = () => {
   return (
-    <Box gridArea="myCheckOut" background="light-5">
+    <Box gridArea="myCheckOut" background="light-6" round="small">
       <Accordion>
         <AccordionPanel label="Contacts">
-          <LabelFormField />
+          <ContactFormField />
         </AccordionPanel>
         <AccordionPanel label="Shipping">
           <Box pad="medium" background="light-2">

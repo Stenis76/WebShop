@@ -24,34 +24,34 @@ const myTheme = {
       size: "18px",
       height: "20px"
     }
-  },
-  formField: {
-    label: {
-      color: "blue",
-      size: "medium",
-      margin: "xsmall"
-    },
-    border: {
-      position: "outer",
-      side: "all"
-    },
-    disabled: {
-      background: {
-        color: "status-disabled",
-        opacity: true
-      }
-    },
-    content: {
-      pad: "small"
-    },
-    error: {
-      background: {
-        color: "status-critical",
-        opacity: "weak"
-      }
-    },
-    margin: "none"
   }
+  // formField: {
+  //   label: {
+  //     color: "blue",
+  //     size: "medium",
+  //     margin: "xsmall"
+  //   },
+  //   border: {
+  //     position: "outer",
+  //     side: "all"
+  //   },
+  //   disabled: {
+  //     background: {
+  //       color: "status-disabled",
+  //       opacity: true
+  //     }
+  //   },
+  //   content: {
+  //     pad: "small"
+  //   },
+  //   error: {
+  //     background: {
+  //       color: "status-critical",
+  //       opacity: "weak"
+  //     }
+  //   },
+  //   margin: "none"
+  // }
 };
 
 type Item = {
