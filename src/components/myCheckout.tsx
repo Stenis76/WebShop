@@ -5,12 +5,12 @@ const MyCheckOut = () => {
   return (
     <Box gridArea="myCheckOut" background="light-5">
       <Accordion>
-        <AccordionPanel label="Panel 1">
+        <AccordionPanel label="My adress">
           <Box pad="medium" background="light-2">
             <Text>One</Text>
           </Box>
         </AccordionPanel>
-        <AccordionPanel label="Panel 2">
+        <AccordionPanel label="Shipping">
           <Box pad="medium" background="light-2">
             <Text>Two</Text>
           </Box>
