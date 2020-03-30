@@ -36,7 +36,18 @@ const Item = (props: Iprops) => {
         <Box direction="column" align="end">
           <Button
             primary
-            onClick={(event: any) => addItemToCart(props.item, event.target)}
+            onClick={(event: any) => {
+              addItemToCart(props.item);
+              const itemComponent = event.target;
+              itemComponent.innerText = "Item added";
+              itemComponent.style.backgroundColor = "#76FEB3";
+              itemComponent.style.color = "#373737";
+              setTimeout(() => {
+                itemComponent.innerText = "Add to cart";
+                itemComponent.style.backgroundColor = "#373737";
+                itemComponent.style.color = "#FEFEFE";
+              }, 4000);
+            }}
             label="Add to cart"
             margin="small"
             color="buttonBg"
