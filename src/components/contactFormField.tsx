@@ -32,15 +32,6 @@ const ContactFormField = () => {
     localStorage.setItem("user-information", JSON.stringify(state));
   }, [state]);
 
-  // const syncWithLocalStorage = () => {
-  //   const localstorageCollections = localStorage.getItem("collection");
-  //   if (!localstorageCollections) {
-  //     localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
-  //   }
-  // };
-
-  console.log("state", state);
-
   return (
     <Form style={{ gridArea: "name" }}>
       <FormFieldLabel

@@ -59,10 +59,6 @@ const Item = ({ item, history, match, location }: Iprops) => {
             color="#c96d36"
             label="Product details"
             onClick={() => {
-              console.log("match", match);
-              console.log("location", location);
-              console.log("history", history);
-
               history.push(
                 match.url +
                   "/" +

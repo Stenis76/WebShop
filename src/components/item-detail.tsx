@@ -6,7 +6,6 @@ interface Iprops {
 }
 
 const ItemDetails = (props: Iprops) => {
-  console.log(props.item);
   return (
     <Box
       width="large"

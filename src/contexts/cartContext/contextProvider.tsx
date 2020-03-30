@@ -25,8 +25,6 @@ const CartContextProvider: FC<IProps> = props => {
 
   const setShipping = (method: ShippingMethod) => setShippingMethod(method);
 
-  console.log("cart", cart);
-
   return (
     <CartContext.Provider
       {...props}
