@@ -11,7 +11,13 @@ import {
 import CartContext from "../contexts/cartContext/context";
 
 const CartItems = () => {
-  const { cart, removeItemFromCart, shippingMethod } = useContext(CartContext);
+  const {
+    cart,
+    removeItemFromCart,
+    addItemToCart,
+    clearItemFromCart,
+    shippingMethod
+  } = useContext(CartContext);
 
   let shippingCost = 0;
   switch (shippingMethod) {
@@ -46,7 +52,9 @@ const CartItems = () => {
           <TableCell scope="col" border="bottom">
             Price
           </TableCell>
-          <TableCell scope="col" border="bottom"></TableCell>
+          <TableCell scope="col" border="bottom">
+            Quantity
+          </TableCell>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -54,8 +62,17 @@ const CartItems = () => {
           <TableRow key={item.id}>
             <TableCell scope="row">{item.name}</TableCell>
             <TableCell>${item.price}</TableCell>
-            <TableCell>
-              <Button onClick={() => removeItemFromCart(item.id)}>x</Button>
+            <TableCell flex direction="row" justify="between">
+              {item.quantity > 1 ? (
+                <Button onClick={() => removeItemFromCart(item.id)}>
+                  {"<"}
+                </Button>
+              ) : (
+                "\u00a0\u00a0" // for empty space
+              )}
+              <span>{item.quantity}</span>
+              <Button onClick={() => addItemToCart(item)}>{">"}</Button>
+              <Button onClick={() => clearItemFromCart(item.id)}>X</Button>
             </TableCell>
           </TableRow>
         ))}

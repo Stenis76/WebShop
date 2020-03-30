@@ -12,6 +12,22 @@ const Item = ({ item, history, match, location }: Iprops) => {
   const { addItemToCart } = useContext(CartContext);
   const url = `url(${item.imageUrl})`;
   const [show, setShow] = React.useState(false);
+
+  const closeModal = () => {
+    history.push(match.url);
+    setShow(false);
+  };
+
+  const openModal = () => {
+    history.push(
+      match.url +
+        "/" +
+        item.id +
+        "/" +
+        item.name.replace(/\s/g, "-").toLowerCase()
+    );
+    setShow(true);
+  };
   return (
     <Box
       width="medium"
@@ -58,27 +74,15 @@ const Item = ({ item, history, match, location }: Iprops) => {
             plain
             color="#c96d36"
             label="Product details"
-            onClick={() => {
-              history.push(
-                match.url +
-                  "/" +
-                  item.id +
-                  "/" +
-                  item.name.replace(" ", "-").toLowerCase()
-              );
-              setShow(true);
-            }}
+            onClick={openModal}
           />
         </Box>
       </Box>
 
       {show && (
-        <Layer
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
-        >
+        <Layer onEsc={closeModal} onClickOutside={closeModal}>
           <ItemDetails item={item} />
-          <Button label="close" onClick={() => setShow(false)} />
+          <Button label="close" onClick={closeModal} />
         </Layer>
       )}
     </Box>
