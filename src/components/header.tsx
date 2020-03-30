@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,6 +13,8 @@ import {
 import CartContext from "../contexts/cartContext/context";
 import { Cart, Search } from "grommet-icons";
 import MyCart from "./myCart";
+import SearchBar from "./search-bar";
+
 interface Iprops {}
 
 const Header = (props: Iprops) => {
@@ -42,17 +45,12 @@ const Header = (props: Iprops) => {
         style={{ fontFamily: `ONEDAY` }}
         size="large"
       >
-        ADAM FREDICK
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          ADAM FREDICK
+        </Link>
       </Heading>
       <Box direction="row">
-        <FormField>
-          <TextInput placeholder="Sök produkter" size="medium" />
-        </FormField>
-        <Button
-          margin={{ right: "medium" }}
-          icon={<Search />}
-          onClick={() => {}}
-        />
+        <SearchBar />
         <Stack
           anchor="top-right"
           onClick={onOpen}
