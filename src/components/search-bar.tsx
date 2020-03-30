@@ -7,7 +7,7 @@ const SearchBar = ({ history, match }: RouteComponentProps) => {
   const [input, setInput] = useState("");
 
   const handleSubmit = () => {
-    history.push("/search/" + input);
+    history.push("/shop/search/" + input);
     setInput("");
   };
 

@@ -87,7 +87,7 @@ function App() {
       <Box height="87vh" pad="large">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/shop/:category" component={Shop} />
+          <Route path="/shop/:category/:query?" component={Shop} />
           <Route path="/checkout" component={Checkout} />
         </Switch>
       </Box>
