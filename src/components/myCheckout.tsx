@@ -1,6 +1,8 @@
 import React from "react";
-import { Box, Accordion, AccordionPanel, Text } from "grommet";
+import { Box, Accordion, AccordionPanel, Text, Button } from "grommet";
 import ContactFormField from "./contactFormField";
+import PaymentForm from "./payment-form";
+import ShippingForm from "./shipping-form";
 
 const MyCheckOut = () => {
   return (
@@ -11,15 +13,15 @@ const MyCheckOut = () => {
         </AccordionPanel>
         <AccordionPanel label="Shipping">
           <Box pad="medium" background="light-2">
-            <Text>Two</Text>
+            <ShippingForm />
           </Box>
         </AccordionPanel>
         <AccordionPanel label="Payment">
           <Box pad="medium" background="light-2">
-            <Text>Two</Text>
-            <Text>Two</Text>
+            <PaymentForm />
           </Box>
         </AccordionPanel>
+        <Button margin="medium" primary label="Place your order" />
       </Accordion>
     </Box>
   );

@@ -11,15 +11,29 @@ import {
 import CartContext from "../contexts/cartContext/context";
 
 const CartItems = () => {
-  const { cart, removeItemFromCart } = useContext(CartContext);
+  const { cart, removeItemFromCart, shippingMethod } = useContext(CartContext);
+
+  let shippingCost = 0;
+  switch (shippingMethod) {
+    case "camel":
+      shippingCost = 2;
+      break;
+    case "lightning":
+      shippingCost = 10;
+      break;
+    default:
+      // regular
+      shippingCost = 5;
+  }
 
   const calculateTotal = () => {
     let total: number = 0;
+
     for (let i = 0; i < cart.length; i++) {
       total += cart[i].price;
     }
 
-    return total;
+    return total + shippingCost;
   };
 
   return (
@@ -45,6 +59,10 @@ const CartItems = () => {
             </TableCell>
           </TableRow>
         ))}
+        <TableRow>
+          <TableCell scope="row">Shipping</TableCell>
+          <TableCell>${shippingCost}</TableCell>
+        </TableRow>
 
         <TableRow>
           <TableCell scope="row">

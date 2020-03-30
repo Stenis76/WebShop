@@ -1,65 +1,99 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FormFieldLabel from "./formFieldLabel";
 import { Box, Form, Text, Button, Grid } from "grommet";
 
+interface IState {
+  firstName: string;
+  lastName: string;
+  phoneNumber?: number;
+  email: string;
+  address: string;
+  postCode?: number;
+  city: string;
+}
+
 const ContactFormField = () => {
-  // const areas = {
-  //   small: [
-  //     { name: "cart", start: [0, 1], end: [0, 1] },
-  //     { name: "myCheckOut", start: [0, 0], end: [0, 0] },
-  //     { name: "terms", start: [1, 0], end: [1, 0] },
-  //     { name: "image", start: [1, 1], end: [1, 1] }
-  //   ],
-  //   medium: [
-  //     { name: "cart", start: [0, 1], end: [0, 1] },
-  //     { name: "myCheckOut", start: [0, 0], end: [0, 0] },
-  //     { name: "terms", start: [1, 0], end: [1, 0] },
-  //     { name: "image", start: [1, 1], end: [1, 1] }
-  //   ],
-  //   large: [
-  //     { name: "cart", start: [0, 1], end: [0, 1] },
-  //     { name: "myCheckOut", start: [0, 0], end: [0, 0] },
-  //     { name: "terms", start: [1, 0], end: [1, 0] },
-  //     { name: "image", start: [1, 1], end: [1, 1] }
-  //   ]
+  const [state, setState] = useState<IState>({
+    firstName: "",
+    lastName: "",
+    phoneNumber: undefined,
+    email: "",
+    address: "",
+    postCode: undefined,
+    city: ""
+  });
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setState(prev => ({ ...prev, [name]: value }));
+  };
+
+  useEffect(() => {
+    localStorage.setItem("user-information", JSON.stringify(state));
+  }, [state]);
+
+  // const syncWithLocalStorage = () => {
+  //   const localstorageCollections = localStorage.getItem("collection");
+  //   if (!localstorageCollections) {
+  //     localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
+  //   }
   // };
 
+  console.log("state", state);
+
   return (
-    <Grid
-      rows={["25%", "25%", "auto"]}
-      columns={["1/4", "auto", "1/4"]}
-      gap="small"
-      areas={[
-        { name: "name", start: [1, 0], end: [1, 0] }
-        // { name: "adress", start: [0, 0], end: [1, 0] }
-        // { name: "contact", start: [10, 0], end: [1, 0] },
-        // { name: "submit", start: [10, 0], end: [1, 0] }
-      ]}
-    >
-      <Box gridArea="name">
-        <Form style={{ gridArea: "name" }}>
-          <FormFieldLabel name="firstName" label="FirstName" required />
-          <FormFieldLabel name="lastName" label="LastName" required />
-        </Form>
-      </Box>
-      {/* <Box gridArea="adress">
-        <Form>
-          <FormFieldLabel name="adress" label="Adress" required />
-          <FormFieldLabel name="country" label="Country" required />
-        </Form>
-      </Box> */}
-      {/*
-        <Box gridArea="contact">
-          <FormFieldLabel name="email" label="Email" required />
-          <FormFieldLabel name="phone" label="Phone" required />
-        </Box>
-        <Box gridArea="submit">
-          <Text margin={{ left: "small" }} size="small" color="status-critical">
-            * Required Field
-          </Text>
-          <Button type="submit" label="Submit" primary />
-        </Box> */}
-    </Grid>
+    <Form style={{ gridArea: "name" }}>
+      <FormFieldLabel
+        name="firstName"
+        label="FirstName"
+        required
+        type="text"
+        onChange={handleOnChange}
+      />
+      <FormFieldLabel
+        name="lastName"
+        label="LastName"
+        required
+        type="text"
+        onChange={handleOnChange}
+      />
+
+      <FormFieldLabel
+        name="phoneNumber"
+        label="Phone number"
+        required
+        type="tel"
+        onChange={handleOnChange}
+      />
+      <FormFieldLabel
+        name="email"
+        label="Email"
+        required
+        type="email"
+        onChange={handleOnChange}
+      />
+      <FormFieldLabel
+        name="address"
+        label="Address"
+        required
+        type="text"
+        onChange={handleOnChange}
+      />
+      <FormFieldLabel
+        name="postCode"
+        label="Post code"
+        required
+        type="number"
+        onChange={handleOnChange}
+      />
+      <FormFieldLabel
+        name="city"
+        label="City"
+        required
+        type="string"
+        onChange={handleOnChange}
+      />
+    </Form>
   );
 };
 

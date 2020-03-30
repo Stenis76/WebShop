@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Button, Layer } from "grommet";
 import CartContext from "../contexts/cartContext/context";
 import ItemDetails from "../components/item-detail";
 
-interface Iprops {
+interface Iprops extends RouteComponentProps {
   item: any;
 }
 
-const Item = (props: Iprops) => {
+const Item = ({ item, history, match, location }: Iprops) => {
   const { addItemToCart } = useContext(CartContext);
-  const url = `url(${props.item.imageUrl})`;
+  const url = `url(${item.imageUrl})`;
   const [show, setShow] = React.useState(false);
   return (
     <Box
@@ -30,14 +31,14 @@ const Item = (props: Iprops) => {
         align="center"
       >
         <Box direction="column" justify="between">
-          <h3>{props.item.name}</h3>
-          <span>{props.item.price * 10} kr</span>
+          <h3>{item.name}</h3>
+          <span>${item.price}</span>
         </Box>
         <Box direction="column" align="end">
           <Button
             primary
             onClick={(event: any) => {
-              addItemToCart(props.item);
+              addItemToCart(item);
               const itemComponent = event.target;
               itemComponent.innerText = "Item added";
               itemComponent.style.backgroundColor = "#76FEB3";
@@ -57,7 +58,20 @@ const Item = (props: Iprops) => {
             plain
             color="#c96d36"
             label="Product details"
-            onClick={() => setShow(true)}
+            onClick={() => {
+              console.log("match", match);
+              console.log("location", location);
+              console.log("history", history);
+
+              history.push(
+                match.url +
+                  "/" +
+                  item.id +
+                  "/" +
+                  item.name.replace(" ", "-").toLowerCase()
+              );
+              setShow(true);
+            }}
           />
         </Box>
       </Box>
@@ -67,7 +81,7 @@ const Item = (props: Iprops) => {
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >
-          <ItemDetails item={props.item} />
+          <ItemDetails item={item} />
           <Button label="close" onClick={() => setShow(false)} />
         </Layer>
       )}
@@ -75,4 +89,4 @@ const Item = (props: Iprops) => {
   );
 };
 
-export default Item;
+export default withRouter(Item);

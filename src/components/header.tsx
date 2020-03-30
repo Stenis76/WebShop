@@ -48,26 +48,24 @@ const Header = (props: Iprops) => {
         <FormField>
           <TextInput placeholder="Sök produkter" size="medium" />
         </FormField>
-
         <Button
           margin={{ right: "medium" }}
           icon={<Search />}
           onClick={() => {}}
         />
-        {cart.length !== 0 ? (
-          <Stack anchor="top-right" margin={{ right: "medium" }}>
-            <Cart size="large" onClick={onOpen} />
-            <Box background="#76FEB3" pad={{ horizontal: "xsmall" }} round>
-              <Text weight="bold" size="medium">
-                {cart.length}
-              </Text>
-            </Box>
-          </Stack>
-        ) : (
-          <Stack margin={{ right: "medium" }}>
-            <Cart size="large" />
-          </Stack>
-        )}
+        <Stack
+          anchor="top-right"
+          onClick={onOpen}
+          margin={{ right: "medium" }}
+          style={{ cursor: "pointer" }}
+        >
+          <Cart size="large" />
+          <Box background="#76FEB3" pad={{ horizontal: "xsmall" }} round>
+            <Text weight="bold" size="medium">
+              {cart.length}
+            </Text>
+          </Box>
+        </Stack>
       </Box>
       {open && (
         <Layer position="top-right" onClickOutside={onClose}>
