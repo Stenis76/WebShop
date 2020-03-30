@@ -36,7 +36,7 @@ const CartItems = () => {
     let total: number = 0;
 
     for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price;
+      total += cart[i].price * cart[i].quantity;
     }
 
     return total + shippingCost;
