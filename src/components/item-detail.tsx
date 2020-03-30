@@ -6,7 +6,6 @@ interface Iprops {
 }
 
 const ItemDetails = (props: Iprops) => {
-  console.log(props.item);
   return (
     <Box
       width="large"
@@ -18,7 +17,8 @@ const ItemDetails = (props: Iprops) => {
     >
       <Heading>{props.item.name}</Heading>
       <Text>size{props.item.size}</Text>
-      <Image src={props.item.imageUrl} />;<Text>pris{props.item.price}</Text>
+      <Image src={props.item.imageUrl} />
+      <Text>${props.item.price}</Text>
     </Box>
   );
 };

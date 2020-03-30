@@ -5,6 +5,10 @@ interface Iprops {
   required: boolean;
   label: string;
   name: string;
+  type?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  disabled?: boolean;
 }
 
 const FormFieldLabel = (props: Iprops) => {
@@ -17,7 +21,7 @@ const FormFieldLabel = (props: Iprops) => {
     //       <Text>{label}</Text>
     //       <Text color="status-critical">*</Text>
     <FormField>
-      <TextInput placeholder={label} size="medium" />
+      <TextInput placeholder={label} size="medium" {...rest} />
     </FormField>
     //     </Box>
     //   ) : (

@@ -7,7 +7,6 @@ import { Grid, ResponsiveContext } from "grommet";
 
 const Home = () => {
   const size = useContext(ResponsiveContext) as "small" | "medium" | "large";
-  console.log(size);
 
   const areas = {
     small: [

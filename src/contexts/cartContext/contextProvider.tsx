@@ -4,8 +4,13 @@ import CartContext from "./context";
 
 interface IProps {}
 
+export type ShippingMethod = "regular" | "camel" | "lightning";
+
 const CartContextProvider: FC<IProps> = props => {
   const [cart, setCart] = useState([] as any);
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>(
+    "regular"
+  );
 
   const addItemToCart = (item: any) => {
     setCart([...cart, item]);
@@ -18,15 +23,17 @@ const CartContextProvider: FC<IProps> = props => {
     console.log("remove item from cart");
   };
 
-  console.log("cart", cart);
+  const setShipping = (method: ShippingMethod) => setShippingMethod(method);
 
   return (
     <CartContext.Provider
       {...props}
       value={{
         cart,
+        shippingMethod,
         addItemToCart,
-        removeItemFromCart
+        removeItemFromCart,
+        setShipping
       }}
     />
   );
