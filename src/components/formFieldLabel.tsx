@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, FormField, Text } from "grommet";
+import { TextInput, Box, FormField, Text } from "grommet";
 
 interface Iprops {
   required: boolean;
@@ -10,22 +10,23 @@ interface Iprops {
 const FormFieldLabel = (props: Iprops) => {
   const { required, label, ...rest } = props;
   return (
-    <Box fill="horizontal">
-      <FormField
-        label={
-          required ? (
-            <Box direction="row">
-              <Text>{label}</Text>
-              <Text color="status-critical">*</Text>
-            </Box>
-          ) : (
-            label
-          )
-        }
-        required={required}
-        {...rest}
-      />
-    </Box>
+    // <FormField
+    // label={
+    //   required ? (
+    //     <Box direction="row">
+    //       <Text>{label}</Text>
+    //       <Text color="status-critical">*</Text>
+    <FormField>
+      <TextInput placeholder={label} size="medium" />
+    </FormField>
+    //     </Box>
+    //   ) : (
+    //     label
+    //   )
+    // }
+    // required={required}
+    // {...rest}
+    // />
   );
 };
 

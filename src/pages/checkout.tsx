@@ -31,8 +31,8 @@ const Checkout = () => {
     <Main>
       <Grid
         fill
-        rows={["1/2", "1/2"]}
-        columns={["3/4", "1/4"]}
+        rows={["1/2", "auto"]}
+        columns={["3/4", "auto"]}
         gap="small"
         areas={areas[size]}
       >
@@ -44,7 +44,19 @@ const Checkout = () => {
         <Box gridArea="terms" background="light-2">
           Terms and conditions
         </Box>
-        <Image src={picture} gridArea="image" />
+
+        <Box>
+          <Image
+            src={picture}
+            gridArea="image"
+            alt="shirts"
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "100%"
+            }}
+          />
+        </Box>
       </Grid>
     </Main>
   );

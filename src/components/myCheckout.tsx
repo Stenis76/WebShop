@@ -5,7 +5,7 @@ import ContactFormField from "./contactFormField";
 const MyCheckOut = () => {
   return (
     <Box gridArea="myCheckOut" background="light-6" round="small">
-      <Accordion>
+      <Accordion gridArea="myCheckOut">
         <AccordionPanel label="Contacts">
           <ContactFormField />
         </AccordionPanel>
