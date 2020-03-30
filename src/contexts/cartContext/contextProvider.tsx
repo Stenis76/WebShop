@@ -7,18 +7,9 @@ interface IProps {}
 const CartContextProvider: FC<IProps> = props => {
   const [cart, setCart] = useState([] as any);
 
-  const addItemToCart = (item: any, itemComponent: any) => {
+  const addItemToCart = (item: any) => {
     setCart([...cart, item]);
     console.log("add item to cart");
-
-    itemComponent.innerText = "Item added";
-    itemComponent.style.backgroundColor = "#76FEB3";
-    itemComponent.style.color = "#373737";
-    setTimeout(() => {
-      itemComponent.innerText = "Add to cart";
-      itemComponent.style.backgroundColor = "#373737";
-      itemComponent.style.color = "#FEFEFE";
-    }, 4000);
   };
 
   const removeItemFromCart = (itemId: number) => {
