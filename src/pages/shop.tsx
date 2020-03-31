@@ -32,8 +32,6 @@ const Shop: FC<IProps> = () => {
   const matchWithQuery = (item: any) =>
     item.name.toLowerCase().includes(query.trim().toLowerCase());
 
-  console.log({ query, category });
-
   return (
     <Grid
       fill

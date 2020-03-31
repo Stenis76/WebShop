@@ -35,6 +35,7 @@ const Item = ({ item, history, match, location }: Iprops) => {
     );
     setShow(true);
   };
+
   return (
     <Box
       width="medium"
