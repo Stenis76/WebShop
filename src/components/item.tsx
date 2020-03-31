@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Button, Layer } from "grommet";
 import CartContext from "../contexts/cartContext/context";
@@ -13,6 +13,13 @@ const Item = ({ item, history, match, location }: Iprops) => {
   const url = `url(${item.imageUrl})`;
   const [show, setShow] = React.useState(false);
 
+  useEffect(() => {
+    const id = location.search.slice(4, location.search.length);
+    if (Number(id) === item.id) {
+      setShow(true);
+    }
+  }, [location.search, item.id]);
+
   const closeModal = () => {
     history.push(match.url);
     setShow(false);
@@ -22,9 +29,9 @@ const Item = ({ item, history, match, location }: Iprops) => {
     history.push(
       match.url +
         "/" +
-        item.id +
-        "/" +
-        item.name.replace(/\s/g, "-").toLowerCase()
+        item.name.replace(/\s/g, "-").toLowerCase() +
+        "/?id=" +
+        item.id
     );
     setShow(true);
   };

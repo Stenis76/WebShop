@@ -32,6 +32,8 @@ const Shop: FC<IProps> = () => {
   const matchWithQuery = (item: any) =>
     item.name.toLowerCase().includes(query.trim().toLowerCase());
 
+  console.log({ query, category });
+
   return (
     <Grid
       fill
@@ -57,7 +59,7 @@ const Shop: FC<IProps> = () => {
           overflowY: "scroll"
         }}
       >
-        {query
+        {category === "search" && query
           ? collections.map((collection: any) =>
               collection.items
                 .filter(matchWithQuery)
