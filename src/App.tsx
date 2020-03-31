@@ -17,7 +17,10 @@ const myTheme = {
       brand: "#373737",
       mainText: "#FEFFFF",
       buttonBg: "#373737",
-      copper: "#ffc29e"
+      copper: "#ffc29e",
+      layer: {
+        background: "red"
+      }
     },
     font: {
       family: "Abel",

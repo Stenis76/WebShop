@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Button, Layer } from "grommet";
 import CartContext from "../contexts/cart-context/context";
 import ItemDetails from "../components/item-detail";
+import { Close } from "grommet-icons";
 
 interface Iprops extends RouteComponentProps {
   item: any;
@@ -89,8 +90,16 @@ const Item = ({ item, history, match, location }: Iprops) => {
 
       {show && (
         <Layer onEsc={closeModal} onClickOutside={closeModal}>
-          <ItemDetails item={item} />
-          <Button label="close" onClick={closeModal} />
+          <Box background="light-3">
+            <Button
+              primary
+              alignSelf="end"
+              icon={<Close />}
+              onClick={closeModal}
+              color="light-3"
+            />
+            <ItemDetails item={item} />
+          </Box>
         </Layer>
       )}
     </Box>
