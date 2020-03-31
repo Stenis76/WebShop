@@ -1,12 +1,14 @@
-import React from "react";
-import { Box, Text, Heading, Image } from "grommet";
+import React, { useContext } from "react";
+import { Box, Button, Text, Heading, Image } from "grommet";
 import item from "./item";
+import CartContext from "../contexts/cart-context/context";
 
 interface Iprops {
   item: any;
 }
 
 const ItemDetails = (props: Iprops) => {
+  const { addItemToCart } = useContext(CartContext);
   return (
     <Box
       width="large"
@@ -37,7 +39,7 @@ const ItemDetails = (props: Iprops) => {
                   key={index}
                   style={{
                     backgroundColor: "#e0e0e0",
-                    padding: "0.5rem",
+                    padding: "0.3rem",
                     border: "1px solid black",
                     color: "black",
                     marginRight: "0.1rem"
@@ -56,7 +58,7 @@ const ItemDetails = (props: Iprops) => {
                   key={index}
                   style={{
                     backgroundColor: "#e0e0e0",
-                    padding: "0.5rem",
+                    padding: "0.3rem",
                     border: "1px solid black",
                     color: "black",
                     marginRight: "0.1rem"
@@ -71,6 +73,24 @@ const ItemDetails = (props: Iprops) => {
             <span style={{ fontWeight: "bold" }}>Description: </span>
             {props.item.description}
           </Text>
+          <Button
+            primary
+            onClick={(event: any) => {
+              addItemToCart(item);
+              const itemComponent = event.target;
+              itemComponent.innerText = "Item added";
+              itemComponent.style.backgroundColor = "#76FEB3";
+              itemComponent.style.color = "#373737";
+              setTimeout(() => {
+                itemComponent.innerText = "Add to cart";
+                itemComponent.style.backgroundColor = "#373737";
+                itemComponent.style.color = "#FEFEFE";
+              }, 4000);
+            }}
+            label="Add to cart"
+            margin="small"
+            color="buttonBg"
+          />
         </Box>
       </Box>
     </Box>
