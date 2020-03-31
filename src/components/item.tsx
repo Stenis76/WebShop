@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Button, Layer } from "grommet";
-import CartContext from "../contexts/cartContext/context";
+import CartContext from "../contexts/cart-context/context";
 import ItemDetails from "../components/item-detail";
 
 interface Iprops extends RouteComponentProps {
@@ -11,7 +11,31 @@ interface Iprops extends RouteComponentProps {
 const Item = ({ item, history, match, location }: Iprops) => {
   const { addItemToCart } = useContext(CartContext);
   const url = `url(${item.imageUrl})`;
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const id = location.search.slice(4, location.search.length);
+    if (Number(id) === item.id) {
+      setShow(true);
+    }
+  }, [location.search, item.id]);
+
+  const closeModal = () => {
+    history.push(match.url);
+    setShow(false);
+  };
+
+  const openModal = () => {
+    history.push(
+      match.url +
+        "/" +
+        item.name.replace(/\s/g, "-").toLowerCase() +
+        "/?id=" +
+        item.id
+    );
+    setShow(true);
+  };
+
   return (
     <Box
       width="medium"
@@ -58,27 +82,15 @@ const Item = ({ item, history, match, location }: Iprops) => {
             plain
             color="#c96d36"
             label="Product details"
-            onClick={() => {
-              history.push(
-                match.url +
-                  "/" +
-                  item.id +
-                  "/" +
-                  item.name.replace(" ", "-").toLowerCase()
-              );
-              setShow(true);
-            }}
+            onClick={openModal}
           />
         </Box>
       </Box>
 
       {show && (
-        <Layer
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
-        >
+        <Layer onEsc={closeModal} onClickOutside={closeModal}>
           <ItemDetails item={item} />
-          <Button label="close" onClick={() => setShow(false)} />
+          <Button label="close" onClick={closeModal} />
         </Layer>
       )}
     </Box>

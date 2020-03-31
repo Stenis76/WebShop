@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Accordion, AccordionPanel, Text, Button } from "grommet";
-import ContactFormField from "./contactFormField";
+import { Box, Accordion, AccordionPanel, Button } from "grommet";
+import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
 import ShippingForm from "./shipping-form";
 

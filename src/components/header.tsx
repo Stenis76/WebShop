@@ -1,17 +1,11 @@
 import React, { useContext } from "react";
-import {
-  Box,
-  Button,
-  Heading,
-  TextInput,
-  FormField,
-  Layer,
-  Stack,
-  Text
-} from "grommet";
-import CartContext from "../contexts/cartContext/context";
-import { Cart, Search } from "grommet-icons";
-import MyCart from "./myCart";
+import { Link } from "react-router-dom";
+import { Box, Heading, Layer, Stack, Text } from "grommet";
+import CartContext from "../contexts/cart-context/context";
+import { Cart } from "grommet-icons";
+import MyCart from "./my-cart";
+import SearchBar from "./search-bar";
+
 interface Iprops {}
 
 const Header = (props: Iprops) => {
@@ -42,17 +36,12 @@ const Header = (props: Iprops) => {
         style={{ fontFamily: `ONEDAY` }}
         size="large"
       >
-        ADAM FREDICK
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          ADAM FREDICK
+        </Link>
       </Heading>
       <Box direction="row">
-        <FormField>
-          <TextInput placeholder="Sök produkter" size="medium" />
-        </FormField>
-        <Button
-          margin={{ right: "medium" }}
-          icon={<Search />}
-          onClick={() => {}}
-        />
+        <SearchBar />
         <Stack
           anchor="top-right"
           onClick={onOpen}

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-import AuthenticationContextProvider from "./authenticationContext/contextProvider";
-import CartContextProvider from "./cartContext/contextProvider";
+import AuthenticationContextProvider from "./authentication-context/context-provider";
+import CartContextProvider from "./cart-context/context-provider";
 
 interface IProps {
   children: React.ReactNode;

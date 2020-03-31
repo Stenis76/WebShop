@@ -1,17 +1,22 @@
 import React, { useContext } from "react";
 import {
   Button,
-  Box,
   Table,
   TableHeader,
   TableRow,
   TableCell,
   TableBody
 } from "grommet";
-import CartContext from "../contexts/cartContext/context";
+import CartContext from "../contexts/cart-context/context";
 
 const CartItems = () => {
-  const { cart, removeItemFromCart, shippingMethod } = useContext(CartContext);
+  const {
+    cart,
+    removeItemFromCart,
+    addItemToCart,
+    clearItemFromCart,
+    shippingMethod
+  } = useContext(CartContext);
 
   let shippingCost = 0;
   switch (shippingMethod) {
@@ -30,7 +35,7 @@ const CartItems = () => {
     let total: number = 0;
 
     for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price;
+      total += cart[i].price * cart[i].quantity;
     }
 
     return total + shippingCost;
@@ -46,7 +51,9 @@ const CartItems = () => {
           <TableCell scope="col" border="bottom">
             Price
           </TableCell>
-          <TableCell scope="col" border="bottom"></TableCell>
+          <TableCell scope="col" border="bottom">
+            Quantity
+          </TableCell>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -54,8 +61,17 @@ const CartItems = () => {
           <TableRow key={item.id}>
             <TableCell scope="row">{item.name}</TableCell>
             <TableCell>${item.price}</TableCell>
-            <TableCell>
-              <Button onClick={() => removeItemFromCart(item.id)}>x</Button>
+            <TableCell flex direction="row" justify="between">
+              {item.quantity > 1 ? (
+                <Button onClick={() => removeItemFromCart(item.id)}>
+                  {"<"}
+                </Button>
+              ) : (
+                "\u00a0\u00a0" // for empty space
+              )}
+              <span>{item.quantity}</span>
+              <Button onClick={() => addItemToCart(item)}>{">"}</Button>
+              <Button onClick={() => clearItemFromCart(item.id)}>X</Button>
             </TableCell>
           </TableRow>
         ))}

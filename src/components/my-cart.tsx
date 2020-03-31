@@ -15,7 +15,7 @@ const MyCart = (props: Iprops) => {
       <Heading margin="small" size="3">
         Your Shopping Cart
       </Heading>
-      <Box pad="medium" width="20vw">
+      <Box pad="medium" style={{ minWidth: "20rem" }}>
         <CartItems />
       </Box>
       <Link to="/Checkout">

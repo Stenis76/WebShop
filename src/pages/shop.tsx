@@ -8,21 +8,29 @@ import Item from "../components/item";
 interface IProps {}
 
 const Shop: FC<IProps> = () => {
-  const [items, setItems] = useState([]);
+  const [collections, setCollection] = useState([]);
 
-  const { category } = useParams();
+  const { category, query = "" } = useParams();
 
   useEffect(() => {
     const localStorageCollections = localStorage.getItem("collection");
     if (localStorageCollections) {
-      const collections = JSON.parse(localStorageCollections);
-      const collection = collections.find(
+      setCollection(JSON.parse(localStorageCollections));
+    }
+  }, []);
+
+  const getCurrentCollectionItems = (): [] => {
+    if (collections.length) {
+      const col: any = collections.find(
         (collection: any) => collection.routeName === category
       );
-
-      setItems(collection.items);
+      if (col.items) return col.items;
     }
-  }, [category]);
+    return [];
+  };
+
+  const matchWithQuery = (item: any) =>
+    item.name.toLowerCase().includes(query.trim().toLowerCase());
 
   return (
     <Grid
@@ -49,9 +57,15 @@ const Shop: FC<IProps> = () => {
           overflowY: "scroll"
         }}
       >
-        {items.map((item: any) => (
-          <Item key={item.id} item={item} />
-        ))}
+        {category === "search" && query
+          ? collections.map((collection: any) =>
+              collection.items
+                .filter(matchWithQuery)
+                .map((item: any) => <Item key={item.id} item={item} />)
+            )
+          : getCurrentCollectionItems().map((item: any) => (
+              <Item key={item.id} item={item} />
+            ))}
       </Box>
     </Grid>
   );

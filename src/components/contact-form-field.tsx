@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import FormFieldLabel from "./formFieldLabel";
-import { Box, Form, Text, Button, Grid } from "grommet";
+import FormFieldLabel from "./form-field-fabel";
+import { Form } from "grommet";
 
 interface IState {
   firstName: string;

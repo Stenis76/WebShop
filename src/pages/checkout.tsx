@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { Grid, Box, Image, ResponsiveContext, Main } from "grommet";
 import picture from "../assets/images/clothesonrack.jpg";
-import MyCheckOut from "../components/myCheckout";
+import MyCheckOut from "../components/my-checkout";
 import CartItems from "../components/cart-items";
 
 const Checkout = () => {
   const size = useContext(ResponsiveContext) as "small" | "medium" | "large";
-  console.log(size);
 
   const areas = {
     small: [
