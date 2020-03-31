@@ -1,44 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import FormFieldLabel from "./form-field-fabel";
 import { Form } from "grommet";
 
-interface IState {
-  firstName: string;
-  lastName: string;
-  phoneNumber?: number;
-  email: string;
-  address: string;
-  postCode?: number;
-  city: string;
-}
+import UserContext from "../contexts/user-context/context";
 
-const ContactFormField = () => {
-  const [state, setState] = useState<IState>({
-    firstName: "",
-    lastName: "",
-    phoneNumber: undefined,
-    email: "",
-    address: "",
-    postCode: undefined,
-    city: ""
-  });
+interface IProps {
+  children: React.ReactNode;
+}
+const ContactFormField = (props: IProps) => {
+  const { user, updateUser } = useContext(UserContext);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setState(prev => ({ ...prev, [name]: value }));
+    updateUser(name, value);
   };
 
-  useEffect(() => {
-    localStorage.setItem("user-information", JSON.stringify(state));
-  }, [state]);
-
   return (
-    <Form style={{ gridArea: "name" }}>
+    <Form validate="blur" style={{ gridArea: "name" }}>
       <FormFieldLabel
         name="firstName"
         label="FirstName"
         required
         type="text"
+        value={user.firstName}
         onChange={handleOnChange}
       />
       <FormFieldLabel
@@ -46,6 +30,7 @@ const ContactFormField = () => {
         label="LastName"
         required
         type="text"
+        value={user.lastName}
         onChange={handleOnChange}
       />
 
@@ -53,7 +38,8 @@ const ContactFormField = () => {
         name="phoneNumber"
         label="Phone number"
         required
-        type="tel"
+        type="number"
+        value={user.phoneNumber}
         onChange={handleOnChange}
       />
       <FormFieldLabel
@@ -61,6 +47,7 @@ const ContactFormField = () => {
         label="Email"
         required
         type="email"
+        value={user.email}
         onChange={handleOnChange}
       />
       <FormFieldLabel
@@ -68,6 +55,7 @@ const ContactFormField = () => {
         label="Address"
         required
         type="text"
+        value={user.address}
         onChange={handleOnChange}
       />
       <FormFieldLabel
@@ -75,6 +63,7 @@ const ContactFormField = () => {
         label="Post code"
         required
         type="number"
+        value={user.postCode}
         onChange={handleOnChange}
       />
       <FormFieldLabel
@@ -82,8 +71,10 @@ const ContactFormField = () => {
         label="City"
         required
         type="string"
+        value={user.city}
         onChange={handleOnChange}
       />
+      {props.children}
     </Form>
   );
 };

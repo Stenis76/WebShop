@@ -1,6 +1,6 @@
 import React from "react";
-import { TextInput, FormField } from "grommet";
-
+import { Box, FormField } from "grommet";
+import { StatusGood } from "grommet-icons";
 interface Iprops {
   required: boolean;
   label: string;
@@ -9,10 +9,11 @@ interface Iprops {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   disabled?: boolean;
+  validate?: (data: string) => void;
 }
 
 const FormFieldLabel = (props: Iprops) => {
-  const { required, label, ...rest } = props;
+  const { required, label, name, ...rest } = props;
   return (
     // <FormField
     // label={
@@ -20,8 +21,21 @@ const FormFieldLabel = (props: Iprops) => {
     //     <Box direction="row">
     //       <Text>{label}</Text>
     //       <Text color="status-critical">*</Text>
-    <FormField>
-      <TextInput placeholder={label} size="medium" {...rest} />
+    <FormField
+      label={label}
+      name={name}
+      required
+      // placeholder={label}
+      {...rest}
+      validate={[
+        { regexp: /^[a-z]/i },
+        name => {
+          if (name && name.length === 1) return "must be more than 1 character";
+          return undefined;
+        }
+      ]}
+    >
+      {/* <TextInput placeholder={label} size="medium" {...rest} /> */}
     </FormField>
     //     </Box>
     //   ) : (

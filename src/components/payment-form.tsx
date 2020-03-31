@@ -1,75 +1,72 @@
-import React, { useState } from "react";
-import { Box, Form, RadioButtonGroup } from "grommet";
+import React, { useState, useContext } from "react";
+import { Box, Form, RadioButtonGroup, Heading } from "grommet";
 
 import FormFieldLabel from "./form-field-fabel";
+
+import UserContext from "../contexts/user-context/context";
+import CartContext from "../contexts/cart-context/context";
+import { PaymentMethod } from "../contexts/cart-context/context-provider";
 
 interface IProps {}
 
 const PaymentForm = (props: IProps) => {
-  const [paymentMethod, setPaymentMethod] = useState("kort");
+  const { user } = useContext(UserContext);
+  const { paymentMethod, setPaymentMethod } = useContext(CartContext);
 
   const paymentInput = () => {
+    console.log(user);
+
     switch (paymentMethod) {
       case "invoice":
-        const email = getUserData("email");
         return (
-          <FormFieldLabel
-            name="email"
-            label="Email"
-            required
-            disabled
-            type="email"
-            value={email}
-          />
+          <>
+            <Heading>Invoice infromation</Heading>
+          </>
         );
       case "swish":
-        const phoneNumber = getUserData("phoneNumber");
         return (
           <FormFieldLabel
             name="phoneNumber"
             label="Phone number"
             required
-            disabled
             type="tel"
-            value={phoneNumber}
+            value={user.phoneNumber}
           />
         );
       default:
         return (
-          <FormFieldLabel name="card" label="Card" required type="number" />
+          <FormFieldLabel
+            name="card"
+            label="Card"
+            required
+            type="number"
+            value={user.card}
+          />
         );
     }
   };
 
-  const getUserData = (key: any) => {
-    const localStorageUser = localStorage.getItem("user-information");
-    let data = "";
-    if (localStorageUser) {
-      data = JSON.parse(localStorageUser)[key];
-    }
-    return data;
-  };
-
   return (
-    <Box gridArea="name">
-      <Form style={{ gridArea: "name" }}>
-        <Box align="center" pad="large">
-          <RadioButtonGroup
-            direction="row"
-            name="radio"
-            options={[
-              { label: "Card", value: "card" },
-              { label: "Swish", value: "swish" },
-              { label: "Invoice", value: "invoice" }
-            ]}
-            value={paymentMethod}
-            onChange={event => setPaymentMethod(event.target.value)}
-            {...props}
-          />
-        </Box>
-        <Box>{paymentInput()}</Box>
-      </Form>
-    </Box>
+    <Form style={{ gridArea: "name" }}>
+      <Box align="center" pad="large">
+        <RadioButtonGroup
+          direction="row"
+          name="radio"
+          options={[
+            { label: "Card", value: "card" },
+            { label: "Swish", value: "swish" },
+            { label: "Invoice", value: "invoice" }
+          ]}
+          value={paymentMethod}
+          onChange={event =>
+            setPaymentMethod(event.target.value as PaymentMethod)
+          }
+          {...props}
+        />
+      </Box>
+
+      {paymentInput()}
+    </Form>
   );
 };
 

@@ -6,7 +6,9 @@ import { Box, Form, RadioButtonGroup } from "grommet";
 interface IProps {}
 
 const ShippingForm = (props: IProps) => {
-  const { shippingMethod, setShipping } = useContext(CartContext);
+  const { shippingMethod, setShippingMethod: setShipping } = useContext(
+    CartContext
+  );
 
   const getDeliveryTime = () => {
     const date = new Date();
