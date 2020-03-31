@@ -6,9 +6,7 @@ import { Box, Form, RadioButtonGroup } from "grommet";
 interface IProps {}
 
 const ShippingForm = (props: IProps) => {
-  const { shippingMethod, setShippingMethod: setShipping } = useContext(
-    CartContext
-  );
+  const { shippingMethod, setShippingMethod } = useContext(CartContext);
 
   const getDeliveryTime = () => {
     const date = new Date();
@@ -39,7 +37,7 @@ const ShippingForm = (props: IProps) => {
           value={shippingMethod}
           onChange={event => {
             const method: any = event.target.value;
-            setShipping(method);
+            setShippingMethod(method);
           }}
           {...props}
         />

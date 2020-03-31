@@ -1,18 +1,18 @@
 import React, { useState, useContext } from "react";
-import { Box, Accordion, AccordionPanel, Button } from "grommet";
+import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
 import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
 import ShippingForm from "./shipping-form";
 
 import UserContext from "../contexts/user-context/context";
 import CartContext from "../contexts/cart-context/context";
-import { User } from "grommet-icons";
+import { User, Close } from "grommet-icons";
 
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const { user } = useContext(UserContext);
-  const { cart, shippingMethod } = useContext(CartContext);
+  const { cart, shippingMethod, paymentMethod } = useContext(CartContext);
 
   const validUserInformation = () =>
     user.firstName.length > 1 &&
@@ -61,9 +61,48 @@ const MyCheckOut = () => {
           </Box>
         </AccordionPanel>
         {activeIndex === 2 ? (
-          <Button margin="medium" primary label="Place your order" />
+          <Button
+            margin="medium"
+            primary
+            label="Place your order"
+            onClick={() => setShowModal(true)}
+          />
         ) : null}
       </Accordion>
+
+      {showModal && (
+        <Layer
+          onEsc={() => setShowModal(false)}
+          onClickOutside={() => setShowModal(false)}
+        >
+          <Box background="light-3">
+            <Button
+              primary
+              alignSelf="end"
+              icon={<Close />}
+              onClick={() => setShowModal(false)}
+              color="light-3"
+            />
+            <h1>Order confirmation</h1>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+              <span>Paying with: </span>
+              <span>{}paymentMethod</span>
+              <span>Shipping with: </span>
+              <span>{shippingMethod}</span>
+              <span>Estimated delivery: </span>
+              <span>{new Date().toLocaleString()}</span>
+              <div>Items</div>
+              <div></div>
+              {cart.map(item => (
+                <>
+                  <span>{item.name}</span>
+                  <span>{item.price}</span>
+                </>
+              ))}
+            </div>
+          </Box>
+        </Layer>
+      )}
     </Box>
   );
 };

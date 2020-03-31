@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, FormField } from "grommet";
-import { StatusGood } from "grommet-icons";
+import { Box, FormField, Text } from "grommet";
+
 interface Iprops {
   required: boolean;
   label: string;
@@ -15,14 +15,17 @@ interface Iprops {
 const FormFieldLabel = (props: Iprops) => {
   const { required, label, name, ...rest } = props;
   return (
-    // <FormField
-    // label={
-    //   required ? (
-    //     <Box direction="row">
-    //       <Text>{label}</Text>
-    //       <Text color="status-critical">*</Text>
     <FormField
-      label={label}
+      label={
+        required ? (
+          <Box direction="row">
+            <Text>{label}</Text>
+            <Text color="status-critical">*</Text>
+          </Box>
+        ) : (
+          label
+        )
+      }
       name={name}
       required
       // placeholder={label}
@@ -34,17 +37,7 @@ const FormFieldLabel = (props: Iprops) => {
           return undefined;
         }
       ]}
-    >
-      {/* <TextInput placeholder={label} size="medium" {...rest} /> */}
-    </FormField>
-    //     </Box>
-    //   ) : (
-    //     label
-    //   )
-    // }
-    // required={required}
-    // {...rest}
-    // />
+    />
   );
 };
 
