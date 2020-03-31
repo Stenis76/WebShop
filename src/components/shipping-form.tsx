@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import CartContext from "../contexts/cartContext/context";
+import React, { useContext } from "react";
+import CartContext from "../contexts/cart-context/context";
 
 import { Box, Form, RadioButtonGroup } from "grommet";
 
 interface IProps {}
 
 const ShippingForm = (props: IProps) => {
-  // const [shippingMethod, setShippingMethod] = useState("camel");
   const { shippingMethod, setShipping } = useContext(CartContext);
 
   const getDeliveryTime = () => {

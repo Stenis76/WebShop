@@ -1,5 +1,5 @@
 import React from "react";
-import { ShippingMethod } from "./contextProvider";
+import { ShippingMethod } from "./context-provider";
 
 interface IState {
   cart: any[];

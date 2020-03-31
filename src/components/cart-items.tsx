@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import {
   Button,
-  Box,
   Table,
   TableHeader,
   TableRow,
   TableCell,
   TableBody
 } from "grommet";
-import CartContext from "../contexts/cartContext/context";
+import CartContext from "../contexts/cart-context/context";
 
 const CartItems = () => {
   const {

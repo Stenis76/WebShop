@@ -1,18 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Heading,
-  TextInput,
-  FormField,
-  Layer,
-  Stack,
-  Text
-} from "grommet";
-import CartContext from "../contexts/cartContext/context";
-import { Cart, Search } from "grommet-icons";
-import MyCart from "./myCart";
+import { Box, Heading, Layer, Stack, Text } from "grommet";
+import CartContext from "../contexts/cart-context/context";
+import { Cart } from "grommet-icons";
+import MyCart from "./my-cart";
 import SearchBar from "./search-bar";
 
 interface Iprops {}

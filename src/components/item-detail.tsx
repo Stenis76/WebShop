@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Layer, Heading, Image } from "grommet";
+import { Box, Text, Heading, Image } from "grommet";
 
 interface Iprops {
   item: any;

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Box, Button, Layer } from "grommet";
-import CartContext from "../contexts/cartContext/context";
+import CartContext from "../contexts/cart-context/context";
 import ItemDetails from "../components/item-detail";
 
 interface Iprops extends RouteComponentProps {
@@ -11,7 +11,7 @@ interface Iprops extends RouteComponentProps {
 const Item = ({ item, history, match, location }: Iprops) => {
   const { addItemToCart } = useContext(CartContext);
   const url = `url(${item.imageUrl})`;
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const id = location.search.slice(4, location.search.length);
