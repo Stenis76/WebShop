@@ -5,7 +5,8 @@ import {
   TableHeader,
   TableRow,
   TableCell,
-  TableBody
+  TableBody,
+  Image
 } from "grommet";
 import CartContext from "../contexts/cart-context/context";
 
@@ -45,6 +46,7 @@ const CartItems = () => {
     <Table style={{ width: "100%" }}>
       <TableHeader>
         <TableRow>
+          <TableCell scope="col" border="bottom"></TableCell>
           <TableCell scope="col" border="bottom">
             Name
           </TableCell>
@@ -59,6 +61,9 @@ const CartItems = () => {
       <TableBody>
         {cart.map(item => (
           <TableRow key={item.id}>
+            <TableCell>
+              <Image src={item.imageUrl} style={{ width: "2rem" }}></Image>
+            </TableCell>
             <TableCell scope="row">{item.name}</TableCell>
             <TableCell>${item.price}</TableCell>
             <TableCell flex direction="row" justify="between">
