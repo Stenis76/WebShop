@@ -35,6 +35,11 @@ const MyCheckOut = () => {
     clearCart();
   };
 
+  const mockupPaymentAPI = async (delay = 2000) => {
+    await new Promise(resolve => setTimeout(resolve, delay));
+    setShowModal(true);
+  };
+
   return (
     <Box gridArea="myCheckOut" background="light-6" round="small">
       <Accordion activeIndex={activeIndex} gridArea="myCheckOut">
@@ -76,7 +81,7 @@ const MyCheckOut = () => {
             margin="medium"
             primary
             label="Place your order"
-            onClick={() => setShowModal(true)}
+            onClick={() => mockupPaymentAPI()}
           />
         ) : null}
       </Accordion>
