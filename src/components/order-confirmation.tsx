@@ -10,6 +10,7 @@ import styled from "styled-components";
 interface IProps {
   closeModal: () => void;
 }
+
 const OrderConfirmation = (props: IProps) => {
   const { cart, shippingMethod, paymentMethod, shippingCost } = useContext(
     CartContext
@@ -26,14 +27,14 @@ const OrderConfirmation = (props: IProps) => {
       />
       <h1>Order confirmation</h1>
       <h3>Order nr: {Math.floor(new Date().getTime() / 10000)}</h3>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <StyledGrid>
         <span>Paying with: </span>
         <span>{paymentMethod}</span>
         <span>Shipping with: </span>
         <span>{shippingMethod}</span>
         <span>Estimated delivery: </span>
         <span>{new Date().toLocaleString()}</span>
-      </div>
+      </StyledGrid>
       <h4>Items</h4>
 
       {cart.map(item => (
@@ -57,6 +58,11 @@ const OrderConfirmation = (props: IProps) => {
     </Box>
   );
 };
+
+const StyledGrid = styled.div`
+  display: grid;
+  grid-template-columns: "1fr" "1fr";
+`;
 
 const StyledItemRow = styled.div`
   display: flex;
