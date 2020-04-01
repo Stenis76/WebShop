@@ -5,7 +5,7 @@ import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
 
-import { Collection, CollectionItem } from "../Shop.data";
+import { Collection, CollectionItem } from "../shop.data";
 
 interface IProps {}
 
