@@ -62,9 +62,9 @@ const Item = ({ item, history, match, location }: Iprops) => {
         <Box direction="column" align="end">
           <Button
             primary
-            onClick={(event: any) => {
+            onClick={event => {
               addItemToCart(item);
-              const itemComponent = event.target;
+              const itemComponent = event.target as HTMLButtonElement;
               itemComponent.innerText = "Item added";
               itemComponent.style.backgroundColor = "#76FEB3";
               itemComponent.style.color = "#373737";

@@ -1,14 +1,16 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import { Grid, Box } from "grommet";
+import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
+
+import { Collection, CollectionItem } from "../Shop.data";
 
 interface IProps {}
 
 const Shop: FC<IProps> = () => {
-  const [collections, setCollection] = useState([]);
+  const [collections, setCollection] = useState<Collection[]>([]);
 
   const { category, query = "" } = useParams();
 
@@ -19,29 +21,64 @@ const Shop: FC<IProps> = () => {
     }
   }, []);
 
-  const getCurrentCollectionItems = (): [] => {
+  const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
-      const col: any = collections.find(
-        (collection: any) => collection.routeName === category
+      const col = collections.find(
+        (collection: Collection) => collection.routeName === category
       );
-      if (col.items) return col.items;
+      if (col) return col.items;
     }
     return [];
   };
 
-  const matchWithQuery = (item: any) =>
+  const matchWithQuery = (item: CollectionItem): boolean =>
     item.name.toLowerCase().includes(query.trim().toLowerCase());
 
+  const size = useContext(ResponsiveContext) as
+    | "small"
+    | "medium"
+    | "large"
+    | "xlarge";
+
+  const columns = {
+    small: ["auto"],
+    medium: ["auto", "auto"],
+    large: ["auto", "auto"],
+    xlarge: ["auto", "auto"]
+  };
+
+  const rows = {
+    small: ["1/3", "auto"],
+    medium: ["auto", "auto"],
+    large: ["auto", "auto"],
+    xlarge: ["auto", "auto"]
+  };
+
+  const areas = {
+    small: [
+      { name: "directory", start: [0, 0], end: [0, 0] },
+      { name: "main", start: [0, 1], end: [0, 1] }
+    ],
+    medium: [
+      { name: "directory", start: [0, 0], end: [0, 0] },
+      { name: "main", start: [1, 0], end: [1, 0] }
+    ],
+    large: [
+      { name: "directory", start: [0, 0], end: [0, 0] },
+      { name: "main", start: [1, 0], end: [1, 0] }
+    ],
+    xlarge: [
+      { name: "directory", start: [0, 0], end: [0, 0] },
+      { name: "main", start: [1, 0], end: [1, 0] }
+    ]
+  };
   return (
     <Grid
       fill
       responsive={true}
-      areas={[
-        { name: "directory", start: [0, 0], end: [0, 0] },
-        { name: "main", start: [1, 0], end: [1, 0] }
-      ]}
-      columns={["medium", "flex"]}
-      rows={["flex"]}
+      areas={areas[size]}
+      columns={columns[size]}
+      rows={rows[size]}
       gap="small"
     >
       <Directory />
@@ -58,12 +95,14 @@ const Shop: FC<IProps> = () => {
         }}
       >
         {category === "search" && query
-          ? collections.map((collection: any) =>
+          ? collections.map((collection: Collection) =>
               collection.items
                 .filter(matchWithQuery)
-                .map((item: any) => <Item key={item.id} item={item} />)
+                .map((item: CollectionItem) => (
+                  <Item key={item.id} item={item} />
+                ))
             )
-          : getCurrentCollectionItems().map((item: any) => (
+          : getCurrentCollectionItems().map((item: CollectionItem) => (
               <Item key={item.id} item={item} />
             ))}
       </Box>
