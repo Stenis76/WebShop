@@ -1,6 +1,23 @@
 /* Used as starting data for ShopPage */
 
-const SHOP_DATA = [
+export interface CollectionItem {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+  size: string[];
+  season: string[];
+  description: string;
+}
+
+export interface Collection {
+  id: number;
+  title: string;
+  routeName: string;
+  items: CollectionItem[];
+}
+
+const SHOP_DATA: Collection[] = [
   {
     id: 1,
     title: "Hats",
