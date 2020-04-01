@@ -50,19 +50,20 @@ const Checkout = () => {
 
   const myCheckout = <MyCheckOut key="0" />;
   const cart = (
-    <Box gridArea="cart" background="light-2" key="1">
+    <Box gridArea="cart" round="small" background="light-2" key="1">
       <CartItems />
     </Box>
   );
   const checkOutImage = (
-    <Box gridArea="image" key="2">
+    <Box gridArea="image" round="small" key="2">
       <Image
         src={picture}
         alt="shirts"
         style={{
           objectFit: "cover",
           width: "100%",
-          height: "100%"
+          height: "100%",
+          borderRadius: "10px"
         }}
       />
     </Box>
