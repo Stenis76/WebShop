@@ -6,8 +6,10 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Image
+  Image,
+  Box
 } from "grommet";
+import { Close, AddCircle, SubtractCircle } from "grommet-icons";
 import CartContext from "../contexts/cart-context/context";
 
 const CartItems = () => {
@@ -42,59 +44,88 @@ const CartItems = () => {
     return total + shippingCost;
   };
 
+  const calculateVat = () => {
+    let total = calculateTotal();
+    let vat = total * 0.25;
+
+    return vat;
+  };
+
   return (
-    <Table style={{ width: "100%" }}>
-      <TableHeader>
-        <TableRow>
-          <TableCell scope="col" border="bottom"></TableCell>
-          <TableCell scope="col" border="bottom">
-            Name
-          </TableCell>
-          <TableCell scope="col" border="bottom">
-            Price
-          </TableCell>
-          <TableCell scope="col" border="bottom">
-            Quantity
-          </TableCell>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {cart.map(item => (
-          <TableRow key={item.id}>
-            <TableCell>
-              <Image src={item.imageUrl} style={{ width: "2rem" }}></Image>
+    <Box>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableCell scope="col" border="bottom"></TableCell>
+            <TableCell scope="col" border="bottom">
+              Name
             </TableCell>
-            <TableCell scope="row">{item.name}</TableCell>
-            <TableCell>${item.price}</TableCell>
-            <TableCell flex direction="row" justify="between">
-              {item.quantity > 1 ? (
-                <Button onClick={() => removeItemFromCart(item.id)}>
-                  {"<"}
-                </Button>
-              ) : (
-                "\u00a0\u00a0" // for empty space
-              )}
-              <span>{item.quantity}</span>
-              <Button onClick={() => addItemToCart(item)}>{">"}</Button>
-              <Button onClick={() => clearItemFromCart(item.id)}>X</Button>
+            <TableCell scope="col" border="bottom">
+              Price
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Quantity
             </TableCell>
           </TableRow>
-        ))}
-        <TableRow>
-          <TableCell scope="row">Shipping</TableCell>
-          <TableCell>${shippingCost}</TableCell>
-        </TableRow>
+        </TableHeader>
+        <TableBody>
+          {cart.map(item => (
+            <TableRow key={item.id}>
+              <TableCell>
+                <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
+              </TableCell>
+              <TableCell scope="row">{item.name}</TableCell>
+              <TableCell>${item.price}</TableCell>
+              <TableCell flex direction="row" align="center">
+                {item.quantity > 1 ? (
+                  <Button
+                    icon={<SubtractCircle />}
+                    onClick={() => removeItemFromCart(item.id)}
+                  />
+                ) : (
+                  "\u00a0\u00a0" // for empty space
+                )}
+                <span>{item.quantity}</span>
+                <Button
+                  size="small"
+                  icon={<AddCircle />}
+                  onClick={() => addItemToCart(item)}
+                />
+              </TableCell>
+              <TableCell>
+                <Button
+                  size="small"
+                  onClick={() => clearItemFromCart(item.id)}
+                  icon={<Close />}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+          <TableRow>
+            <TableCell scope="row">Shipping</TableCell>
+            <TableCell>${shippingCost}</TableCell>
+          </TableRow>
 
-        <TableRow>
-          <TableCell scope="row">
-            <strong>Total</strong>
-          </TableCell>
-          <TableCell>
-            <strong>${calculateTotal()}</strong>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+          <TableRow>
+            <TableCell scope="row">
+              <strong>Total</strong>
+            </TableCell>
+            <TableCell>
+              <strong>${calculateTotal()}</strong>
+            </TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell scope="row">
+              <em>VAT included</em>
+            </TableCell>
+            <TableCell>
+              <em>${calculateVat()}</em>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Box>
   );
 };
 

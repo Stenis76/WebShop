@@ -53,7 +53,6 @@ const PaymentForm = (props: IProps) => {
           value={user.phoneNumber} // WTF ?!!?? varför visas telefonnummer
         />
       )}
-      }
     </Form>
   );
 };

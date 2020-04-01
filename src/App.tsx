@@ -8,6 +8,7 @@ import Shop from "./pages/shop";
 import Checkout from "./pages/checkout";
 import { Grommet, Box, grommet } from "grommet";
 import { deepMerge } from "grommet/utils";
+import Admin from "./pages/adminPage";
 
 import SHOP_DATA from "./shop.data";
 
@@ -92,6 +93,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/shop/:category/:query?" component={Shop} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </Box>
     </Grommet>

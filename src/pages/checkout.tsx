@@ -20,17 +20,14 @@ const Checkout = () => {
   };
 
   const rows = {
-    small: ["auto", "auto"],
-    medium: ["1/2", "auto"],
-    large: ["1/2", "auto"],
+    small: ["auto"],
+    medium: ["auto", "auto"],
+    large: ["auto", "auto"],
     xlarge: ["auto", "auto"]
   };
 
   const areas = {
-    small: [
-      { name: "myCheckOut", start: [0, 0], end: [0, 1] },
-      { name: "cart", start: [0, 1], end: [0, 1] }
-    ],
+    small: [{ name: "myCheckOut", start: [0, 0], end: [0, 0] }],
     medium: [
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
@@ -50,7 +47,13 @@ const Checkout = () => {
 
   const myCheckout = <MyCheckOut key="0" />;
   const cart = (
-    <Box gridArea="cart" round="small" background="light-2" key="1">
+    <Box
+      gridArea="cart"
+      round="small"
+      background="light-2"
+      key="1"
+      style={{ overflowY: "scroll" }}
+    >
       <CartItems />
     </Box>
   );
@@ -70,7 +73,7 @@ const Checkout = () => {
   );
 
   const components = {
-    small: [myCheckout, cart],
+    small: [myCheckout],
     medium: [myCheckout, cart, checkOutImage],
     large: [myCheckout, cart, checkOutImage],
     xlarge: [myCheckout, cart, checkOutImage]
@@ -78,7 +81,6 @@ const Checkout = () => {
   return (
     <Main>
       <Grid
-        fill
         rows={rows[size]}
         columns={columns[size]}
         gap="small"
