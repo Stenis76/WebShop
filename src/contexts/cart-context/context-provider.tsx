@@ -5,12 +5,12 @@ import CartContext from "./context";
 interface IProps {}
 
 export type ShippingMethod = "regular" | "camel" | "lightning";
+export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = props => {
   const [cart, setCart] = useState([] as any);
-  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>(
-    "regular"
-  );
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>("camel");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
   const addItemToCart = (item: any) => {
     const existing = cart.find((cartItem: any) => cartItem.id === item.id);
@@ -55,7 +55,7 @@ const CartContextProvider: FC<IProps> = props => {
   };
 
   const setShipping = (method: ShippingMethod) => setShippingMethod(method);
-  console.log(cart);
+  const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
 
   return (
     <CartContext.Provider
@@ -63,10 +63,12 @@ const CartContextProvider: FC<IProps> = props => {
       value={{
         cart,
         shippingMethod,
+        setShippingMethod: setShipping,
+        paymentMethod,
+        setPaymentMethod: setPayment,
         addItemToCart,
         removeItemFromCart,
-        clearItemFromCart,
-        setShipping
+        clearItemFromCart
       }}
     />
   );
