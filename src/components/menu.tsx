@@ -68,8 +68,8 @@ const MyMenu = () => {
         }
       </ResponsiveContext.Consumer>
       <Text size="medium">
-        <Link className="link" to="/sign-in-sign-up">
-          Sign in / Register
+        <Link className="link" to="/admin">
+          Admin
         </Link>
       </Text>
     </Box>
