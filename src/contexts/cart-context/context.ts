@@ -1,24 +1,30 @@
 import { createContext } from "react";
 import { ShippingMethod, PaymentMethod } from "./context-provider";
 
+import { CollectionItem } from "../../shop.data";
+
 interface IState {
-  cart: any[];
+  cart: CollectionItem[];
   shippingMethod: ShippingMethod;
   setShippingMethod: (method: ShippingMethod) => void;
   paymentMethod: PaymentMethod;
   setPaymentMethod: (method: PaymentMethod) => void;
-  addItemToCart: (item: object) => void;
+  addItemToCart: (item: CollectionItem) => void;
   removeItemFromCart: (itemId: number) => void;
   clearItemFromCart: (itemId: number) => void;
+  clearCart: () => void;
+  shippingCost: number;
 }
 
 export default createContext<IState>({
   cart: [],
-  shippingMethod: "regular",
+  shippingMethod: "postNord",
   setShippingMethod: () => {},
   paymentMethod: "card",
   setPaymentMethod: () => {},
   addItemToCart: () => {},
   removeItemFromCart: () => {},
-  clearItemFromCart: () => {}
+  clearItemFromCart: () => {},
+  clearCart: () => {},
+  shippingCost: 0
 });
