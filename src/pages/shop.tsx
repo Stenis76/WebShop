@@ -5,10 +5,12 @@ import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
 
+import { Collection, CollectionItem } from "../Shop.data";
+
 interface IProps {}
 
 const Shop: FC<IProps> = () => {
-  const [collections, setCollection] = useState([]);
+  const [collections, setCollection] = useState<Collection[]>([]);
 
   const { category, query = "" } = useParams();
 
@@ -19,17 +21,17 @@ const Shop: FC<IProps> = () => {
     }
   }, []);
 
-  const getCurrentCollectionItems = (): [] => {
+  const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
-      const col: any = collections.find(
-        (collection: any) => collection.routeName === category
+      const col = collections.find(
+        (collection: Collection) => collection.routeName === category
       );
-      if (col.items) return col.items;
+      if (col) return col.items;
     }
     return [];
   };
 
-  const matchWithQuery = (item: any) =>
+  const matchWithQuery = (item: CollectionItem): boolean =>
     item.name.toLowerCase().includes(query.trim().toLowerCase());
 
   const size = useContext(ResponsiveContext) as
@@ -93,12 +95,14 @@ const Shop: FC<IProps> = () => {
         }}
       >
         {category === "search" && query
-          ? collections.map((collection: any) =>
+          ? collections.map((collection: Collection) =>
               collection.items
                 .filter(matchWithQuery)
-                .map((item: any) => <Item key={item.id} item={item} />)
+                .map((item: CollectionItem) => (
+                  <Item key={item.id} item={item} />
+                ))
             )
-          : getCurrentCollectionItems().map((item: any) => (
+          : getCurrentCollectionItems().map((item: CollectionItem) => (
               <Item key={item.id} item={item} />
             ))}
       </Box>
