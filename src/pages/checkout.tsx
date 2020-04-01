@@ -25,26 +25,23 @@ const Checkout = () => {
     large: ["1/2", "auto"],
     xlarge: ["auto", "auto"]
   };
-  // [column, row]
+
   const areas = {
     small: [
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [0, 1], end: [0, 1] }
     ],
     medium: [
-      // { name: "cart", start: [0, 1], end: [0, 1] },
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
       { name: "image", start: [1, 1], end: [1, 1] }
     ],
     large: [
-      // { name: "cart", start: [0, 1], end: [0, 1] },
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
       { name: "image", start: [1, 1], end: [1, 1] }
     ],
     xlarge: [
-      // { name: "cart", start: [0, 1], end: [0, 1] },
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
       { name: "image", start: [1, 1], end: [1, 1] }
@@ -58,7 +55,7 @@ const Checkout = () => {
     </Box>
   );
   const checkOutImage = (
-    <Box gridArea="image">
+    <Box gridArea="image" key="2">
       <Image
         src={picture}
         alt="shirts"
