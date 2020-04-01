@@ -9,14 +9,16 @@ interface Iprops {
 }
 const MyCart = (props: Iprops) => {
   return (
-    <Box align="center" height="xlarge" overflow="auto">
-      <Button alignSelf="end" icon={<Close />} onClick={props.closeCart} />
+    <Box>
+      <Box align="center" height="100vh" overflow="auto">
+        <Button alignSelf="end" icon={<Close />} onClick={props.closeCart} />
 
-      <Heading margin="small" size="3">
-        Your Shopping Cart
-      </Heading>
-      <Box pad="medium" style={{ minWidth: "20rem" }}>
-        <CartItems />
+        <Heading margin="small" size="3">
+          Your Shopping Cart
+        </Heading>
+        <Box width="large" pad="medium">
+          <CartItems />
+        </Box>
       </Box>
       <Link to="/Checkout">
         <Button

@@ -23,6 +23,21 @@ const ShippingForm = (props: IProps) => {
     return date;
   };
 
+  const getDeliveryCost = () => {
+    let cost;
+    switch (shippingMethod) {
+      case "camel":
+        cost = 10;
+        break;
+      case "lightning":
+        cost = 5;
+        break;
+      default:
+        cost = 2;
+    }
+    return cost;
+  };
+
   return (
     <Form style={{ gridArea: "name" }}>
       <Box align="center" pad="large">
@@ -30,9 +45,9 @@ const ShippingForm = (props: IProps) => {
           direction="row"
           name="radio"
           options={[
-            { label: "Camel Express", value: "camel" },
-            { label: "Regular", value: "regular" },
-            { label: "Lightning Shipping", value: "lightning" }
+            { label: "PostNord (72h)", value: "camel" },
+            { label: "Schenker (36h)", value: "regular" },
+            { label: "DHL Express (6h)", value: "lightning" }
           ]}
           value={shippingMethod}
           onChange={event => {
@@ -42,7 +57,13 @@ const ShippingForm = (props: IProps) => {
           {...props}
         />
       </Box>
-      <div>{getDeliveryTime().toLocaleString()}</div>
+      <div>+ ${getDeliveryCost()}</div>
+      <div>
+        <span style={{ fontWeight: "bold", color: "#c96d36" }}>
+          Delivery date:
+        </span>{" "}
+        {getDeliveryTime().toLocaleString()}
+      </div>
     </Form>
   );
 };
