@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Nav, Text, Box, ResponsiveContext, Menu } from "grommet";
 
 const MyMenu = () => {
+  const history = useHistory();
+
   return (
     <Box
       height="5vh"
@@ -18,11 +20,20 @@ const MyMenu = () => {
             <Menu
               label="Menu"
               items={[
-                { label: "Mens", onClick: () => {} },
-                { label: "Womens", onClick: () => {} },
-                { label: "Hats", onClick: () => {} },
-                { label: "Jackets", onClick: () => {} },
-                { label: "Sneakers", onClick: () => {} }
+                { label: "Mens", onClick: () => history.push("/shop/mens") },
+                {
+                  label: "Womens",
+                  onClick: () => history.push("/shop/womens")
+                },
+                { label: "Hats", onClick: () => history.push("/shop/hats") },
+                {
+                  label: "Jackets",
+                  onClick: () => history.push("/shop/jackets")
+                },
+                {
+                  label: "Sneakers",
+                  onClick: () => history.push("/shop/sneakers")
+                }
               ]}
             />
           ) : (
