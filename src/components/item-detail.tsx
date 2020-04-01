@@ -76,7 +76,7 @@ const ItemDetails = (props: Iprops) => {
           <Button
             primary
             onClick={(event: any) => {
-              addItemToCart(item);
+              addItemToCart(props.item);
               const itemComponent = event.target;
               itemComponent.innerText = "Item added";
               itemComponent.style.backgroundColor = "#76FEB3";
