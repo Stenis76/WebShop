@@ -8,7 +8,6 @@ import {
   Button,
   Layer,
   Form,
-  RadioButtonGroup,
   TextArea,
   CheckBox
 } from "grommet";
@@ -17,9 +16,17 @@ import { Collection, CollectionItem } from "../shop.data";
 import { AddCircle, SubtractCircle } from "grommet-icons";
 
 const Admin = () => {
-  const [currentCollection, setCurrentCollection] = useState<Collection[]>([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
+  const [inputs, setInputs] = useState({
+    name: "",
+    imageUrl: "",
+    price: "",
+    size: [],
+    season: [],
+    description: ""
+  });
 
   const onOpen = () => setOpen(true);
 
@@ -28,17 +35,60 @@ const Admin = () => {
   useEffect(() => {
     const localStorageCollections = localStorage.getItem("collection");
     if (localStorageCollections) {
-      setCurrentCollection(JSON.parse(localStorageCollections));
+      setCollections(JSON.parse(localStorageCollections));
     }
   }, []);
 
-  const addToCollection = (collection: Collection) => () => {
-    onOpen();
-    setCategory(collection.title);
+  const addToCollection = () => {
+    const item: CollectionItem = {
+      id: findId(),
+      name: inputs.name,
+      imageUrl: inputs.imageUrl,
+      price: Number(inputs.price),
+      size: inputs.size,
+      season: inputs.season,
+      description: inputs.description
+    };
+
+    console.log("item", item);
+
+    const updatedCollections = collections.map(collection => {
+      if (collection.routeName === category) {
+        return {
+          ...collection,
+          items: [...collection.items, item]
+        };
+      } else {
+        return { ...collection };
+      }
+    });
+
+    setCollections(updatedCollections);
+    localStorage.setItem("collection", JSON.stringify(updatedCollections));
+    onClose();
+  };
+  // console.log("collections", collections);
+
+  const removeFromCollection = (itemId: number) => {
+    const updatedCollections = collections.map(collection => ({
+      ...collection,
+      items: collection.items.filter(item => item.id !== itemId)
+    }));
+
+    setCollections(updatedCollections);
+    localStorage.setItem("collection", JSON.stringify(updatedCollections));
+  };
+
+  const editItem = (itemId: number, category: string) => {
+    const updatedCollections = collections.map(collection => {
+      if (category === collection.routeName) {
+      }
+      return collection;
+    });
   };
 
   const findId = () => {
-    let nextID;
+    let nextID = -1;
     const localStorageCollections = localStorage.getItem("collection");
     if (localStorageCollections) {
       let collection = JSON.parse(localStorageCollections);
@@ -49,22 +99,36 @@ const Admin = () => {
     return nextID;
   };
 
+  const handleInputs = (name: string, value: string) => {
+    setInputs(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <Main>
       <Box direction="row" justify="evenly">
-        {currentCollection.map((collection: Collection) => (
+        {collections.map((collection: Collection) => (
           <Box key={collection.id}>
             <Heading size="small">
               {collection.title}
               <Button
-                icon={<AddCircle onClick={addToCollection(collection)} />}
+                icon={
+                  <AddCircle
+                    onClick={() => {
+                      onOpen();
+                      setCategory(collection.routeName);
+                    }}
+                  />
+                }
               />
             </Heading>
 
             {collection.items.map((item: CollectionItem) => (
               <Box key={item.id}>
                 <Box direction="row" align="center">
-                  <Button icon={<SubtractCircle />} />
+                  <Button
+                    icon={<SubtractCircle />}
+                    onClick={() => removeFromCollection(item.id)}
+                  />
                   <Image
                     src={item.imageUrl}
                     style={{ width: "3rem", marginTop: "1rem" }}
@@ -96,12 +160,16 @@ const Admin = () => {
                   label="Product name"
                   required
                   type="text"
+                  value={inputs.name}
+                  onChange={e => handleInputs("name", e.target.value)}
                 />
                 <FormFieldLabel
                   name="Price"
                   label="Price"
                   required
                   type="text"
+                  value={inputs.price}
+                  onChange={e => handleInputs("price", e.target.value)}
                 />
                 <Text>Sizes</Text>
                 <Box direction="row">
@@ -118,7 +186,8 @@ const Admin = () => {
                   <CheckBox label="winter" onChange={() => {}} />
                 </Box>
                 <Text>Description</Text>
-                <TextArea name="Decription" required />
+                <TextArea value={inputs.price} name="Decription" required />
+                <Button onClick={addToCollection} label="Add to collection" />
               </Box>
             </Form>
           </Box>

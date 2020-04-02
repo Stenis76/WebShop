@@ -31,6 +31,7 @@ const PaymentForm = (props: IProps) => {
       />
       {paymentMethod === "invoice" ? (
         <FormFieldLabel
+          key={1}
           name="email"
           label="Email"
           required
@@ -39,18 +40,20 @@ const PaymentForm = (props: IProps) => {
         />
       ) : paymentMethod === "swish" ? (
         <FormFieldLabel
+          key={2}
           name="phoneNumber"
           label="Phone number"
           required
           type="number"
+          value={user.phoneNumber}
         />
       ) : (
         <FormFieldLabel
+          key={3}
           name="card"
           label="Card"
           required
           type="number"
-          value={user.phoneNumber} // WTF ?!!?? varför visas telefonnummer
         />
       )}
     </Form>
