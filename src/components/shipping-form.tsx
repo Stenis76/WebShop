@@ -27,13 +27,13 @@ const ShippingForm = (props: IProps) => {
     let cost;
     switch (shippingMethod) {
       case "camel":
-        cost = 10;
+        cost = 2;
         break;
       case "lightning":
-        cost = 5;
+        cost = 10;
         break;
       default:
-        cost = 2;
+        cost = 5;
     }
     return cost;
   };
