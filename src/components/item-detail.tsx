@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Box, Button, Text, Heading, Image } from "grommet";
-import item from "./item";
+
 import CartContext from "../contexts/cart-context/context";
 
 interface Iprops {
