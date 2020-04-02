@@ -67,7 +67,7 @@ const Admin = () => {
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
     onClose();
   };
-  // console.log("collections", collections);
+  console.log("collections", collections);
 
   const removeFromCollection = (itemId: number) => {
     const updatedCollections = collections.map(collection => ({
@@ -171,6 +171,14 @@ const Admin = () => {
                   value={inputs.price}
                   onChange={e => handleInputs("price", e.target.value)}
                 />
+                <FormFieldLabel
+                  name="ImageUrl"
+                  label="Image URL"
+                  required
+                  type="text"
+                  value={inputs.imageUrl}
+                  onChange={e => handleInputs("imageUrl", e.target.value)}
+                />
                 <Text>Sizes</Text>
                 <Box direction="row">
                   <CheckBox label="small" onChange={() => {}} />
@@ -186,7 +194,12 @@ const Admin = () => {
                   <CheckBox label="winter" onChange={() => {}} />
                 </Box>
                 <Text>Description</Text>
-                <TextArea value={inputs.price} name="Decription" required />
+                <TextArea
+                  value={inputs.description}
+                  name="Description"
+                  required
+                  onChange={e => handleInputs("description", e.target.value)}
+                />
                 <Button onClick={addToCollection} label="Add to collection" />
               </Box>
             </Form>
