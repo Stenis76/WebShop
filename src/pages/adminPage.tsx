@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Main, Text, Heading, Box } from "grommet";
-import { Collection, CollectionItem } from "../shop.data";
+import { Main, Heading, Box } from "grommet";
+import { Collection } from "../shop.data";
 
 const Admin = () => {
   const [currentCollection, setCurrentCollection] = useState<Collection[]>([]);
