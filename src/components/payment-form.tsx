@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Form, RadioButtonGroup, Heading } from "grommet";
+import { Form, RadioButtonGroup } from "grommet";
 
 import FormFieldLabel from "./form-field-fabel";
 
