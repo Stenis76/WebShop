@@ -17,8 +17,6 @@ const CartContextProvider: FC<IProps> = props => {
   );
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
-  console.log({ shippingMethod, shippingCost });
-
   useEffect(() => {
     let cost = 0;
     switch (shippingMethod) {

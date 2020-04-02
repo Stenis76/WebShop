@@ -10,7 +10,7 @@ import { PaymentMethod } from "../contexts/cart-context/context-provider";
 interface IProps {}
 
 const PaymentForm = (props: IProps) => {
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const { paymentMethod, setPaymentMethod } = useContext(CartContext);
 
   return (
@@ -55,6 +55,8 @@ const PaymentForm = (props: IProps) => {
           label="Card"
           required
           type="number"
+          value={user.card}
+          onChange={e => updateUser("card", e.target.value)}
         />
       )}
     </Form>

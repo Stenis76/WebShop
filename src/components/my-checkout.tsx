@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
 
+import { payWithApi } from "../api-utils";
+
 import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
 import ShippingForm from "./shipping-form";
@@ -14,8 +16,9 @@ import CartContext from "../contexts/cart-context/context";
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
-  const { clearCart } = useContext(CartContext);
+  const { clearCart, paymentMethod } = useContext(CartContext);
   const history = useHistory();
 
   const validUserInformation = () =>
@@ -35,8 +38,9 @@ const MyCheckOut = () => {
     clearCart();
   };
 
-  const mockupPaymentAPI = async (delay = 2000) => {
-    await new Promise(resolve => setTimeout(resolve, delay));
+  const pay = async () => {
+    setLoading(true);
+    await payWithApi();
     setShowModal(true);
   };
 
@@ -76,14 +80,21 @@ const MyCheckOut = () => {
             <PaymentForm />
           </Box>
         </AccordionPanel>
-        {activeIndex === 2 ? (
+        {activeIndex === 2 &&
+        !loading &&
+        validUserInformation() &&
+        ((paymentMethod === "card" && user.card.length) ||
+          paymentMethod === "swish" ||
+          paymentMethod === "invoice") ? (
           <Button
             margin="medium"
             primary
             label="Place your order"
-            onClick={() => mockupPaymentAPI()}
+            onClick={pay}
           />
-        ) : null}
+        ) : (
+          <Button margin="medium" primary disabled label="Place your order" />
+        )}
       </Accordion>
 
       {showModal && (
