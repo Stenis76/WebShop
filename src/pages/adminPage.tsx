@@ -13,20 +13,24 @@ import {
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
-import { AddCircle, SubtractCircle } from "grommet-icons";
+import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+
+const initialInputs = {
+  name: "",
+  imageUrl: "",
+  price: "",
+  size: "",
+  season: "",
+  description: ""
+};
 
 const Admin = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
-  const [inputs, setInputs] = useState({
-    name: "",
-    imageUrl: "",
-    price: "",
-    size: [],
-    season: [],
-    description: ""
-  });
+  const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
+  const [inputs, setInputs] = useState(initialInputs);
+  const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
 
   const onOpen = () => setOpen(true);
 
@@ -45,12 +49,10 @@ const Admin = () => {
       name: inputs.name,
       imageUrl: inputs.imageUrl,
       price: Number(inputs.price),
-      size: inputs.size,
-      season: inputs.season,
+      size: inputs.size.split(" "), // splitta på mellanrum "small medium large"
+      season: inputs.season.split(" "),
       description: inputs.description
     };
-
-    console.log("item", item);
 
     const updatedCollections = collections.map(collection => {
       if (collection.routeName === category) {
@@ -67,7 +69,6 @@ const Admin = () => {
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
     onClose();
   };
-  console.log("collections", collections);
 
   const removeFromCollection = (itemId: number) => {
     const updatedCollections = collections.map(collection => ({
@@ -79,12 +80,32 @@ const Admin = () => {
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
   };
 
-  const editItem = (itemId: number, category: string) => {
+  const editItem = () => {
     const updatedCollections = collections.map(collection => {
-      if (category === collection.routeName) {
+      if (itemToEdit !== undefined) {
+        let itemIndex = collection.items.findIndex(
+          item => item.id === itemToEdit.id
+        );
+
+        if (itemIndex !== -1) {
+          // if we found the index of the item
+          collection.items[itemIndex] = {
+            ...itemToEdit,
+            name: inputs.name,
+            imageUrl: inputs.imageUrl,
+            price: Number(inputs.price),
+            size: inputs.size.split(" "),
+            season: inputs.season.split(" "),
+            description: inputs.description
+          };
+        }
       }
       return collection;
     });
+
+    setCollections(updatedCollections);
+    localStorage.setItem("collection", JSON.stringify(updatedCollections));
+    onClose();
   };
 
   const findId = () => {
@@ -103,6 +124,17 @@ const Admin = () => {
     setInputs(prev => ({ ...prev, [name]: value }));
   };
 
+  const setInputsToItemData = (item: CollectionItem) => {
+    setInputs({
+      name: item.name,
+      imageUrl: item.imageUrl,
+      price: item.price + "",
+      size: item.size.join(" "),
+      season: item.season.join(" "),
+      description: item.description
+    });
+  };
+
   return (
     <Main>
       <Box direction="row" justify="evenly">
@@ -114,8 +146,10 @@ const Admin = () => {
                 icon={
                   <AddCircle
                     onClick={() => {
-                      onOpen();
+                      setEditOrAdd("add");
                       setCategory(collection.routeName);
+                      setInputs(initialInputs);
+                      onOpen();
                     }}
                   />
                 }
@@ -129,6 +163,16 @@ const Admin = () => {
                     icon={<SubtractCircle />}
                     onClick={() => removeFromCollection(item.id)}
                   />
+                  <Button
+                    icon={<FormEdit />}
+                    onClick={() => {
+                      setEditOrAdd("edit");
+                      setInputsToItemData(item);
+                      setItemToEdit(item);
+                      onOpen();
+                    }}
+                  />
+
                   <Image
                     src={item.imageUrl}
                     style={{ width: "3rem", marginTop: "1rem" }}
@@ -200,7 +244,11 @@ const Admin = () => {
                   required
                   onChange={e => handleInputs("description", e.target.value)}
                 />
-                <Button onClick={addToCollection} label="Add to collection" />
+                {editOrAdd === "add" ? (
+                  <Button onClick={addToCollection} label="Add to collection" />
+                ) : (
+                  <Button onClick={editItem} label="Submit edit" />
+                )}
               </Box>
             </Form>
           </Box>
