@@ -48,17 +48,14 @@ const Shop: FC<IProps> = () => {
   };
 
   const rows = {
-    small: ["1/3", "auto"],
+    small: ["auto"],
     medium: ["auto", "auto"],
     large: ["auto", "auto"],
     xlarge: ["auto", "auto"]
   };
 
   const areas = {
-    small: [
-      { name: "directory", start: [0, 0], end: [0, 0] },
-      { name: "main", start: [0, 1], end: [0, 1] }
-    ],
+    small: [{ name: "main", start: [0, 0], end: [0, 0] }],
     medium: [
       { name: "directory", start: [0, 0], end: [0, 0] },
       { name: "main", start: [1, 0], end: [1, 0] }
@@ -72,6 +69,38 @@ const Shop: FC<IProps> = () => {
       { name: "main", start: [1, 0], end: [1, 0] }
     ]
   };
+  const main = (
+    <Box
+      key="0"
+      style={{
+        gridArea: "main",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        margin: "small",
+        justifyContent: "center",
+        overflowY: "scroll"
+      }}
+    >
+      {category === "search" && query
+        ? collections.map((collection: Collection) =>
+            collection.items
+              .filter(matchWithQuery)
+              .map((item: CollectionItem) => <Item key={item.id} item={item} />)
+          )
+        : getCurrentCollectionItems().map((item: CollectionItem) => (
+            <Item key={item.id} item={item} />
+          ))}
+    </Box>
+  );
+  const directory = <Directory key="1" />;
+
+  const components = {
+    small: [main],
+    medium: [main, directory],
+    large: [main, directory],
+    xlarge: [main, directory]
+  };
   return (
     <Grid
       fill
@@ -81,31 +110,7 @@ const Shop: FC<IProps> = () => {
       rows={rows[size]}
       gap="small"
     >
-      <Directory />
-
-      <Box
-        style={{
-          gridArea: "main",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          margin: "small",
-          justifyContent: "center",
-          overflowY: "scroll"
-        }}
-      >
-        {category === "search" && query
-          ? collections.map((collection: Collection) =>
-              collection.items
-                .filter(matchWithQuery)
-                .map((item: CollectionItem) => (
-                  <Item key={item.id} item={item} />
-                ))
-            )
-          : getCurrentCollectionItems().map((item: CollectionItem) => (
-              <Item key={item.id} item={item} />
-            ))}
-      </Box>
+      {components[size]}
     </Grid>
   );
 };
