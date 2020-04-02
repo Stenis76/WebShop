@@ -1,18 +1,22 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
+
 import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
 import ShippingForm from "./shipping-form";
+import OrderConfirmation from "./order-confirmation";
 
 import UserContext from "../contexts/user-context/context";
 import CartContext from "../contexts/cart-context/context";
-import { User, Close } from "grommet-icons";
 
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const { user } = useContext(UserContext);
-  const { cart, shippingMethod, paymentMethod } = useContext(CartContext);
+  const { clearCart } = useContext(CartContext);
+  const history = useHistory();
 
   const validUserInformation = () =>
     user.firstName.length > 1 &&
@@ -24,6 +28,17 @@ const MyCheckOut = () => {
     user.address.length > 1 &&
     user.city.length > 1 &&
     user.postCode.length > 1;
+
+  const closeModal = () => {
+    history.push("/");
+    setShowModal(false);
+    clearCart();
+  };
+
+  const mockupPaymentAPI = async (delay = 2000) => {
+    await new Promise(resolve => setTimeout(resolve, delay));
+    setShowModal(true);
+  };
 
   return (
     <Box gridArea="myCheckOut" background="light-6" round="small">
@@ -52,6 +67,7 @@ const MyCheckOut = () => {
               disabled={!validUserInformation()}
               onClick={() => setActiveIndex(2)}
               label="NEXT"
+              margin={{ top: "medium" }}
             />
           </Box>
         </AccordionPanel>
@@ -65,42 +81,14 @@ const MyCheckOut = () => {
             margin="medium"
             primary
             label="Place your order"
-            onClick={() => setShowModal(true)}
+            onClick={() => mockupPaymentAPI()}
           />
         ) : null}
       </Accordion>
 
       {showModal && (
-        <Layer
-          onEsc={() => setShowModal(false)}
-          onClickOutside={() => setShowModal(false)}
-        >
-          <Box background="light-3">
-            <Button
-              primary
-              alignSelf="end"
-              icon={<Close />}
-              onClick={() => setShowModal(false)}
-              color="light-3"
-            />
-            <h1>Order confirmation</h1>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-              <span>Paying with: </span>
-              <span>{}paymentMethod</span>
-              <span>Shipping with: </span>
-              <span>{shippingMethod}</span>
-              <span>Estimated delivery: </span>
-              <span>{new Date().toLocaleString()}</span>
-              <div>Items</div>
-              <div></div>
-              {cart.map(item => (
-                <>
-                  <span>{item.name}</span>
-                  <span>{item.price}</span>
-                </>
-              ))}
-            </div>
-          </Box>
+        <Layer onEsc={closeModal} onClickOutside={closeModal}>
+          <OrderConfirmation closeModal={closeModal} />
         </Layer>
       )}
     </Box>

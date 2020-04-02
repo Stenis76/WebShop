@@ -8,6 +8,7 @@ export interface CollectionItem {
   size: string[];
   season: string[];
   description: string;
+  quantity?: number;
 }
 
 export interface Collection {

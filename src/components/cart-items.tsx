@@ -11,6 +11,7 @@ import {
 } from "grommet";
 import { Close, AddCircle, SubtractCircle } from "grommet-icons";
 import CartContext from "../contexts/cart-context/context";
+import { CollectionItem } from "../shop.data";
 
 const CartItems = () => {
   const {
@@ -18,27 +19,15 @@ const CartItems = () => {
     removeItemFromCart,
     addItemToCart,
     clearItemFromCart,
-    shippingMethod
+    shippingCost
   } = useContext(CartContext);
-
-  let shippingCost = 0;
-  switch (shippingMethod) {
-    case "camel":
-      shippingCost = 2;
-      break;
-    case "lightning":
-      shippingCost = 10;
-      break;
-    default:
-      // regular
-      shippingCost = 5;
-  }
 
   const calculateTotal = () => {
     let total: number = 0;
 
     for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price * cart[i].quantity;
+      const quantity = cart[i].quantity || 1;
+      total += cart[i].price * quantity;
     }
 
     return total + shippingCost;
@@ -69,7 +58,7 @@ const CartItems = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {cart.map(item => (
+          {cart.map((item: CollectionItem) => (
             <TableRow key={item.id}>
               <TableCell>
                 <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
@@ -77,7 +66,7 @@ const CartItems = () => {
               <TableCell scope="row">{item.name}</TableCell>
               <TableCell>${item.price}</TableCell>
               <TableCell flex direction="row" align="center">
-                {item.quantity > 1 ? (
+                {item.quantity && item.quantity > 1 ? (
                   <Button
                     icon={<SubtractCircle />}
                     onClick={() => removeItemFromCart(item.id)}

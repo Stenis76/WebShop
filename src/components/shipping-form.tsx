@@ -6,36 +6,23 @@ import { Box, Form, RadioButtonGroup } from "grommet";
 interface IProps {}
 
 const ShippingForm = (props: IProps) => {
-  const { shippingMethod, setShippingMethod } = useContext(CartContext);
+  const { shippingMethod, setShippingMethod, shippingCost } = useContext(
+    CartContext
+  );
 
   const getDeliveryTime = () => {
     const date = new Date();
     switch (shippingMethod) {
-      case "camel":
+      case "postNord":
         date.setHours(date.getHours() + 72);
         break;
-      case "lightning":
+      case "dhl":
         date.setHours(date.getHours() + 6);
         break;
       default:
         date.setHours(date.getHours() + 36);
     }
     return date;
-  };
-
-  const getDeliveryCost = () => {
-    let cost;
-    switch (shippingMethod) {
-      case "camel":
-        cost = 10;
-        break;
-      case "lightning":
-        cost = 5;
-        break;
-      default:
-        cost = 2;
-    }
-    return cost;
   };
 
   return (
@@ -45,9 +32,9 @@ const ShippingForm = (props: IProps) => {
           direction="row"
           name="radio"
           options={[
-            { label: "PostNord (72h)", value: "camel" },
-            { label: "Schenker (36h)", value: "regular" },
-            { label: "DHL Express (6h)", value: "lightning" }
+            { label: "PostNord (72h)", value: "postNord" },
+            { label: "Schenker (36h)", value: "schenker" },
+            { label: "DHL Express (6h)", value: "dhl" }
           ]}
           value={shippingMethod}
           onChange={event => {
@@ -57,7 +44,7 @@ const ShippingForm = (props: IProps) => {
           {...props}
         />
       </Box>
-      <div>+ ${getDeliveryCost()}</div>
+      <div>${shippingCost}</div>
       <div>
         <span style={{ fontWeight: "bold", color: "#c96d36" }}>
           Delivery date:

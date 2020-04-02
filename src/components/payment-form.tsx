@@ -16,6 +16,7 @@ const PaymentForm = (props: IProps) => {
   return (
     <Form style={{ gridArea: "name" }}>
       <RadioButtonGroup
+        margin={{ vertical: "medium" }}
         direction="row"
         name="radio"
         options={[

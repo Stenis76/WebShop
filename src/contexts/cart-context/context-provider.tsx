@@ -1,24 +1,49 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 import CartContext from "./context";
 
+import { CollectionItem } from "../../shop.data";
+
 interface IProps {}
 
-export type ShippingMethod = "regular" | "camel" | "lightning";
+export type ShippingMethod = "postNord" | "schenker" | "dhl";
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = props => {
-  const [cart, setCart] = useState([] as any);
-  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>("camel");
+  const [cart, setCart] = useState<CollectionItem[]>([]);
+  const [shippingCost, setShippingCost] = useState(0);
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>(
+    "postNord"
+  );
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
-  const addItemToCart = (item: any) => {
-    const existing = cart.find((cartItem: any) => cartItem.id === item.id);
+  console.log({ shippingMethod, shippingCost });
+
+  useEffect(() => {
+    let cost = 0;
+    switch (shippingMethod) {
+      case "dhl":
+        cost = 10;
+        break;
+      case "schenker":
+        cost = 5;
+        break;
+      default:
+        cost = 2;
+    }
+    setShippingCost(cost);
+  }, [shippingMethod]);
+
+  const addItemToCart = (item: CollectionItem) => {
+    const existing = cart.find(cartItem => cartItem.id === item.id);
 
     if (existing) {
-      const newCart = cart.map((cartItem: any) => {
+      const newCart = cart.map(cartItem => {
         if (cartItem.id === item.id) {
-          return { ...cartItem, quantity: cartItem.quantity + 1 };
+          return {
+            ...cartItem,
+            quantity: cartItem.quantity ? cartItem.quantity + 1 : 1
+          };
         } else return cartItem;
       });
       setCart(newCart);
@@ -30,16 +55,19 @@ const CartContextProvider: FC<IProps> = props => {
   };
 
   const removeItemFromCart = (itemId: number) => {
-    const existing = cart.find((cartItem: any) => cartItem.id === itemId);
+    const existing = cart.find(cartItem => cartItem.id === itemId);
 
     if (existing) {
       if (existing.quantity === 1) {
-        const newCart = cart.filter((item: any) => item.id !== itemId);
+        const newCart = cart.filter(item => item.id !== itemId);
         setCart(newCart);
       } else {
-        const newCart = cart.map((cartItem: any) => {
+        const newCart = cart.map(cartItem => {
           if (cartItem.id === itemId) {
-            return { ...cartItem, quantity: cartItem.quantity - 1 };
+            return {
+              ...cartItem,
+              quantity: cartItem.quantity ? cartItem.quantity - 1 : 1
+            };
           } else return cartItem;
         });
         setCart(newCart);
@@ -49,12 +77,13 @@ const CartContextProvider: FC<IProps> = props => {
   };
 
   const clearItemFromCart = (itemId: number) => {
-    setCart((prevCart: any) =>
-      prevCart.filter((cartItem: any) => cartItem.id !== itemId)
-    );
+    setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== itemId));
   };
 
+  const clearCart = () => setCart([]);
+
   const setShipping = (method: ShippingMethod) => setShippingMethod(method);
+
   const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
 
   return (
@@ -68,7 +97,9 @@ const CartContextProvider: FC<IProps> = props => {
         setPaymentMethod: setPayment,
         addItemToCart,
         removeItemFromCart,
-        clearItemFromCart
+        clearItemFromCart,
+        clearCart,
+        shippingCost: shippingCost
       }}
     />
   );
