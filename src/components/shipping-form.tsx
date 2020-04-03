@@ -9,7 +9,8 @@ import {
   Table,
   TableCell,
   TableBody,
-  TableRow
+  TableRow,
+  ResponsiveContext
 } from "grommet";
 
 interface IProps {}
@@ -40,21 +41,43 @@ const ShippingForm = (props: IProps) => {
         Choose your prefered delivery partner{" "}
       </Text>
       <Box align="center" pad="medium">
-        <RadioButtonGroup
-          direction="row"
-          name="radio"
-          options={[
-            { label: "PostNord (72h)", value: "postNord" },
-            { label: "Schenker (36h)", value: "schenker" },
-            { label: "DHL Express (6h)", value: "dhl" }
-          ]}
-          value={shippingMethod}
-          onChange={event => {
-            const method: any = event.target.value;
-            setShippingMethod(method);
-          }}
-          {...props}
-        />
+        <ResponsiveContext.Consumer>
+          {responsive =>
+            responsive === "small" ? (
+              <RadioButtonGroup
+                direction="column"
+                name="radio"
+                options={[
+                  { label: "PostNord (72h)", value: "postNord" },
+                  { label: "Schenker (36h)", value: "schenker" },
+                  { label: "DHL Express (6h)", value: "dhl" }
+                ]}
+                value={shippingMethod}
+                onChange={event => {
+                  const method: any = event.target.value;
+                  setShippingMethod(method);
+                }}
+                {...props}
+              />
+            ) : (
+              <RadioButtonGroup
+                direction="row"
+                name="radio"
+                options={[
+                  { label: "PostNord (72h)", value: "postNord" },
+                  { label: "Schenker (36h)", value: "schenker" },
+                  { label: "DHL Express (6h)", value: "dhl" }
+                ]}
+                value={shippingMethod}
+                onChange={event => {
+                  const method: any = event.target.value;
+                  setShippingMethod(method);
+                }}
+                {...props}
+              />
+            )
+          }
+        </ResponsiveContext.Consumer>
       </Box>
       <Table margin="0">
         <TableBody>

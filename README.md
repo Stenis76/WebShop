@@ -1,3 +1,16 @@
+ADAMFREDRIK - Webshop
+
+Projekt för FED19G, kurs - Javascript 2
+
+React och typescript med Grommet som designsystem
+
+Projektdeltagare : Dick Stenqvist, Fredrik Thelin och Adam Kjäll
+
+Avgränsningar: Adminsidan är ej responsiv då vi förväntar oss att den användes i desktop-mode
+
+länk till designsystem
+https://v2.grommet.io
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

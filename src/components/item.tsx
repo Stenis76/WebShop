@@ -55,12 +55,19 @@ const Item = ({ item, history, match, location }: Iprops) => {
         justify="evenly"
         align="center"
       >
-        <Box direction="column" justify="between">
+        <Box
+          direction="column"
+          pad={{ left: "medium" }}
+          align="start"
+          fill
+          justify="around"
+        >
           <h3>{item.name}</h3>
           <span>${item.price}</span>
         </Box>
-        <Box direction="column" align="end">
+        <Box direction="column" align="center" fill justify="around">
           <Button
+            style={{ height: "2rem" }}
             primary
             onClick={event => {
               addItemToCart(item);

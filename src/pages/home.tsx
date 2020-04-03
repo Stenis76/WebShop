@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   const rows = {
-    small: ["auto", "auto"],
+    small: ["1/2", "auto"],
     medium: ["auto", "auto"],
     large: ["auto", "auto", "auto"],
     xlarge: ["auto", "auto", "auto"]

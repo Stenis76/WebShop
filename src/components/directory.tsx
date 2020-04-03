@@ -65,16 +65,18 @@ const Directory = () => {
             </Box>
           ))}
         </Box>
-        <RangeSelector
-          direction="horizontal"
-          invert={false}
-          min={0}
-          max={250}
-          size="medium"
-          round="small"
-          values={values}
-          onChange={(values: any) => setPrice(values)}
-        />
+        <Box pad="small">
+          <RangeSelector
+            direction="horizontal"
+            invert={false}
+            min={0}
+            max={250}
+            size="medium"
+            round="small"
+            values={values}
+            onChange={(values: any) => setPrice(values)}
+          />
+        </Box>
       </Stack>
       <Box>
         <Text style={{ color: "#c96d36" }}>From:</Text>

@@ -1,8 +1,9 @@
-import React from "react";
-import { Box, Paragraph } from "grommet";
+import React, { useContext } from "react";
+import { Box, Paragraph, ResponsiveContext } from "grommet";
 import WideImage from "../../assets/images/manwithshirtwide.jpg";
 
 const HomeHeader = () => {
+  const responsive = useContext(ResponsiveContext);
   return (
     <Box gridArea="header" style={{ position: "relative" }}>
       <Box fill>
@@ -17,7 +18,7 @@ const HomeHeader = () => {
         />
       </Box>
       <Paragraph
-        size="xxlarge"
+        size={responsive === "small" ? "xlarge" : "xxlarge"}
         style={{
           margin: 0,
           position: "absolute",

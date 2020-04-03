@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Box, Heading, Layer, Stack, Text } from "grommet";
+import { Box, Heading, Layer, Stack, Text, ResponsiveContext } from "grommet";
 import CartContext from "../contexts/cart-context/context";
 import { Cart } from "grommet-icons";
 import MyCart from "./my-cart";
@@ -10,6 +10,7 @@ interface Iprops {}
 
 const Header = (props: Iprops) => {
   const { cart } = useContext(CartContext);
+  const responsive = useContext(ResponsiveContext);
 
   const [open, setOpen] = React.useState<boolean>();
 
@@ -49,9 +50,12 @@ const Header = (props: Iprops) => {
           style={{ cursor: "pointer" }}
           alignSelf="center"
         >
-          <Cart size="2.3rem" />
+          <Cart size={responsive === "small" ? "1.7rem" : "2.3rem"} />
           <Box background="#76FEB3" pad={{ horizontal: "xxsmall" }} round>
-            <Text weight="bold" size="medium">
+            <Text
+              weight="bold"
+              size={responsive === "small" ? "small" : "medium"}
+            >
               {cart.length}
             </Text>
           </Box>

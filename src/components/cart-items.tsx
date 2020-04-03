@@ -7,7 +7,8 @@ import {
   TableCell,
   TableBody,
   Image,
-  Box
+  Box,
+  ResponsiveContext
 } from "grommet";
 import { Close, AddCircle, SubtractCircle } from "grommet-icons";
 import CartContext from "../contexts/cart-context/context";
@@ -21,6 +22,7 @@ const CartItems = () => {
     clearItemFromCart,
     shippingCost
   } = useContext(CartContext);
+  const responsive = useContext(ResponsiveContext);
 
   const calculateTotal = () => {
     let total: number = 0;
@@ -41,11 +43,13 @@ const CartItems = () => {
   };
 
   return (
-    <Box>
+    <Box responsive>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableCell scope="col" border="bottom"></TableCell>
+            {responsive !== "small" ? (
+              <TableCell scope="col" border="bottom"></TableCell>
+            ) : null}
             <TableCell scope="col" border="bottom">
               Name
             </TableCell>
@@ -60,23 +64,32 @@ const CartItems = () => {
         <TableBody>
           {cart.map((item: CollectionItem) => (
             <TableRow key={item.id}>
-              <TableCell>
-                <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
-              </TableCell>
+              {responsive !== "small" ? (
+                <TableCell>
+                  <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
+                </TableCell>
+              ) : null}
               <TableCell scope="row">{item.name}</TableCell>
               <TableCell>${item.price}</TableCell>
-              <TableCell flex direction="row" align="center">
+              <TableCell flex direction="row" align="center" size="xxsmall">
                 {item.quantity && item.quantity > 1 ? (
                   <Button
                     icon={<SubtractCircle />}
+                    style={{
+                      padding: responsive === "small" ? "0.2rem" : "0.4rem"
+                    }}
                     onClick={() => removeItemFromCart(item.id)}
                   />
                 ) : (
-                  "\u00a0\u00a0" // for empty space
+                  <div>{"\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"}</div>
+                  // "\u00a0\u00a0" // for empty space
                 )}
                 <span>{item.quantity}</span>
                 <Button
                   size="small"
+                  style={{
+                    padding: responsive === "small" ? "0.2rem" : "0.4rem"
+                  }}
                   icon={<AddCircle />}
                   onClick={() => addItemToCart(item)}
                 />
@@ -84,6 +97,9 @@ const CartItems = () => {
               <TableCell>
                 <Button
                   size="small"
+                  style={{
+                    padding: responsive === "small" ? "0.2rem" : "0.4rem"
+                  }}
                   onClick={() => clearItemFromCart(item.id)}
                   icon={<Close />}
                 />
