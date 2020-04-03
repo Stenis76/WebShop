@@ -1,7 +1,16 @@
 import React, { useContext } from "react";
 import CartContext from "../contexts/cart-context/context";
 
-import { Box, Form, RadioButtonGroup } from "grommet";
+import {
+  Box,
+  Form,
+  RadioButtonGroup,
+  Text,
+  Table,
+  TableCell,
+  TableBody,
+  TableRow
+} from "grommet";
 
 interface IProps {}
 
@@ -10,7 +19,7 @@ const ShippingForm = (props: IProps) => {
     CartContext
   );
 
-  const getDeliveryTime = () => {
+  const getDeliveryDate = () => {
     const date = new Date();
     switch (shippingMethod) {
       case "postNord":
@@ -22,12 +31,15 @@ const ShippingForm = (props: IProps) => {
       default:
         date.setHours(date.getHours() + 36);
     }
-    return date;
+    return date.toLocaleDateString();
   };
 
   return (
     <Form style={{ gridArea: "name" }}>
-      <Box align="center" pad="large">
+      <Text weight="bold" alignSelf="start">
+        Choose your prefered delivery partner{" "}
+      </Text>
+      <Box align="center" pad="medium">
         <RadioButtonGroup
           direction="row"
           name="radio"
@@ -44,13 +56,26 @@ const ShippingForm = (props: IProps) => {
           {...props}
         />
       </Box>
-      <div>${shippingCost}</div>
-      <div>
-        <span style={{ fontWeight: "bold", color: "#c96d36" }}>
-          Delivery date:
-        </span>{" "}
-        {getDeliveryTime().toLocaleString()}
-      </div>
+      <Table margin="0">
+        <TableBody>
+          <TableRow>
+            <TableCell scope="row">
+              <Text>Delivery cost:</Text>
+            </TableCell>
+            <TableCell>
+              <strong>${shippingCost}</strong>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell scope="row">
+              <Text>Delivery date:</Text>
+            </TableCell>
+            <TableCell>
+              <strong>{getDeliveryDate().toLocaleString()}</strong>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </Form>
   );
 };
