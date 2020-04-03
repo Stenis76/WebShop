@@ -18,11 +18,15 @@ const SearchBar = ({ history, match }: RouteComponentProps) => {
           <TextInput
             onChange={e => setInput(e.target.value)}
             value={input}
-            placeholder="Sök produkter"
+            placeholder="Sök"
             size="medium"
           />
         </FormField>
-        <Button margin={{ right: "medium" }} icon={<Search />} type="submit" />
+        <Button
+          margin={{ right: "medium" }}
+          icon={<Search size="2.3rem" />}
+          type="submit"
+        />
       </Box>
     </Form>
   );

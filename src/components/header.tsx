@@ -47,9 +47,10 @@ const Header = (props: Iprops) => {
           onClick={onOpen}
           margin={{ right: "medium" }}
           style={{ cursor: "pointer" }}
+          alignSelf="center"
         >
-          <Cart size="large" />
-          <Box background="#76FEB3" pad={{ horizontal: "xsmall" }} round>
+          <Cart size="2.3rem" />
+          <Box background="#76FEB3" pad={{ horizontal: "xxsmall" }} round>
             <Text weight="bold" size="medium">
               {cart.length}
             </Text>
