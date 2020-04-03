@@ -11,6 +11,8 @@ Avgränsningar: Adminsidan är ej responsiv då vi förväntar oss att den anvä
 länk till designsystem
 https://v2.grommet.io
 
+https://github.com/FThelin/WebShop länk till GitHub och https://epic-varahamihira-8e19d0.netlify.com/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
