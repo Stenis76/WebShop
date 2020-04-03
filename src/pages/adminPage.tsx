@@ -19,8 +19,8 @@ const initialInputs = {
   name: "",
   imageUrl: "",
   price: "",
-  size: "",
-  season: "",
+  size: [""],
+  season: [""],
   description: ""
 };
 
@@ -45,12 +45,12 @@ const Admin = () => {
 
   const addToCollection = () => {
     const item: CollectionItem = {
-      id: findId(),
+      id: calculateNextItemId(),
       name: inputs.name,
       imageUrl: inputs.imageUrl,
       price: Number(inputs.price),
-      size: inputs.size.split(" "), // splitta på mellanrum "small medium large"
-      season: inputs.season.split(" "),
+      size: inputs.size,
+      season: inputs.season,
       description: inputs.description
     };
 
@@ -94,8 +94,8 @@ const Admin = () => {
             name: inputs.name,
             imageUrl: inputs.imageUrl,
             price: Number(inputs.price),
-            size: inputs.size.split(" "),
-            season: inputs.season.split(" "),
+            size: inputs.size,
+            season: inputs.season,
             description: inputs.description
           };
         }
@@ -108,16 +108,15 @@ const Admin = () => {
     onClose();
   };
 
-  const findId = () => {
-    let nextID = -1;
-    const localStorageCollections = localStorage.getItem("collection");
-    if (localStorageCollections) {
-      let collection = JSON.parse(localStorageCollections);
-      collection.map((category: any) =>
-        category.items.map((item: any) => (nextID = item.id + 1))
-      );
-    }
-    return nextID;
+  const calculateNextItemId = () => {
+    let highestId =
+      collections
+        .map(collection => collection.items.map(item => item.id))
+        .flat()
+        .sort((a, b) => a - b)
+        .pop() || 0;
+
+    return highestId + 1;
   };
 
   const handleInputs = (name: string, value: string) => {
@@ -129,8 +128,8 @@ const Admin = () => {
       name: item.name,
       imageUrl: item.imageUrl,
       price: item.price + "",
-      size: item.size.join(" "),
-      season: item.season.join(" "),
+      size: item.size,
+      season: item.season,
       description: item.description
     });
   };
@@ -198,7 +197,7 @@ const Admin = () => {
                 height="large"
               >
                 <Heading size="xsmall">{category}</Heading>
-                <Text>ID: {findId()}</Text>
+                <Text>ID: {calculateNextItemId()}</Text>
                 <FormFieldLabel
                   name="ProductName"
                   label="Product name"
@@ -225,7 +224,7 @@ const Admin = () => {
                 />
                 <Text>Sizes</Text>
                 <Box direction="row">
-                  <CheckBox label="small" onChange={() => {}} />
+                  <CheckBox label="small" />
                   <CheckBox label="medium" onChange={() => {}} />
                   <CheckBox label="large" onChange={() => {}} />
                   <CheckBox label="xlarge" onChange={() => {}} />

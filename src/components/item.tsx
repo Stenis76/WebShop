@@ -67,7 +67,6 @@ const Item = ({ item, history, match, location }: Iprops) => {
         </Box>
         <Box direction="column" align="center" fill justify="around">
           <Button
-            style={{ height: "2rem" }}
             primary
             onClick={event => {
               addItemToCart(item);
@@ -81,7 +80,7 @@ const Item = ({ item, history, match, location }: Iprops) => {
                 itemComponent.style.color = "#FEFEFE";
               }, 4000);
             }}
-            label="Add to cart"
+            label="Buy"
             margin="small"
             color="buttonBg"
           />
