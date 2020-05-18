@@ -1,12 +1,14 @@
-Projektarbete: Webbshop
+# Projektarbete: Webbshop
 
 Dynamiskwebbutveckling
-Mål:
+
+## Mål:
 Ni skall bygga en webbshops-applikation inkluderande en klient och en server. Servern ska vara kopplad till en mongodb databas och vara strukturerad baserad på ett REST-API med resurser. Till er hjälp har ni en uppgiftsbeskrivning samt en kravspecifikation.
 Regler
 Projektet genomförs i grupper om 4 eller 5 personer
 Ert projekt ska skötas från ett gemensamt Github repo. Ni skall använda er av issues och pull request för att strukturera upp erat arbete. I början av projektet skall ni presentera två diagram. Ett ER-diagram över er datastruktur och ett diagram över er kodstruktur. Diagrammen skall uppdateras under projektets gång och lämnas in tillsammans med er kodbas - diagrammen och koden skall stämma överens.
 Ett gruppkontrakt skall skrivas på och lämnas in.
+
 Projektledare
 Er grupp skall utse en projektledare vars roll utöver alla andras är att samla ihop gruppen och försöka ha en mer övergripande roll över projektet. Det här ansvarar projektledaren för:
 
@@ -14,7 +16,8 @@ Er grupp skall utse en projektledare vars roll utöver alla andras är att samla
 - att projektet flyter på enligt planering och samla gruppen till ev. möten.
 - att fokus är på rätt saker och att alla har något att göra.
 - ta kontakt med gruppmedlemmar om dom är frånvarande utan att ha meddelat gruppen.
-  Betyg
+ 
+ ## Betyg
   Projektarbetets betyg beror på er givna idépresentation tillsammans med ert resultat. Alla VG krav behöver inte uppfyllas för betyget VG.
   Redovisningar
   Idégodkännande
@@ -27,7 +30,7 @@ Er grupp skall utse en projektledare vars roll utöver alla andras är att samla
   Vid behov: uppgifter att testa med, så som inloggningsuppgifter.
   OBS: Readme filen ska framförallt innehålla en lista över alla kraven i kravspecen nedanför samt en kort kommentar från er - har ni uppfyllt kravet? I så fall, hur?
 
-Presentation
+## Presentation
 Fredag den 12:e Juni ska ni presentera ert projektarbete med en presentation och genomgång av ert slutresultat. Ni ska i presentationen svara på följande frågor:
 
 - Hur ser ert första ER diagram ut.
@@ -44,10 +47,11 @@ Fredag den 12:e Juni ska ni presentera ert projektarbete med en presentation och
   Hjälp oss lärare hjälpa er!
   Fundera ut bra frågor och ställ dem till oss under handledningen så vi kan förklara för er.
 
-Bakgrund till projektet:
+## Bakgrund till projektet:
 Året är 1992, Waynes World och Charlie Moon går på biograferna. Janne Kemi är en finsk ultramiljonär som bestämt sig för att satsa på en ny e-handeln. Han vill investera i nya hemsidor. Han har anlitat er för att ta fram dessa sidor.
 Han har vissa specifika krav från sin IT avdelning som han bifogat som en kravspecifikation. Förutom det har ni fria händer att ta fram en grym idé och tjäna sjuka pengar (åt Janne).
-Kravspecifikation på projektet:
+
+## Kravspecifikation på projektet:
 • Alla sidor skall vara responsiva. (G)
 • Arbetet ska implementeras med en React frontend och en Express backend. (G)
 • Skapa ett ER diagram och koddiagram, detta ska lämnas in vid idégodkännandet G)
