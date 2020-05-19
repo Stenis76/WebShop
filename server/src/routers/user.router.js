@@ -67,8 +67,6 @@ router.post("/api/newuser", (req, res) => {
 
 // LOGIN
 router.post("/api/log-in", (req, res) => {
-  console.log("här är jag");
-
   if (req.body.email && req.body.password) {
     User.authenticate(req.body.email, req.body.password, (err, user) => {
       if (err) {
