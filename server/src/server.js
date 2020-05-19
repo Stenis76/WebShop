@@ -4,7 +4,7 @@ const app = express();
 // const cors = require("cors");
 require("dotenv").config();
 
-const { run } = require("./mongo");
+const { run } = require("./controllers/mongo");
 
 /* Import routes */
 
