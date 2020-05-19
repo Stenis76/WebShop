@@ -67,8 +67,8 @@ router.put("/api/product/:productId", async (req, res) => {
           category: req.body.category,
           season: req.body.season,
           stock: {
-            small: req.body.small,
-            medium: req.body.medium,
+            small: req.body.stock.small,
+            medium: req.body.stock.medium,
             large: req.body.large,
             xlarge: req.body.xlarge,
           },

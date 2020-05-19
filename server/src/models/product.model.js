@@ -28,20 +28,16 @@ const ProductSchema = new mongoose.Schema({
   },
   stock: {
     small: {
-      type: Number,
-      trim: true,
+      type: String,
     },
     medium: {
-      type: Number,
-      trim: true,
+      type: String,
     },
     large: {
-      type: Number,
-      trim: true,
+      type: String,
     },
     xlarge: {
       type: Number,
-      trim: true,
     },
   },
   description: {

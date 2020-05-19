@@ -36,5 +36,6 @@ Content-Type: application/json
     "price": "12344",
     "category": "Sweater",
     "season": "höst",
-    "description": "en varm kofta"
+    "description": "en varm kofta",
+    "stock": {"medium": "43"}
 }
