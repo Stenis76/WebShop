@@ -1,0 +1,26 @@
+// ----- USER ------ // 
+###
+// GET ONE USER BY ID
+GET http://localhost:3002/api/users/5eb294dc5ecfbb162830364e
+
+###
+// GET ALL USERS
+GET http://localhost:3002/api/users
+
+
+###
+// CREATE A USER
+POST http://localhost:3002/api/newuser
+Content-Type: application/json
+
+{
+  "firstname": "Dick",
+  "lastname": "Stenqvist",
+  "phonenumber": "073322110",
+  "email": "dicken@test.se",
+  "adress": "Skosnörstigen 6",
+  "postcode": "18282",
+  "city": "Ljungby",
+  "creditcardnumber": "68898277272",
+  "password": "1234"
+}
