@@ -4,11 +4,12 @@ const app = express();
 // const cors = require("cors");
 require("dotenv").config();
 
-const { run } = require("./mongo");
+const { run } = require("./controllers/mongo");
 
 /* Import routes */
 
 const userRouter = require("./routers/user.router");
+const productRouter = require("./routers/product.router");
 
 // run the database
 run();
@@ -44,7 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 /* Add API resourses */
 
 app.use(userRouter);
-// app.use(postRouter);
+app.use(productRouter);
 
 const PORT = process.env.PORT || 8080;
 
