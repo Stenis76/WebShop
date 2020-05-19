@@ -1,0 +1,17 @@
+### 
+//GET all freight options
+
+GET http://localhost:3002/api/freight
+Content-Type: : application/json
+
+###
+
+POST http://localhost:3002/api/freight
+Content-Type: application/json
+
+{
+  "shipmentId": "123",
+  "orderId": "321",
+  "deliveryDate": "5/6",
+  "price": "20kr"
+}

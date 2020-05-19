@@ -7,4 +7,6 @@ let freightSchema = mongoose.Schema({
   price: String
 });
 
-module.exports = mongoose.model("freight", freightSchema)
+let FreightModel = mongoose.model("freight", freightSchema)
+module.exports = FreightModel
+
