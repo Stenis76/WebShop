@@ -1,0 +1,40 @@
+// ----- PRODUCTS ------ // 
+###
+// GET ONE PRODUCT BY ID. 
+GET http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
+
+###
+// GET ALL PRODUCTS. 
+GET http://localhost:3002/api/product
+
+###
+// CREATE A NEW PRODUCT. 
+POST http://localhost:3002/api/newproduct
+Content-Type: application/json
+
+{
+  "name": "mössa",
+  "imageuri": "www.google.se",
+  "price": "13",
+  "category": "hats",
+  "season": "winter",
+  "description": "a grön mössa"
+}
+
+###
+// DELETE USER
+DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
+
+###
+// UPDATE PRODUCT
+PUT   http://localhost:3002/api/product/5ec3cde04337b612bf613796
+Content-Type: application/json
+
+{
+    "name": "kofta",
+    "imageuri": "www.shop.se",
+    "price": "12344",
+    "category": "Sweater",
+    "season": "höst",
+    "description": "en varm kofta"
+}
