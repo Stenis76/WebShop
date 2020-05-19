@@ -10,8 +10,12 @@ POST http://localhost:3002/api/freight
 Content-Type: application/json
 
 {
-  "shipmentId": "123",
-  "orderId": "321",
-  "deliveryDate": "5/6",
-  "price": "20kr"
+  "shipmentId": "1234",
+  "orderId": "9876",
+  "deliveryDate": "200615",
+  "price": "1234"
 }
+
+###
+
+DELETE http://localhost:3002/api/freight/5ec415d04e043e49782a7f4d

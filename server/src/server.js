@@ -9,6 +9,7 @@ const { run } = require("./mongo");
 /* Import routes */
 
 const userRouter = require("./routers/user.router");
+const freightRouter = require("./routers/freight.router");
 
 // run the database
 run();
@@ -45,6 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(userRouter);
 // app.use(postRouter);
+app.use(freightRouter);
 
 const PORT = process.env.PORT || 8080;
 
