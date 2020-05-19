@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 const User = require("../models/user.model");
-const { isAuthenticated } = require("../authenticationMiddleware.js");
 
 // GET ALL
-router.get("/api/users", isAuthenticated, async (req, res) => {
+router.get("/api/users", async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -16,7 +15,7 @@ router.get("/api/users", isAuthenticated, async (req, res) => {
 });
 
 // GET ONE BY ID
-router.get("/api/users/:userId", isAuthenticated, async (req, res) => {
+router.get("/api/users/:userId", async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     res.status(200).json(user);
@@ -27,20 +26,21 @@ router.get("/api/users/:userId", isAuthenticated, async (req, res) => {
 
 // CREATE
 router.post("/api/newuser", (req, res) => {
+  console.log("här är jag");
   const userData = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    phonenumber: req.body.phonenumber,
+    phonenumber: "",
     email: req.body.email,
-    adress: req.body.adress,
-    postcode: req.body.postcode,
-    city: req.body.city,
-    creditcardnumber: req.body.creditcardnumber,
+    adress: "",
+    postcode: "",
+    city: "",
+    creditcardnumber: "",
     password: req.body.password,
     role: "customer",
   };
 
-  User.findOne({ username: userData.username }, (err, queriedUser) => {
+  User.findOne({ email: userData.email }, (err, queriedUser) => {
     if (err) {
       console.log("Error finding user in database", err);
       return;
@@ -54,7 +54,7 @@ router.post("/api/newuser", (req, res) => {
           res.status(400).json(err);
         } else {
           // store authentication session
-          req.session.userId = user._id;
+          // req.session.userId = user._id;
 
           res.status(201).json({ status: "Authenticated", user });
         }
@@ -66,21 +66,21 @@ router.post("/api/newuser", (req, res) => {
 });
 
 // LOGIN
-router.post("/api/login", (req, res) => {
-  if (req.body.username && req.body.password) {
-    User.authenticate(req.body.username, req.body.password, (err, user) => {
+router.post("/api/log-in", (req, res) => {
+  console.log("här är jag");
+
+  if (req.body.email && req.body.password) {
+    User.authenticate(req.body.email, req.body.password, (err, user) => {
       if (err) {
         res.status(401).json({ status: "Wrong name" });
       } else if (user) {
         // store authentication session
-        req.session.userId = user._id;
+        // req.session.userId = user._id;
 
         res.status(200).json({
           status: "Authenticated",
           user: {
             _id: user._id,
-            username: user.username,
-            name: user.name,
             email: user.email,
           },
         });
@@ -92,7 +92,7 @@ router.post("/api/login", (req, res) => {
 });
 
 // LOGOUT
-router.get("/api/logout/:userId", isAuthenticated, (req, res, next) => {
+router.get("/api/logout/:userId", (req, res, next) => {
   if (req.session) {
     // delete session object
     req.session.destroy(function (err) {
@@ -106,7 +106,7 @@ router.get("/api/logout/:userId", isAuthenticated, (req, res, next) => {
 });
 
 // DELETE
-router.delete("/api/users/:userId", isAuthenticated, async (req, res) => {
+router.delete("/api/users/:userId", async (req, res) => {
   try {
     const removedUser = await User.deleteOne({ _id: req.params.userId });
     res.status(200).json("User removed");
@@ -116,14 +116,21 @@ router.delete("/api/users/:userId", isAuthenticated, async (req, res) => {
 });
 
 // UPDATE
-router.put("/api/users/:userId", isAuthenticated, async (req, res) => {
+router.put("/api/users/:userId", async (req, res) => {
   try {
     let user = await User.findById(req.params.userId);
 
     if (user) {
-      user.email = req.body.email;
-      user.password = req.body.password;
-
+      user.firstname = user.firstname;
+      user.lastname = user.lastname;
+      user.phonenumber = req.body.phonenumber;
+      user.email = user.email;
+      user.adress = req.body.adress;
+      user.postcode = req.body.postcode;
+      user.city = req.body.city;
+      user.creditcardnumber = req.body.creditcardnumber;
+      user.password = user.password;
+      user.role = "customer";
       await user.save();
 
       res.status(200).json(user);

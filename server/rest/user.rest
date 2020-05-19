@@ -1,0 +1,51 @@
+// ----- USER ------ // 
+###
+// GET ONE USER BY ID. Is working!!!
+GET http://localhost:3002/api/users/5ec3aae54b390402d59d0ccc
+
+###
+// GET ALL USERS. Is working!!!
+GET http://localhost:3002/api/users
+
+
+###
+// CREATE A USER. Is working!!!
+POST http://localhost:3002/api/newuser
+Content-Type: application/json
+
+{
+  "firstname": "Pontus",
+  "lastname": "Stenssqvist",
+  "email": "dicken@test.dddse",
+  "password": "1234"
+}
+
+###
+// LOGIN Is working!!!
+POST http://localhost:3002/api/log-in
+Content-Type: application/json
+
+{
+    "email": "dicken@test.se",
+    "password": "1234"
+}
+
+###
+// DELETE USER Is working!!!
+DELETE http://localhost:3002/api/users/5ec3b3e2fa18c10684a9b3d8
+
+
+###
+// UPDATE USER Is working!!!
+PUT   http://localhost:3002/api/users/5ec3b3e2fa18c10684a9b3d8
+Content-Type: application/json
+
+{
+  "phonenumber": "07332332110",
+  "adress": "Skosnörstigen 6",
+  "postcode": "1822282",
+  "city": "Borås",
+  "creditcardnumber": "688982722211117272"
+}
+
+

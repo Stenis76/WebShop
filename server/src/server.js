@@ -7,8 +7,8 @@ require("dotenv").config();
 const { run } = require("./mongo");
 
 /* Import routes */
-// const postRouter = require("./routers/post.router");
-// const userRouter = require("./routers/user.router");
+
+const userRouter = require("./routers/user.router");
 
 // run the database
 run();
@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 
 /* Add API resourses */
 
-// app.use(userRouter);
+app.use(userRouter);
 // app.use(postRouter);
 
 const PORT = process.env.PORT || 8080;
