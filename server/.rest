@@ -1,7 +1,7 @@
 // ----- USER ------ // 
 ###
 // GET ONE USER BY ID
-GET http://localhost:3002/api/users/5eb294dc5ecfbb162830364e
+GET http://localhost:3002/api/users/5ec3aae54b390402d59d0ccc
 
 ###
 // GET ALL USERS
@@ -24,3 +24,31 @@ Content-Type: application/json
   "creditcardnumber": "68898277272",
   "password": "1234"
 }
+
+###
+// LOGIN
+POST http://localhost:3002/api/log-
+in
+Content-Type: application/json
+
+{
+    "email": "dicken@test.se",
+    "password": "123"
+}
+
+###
+// DELETE USER
+DELETE http://localhost:3002/api/users/5eb296c5958d4620bcfd7240
+
+
+###
+// UPDATE USER
+PUT   http://localhost:3002/api/users/5ebd8c483b5c7a3568caf750
+Content-Type: application/json
+
+{
+    "email": "dick.skjk@jhhd.se",
+    "password": "1234"
+}
+
+
