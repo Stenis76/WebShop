@@ -11,6 +11,7 @@ const { run } = require("./controllers/mongo");
 const userRouter = require("./routers/user.router");
 const freightRouter = require("./routers/freight.router");
 const productRouter = require("./routers/product.router");
+const orderRouter = require("./routers/order.router");
 
 // run the database
 run();
@@ -46,7 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 /* Add API resourses */
 
 app.use(userRouter);
-// app.use(postRouter);
+app.use(orderRouter);
 app.use(freightRouter);
 app.use(productRouter);
 
