@@ -26,19 +26,11 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  stock: {
-    small: {
-      type: String,
-    },
-    medium: {
-      type: String,
-    },
-    large: {
-      type: String,
-    },
-    xlarge: {
-      type: Number,
-    },
+  size: {
+    type: String,
+  },
+  quantity: {
+    type: Number,
   },
   description: {
     type: String,
@@ -46,5 +38,10 @@ const ProductSchema = new mongoose.Schema({
   },
 });
 
-var Product = mongoose.model("Product", ProductSchema);
+
+
+
+
+const Product = mongoose.model("Product", ProductSchema);
+
 module.exports = Product;

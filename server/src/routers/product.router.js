@@ -27,12 +27,8 @@ router.post("/api/newproduct", (req, res) => {
     price: req.body.price,
     category: req.body.category,
     season: req.body.season,
-    stock: {
-      small: req.body.small,
-      medium: req.body.medium,
-      large: req.body.large,
-      xlarge: req.body.xlarge,
-    },
+    size: req.body.size,
+    quantity: req.body.quantity,
     description: req.body.description,
   });
 
@@ -66,12 +62,8 @@ router.put("/api/product/:productId", async (req, res) => {
           price: req.body.price,
           category: req.body.category,
           season: req.body.season,
-          stock: {
-            small: req.body.stock.small,
-            medium: req.body.stock.medium,
-            large: req.body.large,
-            xlarge: req.body.xlarge,
-          },
+          size: req.body.size,
+          quantity: req.body.quantity,
           description: req.body.description,
         },
       }

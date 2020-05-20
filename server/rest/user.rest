@@ -14,10 +14,10 @@ POST http://localhost:3002/api/newuser
 Content-Type: application/json
 
 {
-  "firstname": "Pontus",
-  "lastname": "Stenssqvist",
+  "firstname": "kalle",
+  "lastname": "Svensson",
   "email": "dicken@test.dddse",
-  "password": "1234"
+  "password": "4321"
 }
 
 ###
