@@ -23,7 +23,7 @@ router.get("/api/product/:productId", (req, res) => {
 router.post("/api/newproduct", (req, res) => {
   const product = new Product({
     name: req.body.name,
-    imageuri: req.body.imageuri,
+    imageUrl: req.body.imageUrl,
     price: req.body.price,
     category: req.body.category,
     season: req.body.season,
@@ -62,7 +62,7 @@ router.put("/api/product/:productId", async (req, res) => {
       {
         $set: {
           name: req.body.name,
-          imageuri: req.body.imageuri,
+          imageUrl: req.body.imageUrl,
           price: req.body.price,
           category: req.body.category,
           season: req.body.season,

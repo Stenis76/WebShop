@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "name": "mössa",
-  "imageuri": "www.google.se",
+  "imageUrl": "www.google.se",
   "price": "13",
   "category": "hats",
   "season": "winter",
@@ -32,7 +32,7 @@ Content-Type: application/json
 
 {
     "name": "kofta",
-    "imageuri": "www.shop.se",
+    "imageUrl": "www.shop.se",
     "price": "12344",
     "category": "Sweater",
     "season": "höst",
