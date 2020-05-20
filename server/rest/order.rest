@@ -14,27 +14,25 @@ Content-Type: application/json
 
 {
   "userId": "176g3h7yb",
-  "productId": "ljh3833",
+  "productId": ["ljh3833", "6hjhvjws"],
   "freightId": "13",
   "paymentMethod": "hats",
   "activeOrder": true
 }
 
 ###
-// DELETE USER
-DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
+// DELETE ORDER
+DELETE http://localhost:3002/api/order/5ec4cf387fc96805d8281c84
 
 ###
-// UPDATE PRODUCT
-PUT   http://localhost:3002/api/product/5ec3cde04337b612bf613796
+// UPDATE ORDER
+PUT   http://localhost:3002/api/order/5ec4cbf51cd1905c28458b79
 Content-Type: application/json
 
 {
-    "name": "kofta",
-    "imageuri": "www.shop.se",
-    "price": "12344",
-    "category": "Sweater",
-    "season": "höst",
-    "description": "en varm kofta",
-    "stock": {"medium": "43"}
+  "userId": "newId86733",
+  "productId": ["newljh3833"],
+  "freightId": "15",
+  "paymentMethod": "visa",
+  "activeOrder": true
 }

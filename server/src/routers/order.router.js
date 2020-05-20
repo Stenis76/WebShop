@@ -21,7 +21,7 @@ router.get("/api/order/:orderId", (req, res) => {
 
 // CREATE
 router.post("/api/neworder", (req, res) => {
-  console.log("häääär");
+  
 
   const order = new Order({
     userId: req.body.userId,
@@ -38,40 +38,33 @@ router.post("/api/neworder", (req, res) => {
 });
 
 // DELETE
-router.delete("/api/product/:productId", async (req, res) => {
+router.delete("/api/order/:orderId", async (req, res) => {
   try {
-    const removedProduct = await Product.deleteOne({
-      _id: req.params.productId,
+    const removedorder = await Order.deleteOne({
+      _id: req.params.orderId,
     });
-    res.status(200).json({ status: "removed product" });
+    res.status(200).json({ status: "removed order" });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // UPDATE
-router.put("/api/product/:productId", async (req, res) => {
+router.put("/api/order/:orderId", async (req, res) => {
   try {
-    const updatedProduct = await Product.updateOne(
-      { _id: req.params.productId },
+    const updatedOrder = await Order.updateOne(
+      { _id: req.params.orderId },
       {
         $set: {
-          name: req.body.name,
-          imageuri: req.body.imageuri,
-          price: req.body.price,
-          category: req.body.category,
-          season: req.body.season,
-          stock: {
-            small: req.body.stock.small,
-            medium: req.body.stock.medium,
-            large: req.body.large,
-            xlarge: req.body.xlarge,
-          },
-          description: req.body.description,
+          userId: req.body.userId,
+          productId: req.body.productId,
+          freightId: req.body.freightId,
+          paymentMethod: req.body.paymentMethod,
+          activeOrder: req.body.activeOrder
         },
       }
     );
-    res.status(200).json(updatedProduct);
+    res.status(200).json(updatedOrder);
   } catch (err) {
     res.status(500).json(err);
   }
