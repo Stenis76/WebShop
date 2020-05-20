@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
+
+
 
 const User = require("../models/user.model");
 
@@ -66,27 +68,47 @@ router.post("/api/newuser", (req, res) => {
 });
 
 // LOGIN
-router.post("/api/log-in", (req, res) => {
-  if (req.body.email && req.body.password) {
-    User.authenticate(req.body.email, req.body.password, (err, user) => {
-      if (err) {
-        res.status(401).json({ status: "Wrong name" });
-      } else if (user) {
-        // store authentication session
-        // req.session.userId = user._id;
+/* router.post("/api/log-in", (req, res) => {
+  logIn(req.body.email, req.body.password) 
+    return console.log("funkar");
+    
+  
+}); */
 
-        res.status(200).json({
-          status: "Authenticated",
-          user: {
-            _id: user._id,
-            email: user.email,
-          },
+router.post("/api/users/login", async (req, res) => {
+  await User.find({ email: req.body.email })
+    .exec()
+    .then((user) => {
+      if (user.length < 1) {
+        return res.status(401).json({
+          message: "Auth failed at start",
         });
-      } else {
-        res.status(401).json({ status: "Wrong password" });
       }
+      bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+        if (err) {
+          return res.status(401).json({
+            message: " Auth failed",
+          });
+        }
+        if (result) {
+          req.session.userId = user[0]._id
+
+          return res.status(200).json({
+            message: "Auth successful",
+            userId: user[0]._id,
+            email: user[0].email,
+          });
+        }
+        res.status(401).json({
+          message: " Auth failed",
+        });
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
     });
-  }
 });
 
 // LOGOUT
@@ -140,4 +162,5 @@ router.put("/api/users/:userId", async (req, res) => {
   }
 });
 
+//exports.logIn = logIn;
 module.exports = router;
