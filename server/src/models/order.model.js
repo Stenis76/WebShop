@@ -11,7 +11,7 @@ const OrderSchema = new mongoose.Schema({
     trim: true,
   },
   freightId: {
-    type: Number,
+    type: String,
     required: true,
     trim: true,
   },
