@@ -1,0 +1,40 @@
+// ----- ODER ------ // 
+###
+// GET ONE ORDER BY ID. 
+GET http://localhost:3002/api/order/5ec3c7c41201c80fe7f5e022
+
+###
+// GET ALL ORDERS. 
+GET http://localhost:3002/api/order
+
+###
+// CREATE A ORDER. 
+POST http://localhost:3002/api/neworder
+Content-Type: application/json
+
+{
+  "userId": "176g3h7yb",
+  "productId": "ljh3833",
+  "freightId": "13",
+  "paymentMethod": "hats",
+  "activeOrder": true
+}
+
+###
+// DELETE USER
+DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
+
+###
+// UPDATE PRODUCT
+PUT   http://localhost:3002/api/product/5ec3cde04337b612bf613796
+Content-Type: application/json
+
+{
+    "name": "kofta",
+    "imageuri": "www.shop.se",
+    "price": "12344",
+    "category": "Sweater",
+    "season": "höst",
+    "description": "en varm kofta",
+    "stock": {"medium": "43"}
+}

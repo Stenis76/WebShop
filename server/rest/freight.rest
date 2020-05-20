@@ -10,7 +10,7 @@ POST http://localhost:3002/api/freight
 Content-Type: application/json
 
 {
-  "shipmentId": "1234",
+  "shipmentCompany": "DHL",
   "orderId": "9876",
   "deliveryDate": "200615",
   "price": "1234"
