@@ -13,14 +13,18 @@ POST http://localhost:3002/api/newproduct
 Content-Type: application/json
 
 {
-  "name": "Blue Beanie",
-  "imageUrl": "https://i.ibb.co/ypkgK0X/blue-beanie.png",
-  "price": 18,
+  "name": "Blue Snapbackp",
+  "imageUrl": "https://i.ibb.co/X2VJP2W/blue-snapback.png",
+  "price": 16,
   "category": "hats",
-  "season": "vinter",
-  "size": "small",
-  "quantity": 99,
-  "description": "Vintrig go hatt. Perfekt för fjällpromenader."
+  "season": ["vår", "sommar"],
+  "inventory": {
+    "small": 99,
+    "medium": 99,
+    "large": 99,
+    "xlarge": 99
+  },
+  "description": "Snap back ifall skallen svullnar i värmen."
 }
 
 ###

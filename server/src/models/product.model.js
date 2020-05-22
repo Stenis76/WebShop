@@ -22,15 +22,35 @@ const ProductSchema = new mongoose.Schema({
     trim: true,
   },
   season: {
-    type: String,
+    type: Array,
     required: true,
     trim: true,
   },
-  size: {
-    type: String,
-  },
-  quantity: {
-    type: Number,
+  inventory: {
+    small: {
+      type: String,
+      quantity: {
+        type: Number,
+      },
+    },
+    medium: {
+      type: String,
+      quantity: {
+        type: Number,
+      },
+    },
+    large: {
+      type: String,
+      quantity: {
+        type: Number,
+      },
+    },
+    xlarge: {
+      type: String,
+      quantity: {
+        type: Number,
+      },
+    },
   },
   description: {
     type: String,
