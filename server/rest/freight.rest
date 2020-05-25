@@ -10,12 +10,12 @@ POST http://localhost:3002/api/freight
 Content-Type: application/json
 
 {
-  "shipmentCompany": "DHL",
-  "orderId": "9876",
-  "deliveryDate": "200615",
-  "price": "1234"
+  "shipmentCompany": "Skriv nytt fraktalternativ",
+  "orderId": "9874",
+  "deliveryDate": "200619",
+  "price": "1236"
 }
 
 ###
 
-DELETE http://localhost:3002/api/freight/5ec415d04e043e49782a7f4d
+DELETE http://localhost:3002/api/freight/5ec4c4a57550e658456d225d
