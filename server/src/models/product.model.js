@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  imageuri: {
+  imageUrl: {
     type: String,
     required: true,
     trim: true,
@@ -22,22 +22,34 @@ const ProductSchema = new mongoose.Schema({
     trim: true,
   },
   season: {
-    type: String,
+    type: Array,
     required: true,
     trim: true,
   },
-  stock: {
+  inventory: {
     small: {
       type: String,
+      quantity: {
+        type: Number,
+      },
     },
     medium: {
       type: String,
+      quantity: {
+        type: Number,
+      },
     },
     large: {
       type: String,
+      quantity: {
+        type: Number,
+      },
     },
     xlarge: {
-      type: Number,
+      type: String,
+      quantity: {
+        type: Number,
+      },
     },
   },
   description: {
@@ -46,5 +58,10 @@ const ProductSchema = new mongoose.Schema({
   },
 });
 
-var Product = mongoose.model("Product", ProductSchema);
+
+
+
+
+const Product = mongoose.model("Product", ProductSchema);
+
 module.exports = Product;

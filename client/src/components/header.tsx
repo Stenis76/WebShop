@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Box, Heading, Layer, Stack, Text, ResponsiveContext } from "grommet";
+import { Box, Heading, Layer, Stack, Text, ResponsiveContext, Button } from "grommet";
+import { User } from "grommet-icons";
 import CartContext from "../contexts/cart-context/context";
 import { Cart } from "grommet-icons";
 import MyCart from "./my-cart";
@@ -8,7 +9,9 @@ import SearchBar from "./search-bar";
 
 interface Iprops {}
 
+
 const Header = (props: Iprops) => {
+
   const { cart } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
 
@@ -17,6 +20,8 @@ const Header = (props: Iprops) => {
   const onOpen = () => setOpen(true);
 
   const onClose = () => setOpen(undefined);
+
+  let logInPressed = false;
 
   return (
     <Box
@@ -38,7 +43,7 @@ const Header = (props: Iprops) => {
         size="large"
       >
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          ADAM FREDICK
+          ADAM FREEDICK
         </Link>
       </Heading>
       <Box direction="row">
@@ -60,6 +65,10 @@ const Header = (props: Iprops) => {
             </Text>
           </Box>
         </Stack>
+        <Link to="/login"><Button
+          margin={{ right: "medium" }}
+          icon={<User size={responsive === "small" ? "1.7rem" : "2.3rem"} />}
+        /></Link>
       </Box>
       {open && (
         <Layer position="top-right" onClickOutside={onClose}>

@@ -23,15 +23,15 @@ router.get("/api/product/:productId", (req, res) => {
 router.post("/api/newproduct", (req, res) => {
   const product = new Product({
     name: req.body.name,
-    imageuri: req.body.imageuri,
+    imageUrl: req.body.imageUrl,
     price: req.body.price,
     category: req.body.category,
     season: req.body.season,
-    stock: {
-      small: req.body.small,
-      medium: req.body.medium,
-      large: req.body.large,
-      xlarge: req.body.xlarge,
+    inventory: {
+      small: req.body.inventory.small,
+      medium: req.body.inventory.medium,
+      large: req.body.inventory.large,
+      xlarge: req.body.inventory.xlarge,
     },
     description: req.body.description,
   });
@@ -62,15 +62,15 @@ router.put("/api/product/:productId", async (req, res) => {
       {
         $set: {
           name: req.body.name,
-          imageuri: req.body.imageuri,
+          imageUrl: req.body.imageUrl,
           price: req.body.price,
           category: req.body.category,
           season: req.body.season,
-          stock: {
-            small: req.body.stock.small,
-            medium: req.body.stock.medium,
-            large: req.body.large,
-            xlarge: req.body.xlarge,
+          inventory: {
+            small: req.body.inventory.small,
+            medium: req.body.inventory.medium,
+            large: req.body.inventory.large,
+            xlarge: req.body.inventory.xlarge,
           },
           description: req.body.description,
         },
