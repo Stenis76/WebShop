@@ -1,0 +1,45 @@
+.sign-in {
+  background: #0000802c; /* fallback for old browsers */
+
+  background-blend-mode: overlay, hard-light, normal;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 33rem;
+  height: 23rem;
+  border-radius: 0.3rem;
+
+  .title {
+    color: #ffe6b6;
+    padding-top: 1.5rem;
+  }
+
+  .sign-in-form {
+    width: 100%;
+    padding: 0 4rem 4rem 4rem;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    margin: auto 2rem;
+
+    .sign-in-form {
+      width: 100%;
+      padding: 0 2rem 2rem 2rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .buttons {
+      grid-template-columns: 1fr;
+    }
+  }
+}
