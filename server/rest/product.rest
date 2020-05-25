@@ -13,18 +13,18 @@ POST http://localhost:3002/api/newproduct
 Content-Type: application/json
 
 {
-  "name": "Blue Snapbackp",
-  "imageUrl": "https://i.ibb.co/X2VJP2W/blue-snapback.png",
-  "price": 16,
-  "category": "hats",
+  "name": "Burgundy T-shirt",
+  "imageUrl": "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
+  "price": 25,
+  "category": "Mens",
   "season": ["vår", "sommar"],
   "inventory": {
-    "small": 99,
-    "medium": 99,
-    "large": 99,
-    "xlarge": 99
+    "small": 40,
+    "medium": 40,
+    "large": 50,
+    "xlarge": 30
   },
-  "description": "Snap back ifall skallen svullnar i värmen."
+  "description": "Vackert, stilfullt, trendigt. Allt du behöver i ett plagg."
 }
 
 ###
@@ -33,20 +33,20 @@ DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
 
 ###
 // UPDATE PRODUCT
-PUT   http://localhost:3002/api/product/5ec78fc8786ce91a29e1792c
+PUT   http://localhost:3002/api/product/5ecb7fc7160eb8556158611b
 Content-Type: application/json
 
 {
-  "name": "Blue Snapbackp",
-  "imageUrl": "https://i.ibb.co/X2VJP2W/blue-snapback.png",
-  "price": 16,
-  "category": "hats",
+  "name": "Grey Jean Jacket",
+  "imageUrl": "https://i.ibb.co/N71k1ML/grey-jean-jacket.png",
+  "price": 90,
+  "category": "Jackets",
   "season": ["vår", "sommar"],
   "inventory": {
-    "small": 45,
-    "medium": 99,
-    "large": 99,
-    "xlarge": 99
+    "small": 50,
+    "medium": 50,
+    "large": 92,
+    "xlarge": 88
   },
-  "description": "Snap back ifall skallen svullnar i värmen."
+  "description": "Jackan som får alla andra att vända sig om och vissla när du går förbi."
 }
