@@ -33,16 +33,20 @@ DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
 
 ###
 // UPDATE PRODUCT
-PUT   http://localhost:3002/api/product/5ec529876059d4d3fe4d9722
+PUT   http://localhost:3002/api/product/5ec78fc8786ce91a29e1792c
 Content-Type: application/json
 
 {
-  "name": "Brown Brim",
-  "imageUrl": "https://i.ibb.co/ZYW3VTp/brown-brim.png",
-  "price": 25,
+  "name": "Blue Snapbackp",
+  "imageUrl": "https://i.ibb.co/X2VJP2W/blue-snapback.png",
+  "price": 16,
   "category": "hats",
-  "season": "höst",
-  "size": "small",
-  "quantity": 99,
-  "description": "Höstig go hatt. Perfekt för skogspromenader."
+  "season": ["vår", "sommar"],
+  "inventory": {
+    "small": 45,
+    "medium": 99,
+    "large": 99,
+    "xlarge": 99
+  },
+  "description": "Snap back ifall skallen svullnar i värmen."
 }
