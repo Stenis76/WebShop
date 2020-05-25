@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-
+import axios from 'axios';
 import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
@@ -20,6 +20,17 @@ const Shop: FC<IProps> = () => {
       setCollection(JSON.parse(localStorageCollections));
     }
   }, []);
+
+  useEffect(() => {
+    axios.get('http://localhost:3002/api/product')
+    .then(res => {
+        console.log(res)
+        //setCollection(res.data)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}, [])
 
   const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
