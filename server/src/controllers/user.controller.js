@@ -1,9 +1,4 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
-const cors = require("cors");
-const cookieSession = require("cookie-session");
-const app = express();
 const User = require("../models/user.model");
 
 // GET ALL

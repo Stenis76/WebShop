@@ -1,42 +1,25 @@
 const express = require("express");
 const router = express.Router();
-
+const {
+  createNewFreightMethod,
+  deleteFreightMethod,
+  getAllFreightMethods,
+} = require("../controllers/freight.controller");
 const FreightModel = require("../models/freight.model");
 
 //GET all freight options
 router.get("/api/freight", async (req, res) => {
-  try {
-    let freightOptions = await FreightModel.find();
-    res.status(200).json(freightOptions);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+  getAllFreightMethods(req, res);
 });
 
 // POST new freight method
 router.post("/api/freight", async (req, res) => {
-  console.log("detta funkar");
-
-  let freight = req.body;
-  try {
-    const freightDoc = await new FreightModel(freight);
-    const savedFreightDoc = await freightDoc.save();
-    res.status(200).json(savedFreightDoc);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+  createNewFreightMethod(req, res);
 });
 
 // DELETE
 router.delete("/api/freight/:freightId", async (req, res) => {
-  try {
-    const removedFreight = await FreightModel.deleteOne({
-      _id: req.params.freightId,
-    });
-    res.status(200).json("Shipment removed");
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  deleteFreightMethod(req, res);
 });
 
 module.exports = router;
