@@ -45,7 +45,7 @@ const SignIn = () => {
 
   return (
     <div className="sign-in">
-      <h1>Logga in</h1>
+      <h1>Sign in</h1>
       {loading ? (
         <Loader type="TailSpin" color="#00BFFF" height={70} width={70} />
       ) : (
