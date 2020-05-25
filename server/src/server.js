@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
-// const session = require("express-session");
-// const cors = require("cors");
 require("dotenv").config();
+const cors = require("cors");
+const cookieSession = require("cookie-session");
 
 const { run } = require("./controllers/mongo");
+
 
 /* Import routes */
 
@@ -16,33 +17,24 @@ const orderRouter = require("./routers/order.router");
 // run the database
 run();
 
-/* Middelwares */
-// app.use(
-//   cors({
-//     origin: ["http://localhost:3000", "http://localhost:3002"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3002"],
+    credentials: true,
+  })
+);
+
+app.use(cookieSession({
+  name: 'GaryLovesCookies',
+  maxAge: 1000 * 1000, // short duration to check easily while developing
+  secret: 'apskda9s8d7236uvjbkajdnfhoias89d70f62t3yhdjhvfuastadcych',
+  httpOnly: true,
+}))
+
 
 // Make sure to parse req.body as JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-//use sessions for tracking logins
-
-// app.use(
-//   session({
-//     name: "hello",
-//     secret: "work hard",
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       maxAge: 60 * 60 * 24,
-//       secure: false,
-//       sameSite: true,
-//     },
-//   })
-// );
 
 /* Add API resourses */
 
