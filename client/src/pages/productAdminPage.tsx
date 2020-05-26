@@ -14,6 +14,7 @@ import {
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+import  AdminMenu  from "../components/adminProductMenu";
 
 const initialInputs = {
   name: "",
@@ -24,7 +25,7 @@ const initialInputs = {
   description: ""
 };
 
-const Admin = () => {
+const ProductAdmin = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
@@ -92,7 +93,7 @@ const Admin = () => {
           collection.items[itemIndex] = {
             ...itemToEdit,
             name: inputs.name,
-            imageUrl: inputs.imageUrl,
+            // imageUrl: inputs.imageUrl,
             price: Number(inputs.price),
             size: inputs.size,
             season: inputs.season,
@@ -136,6 +137,7 @@ const Admin = () => {
 
   return (
     <Main>
+      <AdminMenu />
       <Box direction="row" justify="evenly">
         {collections.map((collection: Collection) => (
           <Box key={collection.id}>
@@ -157,7 +159,10 @@ const Admin = () => {
 
             {collection.items.map((item: CollectionItem) => (
               <Box key={item.id}>
-                <Box direction="row" align="center">
+                <Box direction="row" align="center" border margin={{ bottom: "small" }}>
+                <Text weight="bold" margin={{ left: "small" }}>
+                    {item.name}
+                  </Text>
                   <Button
                     icon={<SubtractCircle />}
                     onClick={() => removeFromCollection(item.id)}
@@ -171,14 +176,11 @@ const Admin = () => {
                       onOpen();
                     }}
                   />
-
-                  <Image
+                  {/* <Image
                     src={item.imageUrl}
                     style={{ width: "3rem", marginTop: "1rem" }}
-                  ></Image>
-                  <Text weight="bold" margin={{ left: "small" }}>
-                    {item.name}
-                  </Text>
+                  ></Image> */}
+
                 </Box>
               </Box>
             ))}
@@ -257,4 +259,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default ProductAdmin;
