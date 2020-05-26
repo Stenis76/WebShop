@@ -6,13 +6,17 @@ import UserContext from "../../contexts/login-userContext/context";
 
 import Loader from "react-loader-spinner";
 import CustomButton from "../custom_button/custom_button";
-import "./sign_in.styles.scss";
+import "./sign-in.styles.scss";
 
 
 const SignUp = () => {
   const [state, setState] = useState({
-    username: "",
-    name: "",
+    firstname: "",
+    lastname: "",
+    address: "",
+    postcode: "",
+    city: "",
+    phonenumber: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -41,10 +45,15 @@ const SignUp = () => {
 
     try {
       const newUser = {
-        name: state.name,
+        firstname: state.firstname,
+        lastname: state.lastname,
+        address: state.address,
+        postcode: state.postcode,
+        city: state.city,
+        phonenumber: state.phonenumber,
         email: state.email,
-        username: state.username,
         password: state.password,
+        confirmPassword: state.confirmPassword
       };
       const options = {
         method: "POST",
@@ -65,7 +74,7 @@ const SignUp = () => {
         setIsAuthenticated(true);
         history.push("/");
       } else if (data.status === "User-name already taken") {
-        alert("Användarnamnet är upptaget!");
+        alert("Account already exists");
       }
     } catch (error) {
       console.log("Error while sign up", error.message);
@@ -113,6 +122,24 @@ const SignUp = () => {
             value={state.postCode}
             handleChange={handleChange}
             label="Postcode"
+            required
+            size="xsmall"
+          />
+          <FormField
+            type="city"
+            name="city"
+            value={state.city}
+            handleChange={handleChange}
+            label="City"
+            required
+            size="xsmall"
+          />
+          <FormField
+            type="phonenumber"
+            name="phonenumber"
+            value={state.phonenumber}
+            handleChange={handleChange}
+            label="Phonenumber"
             required
             size="xsmall"
           />

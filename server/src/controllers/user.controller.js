@@ -26,7 +26,7 @@ const newUser = async (req, res) => {
     lastname: req.body.lastname,
     phonenumber: "",
     email: req.body.email,
-    adress: "",
+    address: "",
     postcode: "",
     city: "",
     creditcardnumber: "",
@@ -131,7 +131,7 @@ const updateUser = async (req, res) => {
       user.lastname = user.lastname;
       user.phonenumber = req.body.phonenumber;
       user.email = user.email;
-      user.adress = req.body.adress;
+      user.address = req.body.address;
       user.postcode = req.body.postcode;
       user.city = req.body.city;
       user.creditcardnumber = req.body.creditcardnumber;

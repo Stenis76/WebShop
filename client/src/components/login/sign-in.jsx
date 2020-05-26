@@ -6,10 +6,10 @@ import UserContext from "../../contexts/login-userContext/context";
 import FormInput from "../form_input/form_input";
 import CustomButton from "../custom_button/custom_button";
 
-import "./sign_in.styles.scss";
+import "./sign-in.styles.scss";
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmailname] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -17,7 +17,7 @@ const SignIn = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "username") setUsername(value);
+    if (name === "username") setEmailname(value);
     else if (name === "password") setPassword(value);
   };
 
@@ -26,16 +26,16 @@ const SignIn = () => {
 
     try {
       setLoading(true);
-      const response = await login(username, password);
+      const response = await login(email, password);
       setLoading(false);
       console.log(response);
 
       if (response === "Authenticated") {
-        history.push("/main");
+        history.push("/");
       } else if (response === "Wrong password") {
-        alert("fel lösenord");
+        alert("Wrong password");
       } else if (response === "Wrong name") {
-        alert("användarnamnet finns ej");
+        alert("Account does not exist");
       }
     } catch (error) {
       console.log("Error while loggin in", error.message);
@@ -52,15 +52,15 @@ const SignIn = () => {
         <form className="sign-in-form" onSubmit={handleSubmit}>
           <FormInput
             type="text"
-            name="username"
-            value={username}
+            name="email"
+            value={email}
             handleChange={handleChange}
-            label={"Användarnamn"}
+            label={"E-mail"}
             required
           />
           <FormInput
             handleChange={handleChange}
-            label="password"
+            label="Password"
             name="password"
             type="password"
             value={password}
@@ -68,9 +68,9 @@ const SignIn = () => {
           />
 
           <div className="buttons">
-            <CustomButton type="submit">Logga in</CustomButton>
+            <CustomButton type="submit">Log in</CustomButton>
             <Link to="/login/register">
-              <CustomButton>Registrera dig</CustomButton>
+              <CustomButton>Sign up</CustomButton>
             </Link>
           </div>
         </form>

@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
-  adress: {
+  address: {
     type: String,
     trim: true,
   },
