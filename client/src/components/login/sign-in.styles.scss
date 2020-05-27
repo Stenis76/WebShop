@@ -1,31 +1,21 @@
-.sign-in {
-  background: #0000802c; /* fallback for old browsers */
-
+.sign-in, .sign-up {
+  background: #F2F2F2; /* fallback for old browsers */
   background-blend-mode: overlay, hard-light, normal;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  width: 33rem;
-  height: 23rem;
+  width: 100vw;
+  height: fit-content;
   border-radius: 0.3rem;
 
-  .title {
-    color: #ffe6b6;
-    padding-top: 1.5rem;
-  }
-
-  .sign-in-form {
-    width: 100%;
-    padding: 0 4rem 4rem 4rem;
-  }
-
   .buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .buttons button {
+    margin: 1rem;
   }
 
   @media screen and (max-width: 450px) {
