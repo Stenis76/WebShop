@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
+import axios from "axios"
 
 import CartContext from "./context";
 
@@ -17,7 +18,20 @@ const CartContextProvider: FC<IProps> = props => {
   );
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
+/*   const [freight, setFreight] = useState([]);
+ */
   useEffect(() => {
+    axios.get('http://localhost:3002/api/freight')
+    .then(res => {
+    console.log('data', res.data)
+    setShippingMethod(res.data)
+    })
+    .catch(err => {
+    console.log(err)
+    })
+   }, [])
+
+/*   useEffect(() => {
     let cost = 0;
     switch (shippingMethod) {
       case "dhl":
@@ -30,7 +44,7 @@ const CartContextProvider: FC<IProps> = props => {
         cost = 2;
     }
     setShippingCost(cost);
-  }, [shippingMethod]);
+  }, [shippingMethod]); */
 
   const addItemToCart = (item: CollectionItem) => {
     const existing = cart.find(cartItem => cartItem.id === item.id);

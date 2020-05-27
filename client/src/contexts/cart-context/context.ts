@@ -26,5 +26,5 @@ export default createContext<IState>({
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
   clearCart: () => {},
-  shippingCost: 0
+  shippingCost: 0,
 });
