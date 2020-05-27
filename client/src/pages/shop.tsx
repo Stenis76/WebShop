@@ -6,40 +6,45 @@ import Directory from "../components/directory";
 import Item from "../components/item";
 
 // import { Collection, CollectionItem } from "../shop.data";
-import { Collection, CollectionItem } from "../interfaces";
+import { Collection, CollectionItem, Product } from "../interfaces";
 
 interface IProps {}
 
+
+
 const Shop: FC<IProps> = () => {
   const [collections, setCollection] = useState<Collection[]>([]);
+  const [products, setProduct] = useState<Product[]>([])
 
   const { category, query = "" } = useParams();
 
-  // useEffect(() => {
-  //   const localStorageCollections = localStorage.getItem("collection");
-  //   if (localStorageCollections) {
-  //     setCollection(JSON.parse(localStorageCollections));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const localStorageCollections = localStorage.getItem("collection");
+    if (localStorageCollections) {
+      setCollection(JSON.parse(localStorageCollections));
+    }
+  }, []);
 
   useEffect(() => {
     axios.get('http://localhost:3002/api/product')
     .then(res => {
         console.log('data', res.data)
-        setCollection(res.data)
-        let products = res.data
-        let categories = products.map((product: { category: any; }) => ({ value: product.category }))
-        console.log('kategorier', categories) 
+        setProduct(res.data)
+        // let products = res.data
+        // let categories = products.map((product: { kategori: string; }) => ({ value: product.kategori }))
+        // console.log('kategorier', categories) 
     })
     .catch(err => {
         console.log(err)
     })
 }, [])
 
+
+ 
   const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
       const col = collections.find(
-        (collection: Collection) => collection.routeName === category
+        (collection) => collection.routeName === category
       );
       if (col) return col.items;
     }
@@ -117,6 +122,18 @@ const Shop: FC<IProps> = () => {
     xlarge: [main, directory]
   };
   return (
+    <div>
+      {products.map((product, i) => (
+            <div className="recipeBoxStyle" key={i}>
+              <h3 style={{ textAlign: "center" }}>{product.name}</h3>
+              <p>{product.price}</p>
+              <p>{product.kategori}</p>
+              <p>{product.season}</p>
+              <p>{product.imageUrl}</p>
+              <p>{product.description}</p>
+            </div>
+          ))}
+
     <Grid
       fill
       responsive={true}
@@ -127,6 +144,7 @@ const Shop: FC<IProps> = () => {
     >
       {components[size]}
     </Grid>
+    </div>
   );
 };
 
