@@ -1,4 +1,12 @@
-import { createContext } from "react";
+import React from "react";
+
+interface IState {
+  isAuthenticated: boolean;
+  user?: object | any;
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  updateUser: (key: string, value: string) => void;
+}
 
 export interface IUser {
   _id: string;
@@ -11,7 +19,6 @@ export interface IUser {
   city: string;
   card: string;
 }
-
 const initialUser: IUser = {
   _id: "",
   firstName: "",
@@ -24,7 +31,10 @@ const initialUser: IUser = {
   card: "",
 };
 
-export default createContext({
+export default React.createContext<IState>({
+  isAuthenticated: false,
   user: initialUser,
-  updateUser: (key: string, value: string) => {},
+  login: () => {},
+  logout: () => {},
+  updateUser: () => {},
 });

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Form, FormField } from "grommet";
 
 import UserContext from "../../contexts/user-context/context";
+import FormInput from "../form_input/form_input";
 
 import Loader from "react-loader-spinner";
 import CustomButton from "../custom_button/custom_button";
@@ -26,6 +27,7 @@ const SignUp = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setState({
       ...state,
       [name]: value,
@@ -34,13 +36,12 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("nu är vi i handlesubmit"); //hit kommer vi
 
-    // Den här funktionen fungerar inte
     if (state.password !== state.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
+    console.log(event);
 
     try {
       const newUser = {
@@ -62,6 +63,8 @@ const SignUp = () => {
         credentials: "include",
         body: JSON.stringify(newUser),
       };
+      console.log(newUser);
+
       setLoading(true);
       const res = await fetch("http://localhost:3002/api/newuser", options);
       const data = await res.json();
@@ -96,7 +99,7 @@ const SignUp = () => {
             type="firstname"
             name="firstname"
             value={state.firstname}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Name"
             required
             size="xsmall"
@@ -105,7 +108,7 @@ const SignUp = () => {
             type="lastname"
             name="lastname"
             value={state.lastname}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Last name"
             required
             size="xsmall"
@@ -114,7 +117,7 @@ const SignUp = () => {
             type="address"
             name="address"
             value={state.address}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Address"
             required
             size="xsmall"
@@ -123,7 +126,7 @@ const SignUp = () => {
             type="postcode"
             name="postcode"
             value={state.postCode}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Postcode"
             required
             size="xsmall"
@@ -132,7 +135,7 @@ const SignUp = () => {
             type="city"
             name="city"
             value={state.city}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="City"
             required
             size="xsmall"
@@ -141,7 +144,7 @@ const SignUp = () => {
             type="phonenumber"
             name="phonenumber"
             value={state.phonenumber}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Phonenumber"
             required
             size="xsmall"
@@ -150,7 +153,7 @@ const SignUp = () => {
             type="email"
             name="email"
             value={state.email}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="E-mail"
             required
             size="xsmall"
@@ -159,7 +162,7 @@ const SignUp = () => {
             type="password"
             name="password"
             value={state.password}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Password"
             required
             size="xsmall"
@@ -168,7 +171,7 @@ const SignUp = () => {
             type="password"
             name="confirmPassword"
             value={state.confirmPassword}
-            handleChange={handleChange}
+            onChange={handleChange}
             label="Confirm password"
             required
             size="xsmall"

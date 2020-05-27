@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import Loader from "react-loader-spinner";
-import UserContext from "../../contexts/authentication-context/context";
+import UserContext from "../../contexts/user-context/context";
 import FormInput from "../form_input/form_input";
 import CustomButton from "../custom_button/custom_button";
 
