@@ -5,6 +5,7 @@ import UserContext, { IUser } from "./context";
 interface IProps {}
 
 const initialUser: IUser = {
+  _id: "",
   firstName: "",
   lastName: "",
   phoneNumber: "",
@@ -12,16 +13,16 @@ const initialUser: IUser = {
   address: "",
   postCode: "",
   city: "",
-  card: ""
+  card: "",
 };
 
 const UserContextProvider = (props: IProps) => {
   const [user, setUser] = useState(initialUser);
 
   const updateUser = (key: string, value: string) => {
-    setUser(prev => ({
+    setUser((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
@@ -30,7 +31,7 @@ const UserContextProvider = (props: IProps) => {
       {...props}
       value={{
         user,
-        updateUser
+        updateUser,
       }}
     />
   );

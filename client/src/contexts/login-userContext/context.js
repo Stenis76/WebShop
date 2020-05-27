@@ -1,10 +1,12 @@
-import React from "react";
+// import React from "react";
 
-export default React.createContext({
-  isAuthenticated: false,
-  setisAuthenticated: () => {},
-  user: undefined,
-  setUser: () => {},
-  login: () => {},
-  logout: () => {},
-});
+// export default React.createContext({
+//   isAuthenticated: false,
+//   setisAuthenticated: () => {},
+//   user: undefined,
+//   setUser: () => {},
+//   login: () => {
+//     console.log("i user context");
+//   },
+//   logout: () => {},
+// });

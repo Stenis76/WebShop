@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 export interface IUser {
+  _id: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -12,6 +13,7 @@ export interface IUser {
 }
 
 const initialUser: IUser = {
+  _id: "",
   firstName: "",
   lastName: "",
   phoneNumber: "",
@@ -19,10 +21,10 @@ const initialUser: IUser = {
   address: "",
   postCode: "",
   city: "",
-  card: ""
+  card: "",
 };
 
 export default createContext({
   user: initialUser,
-  updateUser: (key: string, value: string) => {}
+  updateUser: (key: string, value: string) => {},
 });

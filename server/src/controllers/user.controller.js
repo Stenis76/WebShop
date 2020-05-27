@@ -80,8 +80,7 @@ const logInUser = async (req, res) => {
 
           return res.status(200).json({
             message: "Auth successful",
-            userId: user[0]._id,
-            email: user[0].email,
+            user,
           });
         }
         res.status(401).json({
