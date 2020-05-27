@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-
-
-
-
-import SignUp from "../components/login/sign_up";
-import SignIn from "../components/login/sign_in";
-
-import { Grid, Box, Image, ResponsiveContext, Main } from "grommet";
-
+import SignUp from "../components/login/sign-up";
+import SignIn from "../components/login/sign-in";
 import "./styles.scss";
 
 

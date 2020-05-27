@@ -42,7 +42,7 @@ Content-Type: application/json
 
 {
   "phonenumber": "07332332110",
-  "adress": "Skosnörstigen 6",
+  "address": "Skosnörstigen 6",
   "postcode": "1822282",
   "city": "Borås",
   "creditcardnumber": "688982722211117272"
