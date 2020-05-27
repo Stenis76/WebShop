@@ -22,6 +22,26 @@ const createNewFreightMethod = async (req, res) => {
   }
 };
 
+// UPDATE freight method
+const updateFreightMethod = async (req, res) => {
+  try {
+    const updatedFreight = await FreightModel.updateOne(
+      { _id: req.params.freightId },
+      {
+        $set: {
+          freightId: req.body.freightId,
+          shipmentCompany: req.body.shipmentCompany,
+          deliveryDate: req.body.deliveryDate,
+          price: req.body.price,
+        },
+      }
+    );
+    res.status(200).json(updatedFreight);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 // DELETE
 const deleteFreightMethod = async (req, res) => {
   try {
@@ -37,5 +57,6 @@ const deleteFreightMethod = async (req, res) => {
 module.exports = {
   getAllFreightMethods,
   createNewFreightMethod,
+  updateFreightMethod,
   deleteFreightMethod,
 };

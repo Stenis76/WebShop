@@ -5,6 +5,7 @@ GET http://localhost:3002/api/freight
 Content-Type: : application/json
 
 ###
+// POST ner freight option
 
 POST http://localhost:3002/api/freight
 Content-Type: application/json
@@ -17,5 +18,18 @@ Content-Type: application/json
 }
 
 ###
+// UPDATE current freight option
 
-DELETE http://localhost:3002/api/freight/5ec4c4b37550e658456d225f
+PUT http://localhost:3002/api/freight/5ecba494bdca5f1ae62a9376
+Content-Type: application/json
+
+{
+  "shipmentCompany": "Uppdaterad frakt",
+  "orderId": "1368",
+  "deliveryDate": "snarast",
+  "price": "00"
+}
+
+###
+
+DELETE http://localhost:3002/api/freight/5ecbb940c605c02531ca954c

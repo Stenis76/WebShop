@@ -1,11 +1,23 @@
 const mongoose = require("mongoose");
 
 let freightSchema = mongoose.Schema({
-  shipmentCompany: String,
-  orderId: String,
-  deliveryDate: String,
-  price: String,
+  _id: mongoose.Schema.Types.ObjectId,
+  shipmentCompany: {
+    type: String,
+    required: true, 
+  },
+  orderId: {
+    type: String,
+    required: true
+  },
+  deliveryDate: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: String,
+    required: true
+  }
 });
 
-let FreightModel = mongoose.model("freight", freightSchema);
-module.exports = FreightModel;
+module.exports = mongoose.model("freight", freightSchema);
