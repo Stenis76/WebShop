@@ -12,8 +12,12 @@ export interface CollectionItem {
   season: string[];
   description: string;
   quantity?: number;
+  inventory?: {
+    small: string;
+  }
 }
 
+// behåll till kategorier
 export interface Collection {
   id: number;
   title: string;

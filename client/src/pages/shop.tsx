@@ -5,7 +5,8 @@ import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
 
-import { Collection, CollectionItem } from "../shop.data";
+// import { Collection, CollectionItem } from "../shop.data";
+import { Collection, CollectionItem } from "../interfaces";
 
 interface IProps {}
 
@@ -14,18 +15,18 @@ const Shop: FC<IProps> = () => {
 
   const { category, query = "" } = useParams();
 
-  useEffect(() => {
-    const localStorageCollections = localStorage.getItem("collection");
-    if (localStorageCollections) {
-      setCollection(JSON.parse(localStorageCollections));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const localStorageCollections = localStorage.getItem("collection");
+  //   if (localStorageCollections) {
+  //     setCollection(JSON.parse(localStorageCollections));
+  //   }
+  // }, []);
 
   useEffect(() => {
     axios.get('http://localhost:3002/api/product')
     .then(res => {
-        console.log(res)
-        //setCollection(res.data)
+        console.log('anything', res)
+        setCollection(res.data) //mappa om till kategori 
     })
     .catch(err => {
         console.log(err)
