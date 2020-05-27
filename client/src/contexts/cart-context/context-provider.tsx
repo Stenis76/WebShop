@@ -5,7 +5,10 @@ import CartContext from "./context";
 
 import { CollectionItem } from "../../shop.data";
 
-interface IProps {}
+interface IProps {
+
+}
+
 
 export type ShippingMethod = "postNord" | "schenker" | "dhl";
 export type PaymentMethod = "card" | "invoice" | "swish";
@@ -18,13 +21,13 @@ const CartContextProvider: FC<IProps> = props => {
   );
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
-/*   const [freight, setFreight] = useState([]);
- */
+  const [freights, setFreight] = useState([]);
+
   useEffect(() => {
     axios.get('http://localhost:3002/api/freight')
     .then(res => {
     console.log('data', res.data)
-    setShippingMethod(res.data)
+    setFreight(res.data)
     })
     .catch(err => {
     console.log(err)
@@ -99,6 +102,14 @@ const CartContextProvider: FC<IProps> = props => {
   const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
 
   return (
+    <div>
+       {freights.map((freight: any, i: any) => (
+        <div key={i}>
+          <h3>{freight.price}</h3>
+          <p>{freight.shipmentCompany}</p>
+          <div>{freight.deliverydate}</div>
+        </div>
+      ))}
     <CartContext.Provider
       {...props}
       value={{
@@ -114,6 +125,7 @@ const CartContextProvider: FC<IProps> = props => {
         shippingCost: shippingCost
       }}
     />
+    </div>
   );
 };
 

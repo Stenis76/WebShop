@@ -11,7 +11,7 @@ interface IProps {
 const ApplicationContextProvider: FC<IProps> = ({ children }) => (
   <AuthenticationContextProvider>
     <UserContextProvider>
-      <CartContextProvider>{children}</CartContextProvider>
+   <CartContextProvider>{children}</CartContextProvider>
     </UserContextProvider>
   </AuthenticationContextProvider>
 );
