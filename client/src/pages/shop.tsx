@@ -25,8 +25,11 @@ const Shop: FC<IProps> = () => {
   useEffect(() => {
     axios.get('http://localhost:3002/api/product')
     .then(res => {
-        console.log('anything', res)
-        setCollection(res.data) //mappa om till kategori 
+        console.log('data', res.data)
+        setCollection(res.data)
+        let products = res.data
+        let categories = products.map((product: { category: any; }) => ({ value: product.category }))
+        console.log('kategorier', categories) 
     })
     .catch(err => {
         console.log(err)
