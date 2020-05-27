@@ -39,7 +39,7 @@ const AdminMenu = () => {
                 </Link>
               </Text>
               <Text size="medium">
-                <Link className="link" to="/admin/user">
+                <Link className="link" to="/admin/users">
                   Users
                 </Link>
               </Text>

@@ -9,7 +9,15 @@ import {
   Layer,
   Form,
   TextArea,
-  CheckBox
+  CheckBox, 
+  Grid,
+  ResponsiveContext,
+  InfiniteScroll,
+  Table,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableHeader
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
@@ -135,58 +143,71 @@ const ProductAdmin = () => {
     });
   };
 
+  const step = 25;
+  const [results, setResults] = useState(
+    Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+  );
+  const load = () => {
+    setResults([
+      ...results,
+      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+    ]);
+  };
+
   return (
     <Main>
-      <AdminMenu />
-      <Box direction="row" justify="evenly">
-        {collections.map((collection: Collection) => (
-          <Box key={collection.id}>
-            <Heading size="small">
-              {collection.title}
-              <Button
-                icon={
-                  <AddCircle
-                    onClick={() => {
-                      setEditOrAdd("add");
-                      setCategory(collection.routeName);
-                      setInputs(initialInputs);
-                      onOpen();
-                    }}
-                  />
-                }
-              />
-            </Heading>
-
-            {collection.items.map((item: CollectionItem) => (
-              <Box key={item.id}>
-                <Box direction="row" align="center" border margin={{ bottom: "small" }}>
-                <Text weight="bold" margin={{ left: "small" }}>
-                    {item.name}
-                  </Text>
-                  <Button
-                    icon={<SubtractCircle />}
-                    onClick={() => removeFromCollection(item.id)}
-                  />
-                  <Button
-                    icon={<FormEdit />}
-                    onClick={() => {
-                      setEditOrAdd("edit");
-                      setInputsToItemData(item);
-                      setItemToEdit(item);
-                      onOpen();
-                    }}
-                  />
-                  {/* <Image
-                    src={item.imageUrl}
-                    style={{ width: "3rem", marginTop: "1rem" }}
-                  ></Image> */}
-
-                </Box>
-              </Box>
-            ))}
-          </Box>
-        ))}
-      </Box>
+    <AdminMenu />
+    <Box pad="small" basis="small">
+      <Heading level={3}>
+        <Box gap="small">
+          <strong>Products</strong>
+          <Text>
+            Here are all products
+          </Text>
+        </Box>
+      </Heading>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableCell scope="col" border="bottom">
+              Product Id
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Product name
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Price
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+             Category
+            </TableCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <InfiniteScroll
+            renderMarker={marker => (
+              <TableRow>
+                <TableCell>{marker}</TableCell>
+              </TableRow>
+            )}
+            scrollableAncestor="window"
+            items={results}
+            onMore={() => load()}
+            step={step}
+          >
+            {result => (
+              <TableRow key={result} >
+                <TableCell border="bottom" onClick={() => {onOpen();}}>{result}</TableCell>
+                <TableCell border="bottom">Black Hat</TableCell>
+                <TableCell border="bottom">4536 Sek</TableCell>
+                <TableCell border="bottom">Men, Hats</TableCell>
+              </TableRow>
+              
+            )}
+          </InfiniteScroll>
+        </TableBody>
+      </Table>
+    </Box>
       {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">

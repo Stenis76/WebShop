@@ -72,7 +72,7 @@ function App() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/admin/product" component={ProductAdmin} />
           <Route path="/admin/order" component={OrderAdmin} />
-          <Route path="/admin/user" component={UserAdmin} />
+          <Route path="/admin/users" component={UserAdmin} />
           <Route path="/login" component={Login} />
         </Switch>
       </Box>

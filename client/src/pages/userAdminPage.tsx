@@ -65,15 +65,19 @@ const step = 50;
     ]);
   };
 
+const [open, setOpen] = React.useState<boolean>(false);
+const onOpen = () => setOpen(true);
+const onClose = () => setOpen(false);
+
   return (
        <Main>
         <AdminMenu />
         <Box pad="small" basis="small">
           <Heading level={3}>
             <Box gap="small">
-              <strong>Orders</strong>
+              <strong>Users</strong>
               <Text>
-                Here are all orders
+                Here are all users
               </Text>
             </Box>
           </Heading>
@@ -95,7 +99,7 @@ const step = 50;
                 <TableCell scope="col" border="bottom">
                   Email
                 </TableCell>
-                <TableCell scope="col" border="bottom">
+                {/* <TableCell scope="col" border="bottom">
                   Adress
                 </TableCell>
                 <TableCell scope="col" border="bottom">
@@ -109,7 +113,7 @@ const step = 50;
                 </TableCell>
                 <TableCell scope="col" border="bottom">
                   Role
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -126,16 +130,11 @@ const step = 50;
               >
                 {result => (
                   <TableRow key={result} >
-                    <TableCell border="bottom">{result}</TableCell>
+                    <TableCell border="bottom" onClick={() => {onOpen();}}>{result}</TableCell>
                     <TableCell border="bottom">Philip</TableCell>
                     <TableCell border="bottom">Arvidsson</TableCell>
                     <TableCell border="bottom">073-370 88 17</TableCell>
                     <TableCell border="bottom">philip.arvidsson@medieinstitutet.se</TableCell>
-                    <TableCell border="bottom">Gyllenkrooksgatan 9B</TableCell>
-                    <TableCell border="bottom">412 82</TableCell>
-                    <TableCell border="bottom">Göteborg</TableCell>
-                    <TableCell border="bottom">HejHallåPåDig</TableCell>
-                    <TableCell border="bottom">Admin</TableCell>
                   </TableRow>
                   
                 )}
@@ -143,6 +142,38 @@ const step = 50;
             </TableBody>
           </Table>
         </Box>
+        {open && (
+        <Layer position="center" onClickOutside={onClose}>
+          <Box width="large" height="large">
+            <Form validate="blur">
+              <Box
+                background="light-3"
+                width="large"
+                pad="medium"
+                justify="between"
+                height="large"
+              >
+                <Heading size="xsmall">User</Heading>
+                <Text>User ID: 0323289238</Text>
+                <Text>First Name: Philip</Text>
+                <Text>Last Name: Arvidsson</Text>
+                <Text>Phone Number: 0733708817</Text>
+                <Text>Email: philip.arvidsson@gmail.com</Text>
+                <Text>Adress: Gyllenkrooksgatan 9B</Text>
+                <Text>Post Code: 412 82</Text>
+                <Text>City: Gothenburg</Text>
+                <Text>Password: ElloEllo</Text>
+                <Text>Role: Admin</Text>
+                {/* {editOrAdd === "add" ? (
+                  <Button onClick={addToCollection} label="Add to collection" />
+                ) : (
+                  <Button onClick={editItem} label="Submit edit" />
+                )} */}
+              </Box>
+            </Form>
+          </Box>
+        </Layer>
+      )}
        </Main>
   );
 
