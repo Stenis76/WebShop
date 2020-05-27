@@ -3,7 +3,7 @@ export interface Product {
     name: string;
     imageUrl: string;
     price: number;
-    kategori: string;
+    category: string;
     season: string[];
     inventory: {
         small: string;

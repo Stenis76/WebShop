@@ -126,11 +126,11 @@ const Shop: FC<IProps> = () => {
       {products.map((product, i) => (
             <div className="recipeBoxStyle" key={i}>
               <h3 style={{ textAlign: "center" }}>{product.name}</h3>
-              <p>{product.price}</p>
-              <p>{product.kategori}</p>
-              <p>{product.season}</p>
+              <p>PRIS: {product.price}</p>
+              <p>KATEGORI: {product.category}</p>
+              <p>SÄSONG: {product.season}</p>
               <p>{product.imageUrl}</p>
-              <p>{product.description}</p>
+              <p>BESKRIVNING: {product.description}</p>
             </div>
           ))}
 
