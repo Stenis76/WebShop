@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  creditcardnumber: {
+    type: String,
+    trim: true,
+  },
   password: {
     type: String,
     required: true,
