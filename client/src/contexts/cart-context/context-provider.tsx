@@ -10,24 +10,22 @@ interface IProps {
 }
 
 
-export type ShippingMethod = "postNord" | "schenker" | "dhl";
+export type ShippingMethod = Object[] | any
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = props => {
   const [cart, setCart] = useState<CollectionItem[]>([]);
   const [shippingCost, setShippingCost] = useState(0);
-  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>(
-    "postNord"
-  );
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
-  const [freights, setFreight] = useState([]);
+  //const [freights, setFreight] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:3002/api/freight')
     .then(res => {
     console.log('data', res.data)
-    setFreight(res.data)
+    setShippingMethod(res.data)
     })
     .catch(err => {
     console.log(err)
@@ -103,13 +101,6 @@ const CartContextProvider: FC<IProps> = props => {
 
   return (
     <div>
-       {freights.map((freight: any, i: any) => (
-        <div key={i}>
-          <h3>{freight.price}</h3>
-          <p>{freight.shipmentCompany}</p>
-          <div>{freight.deliverydate}</div>
-        </div>
-      ))}
     <CartContext.Provider
       {...props}
       value={{

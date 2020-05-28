@@ -10,7 +10,8 @@ import {
   TableCell,
   TableBody,
   TableRow,
-  ResponsiveContext
+  ResponsiveContext,
+  RadioButton,
 } from "grommet";
 
 interface IProps {}
@@ -20,7 +21,7 @@ const ShippingForm = (props: IProps) => {
     CartContext
   );
 
-  const getDeliveryDate = () => {
+  /*   const getDeliveryDate = () => {
     const date = new Date();
     switch (shippingMethod) {
       case "postNord":
@@ -33,74 +34,80 @@ const ShippingForm = (props: IProps) => {
         date.setHours(date.getHours() + 36);
     }
     return date.toLocaleDateString();
-  };
+  }; */
 
   return (
-    <Form style={{ gridArea: "name" }}>
-      <Text weight="bold" alignSelf="start">
-        Choose your prefered delivery partner{" "}
-      </Text>
-      <Box align="center" pad="medium">
-        <ResponsiveContext.Consumer>
-          {responsive =>
-            responsive === "small" ? (
-              <RadioButtonGroup
-                direction="column"
-                name="radio"
-                options={[
-                  { label: "PostNord (72h)", value: "postNord" },
-                  { label: "Schenker (36h)", value: "schenker" },
-                  { label: "DHL Express (6h)", value: "dhl" }
-                ]}
-                value={shippingMethod}
-                onChange={event => {
-                  const method: any = event.target.value;
-                  setShippingMethod(method);
-                }}
-                {...props}
-              />
-            ) : (
-              <RadioButtonGroup
-                direction="row"
-                name="radio"
-                options={[
-                  { label: "PostNord (72h)", value: "postNord" },
-                  { label: "Schenker (36h)", value: "schenker" },
-                  { label: "DHL Express (6h)", value: "dhl" }
-                ]}
-                value={shippingMethod}
-                onChange={event => {
-                  const method: any = event.target.value;
-                  setShippingMethod(method);
-                }}
-                {...props}
-              />
-            )
-          }
-        </ResponsiveContext.Consumer>
-      </Box>
-      <Table margin="0">
-        <TableBody>
-          <TableRow>
-            <TableCell scope="row">
-              <Text>Delivery cost:</Text>
-            </TableCell>
-            <TableCell>
-              <strong>${shippingCost}</strong>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell scope="row">
-              <Text>Delivery date:</Text>
-            </TableCell>
-            <TableCell>
-              <strong>{getDeliveryDate().toLocaleString()}</strong>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Form>
+    <div>
+       <Text weight="bold" alignSelf="start">
+            Choose your prefered delivery partner{" "}
+          </Text>
+      {shippingMethod.map((freight: any, i: any) => (
+        <Form key={i} style={{ gridArea: "name" }}>
+         {/*  <div key={i}>
+            <h3>{freight.price}</h3>
+            <p>{freight.shipmentCompany}</p>
+            <p>{freight.deliveryDate}</p>
+          </div> */}
+         
+          <Box align="center" pad="medium">
+            <ResponsiveContext.Consumer>
+              {(responsive) =>
+                responsive === "small" ? (
+                  <RadioButton
+                    name="radio"
+                    label={freight.shipmentCompany}
+                    value={freight}
+                    onChange={(event) => {
+                      const method: any = event.target.value;
+                      setShippingMethod(method);
+                    }}
+                    {...props}
+                  />
+                ) : (
+                  <RadioButton
+                    name="radio"
+                    label={freight.shipmentCompany}
+                    value={freight}
+                    onChange={(event) => {
+                      const method: any = event.target.value;
+                      setShippingMethod(method);
+                    }}
+                    {...props}
+                  />
+                )
+              }
+            </ResponsiveContext.Consumer>
+          </Box>
+          <Table margin="0">
+            <TableBody>
+              <TableRow>
+                <TableCell scope="row">
+                  <Text>Delivery cost:</Text>
+                </TableCell>
+                <TableCell>
+                  <strong>${freight.price}</strong>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell scope="row">
+                  <Text>Delivery date:</Text>
+                </TableCell>
+                <TableCell>
+                   <strong>{freight.deliveryDate}</strong>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Form>
+      ))}
+    </div>
   );
 };
 
 export default ShippingForm;
+
+/* [
+  { label: "PostNord (72h)", value: "postNord" },
+  { label: "Schenker (36h)", value: "schenker" },
+  { label: "DHL Express (6h)", value: "dhl" },
+] */

@@ -18,7 +18,7 @@ interface IState {
 
 export default createContext<IState>({
   cart: [],
-  shippingMethod: "postNord",
+  shippingMethod: "",
   setShippingMethod: () => {},
   paymentMethod: "card",
   setPaymentMethod: () => {},
