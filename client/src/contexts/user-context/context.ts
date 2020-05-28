@@ -35,7 +35,7 @@ export const initialUser: IUser = {
 export default React.createContext<IState>({
   isAuthenticated: false,
   user: initialUser,
-  login: () => Promise.resolve(""),
+  login: async () => "",
   logout: () => {},
   updateUser: () => {},
   registerUser: () => {},
