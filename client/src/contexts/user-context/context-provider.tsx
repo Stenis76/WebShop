@@ -1,24 +1,42 @@
 import React, { FC, useState } from "react";
-import UserContext, { IUser } from "./context";
+import UserContext, { IUser, initialUser } from "./context";
+import Loader from "react-loader-spinner";
 
 interface IProps {}
 
-const currentUser: IUser = {
-  _id: "",
-  firstName: "",
-  lastName: "",
-  phoneNumber: "",
-  email: "",
-  address: "",
-  postCode: "",
-  city: "",
-  card: "",
-};
-
 const UserContextProvider: FC<IProps> = (props) => {
-  const [user, setUser] = useState(currentUser);
+  const [user, setUser] = useState(initialUser);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  // NEWUSER
+  const registerUser = async (newUser: Object) => {
+    const options: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(newUser),
+    };
+
+    setLoading(true);
+    const res = await fetch("http://localhost:3002/api/newuser", options);
+    const data = await res.json();
+    setLoading(false);
+
+    console.log(data);
+
+    if (data.status === "Authenticated") {
+      //SetUser is not a function enligt consolen
+      setUser(data.user);
+      setIsAuthenticated(true);
+    } else if (data.status === "E-mail already taken") {
+      alert("Account already exists");
+    }
+  };
+
+  //UPDATE
   const updateUser = (key: string, value: string) => {
     setUser((prev) => ({
       ...prev,
@@ -26,6 +44,7 @@ const UserContextProvider: FC<IProps> = (props) => {
     }));
   };
 
+  //LOGIN
   const login = async (email: string, password: string) => {
     const res = await fetch("http://localhost:3002/api/users/login", {
       method: "POST",
@@ -66,6 +85,7 @@ const UserContextProvider: FC<IProps> = (props) => {
         updateUser,
         login,
         logout,
+        registerUser,
       }}
     />
   );

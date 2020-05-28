@@ -2,10 +2,11 @@ import React from "react";
 
 interface IState {
   isAuthenticated: boolean;
-  user?: object | any;
+  user: IUser;
   login: (email: string, password: string) => void;
   logout: () => void;
   updateUser: (key: string, value: string) => void;
+  registerUser: (newUser: object) => void;
 }
 
 export interface IUser {
@@ -19,9 +20,9 @@ export interface IUser {
   city: string;
   card: string;
 }
-const initialUser: IUser = {
+export const initialUser: IUser = {
   _id: "",
-  firstName: "",
+  firstName: "dick",
   lastName: "",
   phoneNumber: "",
   email: "",
@@ -37,4 +38,5 @@ export default React.createContext<IState>({
   login: () => {},
   logout: () => {},
   updateUser: () => {},
+  registerUser: () => {},
 });

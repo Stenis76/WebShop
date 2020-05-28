@@ -3,7 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 
 import Loader from "react-loader-spinner";
 import UserContext from "../../contexts/user-context/context";
-import FormInput from "../form_input/form_input";
+// import FormInput from "../form_input/form_input";
+import { Form, FormField } from "grommet";
 import CustomButton from "../custom_button/custom_button";
 
 import "./sign-in.styles.scss";
@@ -50,20 +51,20 @@ const SignIn = () => {
         <Loader type="TailSpin" color="#00BFFF" height={70} width={70} />
       ) : (
         <form className="sign-in-form" onSubmit={handleSubmit}>
-          <FormInput
+          <FormField
             label={"E-mail"}
             type="text"
             name="email"
             value={email}
-            handleChange={handleChange}
+            onChange={handleChange}
             required
           />
-          <FormInput
+          <FormField
             label="Password"
             type="password"
             name="password"
             value={password}
-            handleChange={handleChange}
+            onChange={handleChange}
             required
           />
 

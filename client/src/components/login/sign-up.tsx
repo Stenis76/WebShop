@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, FormField } from "grommet";
+import { Form, FormField, Button } from "grommet";
 
 import UserContext from "../../contexts/user-context/context";
-import FormInput from "../form_input/form_input";
 
 import Loader from "react-loader-spinner";
 import CustomButton from "../custom_button/custom_button";
@@ -23,9 +22,9 @@ const SignUp = () => {
   });
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const { setUser, setIsAuthenticated } = useContext(UserContext);
+  const { user, registerUser } = useContext(UserContext);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setState({
@@ -34,56 +33,35 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    console.log("hämtar context" + user.firstName);
 
     if (state.password !== state.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
-    console.log(event);
 
     try {
       const newUser = {
         firstname: state.firstname,
         lastname: state.lastname,
+        phonenumber: state.phonenumber,
+        email: state.email,
         address: state.address,
         postcode: state.postcode,
         city: state.city,
-        phonenumber: state.phonenumber,
-        email: state.email,
         password: state.password,
         confirmPassword: state.confirmPassword,
       };
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(newUser),
-      };
-      console.log(newUser);
 
-      setLoading(true);
-      const res = await fetch("http://localhost:3002/api/newuser", options);
-      const data = await res.json();
-      setLoading(false);
-
-      //Hit kommer vi aldrig
-      if (data.status === "Authenticated") {
-        setUser(data.user);
-        setIsAuthenticated(true);
-        history.push("/");
-      } else if (data.status === "User-name already taken") {
-        alert("Account already exists");
-      }
+      registerUser(newUser);
+      history.push("/");
     } catch (error) {
       console.log("Error while sign up", error.message);
       setLoading(false);
     }
   };
-
   return (
     <div className="sign-up">
       <h1>Create an account</h1>
@@ -92,8 +70,8 @@ const SignUp = () => {
       ) : (
         <Form
           validate="submit"
-          onSubmit={handleSubmit}
           style={{ width: "20rem" }}
+          onSubmit={handleSubmit}
         >
           <FormField
             type="firstname"
@@ -102,7 +80,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Name"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="lastname"
@@ -111,7 +89,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Last name"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="address"
@@ -120,16 +98,16 @@ const SignUp = () => {
             onChange={handleChange}
             label="Address"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="postcode"
             name="postcode"
-            value={state.postCode}
+            value={state.postcode}
             onChange={handleChange}
             label="Postcode"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="city"
@@ -138,7 +116,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="City"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="phonenumber"
@@ -147,7 +125,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Phonenumber"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="email"
@@ -156,7 +134,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="E-mail"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="password"
@@ -165,7 +143,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Password"
             required
-            size="xsmall"
+            // size="xsmall"
           />
           <FormField
             type="password"
@@ -174,15 +152,14 @@ const SignUp = () => {
             onChange={handleChange}
             label="Confirm password"
             required
-            size="xsmall"
+            // size="xsmall"
           />
-          <CustomButton margin="medium" primary type="submit">
+          <Button margin="medium" primary type="submit">
             Sign up
-          </CustomButton>
+          </Button>
         </Form>
       )}
     </div>
   );
 };
-
 export default SignUp;
