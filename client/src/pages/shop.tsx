@@ -6,7 +6,8 @@ import Directory from "../components/directory";
 import Item from "../components/item";
 
 // import { Collection, CollectionItem } from "../shop.data";
-import { Collection, CollectionItem, Product } from "../interfaces";
+import { Collection, CollectionItem } from "../interfaces";
+import { ProductHunt } from "grommet-icons";
 
 interface IProps {}
 
@@ -14,7 +15,6 @@ interface IProps {}
 
 const Shop: FC<IProps> = () => {
   const [collections, setCollection] = useState<Collection[]>([]);
-  const [products, setProduct] = useState<Product[]>([])
 
   const { category, query = "" } = useParams();
 
@@ -29,10 +29,11 @@ const Shop: FC<IProps> = () => {
     axios.get('http://localhost:3002/api/product')
     .then(res => {
         console.log('data', res.data)
-        setProduct(res.data)
-        // let products = res.data
-        // let categories = products.map((product: { kategori: string; }) => ({ value: product.kategori }))
-        // console.log('kategorier', categories) 
+        setCollection(res.data)
+        let products = res.data
+        let categories: Collection[] = products.map((product: { category: string; name: string; id: number; imageUrl: string; price: number; season: string[]; inventory: Object; description: string;
+         }) => ({ routeName: product.category, name: product.name, id: product.id, imageUrl: product.imageUrl, price: product.price, season: product.season, inventory: product.inventory, description: product.description })) //mappa om så man får ut alla grejer.
+        console.log('kategorier', categories) 
     })
     .catch(err => {
         console.log(err)
@@ -123,14 +124,14 @@ const Shop: FC<IProps> = () => {
   };
   return (
     <div>
-      {products.map((product, i) => (
-            <div className="recipeBoxStyle" key={i}>
-              <h3 style={{ textAlign: "center" }}>{product.name}</h3>
-              <p>PRIS: {product.price}</p>
-              <p>KATEGORI: {product.category}</p>
-              <p>SÄSONG: {product.season}</p>
-              <p>{product.imageUrl}</p>
-              <p>BESKRIVNING: {product.description}</p>
+      {collections.map((product, i) => (
+            <div key={i}>
+              <h3 style={{ textAlign: "center" }}>{product.title}</h3>
+              <p>PRIS: {product.routeName}</p>
+              <p>KATEGORI: {product.routeName}</p>
+              <p>SÄSONG: {product.routeName}</p>
+              <img src={product.routeName}/>
+              <p>BESKRIVNING: {product.routeName}</p>
             </div>
           ))}
 

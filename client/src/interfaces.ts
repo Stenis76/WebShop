@@ -1,24 +1,10 @@
-export interface Product {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
-    category: string;
-    season: string[];
-    inventory: {
-        small: string;
-        medium: string;
-        large: string;
-        xlarge: string;
-    }
-    description: string;
-  }
+
 export interface CollectionItem {
     id: number;
     name: string;
     imageUrl: string;
     price: number;
-    kategori: string;
+    category: string;
     season: string[];
     inventory: {
         small: string;
