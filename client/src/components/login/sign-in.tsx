@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import UserContext from "../../contexts/user-context/context";
 // import FormInput from "../form_input/form_input";
-import { Form, FormField } from "grommet";
+import { Form, FormField, Button } from "grommet";
 import CustomButton from "../custom_button/custom_button";
 
 import "./sign-in.styles.scss";
@@ -16,13 +16,13 @@ const SignIn = () => {
   const history = useHistory();
   const { login } = useContext(UserContext);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (name === "email") setEmail(value);
     else if (name === "password") setPassword(value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
@@ -50,7 +50,7 @@ const SignIn = () => {
       {loading ? (
         <Loader type="TailSpin" color="#00BFFF" height={70} width={70} />
       ) : (
-        <form className="sign-in-form" onSubmit={handleSubmit}>
+        <Form className="sign-in-form" onSubmit={handleSubmit}>
           <FormField
             label={"E-mail"}
             type="text"
@@ -69,12 +69,12 @@ const SignIn = () => {
           />
 
           <div className="buttons">
-            <CustomButton type="submit">Log in</CustomButton>
+            <Button type="submit">Log in</Button>
             <Link to="/login/register">
-              <CustomButton>Sign up</CustomButton>
+              <Button>Sign up</Button>
             </Link>
           </div>
-        </form>
+        </Form>
       )}
     </div>
   );

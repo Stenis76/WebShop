@@ -7,8 +7,8 @@ interface IProps {}
 const UserContextProvider: FC<IProps> = (props) => {
   const [user, setUser] = useState(initialUser);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
 
+  const [loading, setLoading] = useState(false);
   // NEWUSER
   const registerUser = async (newUser: Object) => {
     const options: RequestInit = {

@@ -3,7 +3,7 @@ import React from "react";
 interface IState {
   isAuthenticated: boolean;
   user: IUser;
-  login: (email: string, password: string) => void;
+  login: (email: string, password: string) => any;
   logout: () => void;
   updateUser: (key: string, value: string) => void;
   registerUser: (newUser: object) => void;
