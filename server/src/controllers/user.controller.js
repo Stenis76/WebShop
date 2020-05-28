@@ -24,12 +24,11 @@ const newUser = async (req, res) => {
   const userData = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    phonenumber: "",
+    phonenumber: req.body.phonenumber,
     email: req.body.email,
-    address: "",
-    postcode: "",
-    city: "",
-    creditcardnumber: "",
+    address: req.body.address,
+    postcode: req.body.postcode,
+    city: req.body.city,
     password: req.body.password,
     role: "customer",
   };
@@ -47,14 +46,14 @@ const newUser = async (req, res) => {
 
           res.status(400).json(err);
         } else {
-          // store authentication session
-          // req.session.userId = user._id;
+          //store authentication session
+          req.session.userId = user._id;
 
           res.status(201).json({ status: "Authenticated", user });
         }
       });
     } else {
-      res.status(401).json({ status: "User-name already taken" });
+      res.status(401).json({ status: "E-mail already taken" });
     }
   });
 };
@@ -80,8 +79,7 @@ const logInUser = async (req, res) => {
 
           return res.status(200).json({
             message: "Auth successful",
-            userId: user[0]._id,
-            email: user[0].email,
+            user,
           });
         }
         res.status(401).json({
