@@ -20,6 +20,9 @@ const ShippingForm = (props: IProps) => {
   const { shippingMethod, setShippingMethod, shippingCost } = useContext(
     CartContext
   );
+console.log(shippingMethod + " detta är shippingmethod");
+
+  
 
   /*   const getDeliveryDate = () => {
     const date = new Date();
@@ -43,12 +46,6 @@ const ShippingForm = (props: IProps) => {
           </Text>
       {shippingMethod.map((freight: any, i: any) => (
         <Form key={i} style={{ gridArea: "name" }}>
-         {/*  <div key={i}>
-            <h3>{freight.price}</h3>
-            <p>{freight.shipmentCompany}</p>
-            <p>{freight.deliveryDate}</p>
-          </div> */}
-         
           <Box align="center" pad="medium">
             <ResponsiveContext.Consumer>
               {(responsive) =>
@@ -56,18 +53,18 @@ const ShippingForm = (props: IProps) => {
                   <RadioButton
                     name="radio"
                     label={freight.shipmentCompany}
-                    value={freight}
+                    value={freight.shipmentCompany}
                     onChange={(event) => {
                       const method: any = event.target.value;
                       setShippingMethod(method);
                     }}
                     {...props}
-                  />
+                  /> 
                 ) : (
                   <RadioButton
                     name="radio"
                     label={freight.shipmentCompany}
-                    value={freight}
+                    value={freight.shipmentCompany}
                     onChange={(event) => {
                       const method: any = event.target.value;
                       setShippingMethod(method);

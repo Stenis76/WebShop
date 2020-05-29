@@ -20,7 +20,8 @@ const CartItems = () => {
     removeItemFromCart,
     addItemToCart,
     clearItemFromCart,
-    shippingCost
+    shippingCost,
+    shippingMethod
   } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
 

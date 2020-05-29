@@ -10,7 +10,7 @@ interface IProps {
 }
 
 
-export type ShippingMethod = Object[] | any
+export type ShippingMethod = [] | any
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = props => {
@@ -24,13 +24,15 @@ const CartContextProvider: FC<IProps> = props => {
   useEffect(() => {
     axios.get('http://localhost:3002/api/freight')
     .then(res => {
-    console.log('data', res.data)
-    setShippingMethod(res.data)
+    console.log('res.data', res.data)
+    setShippingMethod(res.data)    
     })
     .catch(err => {
     console.log(err)
     })
    }, [])
+
+
 
 /*   useEffect(() => {
     let cost = 0;
@@ -63,8 +65,6 @@ const CartContextProvider: FC<IProps> = props => {
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
     }
-
-    console.log("add item to cart");
   };
 
   const removeItemFromCart = (itemId: number) => {
@@ -86,7 +86,6 @@ const CartContextProvider: FC<IProps> = props => {
         setCart(newCart);
       }
     }
-    console.log("remove item from cart");
   };
 
   const clearItemFromCart = (itemId: number) => {
