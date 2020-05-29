@@ -16,7 +16,7 @@ Content-Type: application/json
 {
   "firstname": "kalle",
   "lastname": "Svensson",
-  "email": "dicken@test.dddse",
+  "email": "dickstenqvist@hotmail.com",
   "password": "4321"
 }
 
@@ -26,7 +26,7 @@ POST http://localhost:3002/api/users/login
 Content-Type: application/json
 
 {
-  "email": "dicken@test.se",
+  "email": "dickstenqvist@hotmail.com",
   "password": "1234"
 }
 

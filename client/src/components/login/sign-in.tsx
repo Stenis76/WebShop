@@ -2,26 +2,27 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import Loader from "react-loader-spinner";
-import UserContext from "../../contexts/login-userContext/context";
-import FormInput from "../form_input/form_input";
+import UserContext from "../../contexts/user-context/context";
+// import FormInput from "../form_input/form_input";
+import { Form, FormField, Button } from "grommet";
 import CustomButton from "../custom_button/custom_button";
 
 import "./sign-in.styles.scss";
 
 const SignIn = () => {
-  const [email, setEmailname] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { login } = useContext(UserContext);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === "username") setEmailname(value);
+    if (name === "email") setEmail(value);
     else if (name === "password") setPassword(value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
@@ -30,11 +31,11 @@ const SignIn = () => {
       setLoading(false);
       console.log(response);
 
-      if (response === "Authenticated") {
+      if (response === "Auth successful") {
         history.push("/");
-      } else if (response === "Wrong password") {
+      } else if (response === " Auth failed") {
         alert("Wrong password");
-      } else if (response === "Wrong name") {
+      } else if (response === "Auth failed at start") {
         alert("Account does not exist");
       }
     } catch (error) {
@@ -49,31 +50,31 @@ const SignIn = () => {
       {loading ? (
         <Loader type="TailSpin" color="#00BFFF" height={70} width={70} />
       ) : (
-        <form className="sign-in-form" onSubmit={handleSubmit}>
-          <FormInput
+        <Form className="sign-in-form" onSubmit={handleSubmit}>
+          <FormField
+            label={"E-mail"}
             type="text"
             name="email"
             value={email}
-            handleChange={handleChange}
-            label={"E-mail"}
+            onChange={handleChange}
             required
           />
-          <FormInput
-            handleChange={handleChange}
+          <FormField
             label="Password"
-            name="password"
             type="password"
+            name="password"
             value={password}
+            onChange={handleChange}
             required
           />
 
           <div className="buttons">
-            <CustomButton type="submit">Log in</CustomButton>
+            <Button type="submit">Log in</Button>
             <Link to="/login/register">
-              <CustomButton>Sign up</CustomButton>
+              <Button>Sign up</Button>
             </Link>
           </div>
-        </form>
+        </Form>
       )}
     </div>
   );
