@@ -22,7 +22,7 @@ import {
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
-import  AdminMenu  from "../components/adminProductMenu";
+import  AdminMenu  from "../components/adminMenu";
 
 const initialInputs = {
   name: "",

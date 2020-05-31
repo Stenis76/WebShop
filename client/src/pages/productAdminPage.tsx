@@ -22,7 +22,7 @@ import {
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
-import  AdminMenu  from "../components/adminProductMenu";
+import  AdminMenu  from "../components/adminMenu";
 
 const initialInputs = {
   name: "",
@@ -143,7 +143,7 @@ const ProductAdmin = () => {
     });
   };
 
-  const step = 25;
+  const length = 1;
   const [results, setResults] = useState(
     Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
   );
@@ -158,14 +158,11 @@ const ProductAdmin = () => {
     <Main>
     <AdminMenu />
     <Box pad="small" basis="small">
-      <Heading level={3}>
-        <Box gap="small">
-          <strong>Products</strong>
-          <Text>
-            Here are all products
-          </Text>
-        </Box>
-      </Heading>
+    {collections.map((collection: Collection) => (
+      <Box key={collection.id}>
+        <Heading size="small">
+            {collection.title}
+        </Heading>
       <Table>
         <TableHeader>
           <TableRow>
@@ -183,6 +180,7 @@ const ProductAdmin = () => {
             </TableCell>
           </TableRow>
         </TableHeader>
+        {collection.items.map((item: CollectionItem) => (
         <TableBody>
           <InfiniteScroll
             renderMarker={marker => (
@@ -193,20 +191,23 @@ const ProductAdmin = () => {
             scrollableAncestor="window"
             items={results}
             onMore={() => load()}
-            step={step}
+            step={length}
           >
             {result => (
-              <TableRow key={result} >
-                <TableCell border="bottom" onClick={() => {onOpen();}}>{result}</TableCell>
-                <TableCell border="bottom">Black Hat</TableCell>
-                <TableCell border="bottom">4536 Sek</TableCell>
-                <TableCell border="bottom">Men, Hats</TableCell>
+              <TableRow key={item.id} >
+                <TableCell border="bottom" onClick={() => {onOpen();}}>{item.id}</TableCell>
+                <TableCell border="bottom">{item.name}</TableCell>
+            <TableCell border="bottom">{item.price}</TableCell>
+                <TableCell border="bottom">{collection.title}</TableCell>
               </TableRow>
               
             )}
           </InfiniteScroll>
         </TableBody>
+        ))}
       </Table>
+      </Box>
+      ))}
     </Box>
       {open && (
         <Layer position="center" onClickOutside={onClose}>
