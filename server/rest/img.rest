@@ -1,0 +1,13 @@
+POST http://localhost:3000/upload
+Content-Type: multipart/form-data; boundary=FormDataRow
+
+--FormDataRow
+Content-Disposition: form-data; name="image"; filename="brown-brim.png"
+Content-Type: image/png
+
+< ./earth.jpg
+--FormDataRow--
+
+### Tänk på följande:
+### ALLA boundary's måste BÖRJA med --
+### SISTA boundary'n måste AVSLUTAS med --
