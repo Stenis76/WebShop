@@ -17,6 +17,7 @@ export interface CollectionItem {
   
  // behåll till kategorier
   export interface Collection {
+    category: string | undefined;
     id: number;
     title: string;
     routeName: string;

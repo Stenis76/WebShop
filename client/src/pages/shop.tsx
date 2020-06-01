@@ -30,10 +30,15 @@ const Shop: FC<IProps> = () => {
     .then(res => {
         console.log('data', res.data)
         setCollection(res.data)
-        let products = res.data
-        let categories: Collection[] = products.map((product: { category: string; name: string; id: number; imageUrl: string; price: number; season: string[]; inventory: Object; description: string;
-         }) => ({ routeName: product.category, name: product.name, id: product.id, imageUrl: product.imageUrl, price: product.price, season: product.season, inventory: product.inventory, description: product.description })) //mappa om så man får ut alla grejer.
-        console.log('kategorier', categories) 
+          const products = res.data
+        // let categories: Collection[] = products.map((product: { category: string; name: string; id: number; imageUrl: string; price: number; season: string[]; inventory: Object; description: string;
+        //  }) => ({ routeName: product.category, name: product.name, id: product.id, imageUrl: product.imageUrl, price: product.price, season: product.season, inventory: product.inventory, description: product.description })) //mappa om så man får ut alla grejer.
+        // console.log('kategorier', categories) 
+        const categoryArray = products.filter((product: { category: string; }) => {
+          return product.category === 'Hats'
+        }).map((product: { category: string; }) => product.category)
+        console.log(categoryArray)
+
     })
     .catch(err => {
         console.log(err)
@@ -123,17 +128,17 @@ const Shop: FC<IProps> = () => {
     xlarge: [main, directory]
   };
   return (
-    <div>
-      {collections.map((product, i) => (
-            <div key={i}>
-              <h3 style={{ textAlign: "center" }}>{product.title}</h3>
-              <p>PRIS: {product.routeName}</p>
-              <p>KATEGORI: {product.routeName}</p>
-              <p>SÄSONG: {product.routeName}</p>
-              <img src={product.routeName}/>
-              <p>BESKRIVNING: {product.routeName}</p>
-            </div>
-          ))}
+    // <div>
+    //   {collections.map((product, i) => (
+    //         <div key={i}>
+    //           <h3 style={{ textAlign: "center" }}>{product.title}</h3>
+    //           <p>PRIS: {product.routeName}</p>
+    //           <p>KATEGORI: {product.routeName}</p>
+    //           <p>SÄSONG: {product.routeName}</p>
+    //           <img src={product.routeName}/>
+    //           <p>BESKRIVNING: {product.routeName}</p>
+    //         </div>
+    //       ))}
 
     <Grid
       fill
@@ -145,7 +150,7 @@ const Shop: FC<IProps> = () => {
     >
       {components[size]}
     </Grid>
-    </div>
+    // </div>
   );
 };
 
