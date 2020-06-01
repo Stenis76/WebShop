@@ -20,10 +20,11 @@ const CartItems = () => {
     removeItemFromCart,
     addItemToCart,
     clearItemFromCart,
-    shippingCost,
-    shippingMethod
+    selectedShippingMethod
   } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
+
+  const shippingCost = (selectedShippingMethod ? selectedShippingMethod.shippingCost : 0)
 
   const calculateTotal = () => {
     let total: number = 0;

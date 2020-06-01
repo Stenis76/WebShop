@@ -14,7 +14,7 @@ Content-Type: application/json
   "shipmentCompany": "Skriv nytt fraktalternativ här",
   "orderId": "1111",
   "deliveryDate": "000000",
-  "price": "00"
+  "shippingCost": "00"
 }
 
 ###

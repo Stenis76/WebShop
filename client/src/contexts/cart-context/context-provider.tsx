@@ -1,40 +1,45 @@
 import React, { FC, useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 
 import CartContext from "./context";
 
 import { CollectionItem } from "../../shop.data";
 
-interface IProps {
+interface IProps {}
 
-}
-
-
-export type ShippingMethod = [] | any
+export type ShippingMethod = {
+  _id: string
+  deliveryDate: string;
+  orderId: string;
+  shipmentCompany: string;
+  shippingCost: number;
+};
 export type PaymentMethod = "card" | "invoice" | "swish";
 
-const CartContextProvider: FC<IProps> = props => {
+const CartContextProvider: FC<IProps> = (props) => {
   const [cart, setCart] = useState<CollectionItem[]>([]);
   const [shippingCost, setShippingCost] = useState(0);
-  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>([]);
+  const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
+  const [selectedShippingMethod, setSelectedShippingMethod] = useState<
+    ShippingMethod
+  >();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
   //const [freights, setFreight] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3002/api/freight')
-    .then(res => {
-    console.log('res.data', res.data)
-    setShippingMethod(res.data)    
-    })
-    .catch(err => {
-    console.log(err)
-    })
-   }, [])
+    axios
+      .get("http://localhost:3002/api/freight")
+      .then((res) => {
+        console.log("res.data", res.data);
+        setShippingMethods(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-
-
-/*   useEffect(() => {
+  /*   useEffect(() => {
     let cost = 0;
     switch (shippingMethod) {
       case "dhl":
@@ -50,14 +55,14 @@ const CartContextProvider: FC<IProps> = props => {
   }, [shippingMethod]); */
 
   const addItemToCart = (item: CollectionItem) => {
-    const existing = cart.find(cartItem => cartItem.id === item.id);
+    const existing = cart.find((cartItem) => cartItem.id === item.id);
 
     if (existing) {
-      const newCart = cart.map(cartItem => {
+      const newCart = cart.map((cartItem) => {
         if (cartItem.id === item.id) {
           return {
             ...cartItem,
-            quantity: cartItem.quantity ? cartItem.quantity + 1 : 1
+            quantity: cartItem.quantity ? cartItem.quantity + 1 : 1,
           };
         } else return cartItem;
       });
@@ -68,18 +73,18 @@ const CartContextProvider: FC<IProps> = props => {
   };
 
   const removeItemFromCart = (itemId: number) => {
-    const existing = cart.find(cartItem => cartItem.id === itemId);
+    const existing = cart.find((cartItem) => cartItem.id === itemId);
 
     if (existing) {
       if (existing.quantity === 1) {
-        const newCart = cart.filter(item => item.id !== itemId);
+        const newCart = cart.filter((item) => item.id !== itemId);
         setCart(newCart);
       } else {
-        const newCart = cart.map(cartItem => {
+        const newCart = cart.map((cartItem) => {
           if (cartItem.id === itemId) {
             return {
               ...cartItem,
-              quantity: cartItem.quantity ? cartItem.quantity - 1 : 1
+              quantity: cartItem.quantity ? cartItem.quantity - 1 : 1,
             };
           } else return cartItem;
         });
@@ -89,32 +94,38 @@ const CartContextProvider: FC<IProps> = props => {
   };
 
   const clearItemFromCart = (itemId: number) => {
-    setCart(prevCart => prevCart.filter(cartItem => cartItem.id !== itemId));
+    setCart((prevCart) =>
+      prevCart.filter((cartItem) => cartItem.id !== itemId)
+    );
   };
 
   const clearCart = () => setCart([]);
 
-  const setShipping = (method: ShippingMethod) => setShippingMethod(method);
+  const setShipping = (_id: string) => {
+    const method = shippingMethods.find((method) => method._id === _id)
+    setSelectedShippingMethod(method);
+  };
 
   const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
 
   return (
     <div>
-    <CartContext.Provider
-      {...props}
-      value={{
-        cart,
-        shippingMethod,
-        setShippingMethod: setShipping,
-        paymentMethod,
-        setPaymentMethod: setPayment,
-        addItemToCart,
-        removeItemFromCart,
-        clearItemFromCart,
-        clearCart,
-        shippingCost: shippingCost
-      }}
-    />
+      <CartContext.Provider
+        {...props}
+        value={{
+          cart,
+          shippingMethods,
+          selectedShippingMethod,
+          setSelectedShippingMethod: setShipping,
+          paymentMethod,
+          setPaymentMethod: setPayment,
+          addItemToCart,
+          removeItemFromCart,
+          clearItemFromCart,
+          clearCart,
+          shippingCost: shippingCost,
+        }}
+      />
     </div>
   );
 };

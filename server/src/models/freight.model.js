@@ -15,7 +15,7 @@ let freightSchema = mongoose.Schema({
     required: true
   },
   shippingCost: {
-    type: String,
+    type: Number,
     required: true
   }
 });

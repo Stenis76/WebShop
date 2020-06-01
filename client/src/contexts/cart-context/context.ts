@@ -5,8 +5,9 @@ import { CollectionItem } from "../../shop.data";
 
 interface IState {
   cart: CollectionItem[];
-  shippingMethod: ShippingMethod;
-  setShippingMethod: (method: ShippingMethod) => void;
+  shippingMethods: ShippingMethod[];
+  selectedShippingMethod?: ShippingMethod;
+  setSelectedShippingMethod: (_id: string) => void;
   paymentMethod: PaymentMethod;
   setPaymentMethod: (method: PaymentMethod) => void;
   addItemToCart: (item: CollectionItem) => void;
@@ -18,8 +19,9 @@ interface IState {
 
 export default createContext<IState>({
   cart: [],
-  shippingMethod: [],
-  setShippingMethod: () => {},
+  shippingMethods: [],
+  selectedShippingMethod: undefined,
+  setSelectedShippingMethod: () => {},
   paymentMethod: "card",
   setPaymentMethod: () => {},
   addItemToCart: () => {},
