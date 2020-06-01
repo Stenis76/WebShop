@@ -197,7 +197,7 @@ const ProductAdmin = () => {
               <TableRow key={item.id} >
                 <TableCell border="bottom" onClick={() => {onOpen();}}>{item.id}</TableCell>
                 <TableCell border="bottom">{item.name}</TableCell>
-            <TableCell border="bottom">{item.price}</TableCell>
+                <TableCell border="bottom">{item.price}</TableCell>
                 <TableCell border="bottom">{collection.title}</TableCell>
               </TableRow>
               
