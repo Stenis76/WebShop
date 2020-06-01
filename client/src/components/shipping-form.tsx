@@ -22,7 +22,7 @@ const ShippingForm = (props: IProps) => {
   );
 console.log(shippingMethod + " detta är shippingmethod");
 
-  
+        
 
   /*   const getDeliveryDate = () => {
     const date = new Date();
@@ -56,7 +56,9 @@ console.log(shippingMethod + " detta är shippingmethod");
                     value={freight.shipmentCompany}
                     onChange={(event) => {
                       const method: any = event.target.value;
+                      
                       setShippingMethod(method);
+
                     }}
                     {...props}
                   /> 
@@ -67,6 +69,8 @@ console.log(shippingMethod + " detta är shippingmethod");
                     value={freight.shipmentCompany}
                     onChange={(event) => {
                       const method: any = event.target.value;
+                      console.log(method);
+                      
                       setShippingMethod(method);
                     }}
                     {...props}
@@ -82,7 +86,7 @@ console.log(shippingMethod + " detta är shippingmethod");
                   <Text>Delivery cost:</Text>
                 </TableCell>
                 <TableCell>
-                  <strong>${freight.price}</strong>
+                  <strong>${freight.shippingCost}</strong>
                 </TableCell>
               </TableRow>
               <TableRow>

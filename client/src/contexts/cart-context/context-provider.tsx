@@ -16,7 +16,7 @@ export type PaymentMethod = "card" | "invoice" | "swish";
 const CartContextProvider: FC<IProps> = props => {
   const [cart, setCart] = useState<CollectionItem[]>([]);
   const [shippingCost, setShippingCost] = useState(0);
-  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>();
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>([]);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
   //const [freights, setFreight] = useState([]);

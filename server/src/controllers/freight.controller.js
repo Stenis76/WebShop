@@ -32,7 +32,7 @@ const updateFreightMethod = async (req, res) => {
           freightId: req.body.freightId,
           shipmentCompany: req.body.shipmentCompany,
           deliveryDate: req.body.deliveryDate,
-          price: req.body.price,
+          shippingCost: req.body.shippingCost,
         },
       }
     );
