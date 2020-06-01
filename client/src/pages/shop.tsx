@@ -27,25 +27,22 @@ const Shop: FC<IProps> = () => {
     axios
       .get("http://localhost:3002/api/product")
       .then((res) => {
-        // console.log("data", res.data);
-        setCollection(res.data);
-        
+        mapDbProductsToCollection(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  
-  const mapDbProductsToCollection = (collections: CollectionItem[]) => {
-    console.log("dick was here");
-    const mappedCategories: Collection[] = []
-    let idIndex = 1
+
+  const mapDbProductsToCollection = (collections) => {
+    const mappedCategories: Collection[] = [];
+    let idIndex = 1;
 
     for (const collection of collections) {
-      let selectedCategory: Collection | undefined
+      let selectedCategory: Collection | undefined;
       for (const category of mappedCategories) {
         if (category.title === collection.category) {
-          selectedCategory = category
+          selectedCategory = category;
           break;
         }
       }
@@ -55,20 +52,19 @@ const Shop: FC<IProps> = () => {
           id: idIndex,
           title: collection.category,
           routeName: collection.category,
-          items: []
-        }
-        mappedCategories.push(selectedCategory)
-        idIndex++
+          items: [],
+        };
+        mappedCategories.push(selectedCategory);
+        idIndex++;
       }
-      selectedCategory.items.push(collection)
+      selectedCategory.items.push(collection);
     }
-    console.log('kooom igen', mappedCategories)
-    return mappedCategories
-  }
-console.log(collections);
+    console.log("kooom igen", mappedCategories);
+    setCollection(mappedCategories);
+    return;
+  };
 
-
-
+  console.log("min collection", collections);
   const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
       const col = collections.find((collection) => {
