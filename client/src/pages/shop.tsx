@@ -5,7 +5,6 @@ import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
 
-// import { Collection, CollectionItem } from "../shop.data";
 import { Collection, CollectionItem } from "../interfaces";
 import { ProductHunt } from "grommet-icons";
 
