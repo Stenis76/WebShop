@@ -27,66 +27,48 @@ const Shop: FC<IProps> = () => {
     axios
       .get("http://localhost:3002/api/product")
       .then((res) => {
-        let products = res.data;
-
-        setCollection(
-          products.map(
-            (product: {
-              category: string;
-              name: string;
-              _id: string;
-              imageUrl: string;
-              price: number;
-              season: string[];
-              inventory: Object;
-              description: string;
-            }) => ({
-              id: 1 /* kategori id, EV SKRIVA EN IF SATS */,
-              title: product.category,
-              routeName: product.category,
-              items: [
-                {
-                  id: product._id,
-                  name: product.name,
-                  imageUrl: product.imageUrl,
-                  price: product.price,
-                  size: product.inventory,
-                  season: product.season,
-                  description: product.description,
-                },
-              ],
-            })
-          ) //mappar om så att categorier blir routeName och passar fronte-end intefacet
-        );
+        // console.log("data", res.data);
+        setCollection(res.data);
+        
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  console.log("Vår collection", collections);
+  
+  const mapDbProductsToCollection = (collections: CollectionItem[]) => {
+    console.log("dick was here");
+    const mappedCategories: Collection[] = []
+    let idIndex = 1
 
-  useEffect(() => {
-    axios.get('http://localhost:3002/api/product')
-    .then(res => {
-        console.log('data', res.data)
-        setCollection(res.data)
-          const products = res.data
-        // let categories: Collection[] = products.map((product: { category: string; name: string; id: number; imageUrl: string; price: number; season: string[]; inventory: Object; description: string;
-        //  }) => ({ routeName: product.category, name: product.name, id: product.id, imageUrl: product.imageUrl, price: product.price, season: product.season, inventory: product.inventory, description: product.description })) //mappa om så man får ut alla grejer.
-        // console.log('kategorier', categories) 
-        const categoryArray = products.filter((product: { category: string; }) => {
-          return product.category === 'Hats'
-        }).map((product: { category: string; }) => product.category)
-        console.log(categoryArray)
+    for (const collection of collections) {
+      let selectedCategory: Collection | undefined
+      for (const category of mappedCategories) {
+        if (category.title === collection.category) {
+          selectedCategory = category
+          break;
+        }
+      }
 
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}, [])
+      if (!selectedCategory) {
+        selectedCategory = {
+          id: idIndex,
+          title: collection.category,
+          routeName: collection.category,
+          items: []
+        }
+        mappedCategories.push(selectedCategory)
+        idIndex++
+      }
+      selectedCategory.items.push(collection)
+    }
+    console.log('kooom igen', mappedCategories)
+    return mappedCategories
+  }
+console.log(collections);
 
 
- 
+
   const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
       const col = collections.find((collection) => {
