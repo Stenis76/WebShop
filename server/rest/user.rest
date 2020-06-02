@@ -14,8 +14,8 @@ POST http://localhost:3002/api/newuser
 Content-Type: application/json
 
 {
-  "firstname": "kalle",
-  "lastname": "Svensson",
+  "firstName": "kalle",
+  "lastName": "Svensson",
   "email": "dickstenqvist@hotmail.com",
   "password": "4321"
 }
@@ -41,9 +41,9 @@ PUT   http://localhost:3002/api/users/5ec3b3e2fa18c10684a9b3d8
 Content-Type: application/json
 
 {
-  "phonenumber": "07332332110",
+  "phoneNumber": "07332332110",
   "address": "Skosnörstigen 6",
-  "postcode": "1822282",
+  "postCode": "1822282",
   "city": "Borås",
   "creditcardnumber": "688982722211117272"
 }

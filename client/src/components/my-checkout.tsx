@@ -20,6 +20,7 @@ const MyCheckOut = () => {
   const { user } = useContext(UserContext);
   const { clearCart, paymentMethod } = useContext(CartContext);
   const history = useHistory();
+  console.log(user);
 
   const validUserInformation = () =>
     user.firstName.length > 1 &&
