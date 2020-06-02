@@ -55,10 +55,10 @@ const UserContextProvider: FC<IProps> = (props) => {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
-    console.log(data);
 
     if (data.user) {
-      setUser(data.user);
+      console.log(data.user[0]);
+      setUser(data.user[0]);
       setIsAuthenticated(true);
     }
     //Tar med password i objectet user, behöver ses över
