@@ -154,20 +154,18 @@ const ProductAdmin = () => {
     ]);
   };
 
+
+
   return (
     <Main>
     <AdminMenu />
-    <Box pad="small" basis="small">
+    <Box basis="large" pad="small">
     {collections.map((collection: Collection) => (
-      <Box key={collection.id}>
-        <Heading size="small">
-            {collection.title}
-        </Heading>
-      <Table>
+      <Table >
         <TableHeader>
           <TableRow>
             <TableCell scope="col" border="bottom">
-              Product Id
+          {collection.title} Product Id
             </TableCell>
             <TableCell scope="col" border="bottom">
               Product name
@@ -175,9 +173,9 @@ const ProductAdmin = () => {
             <TableCell scope="col" border="bottom">
               Price
             </TableCell>
-            <TableCell scope="col" border="bottom">
+            {/* <TableCell scope="col" border="bottom">
              Category
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         </TableHeader>
         {collection.items.map((item: CollectionItem) => (
@@ -198,7 +196,7 @@ const ProductAdmin = () => {
                 <TableCell border="bottom" onClick={() => {onOpen();}}>{item.id}</TableCell>
                 <TableCell border="bottom">{item.name}</TableCell>
                 <TableCell border="bottom">{item.price}</TableCell>
-                <TableCell border="bottom">{collection.title}</TableCell>
+                {/* <TableCell border="bottom">{collection.title}</TableCell> */}
               </TableRow>
               
             )}
@@ -206,9 +204,8 @@ const ProductAdmin = () => {
         </TableBody>
         ))}
       </Table>
-      </Box>
       ))}
-    </Box>
+      </Box>
       {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">

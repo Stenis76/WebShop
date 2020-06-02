@@ -93,12 +93,12 @@ const onClose = () => setOpen(false);
                 <TableCell scope="col" border="bottom">
                   Last name
                 </TableCell>
-                <TableCell scope="col" border="bottom">
+                {/* <TableCell scope="col" border="bottom">
                   Phone number
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </TableCell> */}
+                {/* <TableCell scope="col" border="bottom">
                   Email
-                </TableCell>
+                </TableCell> */}
                 {/* <TableCell scope="col" border="bottom">
                   Adress
                 </TableCell>
@@ -133,8 +133,8 @@ const onClose = () => setOpen(false);
                     <TableCell border="bottom" onClick={() => {onOpen();}}>{result}</TableCell>
                     <TableCell border="bottom">Philip</TableCell>
                     <TableCell border="bottom">Arvidsson</TableCell>
-                    <TableCell border="bottom">073-370 88 17</TableCell>
-                    <TableCell border="bottom">philip.arvidsson@medieinstitutet.se</TableCell>
+                    {/* <TableCell border="bottom">073-370 88 17</TableCell> */}
+                    {/* <TableCell border="bottom">philip.arvidsson@medieinstitutet.se</TableCell> */}
                   </TableRow>
                   
                 )}

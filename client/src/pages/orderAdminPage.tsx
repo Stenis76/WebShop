@@ -95,9 +95,9 @@ const step = 25;
                 <TableCell scope="col" border="bottom">
                   Freight Id
                 </TableCell>
-                <TableCell scope="col" border="bottom">
+                {/* <TableCell scope="col" border="bottom">
                   Order Date
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -117,7 +117,7 @@ const step = 25;
                     <TableCell border="bottom" onClick={() => {onOpen();}}>{result}</TableCell>
                     <TableCell border="bottom">{result}</TableCell>
                     <TableCell border="bottom">{result}</TableCell>
-                    <TableCell border="bottom">2020-01-07</TableCell>
+                    {/* <TableCell border="bottom">2020-01-07</TableCell> */}
                   </TableRow>
                 )}
               </InfiniteScroll>
