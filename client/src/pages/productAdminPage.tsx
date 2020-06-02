@@ -9,11 +9,20 @@ import {
   Layer,
   Form,
   TextArea,
-  CheckBox
+  CheckBox, 
+  Grid,
+  ResponsiveContext,
+  InfiniteScroll,
+  Table,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableHeader
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+import  AdminMenu  from "../components/adminMenu";
 
 const initialInputs = {
   name: "",
@@ -24,7 +33,7 @@ const initialInputs = {
   description: ""
 };
 
-const Admin = () => {
+const ProductAdmin = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
@@ -92,7 +101,7 @@ const Admin = () => {
           collection.items[itemIndex] = {
             ...itemToEdit,
             name: inputs.name,
-            imageUrl: inputs.imageUrl,
+            // imageUrl: inputs.imageUrl,
             price: Number(inputs.price),
             size: inputs.size,
             season: inputs.season,
@@ -134,57 +143,143 @@ const Admin = () => {
     });
   };
 
+  const length = 1;
+  const [results, setResults] = useState(
+    Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+  );
+  const load = () => {
+    setResults([
+      ...results,
+      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+    ]);
+  };
+
+
+
   return (
     <Main>
-      <Box direction="row" justify="evenly">
-        {collections.map((collection: Collection) => (
-          <Box key={collection.id}>
-            <Heading size="small">
-              {collection.title}
-              <Button
-                icon={
-                  <AddCircle
-                    onClick={() => {
-                      setEditOrAdd("add");
-                      setCategory(collection.routeName);
-                      setInputs(initialInputs);
-                      onOpen();
-                    }}
-                  />
-                }
-              />
-            </Heading>
-
-            {collection.items.map((item: CollectionItem) => (
-              <Box key={item.id}>
-                <Box direction="row" align="center">
-                  <Button
-                    icon={<SubtractCircle />}
-                    onClick={() => removeFromCollection(item.id)}
-                  />
-                  <Button
-                    icon={<FormEdit />}
-                    onClick={() => {
+    <AdminMenu />
+    <Box basis="large" pad="small">
+    {collections.map((collection: Collection) => (
+      <Table >
+        <TableHeader>
+          <Heading level="3">{collection.title}</Heading>
+          <TableRow>
+            <TableCell scope="col" border="bottom">
+             Product Id
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Product name
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Price
+            </TableCell>
+            {/* <TableCell scope="col" border="bottom">
+             Category
+            </TableCell> */}
+          </TableRow>
+        </TableHeader>
+        {collection.items.map((item: CollectionItem) => (
+        <TableBody>
+          <InfiniteScroll
+            renderMarker={marker => (
+              <TableRow>
+                <TableCell>{marker}</TableCell>
+              </TableRow>
+            )}
+            scrollableAncestor="window"
+            items={results}
+            onMore={() => load()}
+            step={length}
+          >
+            {result => (
+              <TableRow key={item.id} >
+                <TableCell border="bottom" onClick={() => {
                       setEditOrAdd("edit");
                       setInputsToItemData(item);
                       setItemToEdit(item);
                       onOpen();
-                    }}
-                  />
-
-                  <Image
-                    src={item.imageUrl}
-                    style={{ width: "3rem", marginTop: "1rem" }}
-                  ></Image>
-                  <Text weight="bold" margin={{ left: "small" }}>
-                    {item.name}
-                  </Text>
-                </Box>
-              </Box>
-            ))}
-          </Box>
+                    }}>{item.id}</TableCell>
+                <TableCell border="bottom">{item.name}</TableCell>
+                <TableCell border="bottom">{item.price}</TableCell>
+                {/* <TableCell border="bottom">{collection.title}</TableCell> */}
+              </TableRow>
+              
+            )}
+          </InfiniteScroll>
+        </TableBody>
         ))}
+      </Table>
+      ))}
       </Box>
+      {/* {open && (
+        <Layer position="center" onClickOutside={onClose}>
+          <Box width="large" height="large">
+            <Form validate="blur">
+              <Box
+                background="light-3"
+                width="large"
+                pad="medium"
+                justify="between"
+                height="large"
+              >
+                <Heading size="xsmall">{category}</Heading>
+                <Text>ID: {calculateNextItemId()}</Text>
+                <FormFieldLabel
+                  name="ProductName"
+                  label="Product name"
+                  required
+                  type="text"
+                  value={inputs.name}
+                  onChange={e => handleInputs("name", e.target.value)}
+                />
+                <FormFieldLabel
+                  name="Price"
+                  label="Price"
+                  required
+                  type="text"
+                  value={inputs.price}
+                  onChange={e => handleInputs("price", e.target.value)}
+                />
+                <FormFieldLabel
+                  name="ImageUrl"
+                  label="Image URL"
+                  required
+                  type="text"
+                  value={inputs.imageUrl}
+                  onChange={e => handleInputs("imageUrl", e.target.value)}
+                />
+                <Text>Sizes</Text>
+                <Box direction="row">
+                  <CheckBox label="small" />
+                  <CheckBox label="medium" onChange={() => {}} />
+                  <CheckBox label="large" onChange={() => {}} />
+                  <CheckBox label="xlarge" onChange={() => {}} />
+                </Box>
+                <Text>Seasons</Text>
+                <Box direction="row">
+                  <CheckBox label="spring" onChange={() => {}} />
+                  <CheckBox label="summer" onChange={() => {}} />
+                  <CheckBox label="autumn" onChange={() => {}} />
+                  <CheckBox label="winter" onChange={() => {}} />
+                </Box>
+                <Text>Description</Text>
+                <TextArea
+                  value={inputs.description}
+                  name="Description"
+                  required
+                  onChange={e => handleInputs("description", e.target.value)}
+                />
+                {editOrAdd === "add" ? (
+                  <Button onClick={addToCollection} label="Add to collection" />
+                ) : (
+                  <Button onClick={editItem} label="Submit edit" />
+                )}
+              </Box>
+            </Form>
+          </Box>
+        </Layer>
+      )} */}
       {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">
@@ -257,4 +352,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default ProductAdmin;

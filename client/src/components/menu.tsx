@@ -68,7 +68,7 @@ const MyMenu = () => {
         }
       </ResponsiveContext.Consumer>
       <Text size="medium">
-        <Link className="link" to="/admin">
+        <Link className="link" to="/admin/product">
           Admin
         </Link>
       </Text>
