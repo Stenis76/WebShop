@@ -15,13 +15,6 @@ const Shop: FC<IProps> = () => {
 
   const { category, query = "" } = useParams();
 
-  // useEffect(() => {
-  //   const localStorageCollections = localStorage.getItem("collection");
-  //   if (localStorageCollections) {
-  //     setCollection(JSON.parse(localStorageCollections));
-  //   }
-  // }, []);
-
   useEffect(() => {
     axios
       .get("http://localhost:3002/api/product")

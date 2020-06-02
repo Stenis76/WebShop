@@ -10,12 +10,12 @@ import "./sign-in.styles.scss";
 
 const SignUp = () => {
   const [state, setState] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     address: "",
-    postcode: "",
+    postCode: "",
     city: "",
-    phonenumber: "",
+    phoneNumber: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -44,12 +44,12 @@ const SignUp = () => {
 
     try {
       const newUser = {
-        firstname: state.firstname,
-        lastname: state.lastname,
-        phonenumber: state.phonenumber,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        phoneNumber: state.phoneNumber,
         email: state.email,
         address: state.address,
-        postcode: state.postcode,
+        postCode: state.postCode,
         city: state.city,
         password: state.password,
         confirmPassword: state.confirmPassword,
@@ -74,18 +74,18 @@ const SignUp = () => {
           onSubmit={handleSubmit}
         >
           <FormField
-            type="firstname"
-            name="firstname"
-            value={state.firstname}
+            type="firstName"
+            name="firstName"
+            value={state.firstName}
             onChange={handleChange}
             label="Name"
             required
             // size="xsmall"
           />
           <FormField
-            type="lastname"
-            name="lastname"
-            value={state.lastname}
+            type="lastName"
+            name="lastName"
+            value={state.lastName}
             onChange={handleChange}
             label="Last name"
             required
@@ -101,11 +101,11 @@ const SignUp = () => {
             // size="xsmall"
           />
           <FormField
-            type="postcode"
-            name="postcode"
-            value={state.postcode}
+            type="postCode"
+            name="postCode"
+            value={state.postCode}
             onChange={handleChange}
-            label="Postcode"
+            label="postCode"
             required
             // size="xsmall"
           />
@@ -119,11 +119,11 @@ const SignUp = () => {
             // size="xsmall"
           />
           <FormField
-            type="phonenumber"
-            name="phonenumber"
-            value={state.phonenumber}
+            type="phoneNumber"
+            name="phoneNumber"
+            value={state.phoneNumber}
             onChange={handleChange}
-            label="Phonenumber"
+            label="phoneNumber"
             required
             // size="xsmall"
           />

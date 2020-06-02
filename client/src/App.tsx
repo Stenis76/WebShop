@@ -8,7 +8,9 @@ import Shop from "./pages/shop";
 import Checkout from "./pages/checkout";
 import { Grommet, Box, grommet } from "grommet";
 import { deepMerge } from "grommet/utils";
-import Admin from "./pages/adminPage";
+import ProductAdmin from "./pages/productAdminPage";
+import OrderAdmin from "./pages/orderAdminPage"
+import UserAdmin from "./pages/userAdminPage"
 import Login from "./pages/logInPage"
 
 const myTheme = {
@@ -60,7 +62,9 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/shop/:category/:query?" component={Shop} />
           <Route path="/checkout" component={Checkout} />
-          <Route path="/admin" component={Admin} />
+          <Route path="/admin/product" component={ProductAdmin} />
+          <Route path="/admin/order" component={OrderAdmin} />
+          <Route path="/admin/users" component={UserAdmin} />
           <Route path="/login" component={Login} />
         </Switch>
       </Box>
