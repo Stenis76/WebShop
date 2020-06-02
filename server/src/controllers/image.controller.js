@@ -5,7 +5,7 @@ newImage = (req, res) => {
     const image = new Image ({
         img: req.files
     })
-    image.save((err, product) => {
+    image.save((err, image) => {
         if (err) res.status(400).json(err);
         else res.status(201).json(image);
       });

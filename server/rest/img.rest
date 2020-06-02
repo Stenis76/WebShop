@@ -2,14 +2,14 @@ GET http://localhost:3002/
 
 ###
 
-POST http://localhost:3002/upload
+POST http://localhost:3002/api/upload
 Content-Type: multipart/form-data; boundary=FormDataRow
 
 --FormDataRow
-Content-Disposition: form-data; name="image"; filename="brown-brim.png"
-Content-Type: image/png
+Content-Disposition: form-data; name="image"; filename="brown-brim.jpg"
+Content-Type: image/jpg
 
-< ./brown-brim.png
+< ./brown-brim.jpg
 --FormDataRow--
 
 ### Tänk på följande:

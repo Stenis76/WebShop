@@ -5,7 +5,7 @@ const { newImage } = require("../controllers/image.controller");
 
 router.use(fileUpload({}))
 
-router.post("/upload", (req, res) => {
+router.post("/api/upload", (req, res) => {
     newImage(req, res)
   });
 
