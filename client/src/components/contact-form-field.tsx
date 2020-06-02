@@ -19,7 +19,7 @@ const ContactFormField = (props: IProps) => {
     <Form validate="blur" style={{ gridArea: "name" }}>
       <FormFieldLabel
         name="firstName"
-        label="FirstName"
+        label="firstName"
         required
         type="text"
         value={user.firstName}
@@ -27,7 +27,7 @@ const ContactFormField = (props: IProps) => {
       />
       <FormFieldLabel
         name="lastName"
-        label="LastName"
+        label="lastName"
         required
         type="text"
         value={user.lastName}

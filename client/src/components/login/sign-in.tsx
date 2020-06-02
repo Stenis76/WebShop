@@ -29,7 +29,7 @@ const SignIn = () => {
       setLoading(true);
       const response = await login(email, password);
       setLoading(false);
-      console.log(response);
+      console.log("svar från server", response);
 
       if (response === "Auth successful") {
         history.push("/");

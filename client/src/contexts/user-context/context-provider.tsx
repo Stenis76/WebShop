@@ -55,6 +55,7 @@ const UserContextProvider: FC<IProps> = (props) => {
       body: JSON.stringify({ email, password }),
     });
     const data = await res.json();
+    console.log(data);
 
     if (data.user) {
       setUser(data.user);

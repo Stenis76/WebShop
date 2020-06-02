@@ -1,20 +1,29 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Box, Heading, Layer, Stack, Text, ResponsiveContext, Button } from "grommet";
-import { User } from "grommet-icons";
+import {
+  Box,
+  Heading,
+  Layer,
+  Stack,
+  Text,
+  ResponsiveContext,
+  Button,
+} from "grommet";
+import { User, Logout } from "grommet-icons";
 import CartContext from "../contexts/cart-context/context";
+import UserContext from "../contexts/user-context/context";
 import { Cart } from "grommet-icons";
 import MyCart from "./my-cart";
 import SearchBar from "./search-bar";
+import { userInfo } from "os";
 
 interface Iprops {}
 
-
 const Header = (props: Iprops) => {
-
   const { cart } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
-
+  const { isAuthenticated } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   const [open, setOpen] = React.useState<boolean>();
 
   const onOpen = () => setOpen(true);
@@ -65,10 +74,24 @@ const Header = (props: Iprops) => {
             </Text>
           </Box>
         </Stack>
-        <Link to="/login"><Button
-          margin={{ right: "medium" }}
-          icon={<User size={responsive === "small" ? "1.7rem" : "2.3rem"} />}
-        /></Link>
+        {isAuthenticated ? (
+          <Button
+            margin={{ right: "medium" }}
+            onClick={logout}
+            icon={
+              <Logout size={responsive === "small" ? "1.7rem" : "2.3rem"} />
+            }
+          />
+        ) : (
+          <Link to="/login">
+            <Button
+              margin={{ right: "medium" }}
+              icon={
+                <User size={responsive === "small" ? "1.7rem" : "2.3rem"} />
+              }
+            />
+          </Link>
+        )}
       </Box>
       {open && (
         <Layer position="top-right" onClickOutside={onClose}>
