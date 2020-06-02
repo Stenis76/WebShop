@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import CartContext from "../contexts/cart-context/context";
 
-
 import {
   Box,
   Form,
-  RadioButtonGroup,
   Text,
   Table,
   TableCell,
@@ -22,20 +20,15 @@ const ShippingForm = (props: IProps) => {
     shippingMethods,
     setSelectedShippingMethod,
     selectedShippingMethod,
-    shippingCost,
   } = useContext(CartContext);
 
-
   const getDeliveryDate = (deliveryDate: number) => {
-
     const date = new Date();
-    date.setHours(date.getHours() + deliveryDate);        
-    
-    return date.toLocaleDateString();
+    date.setHours(date.getHours() + deliveryDate);
 
+    return date.toLocaleDateString();
   };
 
-  
   return (
     <div>
       <Text weight="bold" alignSelf="start">
@@ -104,9 +97,3 @@ const ShippingForm = (props: IProps) => {
 };
 
 export default ShippingForm;
-
-/* [
-  { label: "PostNord (72h)", value: "postNord" },
-  { label: "Schenker (36h)", value: "schenker" },
-  { label: "DHL Express (6h)", value: "dhl" },
-] */
