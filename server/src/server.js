@@ -13,6 +13,7 @@ const userRouter = require("./routers/user.router");
 const freightRouter = require("./routers/freight.router");
 const productRouter = require("./routers/product.router");
 const orderRouter = require("./routers/order.router");
+const imgRouter = require("./routers/image.router");
 
 // run the database
 run();
@@ -42,6 +43,7 @@ app.use(userRouter);
 app.use(orderRouter);
 app.use(freightRouter);
 app.use(productRouter);
+app.use(imgRouter);
 
 const PORT = process.env.PORT || 8080;
 
