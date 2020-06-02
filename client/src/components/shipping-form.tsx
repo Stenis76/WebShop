@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import CartContext from "../contexts/cart-context/context";
 
+
 import {
   Box,
   Form,
@@ -24,11 +25,16 @@ const ShippingForm = (props: IProps) => {
     shippingCost,
   } = useContext(CartContext);
 
-  const getDeliveryDate = () => {
+
+  const getDeliveryDate = (deliveryDate: number) => {
+
     const date = new Date();
-    date.setHours(date.getHours() + 72 /* selectedShippingMethod.deliveryDate) */);
+    date.setHours(date.getHours() + deliveryDate);        
+    
     return date.toLocaleDateString();
+
   };
+
   
   return (
     <div>
@@ -86,7 +92,7 @@ const ShippingForm = (props: IProps) => {
                   <Text>Delivery date:</Text>
                 </TableCell>
                 <TableCell>
-                  <strong>{freight.deliveryDate}</strong>
+                  <strong>{getDeliveryDate(freight.deliveryDate)}</strong>
                 </TableCell>
               </TableRow>
             </TableBody>

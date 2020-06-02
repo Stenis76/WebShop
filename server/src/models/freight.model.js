@@ -11,7 +11,7 @@ let freightSchema = mongoose.Schema({
     required: true
   },
   deliveryDate: {
-    type: String,
+    type: Number,
     required: true
   },
   shippingCost: {

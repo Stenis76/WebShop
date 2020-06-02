@@ -9,7 +9,7 @@ interface IProps {}
 
 export type ShippingMethod = {
   _id: string
-  deliveryDate: string;
+  deliveryDate: number;
   orderId: string;
   shipmentCompany: string;
   shippingCost: number;
@@ -25,7 +25,6 @@ const CartContextProvider: FC<IProps> = (props) => {
   >();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
 
-  //const [freights, setFreight] = useState([]);
 
   useEffect(() => {
     axios
