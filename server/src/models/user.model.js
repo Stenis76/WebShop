@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
-  firstname: {
+  firstName: {
     type: String,
     required: false,
     trim: true,
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true,
     trim: true,
   },
-  phonenumber: {
+  phoneNumber: {
     type: String,
     trim: true,
   },
@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  postcode: {
+  postCode: {
     type: String,
     trim: true,
   },

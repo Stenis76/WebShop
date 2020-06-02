@@ -22,7 +22,7 @@ export interface IUser {
 }
 export const initialUser: IUser = {
   _id: "",
-  firstName: "dick",
+  firstName: "",
   lastName: "",
   phoneNumber: "",
   email: "",

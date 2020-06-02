@@ -22,12 +22,12 @@ const getOneById = async (req, res) => {
 // CREATE NEW USER
 const newUser = async (req, res) => {
   const userData = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    phonenumber: req.body.phonenumber,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    phoneNumber: req.body.phoneNumber,
     email: req.body.email,
     address: req.body.address,
-    postcode: req.body.postcode,
+    postCode: req.body.postCode,
     city: req.body.city,
     password: req.body.password,
     role: "customer",
@@ -76,6 +76,7 @@ const logInUser = async (req, res) => {
         }
         if (result) {
           req.session.userId = user[0]._id;
+          console.log(req.session.userId);
 
           return res.status(200).json({
             message: "Auth successful",
@@ -96,16 +97,12 @@ const logInUser = async (req, res) => {
 
 // LOGOUT
 
-const logOutUser = (req, res, next) => {
+const logOutUser = (req, res) => {
   if (req.session) {
     // delete session object
-    req.session.destroy(function (err) {
-      if (err) {
-        return next(err);
-      } else {
-        return res.redirect("/");
-      }
-    });
+    req.session = null;
+  } else {
+    return res.redirect("/");
   }
 };
 
@@ -125,12 +122,12 @@ const updateUser = async (req, res) => {
     let user = await User.findById(req.params.userId);
 
     if (user) {
-      user.firstname = user.firstname;
-      user.lastname = user.lastname;
-      user.phonenumber = req.body.phonenumber;
+      user.firstName = user.firstName;
+      user.lastName = user.lastName;
+      user.phoneNumber = req.body.phoneNumber;
       user.email = user.email;
       user.address = req.body.address;
-      user.postcode = req.body.postcode;
+      user.postCode = req.body.postCode;
       user.city = req.body.city;
       user.creditcardnumber = req.body.creditcardnumber;
       user.password = user.password;
