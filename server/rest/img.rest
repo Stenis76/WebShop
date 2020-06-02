@@ -1,4 +1,6 @@
-POST http://localhost:3000/upload
+GET http://localhost:3002/
+
+POST http://localhost:3002/upload
 Content-Type: multipart/form-data; boundary=FormDataRow
 
 --FormDataRow
