@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-
+import axios from "axios";
 import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
 
-import { Collection, CollectionItem } from "../shop.data";
+// import { Collection, CollectionItem } from "../shop.data";
+import { Collection, CollectionItem } from "../interfaces";
+import { ProductHunt } from "grommet-icons";
 
 interface IProps {}
 
@@ -14,18 +16,63 @@ const Shop: FC<IProps> = () => {
 
   const { category, query = "" } = useParams();
 
+  // useEffect(() => {
+  //   const localStorageCollections = localStorage.getItem("collection");
+  //   if (localStorageCollections) {
+  //     setCollection(JSON.parse(localStorageCollections));
+  //   }
+  // }, []);
+
   useEffect(() => {
-    const localStorageCollections = localStorage.getItem("collection");
-    if (localStorageCollections) {
-      setCollection(JSON.parse(localStorageCollections));
-    }
+    axios
+      .get("http://localhost:3002/api/product")
+      .then((res) => {
+        mapDbProductsToCollection(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
+  const mapDbProductsToCollection = (collections) => {
+    const mappedCategories: Collection[] = [];
+    let idIndex = 1;
+
+    for (const collection of collections) {
+      let selectedCategory: Collection | undefined;
+      for (const category of mappedCategories) {
+        if (category.title === collection.category) {
+          selectedCategory = category;
+          break;
+        }
+      }
+
+      if (!selectedCategory) {
+        selectedCategory = {
+          id: idIndex,
+          title: collection.category,
+          routeName: collection.category,
+          items: [],
+        };
+        mappedCategories.push(selectedCategory);
+        idIndex++;
+      }
+      selectedCategory.items.push(collection);
+    }
+    console.log("kooom igen", mappedCategories);
+    setCollection(mappedCategories);
+    return;
+  };
+
+  console.log("min collection", collections);
   const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
-      const col = collections.find(
-        (collection: Collection) => collection.routeName === category
-      );
+      const col = collections.find((collection) => {
+        console.log(collection.routeName, category);
+
+        return collection.routeName.toLowerCase() === category!.toLowerCase();
+      });
+      console.log("här", col!.items);
       if (col) return col.items;
     }
     return [];
@@ -44,30 +91,30 @@ const Shop: FC<IProps> = () => {
     small: ["auto"],
     medium: ["auto", "auto"],
     large: ["auto", "auto"],
-    xlarge: ["auto", "auto"]
+    xlarge: ["auto", "auto"],
   };
 
   const rows = {
     small: ["auto"],
     medium: ["auto", "auto"],
     large: ["auto", "auto"],
-    xlarge: ["auto", "auto"]
+    xlarge: ["auto", "auto"],
   };
 
   const areas = {
     small: [{ name: "main", start: [0, 0], end: [0, 0] }],
     medium: [
       { name: "directory", start: [0, 0], end: [0, 0] },
-      { name: "main", start: [1, 0], end: [1, 0] }
+      { name: "main", start: [1, 0], end: [1, 0] },
     ],
     large: [
       { name: "directory", start: [0, 0], end: [0, 0] },
-      { name: "main", start: [1, 0], end: [1, 0] }
+      { name: "main", start: [1, 0], end: [1, 0] },
     ],
     xlarge: [
       { name: "directory", start: [0, 0], end: [0, 0] },
-      { name: "main", start: [1, 0], end: [1, 0] }
-    ]
+      { name: "main", start: [1, 0], end: [1, 0] },
+    ],
   };
   const main = (
     <Box
@@ -79,15 +126,19 @@ const Shop: FC<IProps> = () => {
         flexWrap: "wrap",
         margin: "small",
         justifyContent: "center",
-        overflowY: "scroll"
+        overflowY: "scroll",
       }}
     >
       {category === "search" && query
-        ? collections.map((collection: Collection) =>
-            collection.items
+        ? collections.map((collection: Collection) => {
+            console.log(collection.items.filter(matchWithQuery));
+
+            return collection.items
               .filter(matchWithQuery)
-              .map((item: CollectionItem) => <Item key={item.id} item={item} />)
-          )
+              .map((item: CollectionItem) => (
+                <Item key={item.id} item={item} />
+              ));
+          })
         : getCurrentCollectionItems().map((item: CollectionItem) => (
             <Item key={item.id} item={item} />
           ))}
@@ -99,9 +150,21 @@ const Shop: FC<IProps> = () => {
     small: [main],
     medium: [main, directory],
     large: [main, directory],
-    xlarge: [main, directory]
+    xlarge: [main, directory],
   };
   return (
+    // <div>
+    //   {collections.map((product, i) => (
+    //     <div key={i}>
+    //       <h3 style={{ textAlign: "center" }}>{product.title}</h3>
+    //       <p>PRIS: {product.routeName}</p>
+    //       <p>KATEGORI: {product.routeName}</p>
+    //       <p>SÄSONG: {product.routeName}</p>
+    //       <img src={product.routeName} />
+    //       <p>BESKRIVNING: {product.routeName}</p>
+    //     </div>
+    //   ))}
+
     <Grid
       fill
       responsive={true}
@@ -112,6 +175,7 @@ const Shop: FC<IProps> = () => {
     >
       {components[size]}
     </Grid>
+    // </div>
   );
 };
 
