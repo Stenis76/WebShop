@@ -1,8 +1,10 @@
-GET http://localhost:3002/
+
+//ALL
+GET http://localhost:3002/images
 
 ###
 
-POST http://localhost:3002/api/upload
+POST http://localhost:3002/api/images
 Content-Type: multipart/form-data; boundary=FormDataRow
 
 --FormDataRow

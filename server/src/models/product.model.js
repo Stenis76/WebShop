@@ -6,10 +6,9 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  imageUrl: {
-    type: String,
+  image: {
+    type: mongoose.Types.ObjectId,
     required: true,
-    trim: true,
   },
   price: {
     type: Number,
@@ -56,10 +55,16 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+}, {
+  toJSON: {
+    virtuals: true
+  }
 });
 
 
-
+ProductSchema.virtual('imageUrl').get(function() {
+  return 'http://localhost:3002/api/images/' + this.image.toString()
+})
 
 
 
