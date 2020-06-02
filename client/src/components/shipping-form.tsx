@@ -4,102 +4,95 @@ import CartContext from "../contexts/cart-context/context";
 import {
   Box,
   Form,
-  RadioButtonGroup,
   Text,
   Table,
   TableCell,
   TableBody,
   TableRow,
-  ResponsiveContext
+  ResponsiveContext,
+  RadioButton,
 } from "grommet";
 
 interface IProps {}
 
 const ShippingForm = (props: IProps) => {
-  const { shippingMethod, setShippingMethod, shippingCost } = useContext(
-    CartContext
-  );
+  const {
+    shippingMethods,
+    setSelectedShippingMethod,
+    selectedShippingMethod,
+  } = useContext(CartContext);
 
-  const getDeliveryDate = () => {
+  const getDeliveryDate = (deliveryDate: number) => {
     const date = new Date();
-    switch (shippingMethod) {
-      case "postNord":
-        date.setHours(date.getHours() + 72);
-        break;
-      case "dhl":
-        date.setHours(date.getHours() + 6);
-        break;
-      default:
-        date.setHours(date.getHours() + 36);
-    }
+    date.setHours(date.getHours() + deliveryDate);
+
     return date.toLocaleDateString();
   };
 
   return (
-    <Form style={{ gridArea: "name" }}>
+    <div>
       <Text weight="bold" alignSelf="start">
         Choose your prefered delivery partner{" "}
       </Text>
-      <Box align="center" pad="medium">
-        <ResponsiveContext.Consumer>
-          {responsive =>
-            responsive === "small" ? (
-              <RadioButtonGroup
-                direction="column"
-                name="radio"
-                options={[
-                  { label: "PostNord (72h)", value: "postNord" },
-                  { label: "Schenker (36h)", value: "schenker" },
-                  { label: "DHL Express (6h)", value: "dhl" }
-                ]}
-                value={shippingMethod}
-                onChange={event => {
-                  const method: any = event.target.value;
-                  setShippingMethod(method);
-                }}
-                {...props}
-              />
-            ) : (
-              <RadioButtonGroup
-                direction="row"
-                name="radio"
-                options={[
-                  { label: "PostNord (72h)", value: "postNord" },
-                  { label: "Schenker (36h)", value: "schenker" },
-                  { label: "DHL Express (6h)", value: "dhl" }
-                ]}
-                value={shippingMethod}
-                onChange={event => {
-                  const method: any = event.target.value;
-                  setShippingMethod(method);
-                }}
-                {...props}
-              />
-            )
-          }
-        </ResponsiveContext.Consumer>
-      </Box>
-      <Table margin="0">
-        <TableBody>
-          <TableRow>
-            <TableCell scope="row">
-              <Text>Delivery cost:</Text>
-            </TableCell>
-            <TableCell>
-              <strong>${shippingCost}</strong>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell scope="row">
-              <Text>Delivery date:</Text>
-            </TableCell>
-            <TableCell>
-              <strong>{getDeliveryDate().toLocaleString()}</strong>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Form>
+      {shippingMethods.map((freight) => (
+        <Form key={freight._id} style={{ gridArea: "name" }}>
+          <Box align="center" pad="medium">
+            <ResponsiveContext.Consumer>
+              {(responsive) =>
+                responsive === "small" ? (
+                  <RadioButton
+                    name="radio"
+                    label={freight.shipmentCompany}
+                    value={freight._id}
+                    onChange={(event) => {
+                      const method: any = event.target.value;
+
+                      setSelectedShippingMethod(method);
+                    }}
+                    checked={freight._id === selectedShippingMethod?._id}
+                    {...props}
+                  />
+                ) : (
+                  <RadioButton
+                    name="radio"
+                    label={freight.shipmentCompany}
+                    value={freight._id}
+                    onChange={(event) => {
+                      const method: any = event.target.value;
+                      console.log(method);
+
+                      setSelectedShippingMethod(method);
+                    }}
+                    checked={freight._id === selectedShippingMethod?._id}
+                    {...props}
+                  />
+                )
+              }
+            </ResponsiveContext.Consumer>
+          </Box>
+          <Table margin="0">
+            <TableBody>
+              <TableRow>
+                <TableCell scope="row">
+                  <Text>Delivery cost:</Text>
+                </TableCell>
+                <TableCell>
+                  <strong>${freight.shippingCost}</strong>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell scope="row">
+                  <Text>Delivery date:</Text>
+                </TableCell>
+                <TableCell>
+                  <strong>{getDeliveryDate(freight.deliveryDate)}</strong>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Form>
+      ))}
+    </div>
   );
 };
 

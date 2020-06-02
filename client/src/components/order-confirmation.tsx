@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const OrderConfirmation = (props: IProps) => {
-  const { cart, shippingMethod, paymentMethod, shippingCost } = useContext(
+  const { cart, selectedShippingMethod, paymentMethod, shippingCost } = useContext(
     CartContext
   );
 
@@ -31,7 +31,7 @@ const OrderConfirmation = (props: IProps) => {
         <span>Paying with: </span>
         <span>{paymentMethod}</span>
         <span>Shipping with: </span>
-        <span>{shippingMethod}</span>
+        <span>{selectedShippingMethod}</span>
         <span>Estimated delivery: </span>
         <span>{new Date().toLocaleString()}</span>
       </StyledGrid>

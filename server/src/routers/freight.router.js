@@ -4,8 +4,8 @@ const {
   createNewFreightMethod,
   deleteFreightMethod,
   getAllFreightMethods,
+  updateFreightMethod,
 } = require("../controllers/freight.controller");
-const FreightModel = require("../models/freight.model");
 
 //GET all freight options
 router.get("/api/freight", async (req, res) => {
@@ -16,6 +16,11 @@ router.get("/api/freight", async (req, res) => {
 router.post("/api/freight", async (req, res) => {
   createNewFreightMethod(req, res);
 });
+
+// UPDATE freight method
+router.put("/api/freight/:freightId", async (req, res) => {
+  updateFreightMethod(req, res);
+})
 
 // DELETE
 router.delete("/api/freight/:freightId", async (req, res) => {
