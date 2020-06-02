@@ -163,9 +163,10 @@ const ProductAdmin = () => {
     {collections.map((collection: Collection) => (
       <Table >
         <TableHeader>
+          <Heading level="3">{collection.title}</Heading>
           <TableRow>
             <TableCell scope="col" border="bottom">
-          {collection.title} Product Id
+             Product Id
             </TableCell>
             <TableCell scope="col" border="bottom">
               Product name
@@ -193,7 +194,12 @@ const ProductAdmin = () => {
           >
             {result => (
               <TableRow key={item.id} >
-                <TableCell border="bottom" onClick={() => {onOpen();}}>{item.id}</TableCell>
+                <TableCell border="bottom" onClick={() => {
+                      setEditOrAdd("edit");
+                      setInputsToItemData(item);
+                      setItemToEdit(item);
+                      onOpen();
+                    }}>{item.id}</TableCell>
                 <TableCell border="bottom">{item.name}</TableCell>
                 <TableCell border="bottom">{item.price}</TableCell>
                 {/* <TableCell border="bottom">{collection.title}</TableCell> */}
@@ -206,6 +212,74 @@ const ProductAdmin = () => {
       </Table>
       ))}
       </Box>
+      {/* {open && (
+        <Layer position="center" onClickOutside={onClose}>
+          <Box width="large" height="large">
+            <Form validate="blur">
+              <Box
+                background="light-3"
+                width="large"
+                pad="medium"
+                justify="between"
+                height="large"
+              >
+                <Heading size="xsmall">{category}</Heading>
+                <Text>ID: {calculateNextItemId()}</Text>
+                <FormFieldLabel
+                  name="ProductName"
+                  label="Product name"
+                  required
+                  type="text"
+                  value={inputs.name}
+                  onChange={e => handleInputs("name", e.target.value)}
+                />
+                <FormFieldLabel
+                  name="Price"
+                  label="Price"
+                  required
+                  type="text"
+                  value={inputs.price}
+                  onChange={e => handleInputs("price", e.target.value)}
+                />
+                <FormFieldLabel
+                  name="ImageUrl"
+                  label="Image URL"
+                  required
+                  type="text"
+                  value={inputs.imageUrl}
+                  onChange={e => handleInputs("imageUrl", e.target.value)}
+                />
+                <Text>Sizes</Text>
+                <Box direction="row">
+                  <CheckBox label="small" />
+                  <CheckBox label="medium" onChange={() => {}} />
+                  <CheckBox label="large" onChange={() => {}} />
+                  <CheckBox label="xlarge" onChange={() => {}} />
+                </Box>
+                <Text>Seasons</Text>
+                <Box direction="row">
+                  <CheckBox label="spring" onChange={() => {}} />
+                  <CheckBox label="summer" onChange={() => {}} />
+                  <CheckBox label="autumn" onChange={() => {}} />
+                  <CheckBox label="winter" onChange={() => {}} />
+                </Box>
+                <Text>Description</Text>
+                <TextArea
+                  value={inputs.description}
+                  name="Description"
+                  required
+                  onChange={e => handleInputs("description", e.target.value)}
+                />
+                {editOrAdd === "add" ? (
+                  <Button onClick={addToCollection} label="Add to collection" />
+                ) : (
+                  <Button onClick={editItem} label="Submit edit" />
+                )}
+              </Box>
+            </Form>
+          </Box>
+        </Layer>
+      )} */}
       {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">
