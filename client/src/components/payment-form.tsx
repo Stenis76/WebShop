@@ -22,10 +22,10 @@ const PaymentForm = (props: IProps) => {
         options={[
           { label: "Card", value: "card" },
           { label: "Swish", value: "swish" },
-          { label: "Invoice", value: "invoice" }
+          { label: "Invoice", value: "invoice" },
         ]}
         value={paymentMethod}
-        onChange={event =>
+        onChange={(event) =>
           setPaymentMethod(event.target.value as PaymentMethod)
         }
         {...props}
@@ -56,7 +56,7 @@ const PaymentForm = (props: IProps) => {
           required
           type="number"
           value={user.card}
-          onChange={e => updateUser("card", e.target.value)}
+          onChange={(e) => updateUser("card", e.target.value)}
         />
       )}
     </Form>

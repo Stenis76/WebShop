@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const { isAuthenticated } = require("../authenticationMiddleware.js");
 const {
   getAllUsers,
   getOneById,
@@ -35,12 +36,14 @@ router.post("/api/users/login", async (req, res) => {
 });
 
 // LOGOUT
-router.get("/api/logout/:userId", (req, res, next) => {
+router.get("/api/logout/:userId", isAuthenticated, (req, res, next) => {
+  console.log("logga ut");
+
   logOutUser(req, res, next);
 });
 
 // DELETE
-router.delete("/api/users/:userId", async (req, res) => {
+router.delete("/api/users/:userId", isAuthenticated, async (req, res) => {
   deleteUser(req, res);
 });
 
