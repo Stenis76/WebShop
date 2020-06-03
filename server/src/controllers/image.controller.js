@@ -1,14 +1,9 @@
 const Image = require('../models/image.model');
 
-// GET ALL
+// GET 
 getImg = async (req, res) => {
-  try {
-    const image = await Image.find();
+    const image = await Image.findById(req.params.id);
     res.status(200).json(image);
-    res.send(image.data)
-  } catch (err) {
-    res.status(500).json(err);
-  }
 };
 
 // POST
