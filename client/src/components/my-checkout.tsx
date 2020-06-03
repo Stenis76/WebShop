@@ -29,7 +29,7 @@ const MyCheckOut = () => {
     user.lastName.length > 1 &&
     user.lastName.match(/[A-Ö]/gi)?.length === user.lastName.length &&
     user.email.length > 1 &&
-    user.phoneNumber.length > 1 &&
+    user.phoneNumber.length > 7 &&
     user.address.length > 1 &&
     user.city.length > 1 &&
     user.postCode.length > 1;
