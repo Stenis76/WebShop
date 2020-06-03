@@ -10,20 +10,19 @@ const Checkout = () => {
     | "medium"
     | "large"
     | "xlarge";
-  console.log(size);
 
   const columns = {
     small: ["auto"],
     medium: ["auto", "auto"],
     large: ["auto", "auto"],
-    xlarge: ["auto", "auto"]
+    xlarge: ["auto", "auto"],
   };
 
   const rows = {
     small: ["auto"],
     medium: ["auto", "auto"],
     large: ["auto", "auto"],
-    xlarge: ["auto", "auto"]
+    xlarge: ["auto", "auto"],
   };
 
   const areas = {
@@ -31,18 +30,18 @@ const Checkout = () => {
     medium: [
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
-      { name: "image", start: [1, 1], end: [1, 1] }
+      { name: "image", start: [1, 1], end: [1, 1] },
     ],
     large: [
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
-      { name: "image", start: [1, 1], end: [1, 1] }
+      { name: "image", start: [1, 1], end: [1, 1] },
     ],
     xlarge: [
       { name: "myCheckOut", start: [0, 0], end: [0, 1] },
       { name: "cart", start: [1, 0], end: [1, 0] },
-      { name: "image", start: [1, 1], end: [1, 1] }
-    ]
+      { name: "image", start: [1, 1], end: [1, 1] },
+    ],
   };
 
   const myCheckout = <MyCheckOut key="0" />;
@@ -66,7 +65,7 @@ const Checkout = () => {
           objectFit: "cover",
           width: "100%",
           height: "100%",
-          borderRadius: "10px"
+          borderRadius: "10px",
         }}
       />
     </Box>
@@ -76,7 +75,7 @@ const Checkout = () => {
     small: [myCheckout],
     medium: [myCheckout, cart, checkOutImage],
     large: [myCheckout, cart, checkOutImage],
-    xlarge: [myCheckout, cart, checkOutImage]
+    xlarge: [myCheckout, cart, checkOutImage],
   };
   return (
     <Main>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Header from "./components/header";
@@ -9,12 +9,13 @@ import Checkout from "./pages/checkout";
 import { Grommet, Box, grommet } from "grommet";
 import { deepMerge } from "grommet/utils";
 import ProductAdmin from "./pages/productAdminPage";
-import OrderAdmin from "./pages/orderAdminPage"
-import UserAdmin from "./pages/userAdminPage"
-import Login from "./pages/logInPage"
-
+import OrderAdmin from "./pages/orderAdminPage";
+import UserAdmin from "./pages/userAdminPage";
+import Login from "./pages/logInPage";
+import UserContext from "./contexts/user-context/context";
 
 import SHOP_DATA from "./shop.data";
+import { setupMaster } from "cluster";
 
 const myTheme = {
   global: {
@@ -24,15 +25,15 @@ const myTheme = {
       buttonBg: "#373737",
       copper: "#ffc29e",
       layer: {
-        background: "red"
-      }
+        background: "red",
+      },
     },
     font: {
       family: "Abel",
       size: "18px",
-      height: "20px"
-    }
-  }
+      height: "20px",
+    },
+  },
 };
 
 type Item = {

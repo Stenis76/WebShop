@@ -8,7 +8,7 @@ import { CollectionItem } from "../../shop.data";
 interface IProps {} 
 
 export type ShippingMethod = {
-  _id: string
+  _id: string;
   deliveryDate: number;
   orderId: string;
   shipmentCompany: string;
@@ -24,7 +24,6 @@ const CartContextProvider: FC<IProps> = (props) => {
     ShippingMethod
   >();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
-
 
   useEffect(() => {
     axios
@@ -100,7 +99,7 @@ const CartContextProvider: FC<IProps> = (props) => {
   const clearCart = () => setCart([]);
 
   const setShipping = (_id: string) => {
-    const method = shippingMethods.find((method) => method._id === _id)
+    const method = shippingMethods.find((method) => method._id === _id);
     setSelectedShippingMethod(method);
   };
 
