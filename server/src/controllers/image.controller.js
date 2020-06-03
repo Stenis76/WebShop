@@ -2,8 +2,15 @@ const Image = require('../models/image.model');
 
 // GET 
 getImg = async (req, res) => {
+  try {
     const image = await Image.findById(req.params.id);
-    res.status(200).json(image);
+    res.set('Content-type', 'image/jpg')
+    console.log(image)
+    res.send(image.data)
+
+  } catch (error) {
+    res.status(200).send({get_error: 'Error while getting image'});
+  }
 };
 
 // POST

@@ -71,4 +71,4 @@ ProductSchema.virtual('imageUrl').get(function() {
 
 const Product = mongoose.model("Product", ProductSchema);
 
-module.exports = Product;
+module.exports = { Product, ProductSchema };

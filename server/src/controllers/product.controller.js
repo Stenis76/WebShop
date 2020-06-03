@@ -22,7 +22,7 @@ getOneProduct = (req, res) => {
 newProduct = (req, res) => {
   const product = new Product({
     name: req.body.name,
-    imageUrl: req.body.imageUrl,
+    image: req.body.image,
     price: req.body.price,
     category: req.body.category,
     season: req.body.season,
@@ -61,7 +61,7 @@ updateProduct = async (req, res) => {
       {
         $set: {
           name: req.body.name,
-          imageUrl: req.body.imageUrl,
+          image: req.body.image,
           price: req.body.price,
           category: req.body.category,
           season: req.body.season,
