@@ -5,7 +5,7 @@ import CartContext from "./context";
 
 import { CollectionItem } from "../../shop.data";
 
-interface IProps {}
+interface IProps {} 
 
 export type ShippingMethod = {
   _id: string
@@ -30,7 +30,6 @@ const CartContextProvider: FC<IProps> = (props) => {
     axios
       .get("http://localhost:3002/api/freight")
       .then((res) => {
-        console.log("res.data", res.data);
         setShippingMethods(res.data);
       })
       .catch((err) => {

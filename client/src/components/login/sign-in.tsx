@@ -53,7 +53,7 @@ const SignIn = () => {
         <Form className="sign-in-form" onSubmit={handleSubmit}>
           <FormField
             label={"E-mail"}
-            type="text"
+            type="email"
             name="email"
             value={email}
             onChange={handleChange}

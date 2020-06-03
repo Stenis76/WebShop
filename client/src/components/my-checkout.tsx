@@ -12,6 +12,7 @@ import OrderConfirmation from "./order-confirmation";
 
 import UserContext from "../contexts/user-context/context";
 import CartContext from "../contexts/cart-context/context";
+import SignIn from "./login/sign-in";
 
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
