@@ -35,7 +35,6 @@ const SignUp = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("hämtar context" + user.firstName);
 
     if (state.password !== state.confirmPassword) {
       alert("Passwords don't match!");
