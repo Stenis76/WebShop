@@ -3,9 +3,9 @@ import axios from "axios";
 
 import CartContext from "./context";
 
-import { CollectionItem } from "../../shop.data";
+import { CollectionItem } from "../../interfaces";
 
-interface IProps {} 
+interface IProps {}
 
 export type ShippingMethod = {
   _id: string;
@@ -52,11 +52,12 @@ const CartContextProvider: FC<IProps> = (props) => {
   }, [shippingMethod]); */
 
   const addItemToCart = (item: CollectionItem) => {
-    const existing = cart.find((cartItem) => cartItem.id === item.id);
+    console.log("cart item", item);
+    const existing = cart.find((cartItem) => cartItem._id === item._id);
 
     if (existing) {
       const newCart = cart.map((cartItem) => {
-        if (cartItem.id === item.id) {
+        if (cartItem._id === item._id) {
           return {
             ...cartItem,
             quantity: cartItem.quantity ? cartItem.quantity + 1 : 1,
@@ -69,16 +70,16 @@ const CartContextProvider: FC<IProps> = (props) => {
     }
   };
 
-  const removeItemFromCart = (itemId: number) => {
-    const existing = cart.find((cartItem) => cartItem.id === itemId);
+  const removeItemFromCart = (itemId: any) => {
+    const existing = cart.find((cartItem) => cartItem._id === itemId);
 
     if (existing) {
       if (existing.quantity === 1) {
-        const newCart = cart.filter((item) => item.id !== itemId);
+        const newCart = cart.filter((item) => item._id != itemId);
         setCart(newCart);
       } else {
         const newCart = cart.map((cartItem) => {
-          if (cartItem.id === itemId) {
+          if (cartItem._id === itemId) {
             return {
               ...cartItem,
               quantity: cartItem.quantity ? cartItem.quantity - 1 : 1,
@@ -90,9 +91,9 @@ const CartContextProvider: FC<IProps> = (props) => {
     }
   };
 
-  const clearItemFromCart = (itemId: number) => {
+  const clearItemFromCart = (itemId: any) => {
     setCart((prevCart) =>
-      prevCart.filter((cartItem) => cartItem.id !== itemId)
+      prevCart.filter((cartItem) => cartItem._id !== itemId)
     );
   };
 

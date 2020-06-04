@@ -5,7 +5,6 @@ import { Grid, Box, ResponsiveContext } from "grommet";
 import Directory from "../components/directory";
 import Item from "../components/item";
 
-// import { Collection, CollectionItem } from "../shop.data";
 import { Collection, CollectionItem } from "../interfaces";
 import { ProductHunt } from "grommet-icons";
 
@@ -125,11 +124,11 @@ const Shop: FC<IProps> = () => {
             return collection.items
               .filter(matchWithQuery)
               .map((item: CollectionItem) => (
-                <Item key={item.id} item={item} />
+                <Item key={item._id} item={item} />
               ));
           })
         : getCurrentCollectionItems().map((item: CollectionItem) => (
-            <Item key={item.id} item={item} />
+            <Item key={item._id} item={item} />
           ))}
     </Box>
   );
@@ -142,18 +141,6 @@ const Shop: FC<IProps> = () => {
     xlarge: [main, directory],
   };
   return (
-    // <div>
-    //   {collections.map((product, i) => (
-    //     <div key={i}>
-    //       <h3 style={{ textAlign: "center" }}>{product.title}</h3>
-    //       <p>PRIS: {product.routeName}</p>
-    //       <p>KATEGORI: {product.routeName}</p>
-    //       <p>SÄSONG: {product.routeName}</p>
-    //       <img src={product.routeName} />
-    //       <p>BESKRIVNING: {product.routeName}</p>
-    //     </div>
-    //   ))}
-
     <Grid
       fill
       responsive={true}
@@ -164,7 +151,6 @@ const Shop: FC<IProps> = () => {
     >
       {components[size]}
     </Grid>
-    // </div>
   );
 };
 
