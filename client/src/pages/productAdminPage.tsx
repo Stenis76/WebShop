@@ -10,7 +10,7 @@ import {
   Layer,
   Form,
   TextArea,
-  CheckBox, 
+  CheckBox,
   Grid,
   ResponsiveContext,
   InfiniteScroll,
@@ -18,12 +18,12 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TableHeader
+  TableHeader,
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
-import  AdminMenu  from "../components/adminMenu";
+import AdminMenu from "../components/adminMenu";
 
 const initialInputs = {
   name: "",
@@ -31,7 +31,7 @@ const initialInputs = {
   price: "",
   size: [""],
   season: [""],
-  description: ""
+  description: "",
 };
 
 const ProductAdmin = () => {
@@ -41,7 +41,6 @@ const ProductAdmin = () => {
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
   const [inputs, setInputs] = useState(initialInputs);
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
-  const [images, setImages] = useState<string>();
 
   const onOpen = () => setOpen(true);
 
@@ -62,14 +61,14 @@ const ProductAdmin = () => {
       price: Number(inputs.price),
       size: inputs.size,
       season: inputs.season,
-      description: inputs.description
+      description: inputs.description,
     };
 
-    const updatedCollections = collections.map(collection => {
+    const updatedCollections = collections.map((collection) => {
       if (collection.routeName === category) {
         return {
           ...collection,
-          items: [...collection.items, item]
+          items: [...collection.items, item],
         };
       } else {
         return { ...collection };
@@ -82,9 +81,9 @@ const ProductAdmin = () => {
   };
 
   const removeFromCollection = (itemId: number) => {
-    const updatedCollections = collections.map(collection => ({
+    const updatedCollections = collections.map((collection) => ({
       ...collection,
-      items: collection.items.filter(item => item.id !== itemId)
+      items: collection.items.filter((item) => item.id !== itemId),
     }));
 
     setCollections(updatedCollections);
@@ -92,10 +91,10 @@ const ProductAdmin = () => {
   };
 
   const editItem = () => {
-    const updatedCollections = collections.map(collection => {
+    const updatedCollections = collections.map((collection) => {
       if (itemToEdit !== undefined) {
         let itemIndex = collection.items.findIndex(
-          item => item.id === itemToEdit.id
+          (item) => item.id === itemToEdit.id
         );
 
         if (itemIndex !== -1) {
@@ -107,7 +106,7 @@ const ProductAdmin = () => {
             price: Number(inputs.price),
             size: inputs.size,
             season: inputs.season,
-            description: inputs.description
+            description: inputs.description,
           };
         }
       }
@@ -122,7 +121,7 @@ const ProductAdmin = () => {
   const calculateNextItemId = () => {
     let highestId =
       collections
-        .map(collection => collection.items.map(item => item.id))
+        .map((collection) => collection.items.map((item) => item.id))
         .flat()
         .sort((a, b) => a - b)
         .pop() || 0;
@@ -131,7 +130,7 @@ const ProductAdmin = () => {
   };
 
   const handleInputs = (name: string, value: string) => {
-    setInputs(prev => ({ ...prev, [name]: value }));
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   const setInputsToItemData = (item: CollectionItem) => {
@@ -141,7 +140,7 @@ const ProductAdmin = () => {
       price: item.price + "",
       size: item.size,
       season: item.season,
-      description: item.description
+      description: item.description,
     });
   };
 
@@ -152,83 +151,85 @@ const ProductAdmin = () => {
   const load = () => {
     setResults([
       ...results,
-      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000)),
     ]);
   };
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/images/5ed7562828326f69755084f4")
+      .get("http://localhost:3002/api/images/5ed7562828326f69755084f4", {
+        responseType: "arraybuffer",
+      })
       .then((res) => {
+        Buffer.from(res.data, "binary").toString("base64");
         console.log(res.data);
-        setImages(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
- 
 
   return (
     <Main>
       <input type="file" id="images"></input>
-      <img
-      src={`data:${images};base64,${Buffer.from(images).toString('base64')}`}
-    />
-      <img src="" alt="brown hat"/>
-    <AdminMenu />
-    <Box basis="large" pad="small">
-    {collections.map((collection: Collection) => (
-      <Table >
-        <TableHeader>
-          <Heading level="3">{collection.title}</Heading>
-          <TableRow>
-            <TableCell scope="col" border="bottom">
-             Product Id
-            </TableCell>
-            <TableCell scope="col" border="bottom">
-              Product name
-            </TableCell>
-            <TableCell scope="col" border="bottom">
-              Price
-            </TableCell>
-            {/* <TableCell scope="col" border="bottom">
+      <img src="" alt="brown hat" />
+      <AdminMenu />
+      <Box basis="large" pad="small">
+        {collections.map((collection: Collection) => (
+          <Table>
+            <TableHeader>
+              <Heading level="3">{collection.title}</Heading>
+              <TableRow>
+                <TableCell scope="col" border="bottom">
+                  Product Id
+                </TableCell>
+                <TableCell scope="col" border="bottom">
+                  Product name
+                </TableCell>
+                <TableCell scope="col" border="bottom">
+                  Price
+                </TableCell>
+                {/* <TableCell scope="col" border="bottom">
              Category
             </TableCell> */}
-          </TableRow>
-        </TableHeader>
-        {collection.items.map((item: CollectionItem) => (
-        <TableBody>
-          <InfiniteScroll
-            renderMarker={marker => (
-              <TableRow>
-                <TableCell>{marker}</TableCell>
               </TableRow>
-            )}
-            scrollableAncestor="window"
-            items={results}
-            onMore={() => load()}
-            step={length}
-          >
-            {result => (
-              <TableRow key={item.id} >
-                <TableCell border="bottom" onClick={() => {
-                      setEditOrAdd("edit");
-                      setInputsToItemData(item);
-                      setItemToEdit(item);
-                      onOpen();
-                    }}>{item.id}</TableCell>
-                <TableCell border="bottom">{item.name}</TableCell>
-                <TableCell border="bottom">{item.price}</TableCell>
-                {/* <TableCell border="bottom">{collection.title}</TableCell> */}
-              </TableRow>
-              
-            )}
-          </InfiniteScroll>
-        </TableBody>
+            </TableHeader>
+            {collection.items.map((item: CollectionItem) => (
+              <TableBody>
+                <InfiniteScroll
+                  renderMarker={(marker) => (
+                    <TableRow>
+                      <TableCell>{marker}</TableCell>
+                    </TableRow>
+                  )}
+                  scrollableAncestor="window"
+                  items={results}
+                  onMore={() => load()}
+                  step={length}
+                >
+                  {(result) => (
+                    <TableRow key={item.id}>
+                      <TableCell
+                        border="bottom"
+                        onClick={() => {
+                          setEditOrAdd("edit");
+                          setInputsToItemData(item);
+                          setItemToEdit(item);
+                          onOpen();
+                        }}
+                      >
+                        {item.id}
+                      </TableCell>
+                      <TableCell border="bottom">{item.name}</TableCell>
+                      <TableCell border="bottom">{item.price}</TableCell>
+                      {/* <TableCell border="bottom">{collection.title}</TableCell> */}
+                    </TableRow>
+                  )}
+                </InfiniteScroll>
+              </TableBody>
+            ))}
+          </Table>
         ))}
-      </Table>
-      ))}
       </Box>
       {/* {open && (
         <Layer position="center" onClickOutside={onClose}>
@@ -317,7 +318,7 @@ const ProductAdmin = () => {
                   required
                   type="text"
                   value={inputs.name}
-                  onChange={e => handleInputs("name", e.target.value)}
+                  onChange={(e) => handleInputs("name", e.target.value)}
                 />
                 <FormFieldLabel
                   name="Price"
@@ -325,7 +326,7 @@ const ProductAdmin = () => {
                   required
                   type="text"
                   value={inputs.price}
-                  onChange={e => handleInputs("price", e.target.value)}
+                  onChange={(e) => handleInputs("price", e.target.value)}
                 />
                 <FormFieldLabel
                   name="ImageUrl"
@@ -333,7 +334,7 @@ const ProductAdmin = () => {
                   required
                   type="text"
                   value={inputs.imageUrl}
-                  onChange={e => handleInputs("imageUrl", e.target.value)}
+                  onChange={(e) => handleInputs("imageUrl", e.target.value)}
                 />
                 <Text>Sizes</Text>
                 <Box direction="row">
@@ -354,7 +355,7 @@ const ProductAdmin = () => {
                   value={inputs.description}
                   name="Description"
                   required
-                  onChange={e => handleInputs("description", e.target.value)}
+                  onChange={(e) => handleInputs("description", e.target.value)}
                 />
                 {editOrAdd === "add" ? (
                   <Button onClick={addToCollection} label="Add to collection" />
