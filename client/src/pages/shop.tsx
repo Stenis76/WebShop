@@ -51,20 +51,16 @@ const Shop: FC<IProps> = () => {
       }
       selectedCategory.items.push(collection);
     }
-    console.log("kooom igen", mappedCategories);
     setCollection(mappedCategories);
     return;
   };
 
-  console.log("min collection", collections);
   const getCurrentCollectionItems = (): CollectionItem[] => {
     if (collections.length) {
       const col = collections.find((collection) => {
-        console.log(collection.routeName, category);
-
         return collection.routeName.toLowerCase() === category!.toLowerCase();
       });
-      console.log("här", col!.items);
+
       if (col) return col.items;
     }
     return [];

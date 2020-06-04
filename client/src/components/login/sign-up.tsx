@@ -24,6 +24,7 @@ const SignUp = () => {
   const history = useHistory();
   const { user, registerUser } = useContext(UserContext);
 
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -35,7 +36,6 @@ const SignUp = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("hämtar context" + user.firstName);
 
     if (state.password !== state.confirmPassword) {
       alert("Passwords don't match!");
@@ -79,7 +79,8 @@ const SignUp = () => {
             value={state.firstName}
             onChange={handleChange}
             label="Name"
-            required
+            required={true}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
             // size="xsmall"
           />
           <FormField
@@ -88,7 +89,8 @@ const SignUp = () => {
             value={state.lastName}
             onChange={handleChange}
             label="Last name"
-            required
+            required={true}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
             // size="xsmall"
           />
           <FormField
@@ -97,7 +99,8 @@ const SignUp = () => {
             value={state.address}
             onChange={handleChange}
             label="Address"
-            required
+            required={true}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
             // size="xsmall"
           />
           <FormField
@@ -105,8 +108,12 @@ const SignUp = () => {
             name="postCode"
             value={state.postCode}
             onChange={handleChange}
-            label="postCode"
-            required
+            label="Postcode"
+            required={true}
+            validate={{
+              regexp: /^[0-9]{4,9}$/,
+              message: "Use numbers, at least 4"
+            }}
             // size="xsmall"
           />
           <FormField
@@ -115,7 +122,8 @@ const SignUp = () => {
             value={state.city}
             onChange={handleChange}
             label="City"
-            required
+            required={true}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
             // size="xsmall"
           />
           <FormField
@@ -123,8 +131,12 @@ const SignUp = () => {
             name="phoneNumber"
             value={state.phoneNumber}
             onChange={handleChange}
-            label="phoneNumber"
-            required
+            label="Phone number"
+            required={true}
+            validate={{
+              regexp: /^[0-9]{8,9}$/,
+              message: "Use numbers, at least 8"
+            }}
             // size="xsmall"
           />
           <FormField
@@ -133,7 +145,7 @@ const SignUp = () => {
             value={state.email}
             onChange={handleChange}
             label="E-mail"
-            required
+            required={true}
             // size="xsmall"
           />
           <FormField
@@ -142,7 +154,7 @@ const SignUp = () => {
             value={state.password}
             onChange={handleChange}
             label="Password"
-            required
+            required={true}
             // size="xsmall"
           />
           <FormField
@@ -151,12 +163,15 @@ const SignUp = () => {
             value={state.confirmPassword}
             onChange={handleChange}
             label="Confirm password"
-            required
+            required={true}
             // size="xsmall"
           />
-          <Button margin="medium" primary type="submit">
-            Sign up
-          </Button>
+          <Button
+              type="submit"
+              margin="medium"
+              label="Sign up"
+              primary
+          />
         </Form>
       )}
     </div>

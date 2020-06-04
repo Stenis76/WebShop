@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/header";
@@ -21,15 +21,15 @@ const myTheme = {
       buttonBg: "#373737",
       copper: "#ffc29e",
       layer: {
-        background: "red"
-      }
+        background: "red",
+      },
     },
     font: {
       family: "Abel",
       size: "18px",
-      height: "20px"
-    }
-  }
+      height: "20px",
+    },
+  },
 };
 
 type Item = {

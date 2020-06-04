@@ -30,11 +30,38 @@ router.post("/api/newuser", async (req, res) => {
 });
 
 // LOGIN
-
 router.post("/api/users/login", async (req, res) => {
   logInUser(req, res);
 });
 
+// CHECKAUTH
+router.post("/api/users/auth", async (req, res) => {
+  console.log("session", req.session.userId);
+
+  if (req.session.userId) {
+    try {
+      // find userid i dabasen
+      const user = await User.findById(req.session.userId);
+      console.log("användarkoll", user);
+
+      if (user) {
+        // req.session.userId = user[0]._id;
+        console.log("userid", req.session.userId);
+        console.log("användarkoll", user);
+
+        user.password = "";
+
+        return res.status(200).json({
+          message: "Auth successful",
+          user,
+        });
+      }
+      console.log("hittad");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+});
 // LOGOUT
 router.get("/api/logout/:userId", isAuthenticated, (req, res, next) => {
   console.log("logga ut");

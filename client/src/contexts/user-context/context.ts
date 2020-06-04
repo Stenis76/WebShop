@@ -3,6 +3,7 @@ import React from "react";
 interface IState {
   isAuthenticated: boolean;
   user: IUser;
+  setUser: (IUser) => void;
   login: (email: string, password: string) => Promise<string>;
   logout: () => void;
   updateUser: (key: string, value: string) => void;
@@ -35,6 +36,7 @@ export const initialUser: IUser = {
 export default React.createContext<IState>({
   isAuthenticated: false,
   user: initialUser,
+  setUser: () => {},
   login: async () => "",
   logout: () => {},
   updateUser: () => {},
