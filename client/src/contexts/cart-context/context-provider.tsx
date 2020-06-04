@@ -5,7 +5,7 @@ import CartContext from "./context";
 
 import { CollectionItem } from "../../shop.data";
 
-interface IProps {}
+interface IProps {} 
 
 export type ShippingMethod = {
   _id: string;
