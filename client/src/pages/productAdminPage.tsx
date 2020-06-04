@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Main,
   Text,
@@ -40,6 +41,7 @@ const ProductAdmin = () => {
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
   const [inputs, setInputs] = useState(initialInputs);
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
+  const [images, setImages] = useState<string>();
 
   const onOpen = () => setOpen(true);
 
@@ -154,10 +156,26 @@ const ProductAdmin = () => {
     ]);
   };
 
-
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/api/images/5ed7562828326f69755084f4")
+      .then((res) => {
+        console.log(res.data);
+        setImages(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+ 
 
   return (
     <Main>
+      <input type="file" id="images"></input>
+      <img
+      src={`data:${images};base64,${Buffer.from(images).toString('base64')}`}
+    />
+      <img src="" alt="brown hat"/>
     <AdminMenu />
     <Box basis="large" pad="small">
     {collections.map((collection: Collection) => (
