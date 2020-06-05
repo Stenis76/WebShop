@@ -16,7 +16,7 @@ Content-Type: application/json
   "name": "Burgundy T-shirt",
   "imageUrl": "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
   "price": 25,
-  "category": "Mens",
+  "category": ["Mens", "All"],
   "season": ["vår", "sommar"],
   "inventory": {
     "small": 40,
