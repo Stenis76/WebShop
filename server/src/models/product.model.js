@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  image: {
+  imageUrl: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
