@@ -16,7 +16,7 @@ Content-Type: application/json
   "name": "Burgundy T-shirt",
   "image": "http://localhost:3002/api/images/5ed7562828326f69755084f4",
   "price": 25,
-  "category": "Mens",
+  "category": ["Mens", "All"],
   "season": ["vår", "sommar"],
   "inventory": {
     "small": 40,
