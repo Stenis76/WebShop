@@ -7,6 +7,7 @@ import Item from "../components/item";
 
 import { Collection, CollectionItem } from "../interfaces";
 import { ProductHunt } from "grommet-icons";
+import item from "../components/item";
 
 interface IProps {}
 
@@ -29,7 +30,6 @@ const Shop: FC<IProps> = () => {
   const mapDbProductsToCollection = (collections) => {
     const mappedCategories: Collection[] = [];
     let idIndex = 1;
-
     for (const collection of collections) {
       let selectedCategory: Collection | undefined;
       for (const category of mappedCategories) {
@@ -141,29 +141,18 @@ const Shop: FC<IProps> = () => {
     xlarge: [main, directory],
   };
   return (
-    // <div>
-    //   {collections.map((product, i) => (
-    //     <div key={i}>
-    //       <h3 style={{ textAlign: "center" }}>{product.title}</h3>
-    //       <p>PRIS: {product.routeName}</p>
-    //       <p>KATEGORI: {product.routeName}</p>
-    //       <p>SÄSONG: {product.routeName}</p>
-    //       <img src={product.routeName} />
-    //       <p>BESKRIVNING: {product.routeName}</p>
-    //     </div>
-    //   ))}
-
-    <Grid
-      fill
-      responsive={true}
-      areas={areas[size]}
-      columns={columns[size]}
-      rows={rows[size]}
-      gap="small"
-    >
-      {components[size]}
-    </Grid>
-    // </div>
+    <div>
+      <Grid
+        fill
+        responsive={true}
+        areas={areas[size]}
+        columns={columns[size]}
+        rows={rows[size]}
+        gap="small"
+      >
+        {components[size]}
+      </Grid>
+    </div>
   );
 };
 

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
   Main,
   Text,
   Heading,
   Box,
-  Image,
   Button,
   Layer,
   Form,
   TextArea,
   CheckBox,
-  Grid,
-  ResponsiveContext,
   InfiniteScroll,
   Table,
   TableRow,
@@ -22,7 +18,7 @@ import {
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
-import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+// import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
 
 const initialInputs = {
@@ -40,7 +36,6 @@ const ProductAdmin = () => {
   const [category, setCategory] = useState("none");
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
   const [inputs, setInputs] = useState(initialInputs);
-  const [img, setImg] = useState<string>();
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
 
   const onOpen = () => setOpen(true);
@@ -156,32 +151,8 @@ const ProductAdmin = () => {
     ]);
   };
 
-  function arrayBufferToBase64(buffer) {
-    var binary = "";
-    var bytes = [].slice.call(new Uint8Array(buffer));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    return window.btoa(binary);
-  }
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3002/api/images/5ed7562828326f69755084f4")
-      .then((res) => res.json())
-      .then((data) => {
-        var base64Flag = 'data:image/jpg;base64';
-        var imageStr = arrayBufferToBase64(data.img.data.data);
-
-        setImg(base64Flag + imageStr)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
     <Main>
-      <input type="file" id="images"></input>
-      <img src={img} alt="brown hat" />
       <AdminMenu />
       <Box basis="large" pad="small">
         {collections.map((collection: Collection) => (
