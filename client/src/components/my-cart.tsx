@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext} from "react";
 import { Box, Button, Heading } from "grommet";
 import { Close } from "grommet-icons";
 import { Link } from "react-router-dom";
 import CartItems from "./cart-items";
+import UserContext from "../contexts/user-context/context";
+
 
 interface Iprops {
   closeCart: any;
 }
 const MyCart = (props: Iprops) => {
+  const { isAuthenticated } = useContext(UserContext);
+
   return (
     <Box>
       <Box align="center" height="100vh" overflow="auto">
@@ -20,6 +24,7 @@ const MyCart = (props: Iprops) => {
           <CartItems />
         </Box>
       </Box>
+      {isAuthenticated ? (
       <Link to="/Checkout">
         <Button
           margin="medium"
@@ -27,7 +32,17 @@ const MyCart = (props: Iprops) => {
           label="Proceed to checkout"
           onClick={props.closeCart}
         />
+      </Link>) 
+      : (
+        <Link to="/login">
+        <Button
+          margin="medium"
+          primary
+          label="Log in/ Sign up"
+          onClick={props.closeCart}
+        />
       </Link>
+      )}
     </Box>
   );
 };
