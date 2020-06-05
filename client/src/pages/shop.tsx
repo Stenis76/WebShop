@@ -141,7 +141,18 @@ const Shop: FC<IProps> = () => {
     xlarge: [main, directory],
   };
   return (
-  
+    // <div>
+    //   {collections.map((product, i) => (
+    //     <div key={i}>
+    //       <h3 style={{ textAlign: "center" }}>{product.title}</h3>
+    //       <p>PRIS: {product.routeName}</p>
+    //       <p>KATEGORI: {product.routeName}</p>
+    //       <p>SÄSONG: {product.routeName}</p>
+    //       <img src={product.routeName} />
+    //       <p>BESKRIVNING: {product.routeName}</p>
+    //     </div>
+    //   ))}
+
     <Grid
       fill
       responsive={true}
@@ -152,7 +163,7 @@ const Shop: FC<IProps> = () => {
     >
       {components[size]}
     </Grid>
-    
+    // </div>
   );
 };
 
