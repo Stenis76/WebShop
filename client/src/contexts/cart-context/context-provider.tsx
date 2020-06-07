@@ -52,7 +52,6 @@ const CartContextProvider: FC<IProps> = (props) => {
   }, [shippingMethod]); */
 
   const addItemToCart = (item: CollectionItem) => {
-    console.log("cart item", item);
     const existing = cart.find((cartItem) => cartItem._id === item._id);
 
     if (existing) {
@@ -67,7 +66,6 @@ const CartContextProvider: FC<IProps> = (props) => {
       setCart(newCart);
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
-      console.log(cart);
     }
   };
 
