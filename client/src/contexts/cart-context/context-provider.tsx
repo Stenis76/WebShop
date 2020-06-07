@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import CartContext from "./context";
+import UserContext from "../user-context/context";
 
 import { CollectionItem } from "../../interfaces";
 
@@ -14,16 +15,26 @@ export type ShippingMethod = {
   shipmentCompany: string;
   shippingCost: number;
 };
+
+export type OrderMethod = {
+  userId: string;
+  productId: [string];
+  freightId: string;
+  paymentMethod: string;
+  activeOrder: boolean;
+};
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = (props) => {
   const [cart, setCart] = useState<CollectionItem[]>([]);
+  const { user } = useContext(UserContext);
   const [shippingCost, setShippingCost] = useState(0);
   const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
   const [selectedShippingMethod, setSelectedShippingMethod] = useState<
     ShippingMethod
   >();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
+  const [order, setOrder] = useState<OrderMethod>({});
 
   useEffect(() => {
     axios
@@ -50,6 +61,22 @@ const CartContextProvider: FC<IProps> = (props) => {
     }
     setShippingCost(cost);
   }, [shippingMethod]); */
+
+  const createOrder = async (order) => {
+    const options: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(order),
+    };
+
+    setLoading(true);
+    const res = await fetch("http://localhost:3002/api/neworder", options);
+    const data = await res.json();
+    setLoading(false);
+  };
 
   const addItemToCart = (item: CollectionItem) => {
     const existing = cart.find((cartItem) => cartItem._id === item._id);
@@ -101,9 +128,19 @@ const CartContextProvider: FC<IProps> = (props) => {
   const setShipping = (_id: string) => {
     const method = shippingMethods.find((method) => method._id === _id);
     setSelectedShippingMethod(method);
+    setOrder(prevState => ({
+      order :{
+        ...prevState.order,
+      freightId: { freightId: selectedShippingMethod._id });
   };
 
   const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
+
+  const filterCartToServer = () => {
+    const cartItemsId = cart.map((item) => item._id);
+    console.log(cartItemsId);
+    return cartItemsId;
+  };
 
   return (
     <div>

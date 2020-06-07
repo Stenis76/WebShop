@@ -13,13 +13,15 @@ import OrderConfirmation from "./order-confirmation";
 import UserContext from "../contexts/user-context/context";
 import CartContext from "../contexts/cart-context/context";
 import SignIn from "./login/sign-in";
+import { Cart } from "grommet-icons";
 
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
-  const { clearCart, paymentMethod } = useContext(CartContext);
+
+  const { cart, clearCart, paymentMethod } = useContext(CartContext);
   const history = useHistory();
   console.log(user);
 
@@ -39,14 +41,14 @@ const MyCheckOut = () => {
     setShowModal(false);
     clearCart();
   };
-  // const newOrder = () {
-  //   user._id
-  //   collectionItem.id: []
 
-  //   freightId:
-  //   paymentMethod:
-  //   activeOrder: true
-  //   }
+  // user._id
+  // collectionItem.id: []
+
+  // freightId:
+  // paymentMethod:
+  // activeOrder: true
+  // }
   const pay = async () => {
     setLoading(true);
     // await createOrder(newOrder);
