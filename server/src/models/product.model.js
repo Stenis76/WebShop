@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  imageUrl: {
+  image: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
@@ -62,7 +62,7 @@ const ProductSchema = new mongoose.Schema({
 });
 
 
-ProductSchema.virtual('imageUrl').get(function() {
+ProductSchema.virtual('imageUrl').get(function () {
   return 'http://localhost:3002/api/images/' + this.image.toString()
 })
 

@@ -1,4 +1,5 @@
 const { Product, ProductSchema } = require("../models/product.model");
+const { uploadedImg, ImgSchema } = require("../models/image.model");
 
 // GET ALL
 getAllProducts = async (req, res) => {
@@ -22,7 +23,7 @@ getOneProduct = (req, res) => {
 newProduct = (req, res) => {
   const product = new Product({
     name: req.body.name,
-    imageUrl: req.body.imageUrl,
+    image: req.files.image,data,
     price: req.body.price,
     category: req.body.category,
     season: req.body.season,
@@ -61,7 +62,7 @@ updateProduct = async (req, res) => {
       {
         $set: {
           name: req.body.name,
-          imageUrl: req.body.imageUrl,
+          image: req.files.image,data,
           price: req.body.price,
           category: req.body.category,
           season: req.body.season,

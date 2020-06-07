@@ -5,4 +5,5 @@ const ImgSchema = mongoose.Schema({
     contentType: String,
 });
 
+
 module.exports = mongoose.model('uploadedImg', ImgSchema);

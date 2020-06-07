@@ -1,7 +1,7 @@
 export interface CollectionItem {
   id: string;
   name: string;
-  imageUrl: string;
+  image: String;
   price: number;
   category: string[];
   season: string[];
