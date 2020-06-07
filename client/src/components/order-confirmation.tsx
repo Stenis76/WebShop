@@ -12,9 +12,12 @@ interface IProps {
 }
 
 const OrderConfirmation = (props: IProps) => {
-  const { cart, selectedShippingMethod, paymentMethod, shippingCost } = useContext(
-    CartContext
-  );
+  const {
+    cart,
+    selectedShippingMethod,
+    paymentMethod,
+    shippingCost,
+  } = useContext(CartContext);
 
   return (
     <Box background="light-3" pad="large">
@@ -37,8 +40,8 @@ const OrderConfirmation = (props: IProps) => {
       </StyledGrid>
       <h4>Items</h4>
 
-      {cart.map(item => (
-        <StyledItemRow key={item.id}>
+      {cart.map((item) => (
+        <StyledItemRow key={item._id}>
           <span>{item.name}</span>
           <span>
             ${item.price} x {item.quantity || 1}
