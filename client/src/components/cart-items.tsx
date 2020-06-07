@@ -8,11 +8,11 @@ import {
   TableBody,
   Image,
   Box,
-  ResponsiveContext
+  ResponsiveContext,
 } from "grommet";
 import { Close, AddCircle, SubtractCircle } from "grommet-icons";
 import CartContext from "../contexts/cart-context/context";
-import { CollectionItem } from "../shop.data";
+import { CollectionItem } from "../interfaces";
 
 const CartItems = () => {
   const {
@@ -20,11 +20,13 @@ const CartItems = () => {
     removeItemFromCart,
     addItemToCart,
     clearItemFromCart,
-    selectedShippingMethod
+    selectedShippingMethod,
   } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
 
-  const shippingCost = (selectedShippingMethod ? selectedShippingMethod.shippingCost : 0)
+  const shippingCost = selectedShippingMethod
+    ? selectedShippingMethod.shippingCost
+    : 0;
 
   const calculateTotal = () => {
     let total: number = 0;
@@ -65,7 +67,7 @@ const CartItems = () => {
         </TableHeader>
         <TableBody>
           {cart.map((item: CollectionItem) => (
-            <TableRow key={item.id}>
+            <TableRow key={item._id}>
               {responsive !== "small" ? (
                 <TableCell>
                   <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
@@ -78,9 +80,9 @@ const CartItems = () => {
                   <Button
                     icon={<SubtractCircle />}
                     style={{
-                      padding: responsive === "small" ? "0.2rem" : "0.4rem"
+                      padding: responsive === "small" ? "0.2rem" : "0.4rem",
                     }}
-                    onClick={() => removeItemFromCart(item.id)}
+                    onClick={() => removeItemFromCart(item._id)}
                   />
                 ) : (
                   <div>{"\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"}</div>
@@ -90,7 +92,7 @@ const CartItems = () => {
                 <Button
                   size="small"
                   style={{
-                    padding: responsive === "small" ? "0.2rem" : "0.4rem"
+                    padding: responsive === "small" ? "0.2rem" : "0.4rem",
                   }}
                   icon={<AddCircle />}
                   onClick={() => addItemToCart(item)}
@@ -100,9 +102,9 @@ const CartItems = () => {
                 <Button
                   size="small"
                   style={{
-                    padding: responsive === "small" ? "0.2rem" : "0.4rem"
+                    padding: responsive === "small" ? "0.2rem" : "0.4rem",
                   }}
-                  onClick={() => clearItemFromCart(item.id)}
+                  onClick={() => clearItemFromCart(item._id)}
                   icon={<Close />}
                 />
               </TableCell>

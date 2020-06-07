@@ -9,6 +9,8 @@ import {
   Form,
   TextArea,
   CheckBox,
+  Grid,
+  ResponsiveContext,
   InfiniteScroll,
   Table,
   TableRow,
@@ -18,7 +20,7 @@ import {
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
 import { Collection, CollectionItem } from "../shop.data";
-// import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
 
 const initialInputs = {

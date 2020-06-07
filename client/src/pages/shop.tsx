@@ -123,11 +123,11 @@ const Shop: FC<IProps> = () => {
             return collection.items
               .filter(matchWithQuery)
               .map((item: CollectionItem) => (
-                <Item key={item.id} item={item} />
+                <Item key={item._id} item={item} />
               ));
           })
         : getCurrentCollectionItems().map((item: CollectionItem) => (
-            <Item key={item.id} item={item} />
+            <Item key={item._id} item={item} />
           ))}
     </Box>
   );
@@ -140,18 +140,16 @@ const Shop: FC<IProps> = () => {
     xlarge: [main, directory],
   };
   return (
-    <div>
-      <Grid
-        fill
-        responsive={true}
-        areas={areas[size]}
-        columns={columns[size]}
-        rows={rows[size]}
-        gap="small"
-      >
-        {components[size]}
-      </Grid>
-    </div>
+    <Grid
+      fill
+      responsive={true}
+      areas={areas[size]}
+      columns={columns[size]}
+      rows={rows[size]}
+      gap="small"
+    >
+      {components[size]}
+    </Grid>
   );
 };
 
