@@ -16,10 +16,10 @@ const Item = ({ item, history, match, location }: Iprops) => {
 
   useEffect(() => {
     const id = location.search.slice(4, location.search.length);
-    if (Number(id) === item.id) {
+    if (Number(id) === item._id) {
       setShow(true);
     }
-  }, [location.search, item.id]);
+  }, [location.search, item._id]);
 
   const closeModal = () => {
     history.push(match.url);
@@ -32,7 +32,7 @@ const Item = ({ item, history, match, location }: Iprops) => {
         "/" +
         item.name.replace(/\s/g, "-").toLowerCase() +
         "/?id=" +
-        item.id
+        item._id
     );
     setShow(true);
   };
@@ -68,7 +68,7 @@ const Item = ({ item, history, match, location }: Iprops) => {
         <Box direction="column" align="center" fill justify="around">
           <Button
             primary
-            onClick={event => {
+            onClick={(event) => {
               addItemToCart(item);
               const itemComponent = event.target as HTMLButtonElement;
               itemComponent.innerText = "Item added";
