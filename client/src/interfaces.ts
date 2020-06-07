@@ -3,7 +3,7 @@ export interface CollectionItem {
   name: string;
   imageUrl: string;
   price: number;
-  category: string;
+  category: string[];
   season: string[];
   inventory: {
     small: string;

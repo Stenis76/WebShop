@@ -26,32 +26,31 @@ const Shop: FC<IProps> = () => {
       });
   }, []);
 
-  const mapDbProductsToCollection = (collections) => {
-    const mappedCategories: Collection[] = [];
+  const mapDbProductsToCollection = (products) => {
+    const mappedCollection: Collection[] = [];
     let idIndex = 1;
 
-    for (const collection of collections) {
-      let selectedCategory: Collection | undefined;
-      for (const category of mappedCategories) {
-        if (category.title === collection.category) {
-          selectedCategory = category;
-          break;
-        }
-      }
+    for (const product of products) {
+      
+      for (const productCategory of product.category) {
 
-      if (!selectedCategory) {
-        selectedCategory = {
-          id: idIndex,
-          title: collection.category,
-          routeName: collection.category,
-          items: [],
-        };
-        mappedCategories.push(selectedCategory);
-        idIndex++;
+        let selectedCollection = mappedCollection.find((c) => c.title === productCategory)
+  
+        if (!selectedCollection) {
+          selectedCollection = {
+            id: idIndex,
+            title: productCategory,
+            routeName: productCategory,
+            items: [],
+          };
+          mappedCollection.push(selectedCollection);
+          idIndex++;
+        }
+        selectedCollection.items.push(product);
+
       }
-      selectedCategory.items.push(collection);
     }
-    setCollection(mappedCategories);
+    setCollection(mappedCollection);
     return;
   };
 
@@ -118,8 +117,7 @@ const Shop: FC<IProps> = () => {
       }}
     >
       {category === "search" && query
-        ? collections.map((collection: Collection) => {
-            console.log(collection.items.filter(matchWithQuery));
+        ? collections.map((collection: Collection) => {          
 
             return collection.items
               .filter(matchWithQuery)
