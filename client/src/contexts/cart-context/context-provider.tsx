@@ -5,7 +5,7 @@ import CartContext from "./context";
 
 import { CollectionItem } from "../../shop.data";
 
-interface IProps {} 
+interface IProps {}
 
 export type ShippingMethod = {
   _id: string;
@@ -66,6 +66,7 @@ const CartContextProvider: FC<IProps> = (props) => {
       setCart(newCart);
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
+      console.log(cart);
     }
   };
 

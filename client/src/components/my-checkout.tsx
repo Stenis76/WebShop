@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
 
-import { payWithApi } from "../api-utils";
+import createOrder from "../api-utils";
 
 import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
@@ -39,10 +39,17 @@ const MyCheckOut = () => {
     setShowModal(false);
     clearCart();
   };
+  // const newOrder = () {
+  //   user._id
+  //   collectionItem.id: []
 
+  //   freightId:
+  //   paymentMethod:
+  //   activeOrder: true
+  //   }
   const pay = async () => {
     setLoading(true);
-    await payWithApi();
+    // await createOrder(newOrder);
     setShowModal(true);
   };
 
