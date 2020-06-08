@@ -63,7 +63,7 @@ router.post("/api/users/auth", async (req, res) => {
   }
 });
 // LOGOUT
-router.get("/api/logout/:userId", isAuthenticated, (req, res, next) => {
+router.post("/api/logout/:userId", isAuthenticated, (req, res, next) => {
   console.log("logga ut");
 
   logOutUser(req, res, next);

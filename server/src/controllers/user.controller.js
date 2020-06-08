@@ -104,7 +104,7 @@ const logOutUser = async (req, res) => {
   if (req.session) {
     // delete session object
     req.session = null;
-    console.log('cookiesession',req.session)
+    console.log('cookiesession 2342',req.session)
   } else {
     return res.redirect("/");
   }

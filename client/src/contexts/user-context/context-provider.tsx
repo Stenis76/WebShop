@@ -71,12 +71,12 @@ const UserContextProvider: FC<IProps> = (props) => {
     console.log("id", user._id);
 
     fetch("http://localhost:3002/api/logout/" + user._id, {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     });
 
     await setUser(initialUser)
-    console.log('ropsten')
+    console.log('gislaved')
     setIsAuthenticated(false);
   };
 
