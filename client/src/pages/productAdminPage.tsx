@@ -33,7 +33,7 @@ const initialInputs = {
   name: "",
   imageUrl: "",
   price: "",
-  category: "",
+  category: [""],
   inventory: {
     small: "",
     medium: "",
@@ -44,30 +44,10 @@ const initialInputs = {
   description: ""
 };
 
-export type products = {
-  _id: "",
-  name: "",
-  image: "",
-  price: "",
-  category: [""],
-  inventory: {
-    small: "",
-    medium: "",
-    large: "",
-    xlarge: ""
-  },
-  season: [""],
-  description: ""
-}
-
-
-
-
 const ProductAdmin:  FC<IProps> = () => {
-  const [collections, setCollections] = useState<Collection[]>([]);
+  const [collections, setCollection] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
-  const [products, setProducts] = useState<products[]>([]);
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
   const [inputs, setInputs] = useState(initialInputs);
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
@@ -81,45 +61,55 @@ const ProductAdmin:  FC<IProps> = () => {
     axios
       .get("http://localhost:3002/api/product")
       .then((res) => {
-        setProducts(res.data);
+        mapDbProductsToCollection(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const mapDbProductsToCollection = (collections) => {
-    const mappedCategories: Collection[] = [];
+  const mapDbProductsToCollection = (products) => {
+    const mappedCollection: Collection[] = [];
     let idIndex = 1;
 
-    for (const collection of collections) {
-      let selectedCategory: Collection | undefined;
-      for (const category of mappedCategories) {
-        if (category.title === collection.category) {
-          selectedCategory = category;
-          break;
-        }
-      }
+    for (const product of products) {
+      
+      for (const productCategory of product.category) {
 
-      if (!selectedCategory) {
-        selectedCategory = {
-          id: idIndex,
-          title: collection.category,
-          routeName: collection.category,
-          items: [],
-        };
-        mappedCategories.push(selectedCategory);
-        idIndex++;
+        let selectedCollection = mappedCollection.find((c) => c.title === productCategory)
+  
+        if (!selectedCollection) {
+          selectedCollection = {
+            id: idIndex,
+            title: productCategory,
+            routeName: productCategory,
+            items: [],
+          };
+          mappedCollection.push(selectedCollection);
+          idIndex++;
+        }
+        selectedCollection.items.push(product);
+
       }
-      selectedCategory.items.push(collection);
     }
-    collections(mappedCategories);
+    setCollection(mappedCollection);
     return;
+  };
+
+  const getCurrentCollectionItems = (): CollectionItem[] => {
+    if (collections.length) {
+      const col = collections.find((collection) => {
+        return collection.routeName.toLowerCase() === category!.toLowerCase();
+      });
+
+      if (col) return col.items;
+    }
+    return [];
   };
 
   const addToCollection = () => {
      const item: CollectionItem = {
-       id: inputs.id,
+       _id: inputs.id,
        name: inputs.name,
        imageUrl: inputs.imageUrl,
        price: Number(inputs.price),
@@ -140,7 +130,7 @@ const ProductAdmin:  FC<IProps> = () => {
        }
      });
 
-     setCollections(updatedCollections);
+     setCollection(updatedCollections);
      localStorage.setItem("collection", JSON.stringify(updatedCollections));
      onClose();
    };
@@ -148,10 +138,10 @@ const ProductAdmin:  FC<IProps> = () => {
    const removeFromCollection = (itemId: string) => {
      const updatedCollections = collections.map(collection => ({
        ...collection,
-       items: collection.items.filter(item => item.id !== itemId)
+       items: collection.items.filter(item => item._id !== itemId)
      }));
 
-     setCollections(updatedCollections);
+     setCollection(updatedCollections);
      localStorage.setItem("collection", JSON.stringify(updatedCollections));
    };
 
@@ -159,7 +149,7 @@ const ProductAdmin:  FC<IProps> = () => {
     const updatedCollections = collections.map(collection => {
       if (itemToEdit !== undefined) {
         let itemIndex = collection.items.findIndex(
-          item => item.id === itemToEdit.id
+          item => item._id === itemToEdit._id
         );
 
         if (itemIndex !== -1) {
@@ -200,7 +190,7 @@ const ProductAdmin:  FC<IProps> = () => {
 
   const setInputsToItemData = (item: CollectionItem) => {
     setInputs({
-      id: item.id,
+      id: item._id,
       name: item.name,
       imageUrl: item.imageUrl,
       price: item.price + "",
@@ -254,16 +244,31 @@ const ProductAdmin:  FC<IProps> = () => {
         </TableHeader>
         {collection.items.map((item: CollectionItem) => (
         <TableBody>
-              <TableRow key={item.id} >
+          <InfiniteScroll
+            renderMarker={marker => (
+              <TableRow>
+                <TableCell>{marker}</TableCell>
+              </TableRow>
+            )}
+            scrollableAncestor="window"
+            items={results}
+            onMore={() => load()}
+            step={length}
+          >
+            {result => (
+              <TableRow key={item._id} >
                 <TableCell border="bottom" onClick={() => {
                       setEditOrAdd("edit");
                       setInputsToItemData(item);
                       setItemToEdit(item);
                       onOpen();
-                    }}>{item.id}</TableCell>
+                    }}>{item._id}</TableCell>
                 <TableCell border="bottom">{item.name}</TableCell>
                 <TableCell border="bottom">{item.price}</TableCell>
               </TableRow>
+              
+            )}
+          </InfiniteScroll>
         </TableBody>
         ))}
       </Table>
