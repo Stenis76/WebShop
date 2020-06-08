@@ -14,7 +14,7 @@ const PaymentForm = (props: IProps) => {
   const { paymentMethod, setPaymentMethod } = useContext(CartContext);
 
   return (
-    <Form style={{ gridArea: "name" }}>
+    <Form validate="submit" style={{ gridArea: "name" }}>
       <RadioButtonGroup
         margin={{ vertical: "medium" }}
         direction="row"

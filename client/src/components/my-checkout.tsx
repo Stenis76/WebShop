@@ -19,7 +19,7 @@ const MyCheckOut = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
 
-  const { cart, clearCart, paymentMethod, createOrder } = useContext(
+  const { cart, clearCart, paymentMethod, createOrder, selectedShippingMethod } = useContext(
     CartContext
   );
   const history = useHistory();
@@ -34,6 +34,10 @@ const MyCheckOut = () => {
     user.address.length > 1 &&
     user.city.length > 1 &&
     user.postCode.length > 1;
+
+    const validShippingInfo = () => 
+    selectedShippingMethod;
+
 
   const closeModal = () => {
     history.push("/");
@@ -71,10 +75,11 @@ const MyCheckOut = () => {
             <Button
               alignSelf="center"
               primary
-              disabled={!validUserInformation()}
+              disabled={!validShippingInfo()}
               onClick={() => setActiveIndex(2)}
               label="NEXT"
               margin={{ top: "medium" }}
+              type="submit"
             />
           </Box>
         </AccordionPanel>
