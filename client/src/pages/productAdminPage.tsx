@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useContext } from "react";
 import {
   Main,
   Text,
@@ -19,24 +19,55 @@ import {
   TableCell,
   TableHeader
 } from "grommet";
+
 import FormFieldLabel from "../components/form-field-fabel";
-import { Collection, CollectionItem } from "../shop.data";
+// import { Collection, CollectionItem } from "../shop.data";
+import axios from "axios";
+import { Collection, CollectionItem } from "../interfaces";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import  AdminMenu  from "../components/adminMenu";
 
+interface IProps {}
 const initialInputs = {
+  id: "",
   name: "",
   imageUrl: "",
   price: "",
-  size: [""],
+  category: "",
+  inventory: {
+    small: "",
+    medium: "",
+    large: "",
+    xlarge: ""
+  },
   season: [""],
   description: ""
 };
 
-const ProductAdmin = () => {
+export type products = {
+  _id: "",
+  name: "",
+  image: "",
+  price: "",
+  category: [""],
+  inventory: {
+    small: "",
+    medium: "",
+    large: "",
+    xlarge: ""
+  },
+  season: [""],
+  description: ""
+}
+
+
+
+
+const ProductAdmin:  FC<IProps> = () => {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
+  const [products, setProducts] = useState<products[]>([]);
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
   const [inputs, setInputs] = useState(initialInputs);
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
@@ -44,50 +75,85 @@ const ProductAdmin = () => {
   const onOpen = () => setOpen(true);
 
   const onClose = () => setOpen(false);
+  console.log("check this out" + initialInputs)
 
   useEffect(() => {
-    const localStorageCollections = localStorage.getItem("collection");
-    if (localStorageCollections) {
-      setCollections(JSON.parse(localStorageCollections));
-    }
+    axios
+      .get("http://localhost:3002/api/product")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
-  const addToCollection = () => {
-    const item: CollectionItem = {
-      id: calculateNextItemId(),
-      name: inputs.name,
-      imageUrl: inputs.imageUrl,
-      price: Number(inputs.price),
-      size: inputs.size,
-      season: inputs.season,
-      description: inputs.description
-    };
+  const mapDbProductsToCollection = (collections) => {
+    const mappedCategories: Collection[] = [];
+    let idIndex = 1;
 
-    const updatedCollections = collections.map(collection => {
-      if (collection.routeName === category) {
-        return {
-          ...collection,
-          items: [...collection.items, item]
-        };
-      } else {
-        return { ...collection };
+    for (const collection of collections) {
+      let selectedCategory: Collection | undefined;
+      for (const category of mappedCategories) {
+        if (category.title === collection.category) {
+          selectedCategory = category;
+          break;
+        }
       }
-    });
 
-    setCollections(updatedCollections);
-    localStorage.setItem("collection", JSON.stringify(updatedCollections));
-    onClose();
+      if (!selectedCategory) {
+        selectedCategory = {
+          id: idIndex,
+          title: collection.category,
+          routeName: collection.category,
+          items: [],
+        };
+        mappedCategories.push(selectedCategory);
+        idIndex++;
+      }
+      selectedCategory.items.push(collection);
+    }
+    collections(mappedCategories);
+    return;
   };
 
-  const removeFromCollection = (itemId: number) => {
-    const updatedCollections = collections.map(collection => ({
-      ...collection,
-      items: collection.items.filter(item => item.id !== itemId)
-    }));
+  const addToCollection = () => {
+     const item: CollectionItem = {
+       id: inputs.id,
+       name: inputs.name,
+       imageUrl: inputs.imageUrl,
+       price: Number(inputs.price),
+       category: inputs.category,
+       inventory: inputs.inventory,
+       season: inputs.season,
+       description: inputs.description
+     };
 
-    setCollections(updatedCollections);
-    localStorage.setItem("collection", JSON.stringify(updatedCollections));
-  };
+     const updatedCollections = collections.map(collection => {
+       if (collection.routeName === category) {
+         return {
+           ...collection,
+           items: [...collection.items, item]
+         };
+       } else {
+         return { ...collection };
+       }
+     });
+
+     setCollections(updatedCollections);
+     localStorage.setItem("collection", JSON.stringify(updatedCollections));
+     onClose();
+   };
+
+   const removeFromCollection = (itemId: string) => {
+     const updatedCollections = collections.map(collection => ({
+       ...collection,
+       items: collection.items.filter(item => item.id !== itemId)
+     }));
+
+     setCollections(updatedCollections);
+     localStorage.setItem("collection", JSON.stringify(updatedCollections));
+   };
 
   const editItem = () => {
     const updatedCollections = collections.map(collection => {
@@ -103,7 +169,7 @@ const ProductAdmin = () => {
             name: inputs.name,
             // imageUrl: inputs.imageUrl,
             price: Number(inputs.price),
-            size: inputs.size,
+            // inventory:
             season: inputs.season,
             description: inputs.description
           };
@@ -112,21 +178,21 @@ const ProductAdmin = () => {
       return collection;
     });
 
-    setCollections(updatedCollections);
+    // setCollections(updatedCollections);
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
     onClose();
   };
 
-  const calculateNextItemId = () => {
-    let highestId =
-      collections
-        .map(collection => collection.items.map(item => item.id))
-        .flat()
-        .sort((a, b) => a - b)
-        .pop() || 0;
+  //  const calculateNextItemId = () => {
+  //    let highestId =
+  //      collections
+  //        .map(collection => collection.items.map(item => item.id))
+  //        .flat()
+  //        .sort((a, b) => a - b)
+  //        .pop() || 0;
 
-    return highestId + 1;
-  };
+  //    return highestId + 1;
+  //  };
 
   const handleInputs = (name: string, value: string) => {
     setInputs(prev => ({ ...prev, [name]: value }));
@@ -134,10 +200,17 @@ const ProductAdmin = () => {
 
   const setInputsToItemData = (item: CollectionItem) => {
     setInputs({
+      id: item.id,
       name: item.name,
       imageUrl: item.imageUrl,
       price: item.price + "",
-      size: item.size,
+      category: item.category,
+      inventory: {
+        small: "",
+        medium: "",
+        large: "",
+        xlarge: ""
+      },
       season: item.season,
       description: item.description
     });
@@ -181,18 +254,6 @@ const ProductAdmin = () => {
         </TableHeader>
         {collection.items.map((item: CollectionItem) => (
         <TableBody>
-          <InfiniteScroll
-            renderMarker={marker => (
-              <TableRow>
-                <TableCell>{marker}</TableCell>
-              </TableRow>
-            )}
-            scrollableAncestor="window"
-            items={results}
-            onMore={() => load()}
-            step={length}
-          >
-            {result => (
               <TableRow key={item.id} >
                 <TableCell border="bottom" onClick={() => {
                       setEditOrAdd("edit");
@@ -202,84 +263,12 @@ const ProductAdmin = () => {
                     }}>{item.id}</TableCell>
                 <TableCell border="bottom">{item.name}</TableCell>
                 <TableCell border="bottom">{item.price}</TableCell>
-                {/* <TableCell border="bottom">{collection.title}</TableCell> */}
               </TableRow>
-              
-            )}
-          </InfiniteScroll>
         </TableBody>
         ))}
       </Table>
       ))}
       </Box>
-      {/* {open && (
-        <Layer position="center" onClickOutside={onClose}>
-          <Box width="large" height="large">
-            <Form validate="blur">
-              <Box
-                background="light-3"
-                width="large"
-                pad="medium"
-                justify="between"
-                height="large"
-              >
-                <Heading size="xsmall">{category}</Heading>
-                <Text>ID: {calculateNextItemId()}</Text>
-                <FormFieldLabel
-                  name="ProductName"
-                  label="Product name"
-                  required
-                  type="text"
-                  value={inputs.name}
-                  onChange={e => handleInputs("name", e.target.value)}
-                />
-                <FormFieldLabel
-                  name="Price"
-                  label="Price"
-                  required
-                  type="text"
-                  value={inputs.price}
-                  onChange={e => handleInputs("price", e.target.value)}
-                />
-                <FormFieldLabel
-                  name="ImageUrl"
-                  label="Image URL"
-                  required
-                  type="text"
-                  value={inputs.imageUrl}
-                  onChange={e => handleInputs("imageUrl", e.target.value)}
-                />
-                <Text>Sizes</Text>
-                <Box direction="row">
-                  <CheckBox label="small" />
-                  <CheckBox label="medium" onChange={() => {}} />
-                  <CheckBox label="large" onChange={() => {}} />
-                  <CheckBox label="xlarge" onChange={() => {}} />
-                </Box>
-                <Text>Seasons</Text>
-                <Box direction="row">
-                  <CheckBox label="spring" onChange={() => {}} />
-                  <CheckBox label="summer" onChange={() => {}} />
-                  <CheckBox label="autumn" onChange={() => {}} />
-                  <CheckBox label="winter" onChange={() => {}} />
-                </Box>
-                <Text>Description</Text>
-                <TextArea
-                  value={inputs.description}
-                  name="Description"
-                  required
-                  onChange={e => handleInputs("description", e.target.value)}
-                />
-                {editOrAdd === "add" ? (
-                  <Button onClick={addToCollection} label="Add to collection" />
-                ) : (
-                  <Button onClick={editItem} label="Submit edit" />
-                )}
-              </Box>
-            </Form>
-          </Box>
-        </Layer>
-      )} */}
       {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">
@@ -292,7 +281,7 @@ const ProductAdmin = () => {
                 height="large"
               >
                 <Heading size="xsmall">{category}</Heading>
-                <Text>ID: {calculateNextItemId()}</Text>
+      <Text>ID: {}item.id</Text>
                 <FormFieldLabel
                   name="ProductName"
                   label="Product name"
