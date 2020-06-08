@@ -1,3 +1,9 @@
+.welcome-page {
+  background-image: url("../../resources/fashion.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .sign-in, .sign-up {
   background: #F2F2F2; /* fallback for old browsers */
   background-blend-mode: overlay, hard-light, normal;
@@ -5,8 +11,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 50vw;
+  min-width: 600px;
   height: fit-content;
+  min-height: 600px;
   border-radius: 0.3rem;
 
   .buttons {
