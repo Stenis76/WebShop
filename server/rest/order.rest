@@ -13,10 +13,10 @@ POST http://localhost:3002/api/neworder
 Content-Type: application/json
 
 {
-  "userId": "176g3h7yb",
-  "productId": ["ljh3833", "6hjhvjws"],
-  "freightId": "13",
-  "paymentMethod": "hats",
+  "userId": "5ed612ec6aaf5cd950517f93",
+  "productId": ["5ecb7dbe160eb85561586115"],
+  "freightId": "5ecb8f77ba0ed849c02f10bd",
+  "paymentMethod": "swish",
   "activeOrder": true
 }
 

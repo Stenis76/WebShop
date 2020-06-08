@@ -14,6 +14,7 @@ interface IState {
   removeItemFromCart: (itemId: any) => void;
   clearItemFromCart: (itemId: any) => void;
   clearCart: () => void;
+  createOrder: () => void;
   shippingCost: number;
 }
 
@@ -28,5 +29,6 @@ export default createContext<IState>({
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
   clearCart: () => {},
+  createOrder: () => {},
   shippingCost: 0,
 });

@@ -16,13 +16,6 @@ export type ShippingMethod = {
   shippingCost: number;
 };
 
-export type OrderMethod = {
-  userId: string;
-  productId: string[];
-  freightId: string;
-  paymentMethod: string;
-  activeOrder: boolean;
-};
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = (props) => {
@@ -34,13 +27,6 @@ const CartContextProvider: FC<IProps> = (props) => {
     ShippingMethod
   >();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
-  const [order, setOrder] = useState<OrderMethod>({
-    userId: user._id,
-    productId: [""],
-    freightId: "",
-    paymentMethod: "",
-    activeOrder: false,
-  });
 
   useEffect(() => {
     axios
@@ -53,22 +39,17 @@ const CartContextProvider: FC<IProps> = (props) => {
       });
   }, []);
 
-  /*   useEffect(() => {
-    let cost = 0;
-    switch (shippingMethod) {
-      case "dhl":
-        cost = 10;
-        break;
-      case "schenker":
-        cost = 5;
-        break;
-      default:
-        cost = 2;
-    }
-    setShippingCost(cost);
-  }, [shippingMethod]); */
+  const createOrder = async () => {
+    const cartItemsId = cart.map((item) => item._id);
+    const order = {
+      userId: user._id,
+      productId: cartItemsId,
+      freightId: selectedShippingMethod._id,
+      paymentMethod: paymentMethod,
+      activeOrder: true,
+    };
+    console.log(order);
 
-  const createOrder = async (order) => {
     const options: RequestInit = {
       method: "POST",
       headers: {
@@ -78,10 +59,10 @@ const CartContextProvider: FC<IProps> = (props) => {
       body: JSON.stringify(order),
     };
 
-    // setLoading(true);
     const res = await fetch("http://localhost:3002/api/neworder", options);
     const data = await res.json();
-    // setLoading(false);
+    console.log(data);
+    return data.message;
   };
 
   const addItemToCart = (item: CollectionItem) => {
@@ -134,28 +115,16 @@ const CartContextProvider: FC<IProps> = (props) => {
   const setShipping = (_id: string) => {
     const method = shippingMethods.find((method) => method._id === _id);
     setSelectedShippingMethod(method);
-    setOrder((prevState) => ({
-      ...prevState,
-      freightId: method._id,
-    }));
-    filterCartToServer();
   };
 
   const setPayment = (method: PaymentMethod) => {
     setPaymentMethod(method);
-    // setOrder((prevState) => ({
-    //   ...prevState,
-    //   paymentMethod: method,
-    // }));
+    console.log(method);
   };
 
   const filterCartToServer = () => {
     const cartItemsId = cart.map((item) => item._id);
-    console.log("Här ska en cartitemarray komma", cartItemsId);
-    setOrder((prevState) => ({
-      ...prevState,
-      productId: cartItemsId,
-    }));
+    console.log("cartarray", cartItemsId);
   };
 
   return (
@@ -173,6 +142,7 @@ const CartContextProvider: FC<IProps> = (props) => {
           removeItemFromCart,
           clearItemFromCart,
           clearCart,
+          createOrder,
           shippingCost: shippingCost,
         }}
       />

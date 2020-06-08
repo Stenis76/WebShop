@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
 
-import createOrder from "../api-utils";
-
 import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
 import ShippingForm from "./shipping-form";
@@ -21,9 +19,10 @@ const MyCheckOut = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
 
-  const { cart, clearCart, paymentMethod } = useContext(CartContext);
+  const { cart, clearCart, paymentMethod, createOrder } = useContext(
+    CartContext
+  );
   const history = useHistory();
-  console.log(user);
 
   const validUserInformation = () =>
     user.firstName.length > 1 &&
@@ -42,16 +41,9 @@ const MyCheckOut = () => {
     clearCart();
   };
 
-  // user._id
-  // collectionItem.id: []
-
-  // freightId:
-  // paymentMethod:
-  // activeOrder: true
-  // }
   const pay = async () => {
     setLoading(true);
-    // await createOrder(newOrder);
+    await createOrder();
     setShowModal(true);
   };
 
@@ -94,7 +86,7 @@ const MyCheckOut = () => {
         {activeIndex === 2 &&
         !loading &&
         validUserInformation() &&
-        ((paymentMethod === "card" && user.card.length) ||
+        (paymentMethod === "card" ||
           paymentMethod === "swish" ||
           paymentMethod === "invoice") ? (
           <Button
