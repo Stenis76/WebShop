@@ -30,6 +30,7 @@ app.use(cookieSession({
   maxAge: 1000 * 1000, // short duration to check easily while developing
   secret: 'apskda9s8d7236uvjbkajdnfhoias89d70f62t3yhdjhvfuastadcych',
   httpOnly: true,
+  unset: 'destroy'
 }))
 
 

@@ -67,7 +67,7 @@ const UserContextProvider: FC<IProps> = (props) => {
     return data.message;
   };
 
-  const logout = () => {
+  const logout = async () => {
     console.log("id", user._id);
 
     fetch("http://localhost:3002/api/logout/" + user._id, {
@@ -75,6 +75,8 @@ const UserContextProvider: FC<IProps> = (props) => {
       credentials: "include",
     });
 
+    await setUser(initialUser)
+    console.log('ropsten')
     setIsAuthenticated(false);
   };
 

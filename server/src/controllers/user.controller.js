@@ -100,10 +100,11 @@ const logInUser = async (req, res) => {
 
 // LOGOUT
 
-const logOutUser = (req, res) => {
+const logOutUser = async (req, res) => {
   if (req.session) {
     // delete session object
     req.session = null;
+    console.log('cookiesession',req.session)
   } else {
     return res.redirect("/");
   }
