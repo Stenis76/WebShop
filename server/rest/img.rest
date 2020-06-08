@@ -1,6 +1,6 @@
 
 //ONE
-GET http://localhost:3002/api/images/5eda310f6eb508fb6638ed9d
+GET http://localhost:3002/api/images/5ede697e3aaed446464f5c8a
 
 ###
 
@@ -11,7 +11,7 @@ Content-Type: multipart/form-data; boundary=FormDataRow
 Content-Disposition: form-data; name="image"; filename="brown-brim.jpg"
 Content-Type: image/jpg
 
-< ./brown-brim.jpg
+< ./timberlands.jpg
 --FormDataRow--
 
 ### Tänk på följande:

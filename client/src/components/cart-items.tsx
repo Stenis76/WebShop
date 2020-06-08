@@ -66,10 +66,11 @@ const CartItems = () => {
         </TableHeader>
         <TableBody>
           {cart.map((item: CollectionItem) => (
+            
             <TableRow key={item._id}>
               {responsive !== "small" ? (
                 <TableCell>
-                  <Image src={item.image} style={{ width: "4rem" }}></Image>
+                  <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
                 </TableCell>
               ) : null}
               <TableCell scope="row">{item.name}</TableCell>

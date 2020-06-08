@@ -110,7 +110,7 @@ const ProductAdmin:  FC<IProps> = () => {
      const item: CollectionItem = {
        _id: inputs.id,
        name: inputs.name,
-       image: inputs.image,
+       imageUrl: inputs.image,
        price: Number(inputs.price),
        category: inputs.category,
        inventory: inputs.inventory,
@@ -191,7 +191,7 @@ const ProductAdmin:  FC<IProps> = () => {
     setInputs({
       id: item._id,
       name: item.name,
-      image: item.image,
+      image: item.imageUrl,
       price: item.price + "",
       category: item.category,
       inventory: {
