@@ -9,7 +9,7 @@ import {
   Layer,
   Form,
   TextArea,
-  CheckBox, 
+  CheckBox,
   Grid,
   ResponsiveContext,
   InfiniteScroll,
@@ -17,12 +17,12 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TableHeader
+  TableHeader,
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
-import { Collection, CollectionItem } from "../shop.data";
+
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
-import  AdminMenu  from "../components/adminMenu";
+import AdminMenu from "../components/adminMenu";
 
 const initialInputs = {
   name: "",
@@ -30,101 +30,106 @@ const initialInputs = {
   price: "",
   size: [""],
   season: [""],
-  description: ""
+  description: "",
 };
 
 const OrderAdmin = () => {
   const size = useContext(ResponsiveContext) as
-  | "small"
-  | "medium"
-  | "large"
-  | "xlarge";
+    | "small"
+    | "medium"
+    | "large"
+    | "xlarge";
 
-const columns = {
-  small: ["auto"],
-  medium: ["auto", "auto"],
-  large: ["auto", "auto"],
-  xlarge: ["auto", "auto"]
-};
+  const columns = {
+    small: ["auto"],
+    medium: ["auto", "auto"],
+    large: ["auto", "auto"],
+    xlarge: ["auto", "auto"],
+  };
 
-const rows = {
-  small: ["auto"],
-  medium: ["auto", "auto"],
-  large: ["auto", "auto"],
-  xlarge: ["auto", "auto"]
-};
+  const rows = {
+    small: ["auto"],
+    medium: ["auto", "auto"],
+    large: ["auto", "auto"],
+    xlarge: ["auto", "auto"],
+  };
 
-const [open, setOpen] = React.useState<boolean>(false);
-const onOpen = () => setOpen(true);
-const onClose = () => setOpen(false);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(false);
 
-const step = 25;
+  const step = 25;
   const [results, setResults] = useState(
     Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
   );
   const load = () => {
     setResults([
       ...results,
-      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000)),
     ]);
   };
 
   return (
-      <Main>
-        <header>
+    <Main>
+      <header>
         <AdminMenu />
-        </header>
-        <Box pad="small" basis="small">
-          <Heading level={3}>
-            <Box gap="small">
-              <strong>Orders</strong>
-              <Text>
-                Here are all orders
-              </Text>
-            </Box>
-          </Heading>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableCell scope="col" border="bottom">
-                  Order Id
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  User Id
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Freight Id
-                </TableCell>
-                {/* <TableCell scope="col" border="bottom">
+      </header>
+      <Box pad="small" basis="small">
+        <Heading level={3}>
+          <Box gap="small">
+            <strong>Orders</strong>
+            <Text>Here are all orders</Text>
+          </Box>
+        </Heading>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableCell scope="col" border="bottom">
+                Order Id
+              </TableCell>
+              <TableCell scope="col" border="bottom">
+                User Id
+              </TableCell>
+              <TableCell scope="col" border="bottom">
+                Freight Id
+              </TableCell>
+              {/* <TableCell scope="col" border="bottom">
                   Order Date
                 </TableCell> */}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <InfiniteScroll
-                renderMarker={marker => (
-                  <TableRow>
-                    <TableCell>{marker}</TableCell>
-                  </TableRow>
-                )}
-                scrollableAncestor="window"
-                items={results}
-                onMore={() => load()}
-                step={step}
-              >
-                {result => (
-                  <TableRow key={result}>
-                    <TableCell border="bottom" onClick={() => {onOpen();}}>{result}</TableCell>
-                    <TableCell border="bottom">{result}</TableCell>
-                    <TableCell border="bottom">{result}</TableCell>
-                    {/* <TableCell border="bottom">2020-01-07</TableCell> */}
-                  </TableRow>
-                )}
-              </InfiniteScroll>
-            </TableBody>
-          </Table>
-        </Box>
-        {open && (
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <InfiniteScroll
+              renderMarker={(marker) => (
+                <TableRow>
+                  <TableCell>{marker}</TableCell>
+                </TableRow>
+              )}
+              scrollableAncestor="window"
+              items={results}
+              onMore={() => load()}
+              step={step}
+            >
+              {(result) => (
+                <TableRow key={result}>
+                  <TableCell
+                    border="bottom"
+                    onClick={() => {
+                      onOpen();
+                    }}
+                  >
+                    {result}
+                  </TableCell>
+                  <TableCell border="bottom">{result}</TableCell>
+                  <TableCell border="bottom">{result}</TableCell>
+                  {/* <TableCell border="bottom">2020-01-07</TableCell> */}
+                </TableRow>
+              )}
+            </InfiniteScroll>
+          </TableBody>
+        </Table>
+      </Box>
+      {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">
             <Form validate="blur">
@@ -165,9 +170,8 @@ const step = 25;
           </Box>
         </Layer>
       )}
-     </Main>
+    </Main>
   );
-
 };
 
 export default OrderAdmin;

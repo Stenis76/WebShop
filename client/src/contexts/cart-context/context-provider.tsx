@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import CartContext from "./context";
+import UserContext from "../user-context/context";
 
 import { CollectionItem } from "../../interfaces";
 
@@ -14,10 +15,12 @@ export type ShippingMethod = {
   shipmentCompany: string;
   shippingCost: number;
 };
+
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = (props) => {
   const [cart, setCart] = useState<CollectionItem[]>([]);
+  const { user } = useContext(UserContext);
   const [shippingCost, setShippingCost] = useState(0);
   const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
   const [selectedShippingMethod, setSelectedShippingMethod] = useState<
@@ -36,23 +39,33 @@ const CartContextProvider: FC<IProps> = (props) => {
       });
   }, []);
 
-  /*   useEffect(() => {
-    let cost = 0;
-    switch (shippingMethod) {
-      case "dhl":
-        cost = 10;
-        break;
-      case "schenker":
-        cost = 5;
-        break;
-      default:
-        cost = 2;
-    }
-    setShippingCost(cost);
-  }, [shippingMethod]); */
+  const createOrder = async () => {
+    const cartItemsId = cart.map((item) => item._id);
+    const order = {
+      userId: user._id,
+      productId: cartItemsId,
+      freightId: selectedShippingMethod._id,
+      paymentMethod: paymentMethod,
+      activeOrder: true,
+    };
+    console.log(order);
+
+    const options: RequestInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(order),
+    };
+
+    const res = await fetch("http://localhost:3002/api/neworder", options);
+    const data = await res.json();
+    console.log(data);
+    return data.message;
+  };
 
   const addItemToCart = (item: CollectionItem) => {
-    console.log("cart item", item);
     const existing = cart.find((cartItem) => cartItem._id === item._id);
 
     if (existing) {
@@ -104,7 +117,15 @@ const CartContextProvider: FC<IProps> = (props) => {
     setSelectedShippingMethod(method);
   };
 
-  const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
+  const setPayment = (method: PaymentMethod) => {
+    setPaymentMethod(method);
+    console.log(method);
+  };
+
+  const filterCartToServer = () => {
+    const cartItemsId = cart.map((item) => item._id);
+    console.log("cartarray", cartItemsId);
+  };
 
   return (
     <div>
@@ -121,6 +142,7 @@ const CartContextProvider: FC<IProps> = (props) => {
           removeItemFromCart,
           clearItemFromCart,
           clearCart,
+          createOrder,
           shippingCost: shippingCost,
         }}
       />
