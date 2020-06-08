@@ -1,9 +1,9 @@
 export interface CollectionItem {
-  id: string;
+  _id: string;
   name: string;
   imageUrl: string;
   price: number;
-  category: string;
+  category: string[];
   season: string[];
   inventory: {
     small: string;
@@ -12,11 +12,12 @@ export interface CollectionItem {
     xlarge: string;
   };
   description: string;
+  quantity?: number;
 }
 
 // behåll till kategorier
 export interface Collection {
-  id: number;
+  id: any;
   title: string;
   routeName: string;
   items: CollectionItem[];
