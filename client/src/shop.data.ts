@@ -227,152 +227,152 @@ const SHOP_DATA: Collection[] = [
   //     }
   //   ]
   // },
-  {
-    id: 3,
-    title: "Jackets",
-    routeName: "jackets",
-    items: [
-      {
-        id: 18,
-        name: "Black Jean Shearling",
-        imageUrl: "https://i.ibb.co/XzcwL5s/black-shearling.png",
-        // imageUrl: "/images/shop-img/jackets/black-shearling.png",
-        price: 125,
-        size: ["large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 19,
-        name: "Blue Jean Jacket",
-        imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
-        // imageUrl: "/images/shop-img/jackets/blue-jean-jacket.png",
-        price: 90,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 20,
-        name: "Grey Jean Jacket",
-        imageUrl: "https://i.ibb.co/N71k1ML/grey-jean-jacket.png",
-        // imageUrl: "/images/shop-img/jackets/grey-jean-jacket.png",
-        price: 90,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 21,
-        name: "Brown Shearling",
-        imageUrl: "https://i.ibb.co/s96FpdP/brown-shearling.png",
-        // imageUrl: "/images/shop-img/jackets/brown-shearling.png",
-        price: 165,
-        size: ["small", "xlarge"],
-        season: ["autumn", "winter"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 22,
-        name: "Tan Trench",
-        imageUrl: "https://i.ibb.co/M6hHc3F/brown-trench.png",
-        // imageUrl: "/images/shop-img/jackets/brown-trench.png",
-        price: 185,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "autumn"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: "Womens",
-    routeName: "womens",
-    items: [
-      {
-        id: 23,
-        name: "Blue Tanktop",
-        imageUrl: "https://i.ibb.co/7CQVJNm/blue-tank.png",
-        // imageUrl: "/images/shop-img/womens/blue-tank.png",
-        price: 25,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 24,
-        name: "Floral Blouse",
-        imageUrl: "https://i.ibb.co/4W2DGKm/floral-blouse.png",
-        // imageUrl: "/images/shop-img/womens/floral-blouse.png",
-        price: 20,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 25,
-        name: "Floral Dress",
-        imageUrl: "https://i.ibb.co/KV18Ysr/floral-skirt.png",
-        // imageUrl: "/images/shop-img/womens/floral-skirt.png",
-        price: 80,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 26,
-        name: "Red Dots Dress",
-        imageUrl: "https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png",
-        // imageUrl: "/images/shop-img/womens/red-polka-dot-dress.png",
-        price: 80,
-        size: ["small", "medium"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 27,
-        name: "Striped Sweater",
-        imageUrl: "https://i.ibb.co/KmSkMbH/striped-sweater.png",
-        // imageUrl: "/images/shop-img/womens/striped-sweater.png",
-        price: 45,
-        size: ["small", "medium", "large"],
-        season: ["spring", "autumn"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 28,
-        name: "Yellow Track Suit",
-        imageUrl: "https://i.ibb.co/v1cvwNf/yellow-track-suit.png",
-        // imageUrl: "/images/shop-img/womens/yellow-track-suit.png",
-        price: 135,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 29,
-        name: "White Blouse",
-        imageUrl: "https://i.ibb.co/qBcrsJg/white-vest.png",
-        // imageUrl: "/images/shop-img/womens/white-vest.png",
-        price: 20,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      }
-    ]
-  },
+  // {
+  //   id: 3,
+  //   title: "Jackets",
+  //   routeName: "jackets",
+  //   items: [
+  //     {
+  //       id: 18,
+  //       name: "Black Jean Shearling",
+  //       imageUrl: "https://i.ibb.co/XzcwL5s/black-shearling.png",
+  //       // imageUrl: "/images/shop-img/jackets/black-shearling.png",
+  //       price: 125,
+  //       size: ["large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 19,
+  //       name: "Blue Jean Jacket",
+  //       imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
+  //       // imageUrl: "/images/shop-img/jackets/blue-jean-jacket.png",
+  //       price: 90,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 20,
+  //       name: "Grey Jean Jacket",
+  //       imageUrl: "https://i.ibb.co/N71k1ML/grey-jean-jacket.png",
+  //       // imageUrl: "/images/shop-img/jackets/grey-jean-jacket.png",
+  //       price: 90,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 21,
+  //       name: "Brown Shearling",
+  //       imageUrl: "https://i.ibb.co/s96FpdP/brown-shearling.png",
+  //       // imageUrl: "/images/shop-img/jackets/brown-shearling.png",
+  //       price: 165,
+  //       size: ["small", "xlarge"],
+  //       season: ["autumn", "winter"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 22,
+  //       name: "Tan Trench",
+  //       imageUrl: "https://i.ibb.co/M6hHc3F/brown-trench.png",
+  //       // imageUrl: "/images/shop-img/jackets/brown-trench.png",
+  //       price: 185,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "autumn"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 4,
+  //   title: "Womens",
+  //   routeName: "womens",
+  //   items: [
+  //     {
+  //       id: 23,
+  //       name: "Blue Tanktop",
+  //       imageUrl: "https://i.ibb.co/7CQVJNm/blue-tank.png",
+  //       // imageUrl: "/images/shop-img/womens/blue-tank.png",
+  //       price: 25,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 24,
+  //       name: "Floral Blouse",
+  //       imageUrl: "https://i.ibb.co/4W2DGKm/floral-blouse.png",
+  //       // imageUrl: "/images/shop-img/womens/floral-blouse.png",
+  //       price: 20,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 25,
+  //       name: "Floral Dress",
+  //       imageUrl: "https://i.ibb.co/KV18Ysr/floral-skirt.png",
+  //       // imageUrl: "/images/shop-img/womens/floral-skirt.png",
+  //       price: 80,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 26,
+  //       name: "Red Dots Dress",
+  //       imageUrl: "https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png",
+  //       // imageUrl: "/images/shop-img/womens/red-polka-dot-dress.png",
+  //       price: 80,
+  //       size: ["small", "medium"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 27,
+  //       name: "Striped Sweater",
+  //       imageUrl: "https://i.ibb.co/KmSkMbH/striped-sweater.png",
+  //       // imageUrl: "/images/shop-img/womens/striped-sweater.png",
+  //       price: 45,
+  //       size: ["small", "medium", "large"],
+  //       season: ["spring", "autumn"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 28,
+  //       name: "Yellow Track Suit",
+  //       imageUrl: "https://i.ibb.co/v1cvwNf/yellow-track-suit.png",
+  //       // imageUrl: "/images/shop-img/womens/yellow-track-suit.png",
+  //       price: 135,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 29,
+  //       name: "White Blouse",
+  //       imageUrl: "https://i.ibb.co/qBcrsJg/white-vest.png",
+  //       // imageUrl: "/images/shop-img/womens/white-vest.png",
+  //       price: 20,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     }
+  //   ]
+  // },
   {
     id: 5,
     title: "Mens",

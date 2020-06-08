@@ -11,7 +11,7 @@ Content-Type: multipart/form-data; boundary=FormDataRow
 Content-Disposition: form-data; name="image"; filename="brown-brim.jpg"
 Content-Type: image/jpg
 
-< ./timberlands.jpg
+< ./polka-dot-shirt.jpg
 --FormDataRow--
 
 ### Tänk på följande:
