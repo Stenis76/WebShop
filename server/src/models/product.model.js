@@ -58,7 +58,7 @@ const ProductSchema = new mongoose.Schema({
 }, {
   toJSON: {
     virtuals: true
-  }
+  },
 });
 
 

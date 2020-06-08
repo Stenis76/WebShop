@@ -38,14 +38,14 @@ const CartItems = () => {
 
     return total + shippingCost;
   };
-
+  
   const calculateVat = () => {
     let total = calculateTotal();
     let vat = total * 0.25;
-
+    
     return vat;
   };
-
+  
   return (
     <Box responsive>
       <Table>
@@ -53,7 +53,7 @@ const CartItems = () => {
           <TableRow>
             {responsive !== "small" ? (
               <TableCell scope="col" border="bottom"></TableCell>
-            ) : null}
+              ) : null}
             <TableCell scope="col" border="bottom">
               Name
             </TableCell>
@@ -70,7 +70,7 @@ const CartItems = () => {
             <TableRow key={item._id}>
               {responsive !== "small" ? (
                 <TableCell>
-                  <Image src={item.imageUrl} style={{ width: "4rem" }}></Image>
+                  <Image src={item.image} style={{ width: "4rem" }}></Image>
                 </TableCell>
               ) : null}
               <TableCell scope="row">{item.name}</TableCell>
