@@ -18,7 +18,7 @@ export type ShippingMethod = {
 
 export type OrderMethod = {
   userId: string;
-  productId: [string];
+  productId: string[];
   freightId: string;
   paymentMethod: string;
   activeOrder: boolean;
@@ -34,7 +34,13 @@ const CartContextProvider: FC<IProps> = (props) => {
     ShippingMethod
   >();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
-  const [order, setOrder] = useState<OrderMethod>({});
+  const [order, setOrder] = useState<OrderMethod>({
+    userId: user._id,
+    productId: [""],
+    freightId: "",
+    paymentMethod: "",
+    activeOrder: false,
+  });
 
   useEffect(() => {
     axios
@@ -72,10 +78,10 @@ const CartContextProvider: FC<IProps> = (props) => {
       body: JSON.stringify(order),
     };
 
-    setLoading(true);
+    // setLoading(true);
     const res = await fetch("http://localhost:3002/api/neworder", options);
     const data = await res.json();
-    setLoading(false);
+    // setLoading(false);
   };
 
   const addItemToCart = (item: CollectionItem) => {
@@ -128,18 +134,28 @@ const CartContextProvider: FC<IProps> = (props) => {
   const setShipping = (_id: string) => {
     const method = shippingMethods.find((method) => method._id === _id);
     setSelectedShippingMethod(method);
-    setOrder(prevState => ({
-      order :{
-        ...prevState.order,
-      freightId: { freightId: selectedShippingMethod._id });
+    setOrder((prevState) => ({
+      ...prevState,
+      freightId: method._id,
+    }));
+    filterCartToServer();
   };
 
-  const setPayment = (method: PaymentMethod) => setPaymentMethod(method);
+  const setPayment = (method: PaymentMethod) => {
+    setPaymentMethod(method);
+    // setOrder((prevState) => ({
+    //   ...prevState,
+    //   paymentMethod: method,
+    // }));
+  };
 
   const filterCartToServer = () => {
     const cartItemsId = cart.map((item) => item._id);
-    console.log(cartItemsId);
-    return cartItemsId;
+    console.log("Här ska en cartitemarray komma", cartItemsId);
+    setOrder((prevState) => ({
+      ...prevState,
+      productId: cartItemsId,
+    }));
   };
 
   return (

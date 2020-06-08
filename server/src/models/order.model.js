@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const { ProductSchema } = require('./product.model')
+const { ProductSchema } = require("./product.model");
 
 const OrderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
     required: true,
-    ref: 'User'
+    ref: "User",
   },
   productId: {
-    type: ProductSchema,
+    type: [ProductSchema],
     required: true,
     trim: true,
   },
@@ -16,7 +16,7 @@ const OrderSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
     trim: true,
-    ref: 'Freight'
+    ref: "Freight",
   },
   paymentMethod: {
     type: String,
