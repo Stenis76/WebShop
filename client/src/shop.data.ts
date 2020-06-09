@@ -373,79 +373,79 @@ const SHOP_DATA: Collection[] = [
   //     }
   //   ]
   // },
-  {
-    id: 5,
-    title: "Mens",
-    routeName: "mens",
-    items: [
-      {
-        id: 30,
-        name: "Camo Down Vest",
-        imageUrl: "https://i.ibb.co/xJS0T3Y/camo-vest.png",
-        // imageUrl: "/images/shop-img/mens/camo-vest.png",
-        price: 325,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "autumn", "winter"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 31,
-        name: "Floral T-shirt",
-        imageUrl: "https://i.ibb.co/qMQ75QZ/floral-shirt.png",
-        // imageUrl: "/images/shop-img/mens/floral-shirt.png",
-        price: 20,
-        size: ["small", "medium", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 32,
-        name: "Black & White Longsleeve",
-        imageUrl: "https://i.ibb.co/55z32tw/long-sleeve.png",
-        // imageUrl: "/images/shop-img/mens/long-sleeve.png",
-        price: 25,
-        size: ["large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 33,
-        name: "Pink T-shirt",
-        imageUrl: "https://i.ibb.co/RvwnBL8/pink-shirt.png",
-        // imageUrl: "/images/shop-img/mens/pink-shirt.png",
-        price: 25,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 34,
-        name: "Jean Long Sleeve",
-        imageUrl: "https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png",
-        // imageUrl: "/images/shop-img/mens/roll-up-jean-shirt.png",
-        price: 40,
-        size: ["small", "medium", "large"],
-        season: ["spring", "summer", "autumn"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      },
-      {
-        id: 35,
-        name: "Burgundy T-shirt",
-        imageUrl: "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
-        // imageUrl: "/images/shop-img/mens/polka-dot-shirt.png",
-        price: 25,
-        size: ["small", "medium", "large", "xlarge"],
-        season: ["spring", "summer"],
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-      }
-    ]
-  }
+  // {
+  //   id: 5,
+  //   title: "Mens",
+  //   routeName: "mens",
+  //   items: [
+  //     {
+  //       id: 30,
+  //       name: "Camo Down Vest",
+  //       imageUrl: "https://i.ibb.co/xJS0T3Y/camo-vest.png",
+  //       // imageUrl: "/images/shop-img/mens/camo-vest.png",
+  //       price: 325,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "autumn", "winter"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 31,
+  //       name: "Floral T-shirt",
+  //       imageUrl: "https://i.ibb.co/qMQ75QZ/floral-shirt.png",
+  //       // imageUrl: "/images/shop-img/mens/floral-shirt.png",
+  //       price: 20,
+  //       size: ["small", "medium", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 32,
+  //       name: "Black & White Longsleeve",
+  //       imageUrl: "https://i.ibb.co/55z32tw/long-sleeve.png",
+  //       // imageUrl: "/images/shop-img/mens/long-sleeve.png",
+  //       price: 25,
+  //       size: ["large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 33,
+  //       name: "Pink T-shirt",
+  //       imageUrl: "https://i.ibb.co/RvwnBL8/pink-shirt.png",
+  //       // imageUrl: "/images/shop-img/mens/pink-shirt.png",
+  //       price: 25,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 34,
+  //       name: "Jean Long Sleeve",
+  //       imageUrl: "https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png",
+  //       // imageUrl: "/images/shop-img/mens/roll-up-jean-shirt.png",
+  //       price: 40,
+  //       size: ["small", "medium", "large"],
+  //       season: ["spring", "summer", "autumn"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     },
+  //     {
+  //       id: 35,
+  //       name: "Burgundy T-shirt",
+  //       imageUrl: "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
+  //       // imageUrl: "/images/shop-img/mens/polka-dot-shirt.png",
+  //       price: 25,
+  //       size: ["small", "medium", "large", "xlarge"],
+  //       season: ["spring", "summer"],
+  //       description:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  //     }
+  //   ]
+  // }
 ];
 
 export default SHOP_DATA;

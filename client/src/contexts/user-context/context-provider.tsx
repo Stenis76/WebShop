@@ -68,15 +68,13 @@ const UserContextProvider: FC<IProps> = (props) => {
   };
 
   const logout = async () => {
-    console.log("id", user._id);
 
-    fetch("http://localhost:3002/api/logout/" + user._id, {
+    await fetch("http://localhost:3002/api/logout/", {
       method: "POST",
       credentials: "include",
     });
 
     await setUser(initialUser)
-    console.log('gislaved')
     setIsAuthenticated(false);
   };
 
