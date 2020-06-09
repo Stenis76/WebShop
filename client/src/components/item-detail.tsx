@@ -27,6 +27,7 @@ const ItemDetails = (props: Iprops) => {
           size={responsive === "small" ? "small" : "large"}
         >
           {props.item.name}
+          {console.log(props.item)}
         </Heading>
         <Heading
           color="#c96d36"
@@ -51,8 +52,8 @@ const ItemDetails = (props: Iprops) => {
         <Box justify="between">
           <Text style={{ fontWeight: "bold" }}>Sizes: </Text>
           <Box margin={{ vertical: "small" }}>
-            <Text>
-              {props.item.size.map((sizeUnit: any, index: any) => (
+            {/* <Text>
+              {props.item.inventory.map((sizeUnit: any, index: any) => (
                 <Text
                   key={index}
                   style={{
@@ -66,7 +67,7 @@ const ItemDetails = (props: Iprops) => {
                   {sizeUnit}
                 </Text>
               ))}
-            </Text>
+            </Text> */}
           </Box>
           <Text style={{ fontWeight: "bold" }}>Seasons: </Text>
           <Box margin={{ vertical: "small" }}>

@@ -7,6 +7,7 @@ import Item from "../components/item";
 
 import { Collection, CollectionItem } from "../interfaces";
 import { ProductHunt } from "grommet-icons";
+import item from "../components/item";
 
 interface IProps {}
 

@@ -4,7 +4,6 @@ import {
   Text,
   Heading,
   Box,
-  Image,
   Button,
   Layer,
   Form,
@@ -31,7 +30,7 @@ interface IProps {}
 const initialInputs = {
   id: "",
   name: "",
-  imageUrl: "",
+  image: "",
   price: "",
   category: [""],
   inventory: {
@@ -111,7 +110,7 @@ const ProductAdmin:  FC<IProps> = () => {
      const item: CollectionItem = {
        _id: inputs.id,
        name: inputs.name,
-       imageUrl: inputs.imageUrl,
+       imageUrl: inputs.image,
        price: Number(inputs.price),
        category: inputs.category,
        inventory: inputs.inventory,
@@ -192,7 +191,7 @@ const ProductAdmin:  FC<IProps> = () => {
     setInputs({
       id: item._id,
       name: item.name,
-      imageUrl: item.imageUrl,
+      image: item.imageUrl,
       price: item.price + "",
       category: item.category,
       inventory: {
@@ -308,7 +307,7 @@ const ProductAdmin:  FC<IProps> = () => {
                   label="Image URL"
                   required
                   type="text"
-                  value={inputs.imageUrl}
+                  value={inputs.image}
                   onChange={e => handleInputs("imageUrl", e.target.value)}
                 />
                 <Text>Sizes</Text>

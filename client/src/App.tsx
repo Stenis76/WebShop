@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
-
+import axios from "axios";
 import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
@@ -9,13 +9,9 @@ import Checkout from "./pages/checkout";
 import { Grommet, Box, grommet } from "grommet";
 import { deepMerge } from "grommet/utils";
 import ProductAdmin from "./pages/productAdminPage";
-import OrderAdmin from "./pages/orderAdminPage";
-import UserAdmin from "./pages/userAdminPage";
-import Login from "./pages/logInPage";
-import UserContext from "./contexts/user-context/context";
-
-import SHOP_DATA from "./shop.data";
-import { setupMaster } from "cluster";
+import OrderAdmin from "./pages/orderAdminPage"
+import UserAdmin from "./pages/userAdminPage"
+import Login from "./pages/logInPage"
 
 const myTheme = {
   global: {
@@ -43,24 +39,19 @@ type Item = {
   price: number;
 };
 
-// type Collection = {
-//   id: number;
-//   title: string;
-//   routeName: string;
-//   items: Item[];
-// };
 
 function App() {
+  
   useEffect(() => {
-    syncWithLocalStorage();
+    axios
+      .get("http://localhost:3002/api/product")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-
-  const syncWithLocalStorage = () => {
-    const localstorageCollections = localStorage.getItem("collection");
-    if (!localstorageCollections) {
-      localStorage.setItem("collection", JSON.stringify(SHOP_DATA));
-    }
-  };
 
   return (
     <Grommet theme={deepMerge(grommet, myTheme)} full>
