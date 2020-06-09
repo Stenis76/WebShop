@@ -68,14 +68,14 @@ const UserContextProvider: FC<IProps> = (props) => {
   };
 
   const logout = async () => {
-
-    await fetch("http://localhost:3002/api/logout/", {
+    fetch("http://localhost:3002/api/logout", {
       method: "POST",
       credentials: "include",
     });
-
-    await setUser(initialUser)
+    await setUser(initialUser);
     setIsAuthenticated(false);
+    console.log("hit?");
+    window.location.reload()
   };
 
   const checkForUser = async () => {

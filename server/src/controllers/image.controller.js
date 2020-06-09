@@ -8,7 +8,6 @@ getImg = async (req, res) => {
       // todo....
     }
 
-    console.log('GETTING IMAGE: ', image)
     res.contentType(image.contentType)
     res.send(image.data)
 

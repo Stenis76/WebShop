@@ -99,16 +99,15 @@ const logInUser = async (req, res) => {
 };
 
 // LOGOUT
-
 const logOutUser = async (req, res) => {
-  if (req.session) {
-    // delete session object
+  try {
     req.session = null;
-    console.log('cookiesession 2342',req.session)
-  } else {
-    return res.redirect("/");
+    res.status(200).send("Successfully logged out user");
+    console.log('cookiesession off', req.session)
+  } catch {
+    res.status(400).send("Could not log out user");
   }
-};
+}
 
 // DELETE USER
 const deleteUser = async (req, res) => {
