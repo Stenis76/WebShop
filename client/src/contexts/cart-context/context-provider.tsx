@@ -40,13 +40,11 @@ const CartContextProvider: FC<IProps> = (props) => {
   }, []);
 
   const createOrder = async () => {
-    const cartItemsId = cart.map((item) => item._id);
     const order = {
       userId: user._id,
-      productId: cartItemsId,
+      products: cart,
       freightId: selectedShippingMethod._id,
       paymentMethod: paymentMethod,
-      activeOrder: true,
     };
     console.log(order);
 
