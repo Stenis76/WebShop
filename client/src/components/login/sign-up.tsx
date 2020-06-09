@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, FormField, Button } from "grommet";
+import { Form, FormField, Button, Box, Text, } from "grommet";
 
 import UserContext from "../../contexts/user-context/context";
 
@@ -9,6 +9,7 @@ import CustomButton from "../custom_button/custom_button";
 import "./sign-in.styles.scss";
 
 const SignUp = () => {
+
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -33,14 +34,15 @@ const SignUp = () => {
       [name]: value,
     });
   };
+  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (state.password !== state.confirmPassword) {
-      alert("Passwords don't match!");
       return;
     }
+  
 
     try {
       const newUser = {
@@ -62,6 +64,11 @@ const SignUp = () => {
       setLoading(false);
     }
   };
+  const passwordMessage =
+  state.password !== state.confirmPassword
+    ? "The password do not match"
+    : undefined;
+
   return (
     <div className="sign-up">
       <h1>Create an account</h1>
@@ -80,7 +87,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Name"
             required={true}
-            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Please use letters to enter your FirstName" }}
             // size="xsmall"
           />
           <FormField
@@ -90,7 +97,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Last name"
             required={true}
-            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Please use letters to enter your lastname" }}
             // size="xsmall"
           />
           <FormField
@@ -100,7 +107,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Address"
             required={true}
-            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Please use letters to enter your adress" }}
             // size="xsmall"
           />
           <FormField
@@ -111,8 +118,8 @@ const SignUp = () => {
             label="Postcode"
             required={true}
             validate={{
-              regexp: /^[0-9]{4,9}$/,
-              message: "Use numbers, at least 4"
+              regexp: /^[0-9]{5,9}$/,
+              message: "Please enter a valid postcode"
             }}
             // size="xsmall"
           />
@@ -123,7 +130,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="City"
             required={true}
-            validate={{ regexp: /^[a-öA-ö]/, message: "Use letters" }}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Please use letters to enter your city" }}
             // size="xsmall"
           />
           <FormField
@@ -135,7 +142,7 @@ const SignUp = () => {
             required={true}
             validate={{
               regexp: /^[0-9]{8,9}$/,
-              message: "Use numbers, at least 8"
+              message: "Please use at least 8 numbers to enter your number"
             }}
             // size="xsmall"
           />
@@ -155,7 +162,6 @@ const SignUp = () => {
             onChange={handleChange}
             label="Password"
             required={true}
-            // size="xsmall"
           />
           <FormField
             type="password"
@@ -164,8 +170,12 @@ const SignUp = () => {
             onChange={handleChange}
             label="Confirm password"
             required={true}
-            // size="xsmall"
           />
+            {passwordMessage && (
+              <Box pad="xsmall">
+                <Text color="red">{passwordMessage}</Text>
+              </Box>
+            )}
           <Button
               type="submit"
               margin="medium"
