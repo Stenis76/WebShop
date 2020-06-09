@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
 
-import { payWithApi } from "../api-utils";
-
 import ContactFormField from "./contact-form-field";
 import PaymentForm from "./payment-form";
 import ShippingForm from "./shipping-form";
@@ -13,15 +11,18 @@ import OrderConfirmation from "./order-confirmation";
 import UserContext from "../contexts/user-context/context";
 import CartContext from "../contexts/cart-context/context";
 import SignIn from "./login/sign-in";
+import { Cart } from "grommet-icons";
 
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
-  const { clearCart, paymentMethod } = useContext(CartContext);
+
+  const { cart, clearCart, paymentMethod, createOrder } = useContext(
+    CartContext
+  );
   const history = useHistory();
-  console.log(user);
 
   const validUserInformation = () =>
     user.firstName.length > 1 &&
@@ -42,7 +43,7 @@ const MyCheckOut = () => {
 
   const pay = async () => {
     setLoading(true);
-    await payWithApi();
+    await createOrder();
     setShowModal(true);
   };
 
@@ -85,7 +86,7 @@ const MyCheckOut = () => {
         {activeIndex === 2 &&
         !loading &&
         validUserInformation() &&
-        ((paymentMethod === "card" && user.card.length) ||
+        (paymentMethod === "card" ||
           paymentMethod === "swish" ||
           paymentMethod === "invoice") ? (
           <Button

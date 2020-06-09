@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useContext } from "react";
 import {
   Main,
   Text,
@@ -9,7 +9,7 @@ import {
   Layer,
   Form,
   TextArea,
-  CheckBox,
+  CheckBox, 
   Grid,
   ResponsiveContext,
   InfiniteScroll,
@@ -17,24 +17,35 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TableHeader,
+  TableHeader
 } from "grommet";
-import FormFieldLabel from "../components/form-field-fabel";
-import { Collection, CollectionItem } from "../shop.data";
-import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
-import AdminMenu from "../components/adminMenu";
 
+import FormFieldLabel from "../components/form-field-fabel";
+// import { Collection, CollectionItem } from "../shop.data";
+import axios from "axios";
+import { Collection, CollectionItem } from "../interfaces";
+import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+import  AdminMenu  from "../components/adminMenu";
+
+interface IProps {}
 const initialInputs = {
+  id: "",
   name: "",
   imageUrl: "",
   price: "",
-  size: [""],
+  category: [""],
+  inventory: {
+    small: "",
+    medium: "",
+    large: "",
+    xlarge: ""
+  },
   season: [""],
-  description: "",
+  description: ""
 };
 
-const ProductAdmin = () => {
-  const [collections, setCollections] = useState<Collection[]>([]);
+const ProductAdmin:  FC<IProps> = () => {
+  const [collections, setCollection] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
   const [category, setCategory] = useState("none");
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
@@ -44,56 +55,101 @@ const ProductAdmin = () => {
   const onOpen = () => setOpen(true);
 
   const onClose = () => setOpen(false);
+  console.log("check this out" + initialInputs)
 
   useEffect(() => {
-    const localStorageCollections = localStorage.getItem("collection");
-    if (localStorageCollections) {
-      setCollections(JSON.parse(localStorageCollections));
-    }
+    axios
+      .get("http://localhost:3002/api/product")
+      .then((res) => {
+        mapDbProductsToCollection(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
-  const addToCollection = () => {
-    const item: CollectionItem = {
-      id: calculateNextItemId(),
-      name: inputs.name,
-      imageUrl: inputs.imageUrl,
-      price: Number(inputs.price),
-      size: inputs.size,
-      season: inputs.season,
-      description: inputs.description,
-    };
+  const mapDbProductsToCollection = (products) => {
+    const mappedCollection: Collection[] = [];
+    let idIndex = 1;
 
-    const updatedCollections = collections.map((collection) => {
-      if (collection.routeName === category) {
-        return {
-          ...collection,
-          items: [...collection.items, item],
-        };
-      } else {
-        return { ...collection };
+    for (const product of products) {
+      
+      for (const productCategory of product.category) {
+
+        let selectedCollection = mappedCollection.find((c) => c.title === productCategory)
+  
+        if (!selectedCollection) {
+          selectedCollection = {
+            id: idIndex,
+            title: productCategory,
+            routeName: productCategory,
+            items: [],
+          };
+          mappedCollection.push(selectedCollection);
+          idIndex++;
+        }
+        selectedCollection.items.push(product);
+
       }
-    });
-
-    setCollections(updatedCollections);
-    localStorage.setItem("collection", JSON.stringify(updatedCollections));
-    onClose();
+    }
+    setCollection(mappedCollection);
+    return;
   };
 
-  const removeFromCollection = (itemId: number) => {
-    const updatedCollections = collections.map((collection) => ({
-      ...collection,
-      items: collection.items.filter((item) => item.id !== itemId),
-    }));
+  const getCurrentCollectionItems = (): CollectionItem[] => {
+    if (collections.length) {
+      const col = collections.find((collection) => {
+        return collection.routeName.toLowerCase() === category!.toLowerCase();
+      });
 
-    setCollections(updatedCollections);
-    localStorage.setItem("collection", JSON.stringify(updatedCollections));
+      if (col) return col.items;
+    }
+    return [];
   };
+
+  const addToCollection = () => {
+     const item: CollectionItem = {
+       _id: inputs.id,
+       name: inputs.name,
+       imageUrl: inputs.imageUrl,
+       price: Number(inputs.price),
+       category: inputs.category,
+       inventory: inputs.inventory,
+       season: inputs.season,
+       description: inputs.description
+     };
+
+     const updatedCollections = collections.map(collection => {
+       if (collection.routeName === category) {
+         return {
+           ...collection,
+           items: [...collection.items, item]
+         };
+       } else {
+         return { ...collection };
+       }
+     });
+
+     setCollection(updatedCollections);
+     localStorage.setItem("collection", JSON.stringify(updatedCollections));
+     onClose();
+   };
+
+   const removeFromCollection = (itemId: string) => {
+     const updatedCollections = collections.map(collection => ({
+       ...collection,
+       items: collection.items.filter(item => item._id !== itemId)
+     }));
+
+     setCollection(updatedCollections);
+     localStorage.setItem("collection", JSON.stringify(updatedCollections));
+   };
 
   const editItem = () => {
-    const updatedCollections = collections.map((collection) => {
+    const updatedCollections = collections.map(collection => {
       if (itemToEdit !== undefined) {
         let itemIndex = collection.items.findIndex(
-          (item) => item.id === itemToEdit.id
+          item => item._id === itemToEdit._id
         );
 
         if (itemIndex !== -1) {
@@ -103,43 +159,50 @@ const ProductAdmin = () => {
             name: inputs.name,
             // imageUrl: inputs.imageUrl,
             price: Number(inputs.price),
-            size: inputs.size,
+            // inventory:
             season: inputs.season,
-            description: inputs.description,
+            description: inputs.description
           };
         }
       }
       return collection;
     });
 
-    setCollections(updatedCollections);
+    // setCollections(updatedCollections);
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
     onClose();
   };
 
-  const calculateNextItemId = () => {
-    let highestId =
-      collections
-        .map((collection) => collection.items.map((item) => item.id))
-        .flat()
-        .sort((a, b) => a - b)
-        .pop() || 0;
+  //  const calculateNextItemId = () => {
+  //    let highestId =
+  //      collections
+  //        .map(collection => collection.items.map(item => item.id))
+  //        .flat()
+  //        .sort((a, b) => a - b)
+  //        .pop() || 0;
 
-    return highestId + 1;
-  };
+  //    return highestId + 1;
+  //  };
 
   const handleInputs = (name: string, value: string) => {
-    setInputs((prev) => ({ ...prev, [name]: value }));
+    setInputs(prev => ({ ...prev, [name]: value }));
   };
 
   const setInputsToItemData = (item: CollectionItem) => {
     setInputs({
+      id: item._id,
       name: item.name,
       imageUrl: item.imageUrl,
       price: item.price + "",
-      size: item.size,
+      category: item.category,
+      inventory: {
+        small: "",
+        medium: "",
+        large: "",
+        xlarge: ""
+      },
       season: item.season,
-      description: item.description,
+      description: item.description
     });
   };
 
@@ -150,71 +213,68 @@ const ProductAdmin = () => {
   const load = () => {
     setResults([
       ...results,
-      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000)),
+      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
     ]);
   };
 
+
+
   return (
     <Main>
-      <AdminMenu />
-      <Box basis="large" pad="small">
-        {collections.map((collection: Collection) => (
-          <Table>
-            <TableHeader>
-              <Heading level="3">{collection.title}</Heading>
-              <TableRow>
-                <TableCell scope="col" border="bottom">
-                  Product Id
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Product name
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Price
-                </TableCell>
-                {/* <TableCell scope="col" border="bottom">
+    <AdminMenu />
+    <Box basis="large" pad="small">
+    {collections.map((collection: Collection) => (
+      <Table >
+        <TableHeader>
+          <Heading level="3">{collection.title}</Heading>
+          <TableRow>
+            <TableCell scope="col" border="bottom">
+             Product Id
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Product name
+            </TableCell>
+            <TableCell scope="col" border="bottom">
+              Price
+            </TableCell>
+            {/* <TableCell scope="col" border="bottom">
              Category
             </TableCell> */}
+          </TableRow>
+        </TableHeader>
+        {collection.items.map((item: CollectionItem) => (
+        <TableBody>
+          <InfiniteScroll
+            renderMarker={marker => (
+              <TableRow>
+                <TableCell>{marker}</TableCell>
               </TableRow>
-            </TableHeader>
-            {collection.items.map((item: CollectionItem) => (
-              <TableBody>
-                <InfiniteScroll
-                  renderMarker={(marker) => (
-                    <TableRow>
-                      <TableCell>{marker}</TableCell>
-                    </TableRow>
-                  )}
-                  scrollableAncestor="window"
-                  items={results}
-                  onMore={() => load()}
-                  step={length}
-                >
-                  {(result) => (
-                    <TableRow key={item.id}>
-                      <TableCell
-                        border="bottom"
-                        onClick={() => {
-                          setEditOrAdd("edit");
-                          setInputsToItemData(item);
-                          setItemToEdit(item);
-                          onOpen();
-                        }}
-                      >
-                        {item.id}
-                      </TableCell>
-                      <TableCell border="bottom">{item.name}</TableCell>
-                      <TableCell border="bottom">{item.price}</TableCell>
-                      {/* <TableCell border="bottom">{collection.title}</TableCell> */}
-                    </TableRow>
-                  )}
-                </InfiniteScroll>
-              </TableBody>
-            ))}
-          </Table>
+            )}
+            scrollableAncestor="window"
+            items={results}
+            onMore={() => load()}
+            step={length}
+          >
+            {result => (
+              <TableRow key={item._id} >
+                <TableCell border="bottom" onClick={() => {
+                      setEditOrAdd("edit");
+                      setInputsToItemData(item);
+                      setItemToEdit(item);
+                      onOpen();
+                    }}>{item._id}</TableCell>
+                <TableCell border="bottom">{item.name}</TableCell>
+                <TableCell border="bottom">{item.price}</TableCell>
+              </TableRow>
+              
+            )}
+          </InfiniteScroll>
+        </TableBody>
         ))}
+      </Table>
+      ))}
       </Box>
-      {/* {open && (
+      {open && (
         <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large">
             <Form validate="blur">
@@ -226,7 +286,7 @@ const ProductAdmin = () => {
                 height="large"
               >
                 <Heading size="xsmall">{category}</Heading>
-                <Text>ID: {calculateNextItemId()}</Text>
+      <Text>ID: {}item.id</Text>
                 <FormFieldLabel
                   name="ProductName"
                   label="Product name"
@@ -271,74 +331,6 @@ const ProductAdmin = () => {
                   name="Description"
                   required
                   onChange={e => handleInputs("description", e.target.value)}
-                />
-                {editOrAdd === "add" ? (
-                  <Button onClick={addToCollection} label="Add to collection" />
-                ) : (
-                  <Button onClick={editItem} label="Submit edit" />
-                )}
-              </Box>
-            </Form>
-          </Box>
-        </Layer>
-      )} */}
-      {open && (
-        <Layer position="center" onClickOutside={onClose}>
-          <Box width="large" height="large">
-            <Form validate="blur">
-              <Box
-                background="light-3"
-                width="large"
-                pad="medium"
-                justify="between"
-                height="large"
-              >
-                <Heading size="xsmall">{category}</Heading>
-                <Text>ID: {calculateNextItemId()}</Text>
-                <FormFieldLabel
-                  name="ProductName"
-                  label="Product name"
-                  required
-                  type="text"
-                  value={inputs.name}
-                  onChange={(e) => handleInputs("name", e.target.value)}
-                />
-                <FormFieldLabel
-                  name="Price"
-                  label="Price"
-                  required
-                  type="text"
-                  value={inputs.price}
-                  onChange={(e) => handleInputs("price", e.target.value)}
-                />
-                <FormFieldLabel
-                  name="ImageUrl"
-                  label="Image URL"
-                  required
-                  type="text"
-                  value={inputs.imageUrl}
-                  onChange={(e) => handleInputs("imageUrl", e.target.value)}
-                />
-                <Text>Sizes</Text>
-                <Box direction="row">
-                  <CheckBox label="small" />
-                  <CheckBox label="medium" onChange={() => {}} />
-                  <CheckBox label="large" onChange={() => {}} />
-                  <CheckBox label="xlarge" onChange={() => {}} />
-                </Box>
-                <Text>Seasons</Text>
-                <Box direction="row">
-                  <CheckBox label="spring" onChange={() => {}} />
-                  <CheckBox label="summer" onChange={() => {}} />
-                  <CheckBox label="autumn" onChange={() => {}} />
-                  <CheckBox label="winter" onChange={() => {}} />
-                </Box>
-                <Text>Description</Text>
-                <TextArea
-                  value={inputs.description}
-                  name="Description"
-                  required
-                  onChange={(e) => handleInputs("description", e.target.value)}
                 />
                 {editOrAdd === "add" ? (
                   <Button onClick={addToCollection} label="Add to collection" />

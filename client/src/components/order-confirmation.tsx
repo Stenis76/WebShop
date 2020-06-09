@@ -34,9 +34,9 @@ const OrderConfirmation = (props: IProps) => {
         <span>Paying with: </span>
         <span>{paymentMethod}</span>
         <span>Shipping with: </span>
-        <span>{selectedShippingMethod}</span>
+        <span>{selectedShippingMethod.shipmentCompany}</span>
         <span>Estimated delivery: </span>
-        <span>{new Date().toLocaleString()}</span>
+        <span>{selectedShippingMethod.deliveryDate}</span>
       </StyledGrid>
       <h4>Items</h4>
 

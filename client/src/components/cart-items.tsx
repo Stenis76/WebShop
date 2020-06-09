@@ -23,7 +23,6 @@ const CartItems = () => {
     selectedShippingMethod,
   } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
-
   const shippingCost = selectedShippingMethod
     ? selectedShippingMethod.shippingCost
     : 0;
