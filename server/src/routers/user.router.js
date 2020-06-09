@@ -63,11 +63,7 @@ router.post("/api/users/auth", async (req, res) => {
   }
 });
 // LOGOUT
-router.post("/api/logout/:userId", isAuthenticated, (req, res, next) => {
-  console.log("logga ut");
-
-  logOutUser(req, res, next);
-});
+router.post("/api/logout", isAuthenticated,logOutUser);
 
 // DELETE
 router.delete("/api/users/:userId", isAuthenticated, async (req, res) => {
