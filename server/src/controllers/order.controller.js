@@ -4,9 +4,11 @@ const Order = require("../models/order.model");
 getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find();
+    console.log("mina ordrar", orders);
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 };
 
@@ -20,7 +22,6 @@ getOneOrder = async (req, res) => {
 // CREATE
 createNewOrder = (req, res) => {
   const order = new Order(req.body);
-  console.log("får vi något kul?", order);
 
   order.save((err, order) => {
     if (err) {
