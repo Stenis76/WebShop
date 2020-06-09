@@ -8,7 +8,7 @@ const ProductSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   price: {
@@ -58,10 +58,9 @@ const ProductSchema = new mongoose.Schema({
   },
 });
 
-
 const Product = mongoose.model("Product", ProductSchema);
 
 module.exports = {
   Product,
-  ProductSchema
+  ProductSchema,
 };
