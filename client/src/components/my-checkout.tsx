@@ -54,6 +54,9 @@ const MyCheckOut = () => {
     setShowModal(true);
   };
 
+  console.log(user.phoneNumber, "detta är telenr");
+
+
   return (
     <Box gridArea="myCheckOut" background="light-6" round="small">
       <Accordion multiple={false} activeIndex={activeIndex} gridArea="myCheckOut">
