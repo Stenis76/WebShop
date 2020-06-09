@@ -1,7 +1,7 @@
 // ----- PRODUCTS ------ // 
 ###
 // GET ONE PRODUCT BY ID. 
-GET http://localhost:3002/api/product/5ec58257ddd9dde2cba0693e
+GET http://localhost:3002/api/product/5ec7853e1f3a4e16bcf55bea
 
 ###
 // GET ALL PRODUCTS. 
@@ -14,17 +14,17 @@ Content-Type: application/json
 
 {
   "name": "Burgundy T-shirt",
-  "imageUrl": "https://i.ibb.co/mh3VM1f/polka-dot-shirt.png",
+  "image": "5ede93693aaed446464f5cd0",
   "price": 25,
   "category": ["Mens", "All"],
   "season": ["vår", "sommar"],
   "inventory": {
-    "small": 40,
+    "small": 60,
     "medium": 40,
-    "large": 50,
-    "xlarge": 30
+    "large": 15,
+    "xlarge": 20
   },
-  "description": "Vackert, stilfullt, trendigt. Allt du behöver i ett plagg."
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 }
 
 ###

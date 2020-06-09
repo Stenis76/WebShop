@@ -16,6 +16,7 @@ const Item = ({ item, history, match, location }: Iprops) => {
 
   useEffect(() => {
     const id = location.search.slice(4, location.search.length);
+
     if (Number(id) === item._id) {
       setShow(true);
     }
@@ -25,6 +26,8 @@ const Item = ({ item, history, match, location }: Iprops) => {
     history.push(match.url);
     setShow(false);
   };
+
+
 
   const openModal = () => {
     history.push(
@@ -48,6 +51,7 @@ const Item = ({ item, history, match, location }: Iprops) => {
       margin="small"
     >
       <Box
+      
         direction="row"
         background="rgba(255,255,255,0.8)"
         width="100%"
