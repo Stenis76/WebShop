@@ -13,8 +13,11 @@ const PaymentForm = (props: IProps) => {
   const { user, updateUser } = useContext(UserContext);
   const { paymentMethod, setPaymentMethod } = useContext(CartContext);
 
+  console.log(user.card, "detta är user.card");
+  
+
   return (
-    <Form style={{ gridArea: "name" }}>
+    <Form validate="submit" style={{ gridArea: "name" }}>
       <RadioButtonGroup
         margin={{ vertical: "medium" }}
         direction="row"
@@ -35,7 +38,7 @@ const PaymentForm = (props: IProps) => {
           key={1}
           name="email"
           label="Email"
-          required
+          required={true}
           type="email"
           value={user.email}
         />
@@ -44,7 +47,7 @@ const PaymentForm = (props: IProps) => {
           key={2}
           name="phoneNumber"
           label="Phone number"
-          required
+          required={true}
           type="number"
           value={user.phoneNumber}
         />
@@ -53,7 +56,7 @@ const PaymentForm = (props: IProps) => {
           key={3}
           name="card"
           label="Card"
-          required
+          required={true}
           type="number"
           value={user.card}
           onChange={(e) => updateUser("card", e.target.value)}
