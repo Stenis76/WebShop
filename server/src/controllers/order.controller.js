@@ -19,17 +19,14 @@ getOneOrder = async (req, res) => {
 
 // CREATE
 createNewOrder = (req, res) => {
-  const order = new Order({
-    userId: req.body.userId,
-    productId: req.body.productId,
-    freightId: req.body.freightId,
-    paymentMethod: req.body.paymentMethod,
-    activeOrder: req.body.activeOrder,
-  });
+  const order = new Order(req.body);
+  console.log("får vi något kul?", order);
 
   order.save((err, order) => {
-    if (err) res.status(400).json(err);
-    else res.status(201).json(order);
+    if (err) {
+      console.log("error", err);
+      res.status(400).json(err);
+    } else res.status(201).json(order);
   });
 };
 
