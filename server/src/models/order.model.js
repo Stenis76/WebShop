@@ -7,8 +7,8 @@ const OrderSchema = new mongoose.Schema({
     required: true,
     ref: "User",
   },
-  productId: {
-    type: [mongoose.Types.ObjectId],
+  products: {
+    type: [ProductSchema],
     required: true,
   },
   freightId: {
@@ -26,6 +26,7 @@ const OrderSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     trim: true,
+    default: true,
   },
 });
 
