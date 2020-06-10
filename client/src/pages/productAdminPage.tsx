@@ -140,7 +140,7 @@ const ProductAdmin: FC<IProps> = () => {
             name: inputs.name,
             imageUrl: inputs.image,
             price: Number(inputs.price),
-            inventory: inputs.inventory,
+            // inventory:
             season: inputs.season,
             description: inputs.description,
           };
@@ -185,6 +185,17 @@ const ProductAdmin: FC<IProps> = () => {
       console.log("kan ej uppdatera produkt", error.message);
     }
   };
+
+  //  const calculateNextItemId = () => {
+  //    let highestId =
+  //      collections
+  //        .map(collection => collection.items.map(item => item.id))
+  //        .flat()
+  //        .sort((a, b) => a - b)
+  //        .pop() || 0;
+
+  //    return highestId + 1;
+  //  };
 
   const handleInputs = (name: string, value: string) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
@@ -324,21 +335,21 @@ const ProductAdmin: FC<IProps> = () => {
                     value={inputs.inventory.small}
                   />
                   <FormFieldLabel
-                    name="SizeMedium"
+                    name="SizeSmall"
                     label="Medium"
                     required
                     value={inputs.inventory.medium}
                     onChange={() => {}}
                   />
                   <FormFieldLabel
-                    name="SizeLarge"
+                    name="SizeSmall"
                     label="Large"
                     required
                     value={inputs.inventory.large}
                     onChange={() => {}}
                   />
                   <FormFieldLabel
-                    name="SizeXLarge"
+                    name="SizeSmall"
                     label="XLarge"
                     required
                     value={inputs.inventory.xlarge}
@@ -359,13 +370,10 @@ const ProductAdmin: FC<IProps> = () => {
                   required
                   onChange={(e) => handleInputs("description", e.target.value)}
                 />
-                {editOrAdd === "add" ? (
-                  <Button
-                    onClick={updateProductToDb}
-                    label="Add to collection"
-                  />
+                 {editOrAdd === "add" ? (
+                   <Button onClick={updateProductToDb} label="Add to collection" />
                 ) : (
-                  <Button onClick={updateProductToDb} label="Submit edit" />
+                   <Button onClick={updateProductToDb} label="Submit edit" />
                 )}
               </Box>
             </Form>
