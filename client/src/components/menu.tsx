@@ -81,7 +81,7 @@ const MyMenu = () => {
         }
       </ResponsiveContext.Consumer>
       <Text size="medium">
-        {user.role ? <Link className="link" to="/admin/product">Admin</Link> : null }
+        {user.role === "admin" ? <Link className="link" to="/admin/product">Admin</Link> : null }
           
       </Text>
     </Box>
