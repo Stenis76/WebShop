@@ -15,5 +15,5 @@ const FreightSchema = mongoose.Schema({
   },
 });
 
-const FreightModel = mongoose.model("freight", FreightSchema);
+const FreightModel = mongoose.model("Freight", FreightSchema);
 module.exports = FreightModel;

@@ -117,8 +117,12 @@ const OrderAdmin = (props) => {
                   >
                     {item._id}
                   </TableCell>
-                  <TableCell border="bottom">{item.userId.firstName}</TableCell>
-                  <TableCell border="bottom">{item.freightId}</TableCell>
+                  <TableCell border="bottom">
+                    {item.userId.firstName} {item.userId.lastName}{" "}
+                  </TableCell>
+                  <TableCell border="bottom">
+                    {item.freightId.shipmentCompany}
+                  </TableCell>
                   {/* <TableCell border="bottom">2020-01-07</TableCell> */}
                 </TableRow>
               )}
