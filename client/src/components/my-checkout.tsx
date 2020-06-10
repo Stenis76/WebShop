@@ -38,15 +38,20 @@ const MyCheckOut = () => {
     const validShippingInfo = () => 
     selectedShippingMethod;
 
+    
+
     const validPayment = () => {
       if(paymentMethod === "card"){
+        if (undefined !== user.card && user.card.length) {
        return user.card.length === 16 
-      } else if(paymentMethod === "swish"){
+      }} else if(paymentMethod === "swish"){
         return user.phoneNumber.length > 8
       } else {
         return validateEmail(user.email)
       }
     }
+
+
 
     const validateEmail = (email: string) => {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
