@@ -11,10 +11,9 @@ POST http://localhost:3002/api/freight
 Content-Type: application/json
 
 {
-  "shipmentCompany": "Skriv nytt fraktalternativ här",
-  "orderId": "1111",
-  "deliveryDate": "000000",
-  "shippingCost": "00"
+  "shipmentCompany": "DHL",
+  "deliveryDate": "24",
+  "shippingCost": "7"
 }
 
 ###

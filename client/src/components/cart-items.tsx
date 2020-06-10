@@ -37,6 +37,7 @@ const CartItems = () => {
 
     return total + shippingCost;
   };
+  let banest;
   
   const calculateVat = () => {
     let total = calculateTotal();
