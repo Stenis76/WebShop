@@ -1,22 +1,43 @@
 const Order = require("../models/order.model");
+const User = require("../models/user.model");
 
 // GET ALL
 getAllOrders = async (req, res) => {
-  try {
-    const orders = await Order.find();
-    console.log("mina ordrar", orders);
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-    console.log(err);
-  }
+  const order = await Order.find()
+    .populate("userId")
+    // .exec(function (err, order) {
+    //   if (err) console.log(err);
+    //   this will log all of the users with each of their posts
+    //   else console.log("borde ha en full user", order);
+    // });
+
+    .then((order) => res.status(200).json(order))
+    .catch((err) => res.status(500).json(err));
+  console.log("orders", order);
 };
+
+//   try {
+//     const orders = await Order.find();
+//     populate("User")
+//     console.log("mina ordrar", orders);
+//     res.status(200).json(orders);
+//   } catch (err) {
+//     res.status(500).json(err);
+//     console.log(err);
+//   }
+// };
 
 // GET ONE
 getOneOrder = async (req, res) => {
   Order.findById(req.params.orderId)
-    .then((post) => res.status(200).json(post))
-    .catch((err) => res.status(500).json(err));
+    .populate("userId")
+    .exec(function (err, order) {
+      if (err) return handleError(err);
+      console.log("The order is %s", order.user);
+      // prints "The author is Ian Fleming"
+    });
+  // .then((post) => res.status(200).json(post))
+  // .catch((err) => res.status(500).json(err));
 };
 
 // CREATE
