@@ -332,28 +332,29 @@ const ProductAdmin: FC<IProps> = () => {
                     name="SizeSmall"
                     label="Small"
                     required
-                    value={inputs.inventory.small}
+                    value={item.inventory.small}
+                    onChange={(e) => handleInputs("SizeSmall", e.target.value)}
                   />
                   <FormFieldLabel
-                    name="SizeSmall"
+                    name="SizeMedium"
                     label="Medium"
                     required
-                    value={inputs.inventory.medium}
-                    onChange={() => {}}
+                    value={item.inventory.medium}
+                    onChange={(e) => handleInputs("SizeMedium", e.target.value)}
                   />
                   <FormFieldLabel
-                    name="SizeSmall"
+                    name="SizeLarge"
                     label="Large"
                     required
                     value={inputs.inventory.large}
-                    onChange={() => {}}
+                    onChange={(e) => handleInputs("SizeLarge", e.target.value)}
                   />
                   <FormFieldLabel
-                    name="SizeSmall"
+                    name="SizeXLarge"
                     label="XLarge"
                     required
                     value={inputs.inventory.xlarge}
-                    onChange={() => {}}
+                    onChange={(e) => handleInputs("SizeXLarge", e.target.value)}
                   />
                 </Box>
                 <Text>Seasons</Text>
