@@ -14,7 +14,6 @@ const OrderSchema = new mongoose.Schema({
   freightId: {
     type: mongoose.Types.ObjectId,
     required: true,
-    trim: true,
     ref: "Freight",
   },
   paymentMethod: {

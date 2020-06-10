@@ -69,6 +69,8 @@ const SignUp = () => {
     ? "The password do not match"
     : undefined;
 
+    
+
   return (
     <div className="sign-up">
       <h1>Create an account</h1>
@@ -87,7 +89,7 @@ const SignUp = () => {
             onChange={handleChange}
             label="Name"
             required={true}
-            validate={{ regexp: /^[a-öA-ö]/, message: "Please use letters to enter your FirstName" }}
+            validate={{ regexp: /^[a-öA-ö]/, message: "Please use letters to enter your firstname" }}
             // size="xsmall"
           />
           <FormField
@@ -141,8 +143,8 @@ const SignUp = () => {
             label="Phone number"
             required={true}
             validate={{
-              regexp: /^[0-9]{8,9}$/,
-              message: "Please use at least 8 numbers to enter your number"
+              regexp: /^[0-9]{4,14}(?:x.+)?$/,
+              message: "Please enter a valid phone number, at least 8 digits"
             }}
             // size="xsmall"
           />

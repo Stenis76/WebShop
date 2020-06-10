@@ -29,13 +29,14 @@ const ShippingForm = (props: IProps) => {
     return date.toLocaleDateString();
   };
 
+
   return (
     <div>
       <Text weight="bold" alignSelf="start">
         Choose your prefered delivery partner{" "}
       </Text>
       {shippingMethods.map((freight) => (
-        <Form key={freight._id} style={{ gridArea: "name" }}>
+        <Form validate="submit" key={freight._id} style={{ gridArea: "name" }}>
           <Box align="center" pad="medium">
             <ResponsiveContext.Consumer>
               {(responsive) =>
@@ -64,6 +65,7 @@ const ShippingForm = (props: IProps) => {
                       setSelectedShippingMethod(method);
                     }}
                     checked={freight._id === selectedShippingMethod?._id}
+                    required={true}
                     {...props}
                   />
                 )

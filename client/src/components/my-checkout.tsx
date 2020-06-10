@@ -19,7 +19,7 @@ const MyCheckOut = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
 
-  const { cart, clearCart, paymentMethod, createOrder } = useContext(
+  const { cart, clearCart, paymentMethod, createOrder, selectedShippingMethod } = useContext(
     CartContext
   );
   const history = useHistory();
@@ -34,6 +34,29 @@ const MyCheckOut = () => {
     user.address.length > 1 &&
     user.city.length > 1 &&
     user.postCode.length > 1;
+
+    const validShippingInfo = () => 
+    selectedShippingMethod;
+
+    
+
+    const validPayment = () => {
+      if(paymentMethod === "card"){
+        if (undefined !== user.card && user.card.length) {
+       return user.card.length === 16 
+      }} else if(paymentMethod === "swish"){
+        return user.phoneNumber.length > 8
+      } else {
+        return validateEmail(user.email)
+      }
+    }
+
+
+
+    const validateEmail = (email: string) => {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+  }
 
   const closeModal = () => {
     history.push("/");
@@ -71,7 +94,7 @@ const MyCheckOut = () => {
             <Button
               alignSelf="center"
               primary
-              disabled={!validUserInformation()}
+              disabled={!validShippingInfo()}
               onClick={() => setActiveIndex(2)}
               label="NEXT"
               margin={{ top: "medium" }}
@@ -81,14 +104,21 @@ const MyCheckOut = () => {
         <AccordionPanel onClick={() => setActiveIndex(2)} label="Payment">
           <Box pad="medium" background="light-2">
             <PaymentForm />
+            <Button
+              alignSelf="center"
+              primary
+              disabled={!validPayment()}
+              onClick={() => setActiveIndex(3)}
+              label="NEXT"
+              margin={{ top: "medium" }}
+            />
           </Box>
         </AccordionPanel>
-        {activeIndex === 2 &&
+        <AccordionPanel onClick={() => setActiveIndex(3)} label="Place order">
+          <Box pad="medium" background="light-2">
+          {activeIndex === 3 &&
         !loading &&
-        validUserInformation() &&
-        (paymentMethod === "card" ||
-          paymentMethod === "swish" ||
-          paymentMethod === "invoice") ? (
+        validUserInformation() ? (
           <Button
             margin="medium"
             primary
@@ -98,6 +128,9 @@ const MyCheckOut = () => {
         ) : (
           <Button margin="medium" primary disabled label="Place your order" />
         )}
+          </Box>
+        </AccordionPanel>
+        
       </Accordion>
 
       {showModal && (

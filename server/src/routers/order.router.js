@@ -10,9 +10,7 @@ const {
 } = require("../controllers/order.controller");
 
 // GET ALL
-router.get("/api/order", async (req, res) => {
-  getAllOrders(req, res);
-});
+router.get("/api/order", getAllOrders);
 
 // GET ONE
 router.get("/api/order/:orderId", (req, res) => {

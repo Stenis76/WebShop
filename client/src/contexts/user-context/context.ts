@@ -20,6 +20,7 @@ export interface IUser {
   postCode: string;
   city: string;
   card: string;
+  role: string;
 }
 export const initialUser: IUser = {
   _id: "",
@@ -31,6 +32,7 @@ export const initialUser: IUser = {
   postCode: "",
   city: "",
   card: "",
+  role: ""
 };
 
 export default React.createContext<IState>({
