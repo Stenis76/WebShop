@@ -69,7 +69,6 @@ const SignUp = () => {
     ? "The password do not match"
     : undefined;
 
-    console.log(user.phoneNumber, "detta är telenr");
     
 
   return (
@@ -144,7 +143,7 @@ const SignUp = () => {
             label="Phone number"
             required={true}
             validate={{
-              regexp: /^(\+|00)[0-9]{1,3}[0-9]{4,14}(?:x.+)?$/,
+              regexp: /^[0-9]{4,14}(?:x.+)?$/,
               message: "Please enter a valid phone number, at least 8 digits"
             }}
             // size="xsmall"

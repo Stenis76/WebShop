@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
@@ -39,9 +39,6 @@ const MyCheckOut = () => {
     selectedShippingMethod;
 
 
-    const validPayment = () => 
-     user.card != undefined 
-
   const closeModal = () => {
     history.push("/");
     setShowModal(false);
@@ -54,12 +51,9 @@ const MyCheckOut = () => {
     setShowModal(true);
   };
 
-  console.log(user.phoneNumber, "detta är telenr");
-
-
   return (
     <Box gridArea="myCheckOut" background="light-6" round="small">
-      <Accordion multiple={false} activeIndex={activeIndex} gridArea="myCheckOut">
+      <Accordion activeIndex={activeIndex} gridArea="myCheckOut">
         <AccordionPanel onClick={() => setActiveIndex(0)} label="Contacts">
           <Box pad="medium" background="light-2">
             <ContactFormField>
@@ -85,35 +79,42 @@ const MyCheckOut = () => {
               onClick={() => setActiveIndex(2)}
               label="NEXT"
               margin={{ top: "medium" }}
-              type="submit"
             />
           </Box>
         </AccordionPanel>
         <AccordionPanel onClick={() => setActiveIndex(2)} label="Payment">
           <Box pad="medium" background="light-2">
             <PaymentForm />
+            <Button
+              alignSelf="center"
+              primary
+              disabled={!validShippingInfo()}
+              onClick={() => setActiveIndex(3)}
+              label="NEXT"
+              margin={{ top: "medium" }}
+            />
           </Box>
         </AccordionPanel>
-        {activeIndex === 2 &&
+        <AccordionPanel onClick={() => setActiveIndex(3)} label="Place prder">
+          <Box pad="medium" background="light-2">
+          {activeIndex === 3 &&
         !loading &&
         validUserInformation() &&
-        (paymentMethod === "card"
-         ) ? (
+        (paymentMethod === "card" ||
+          paymentMethod === "swish" ||
+          paymentMethod === "invoice") ? (
           <Button
             margin="medium"
             primary
             label="Place your order"
-            disabled={!validPayment()}
             onClick={pay}
           />
         ) : (
-          <Button
-            margin="medium"
-            primary
-            label="Place your order"
-            onClick={pay}
-          />
+          <Button margin="medium" primary disabled label="Place your order" />
         )}
+          </Box>
+        </AccordionPanel>
+        
       </Accordion>
 
       {showModal && (
