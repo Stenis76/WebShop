@@ -128,9 +128,19 @@ const Shop: FC<IProps> = () => {
           })
         : getCurrentCollectionItems().map((item: CollectionItem) => (
             <Item key={item._id} item={item} />
-          ))}
+            ))}
     </Box>
   );
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3002/api/product")
+  //     .then((res) => {
+  //       console.log(res.data[0].inventory.small);
+  //       res.data[0].inventory.small --;
+  //       console.log(res.data[0].inventory.small);
+  //     })
+  // }, []);
+  
   const directory = <Directory key="1" />;
 
   const components = {
