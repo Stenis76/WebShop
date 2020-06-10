@@ -16,7 +16,8 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TableHeader
+  TableHeader,
+  TextInput
 } from "grommet";
 
 import FormFieldLabel from "../components/form-field-fabel";
@@ -56,9 +57,11 @@ const ProductAdmin:  FC<IProps> = () => {
   const onClose = () => setOpen(false);
   console.log("check this out" + initialInputs)
 
+
+  //
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/product")
+      .get("http://localhost:3002/api/product", )
       .then((res) => {
         mapDbProductsToCollection(res.data);
       })
@@ -156,7 +159,7 @@ const ProductAdmin:  FC<IProps> = () => {
           collection.items[itemIndex] = {
             ...itemToEdit,
             name: inputs.name,
-            // imageUrl: inputs.imageUrl,
+             imageUrl: inputs.image,
             price: Number(inputs.price),
             // inventory:
             season: inputs.season,
@@ -164,8 +167,44 @@ const ProductAdmin:  FC<IProps> = () => {
           };
         }
       }
-      return collection;
+
+    //   axios.put('http://localhost:3002/api/product', updateProduct)
+    //   .then(res => console.log(res.data))
+
+    return collection;
+  });
+}
+///
+const updateProductToDb =  async () => {
+  console.log("update product");
+  
+  try {
+    const updateProduct = {
+    id: inputs.id, 
+    name: inputs.name,
+    image: inputs.image,
+    price: inputs.price,
+    category: inputs.category,
+    inventory: inputs.inventory,
+    season: inputs.season,
+    description: inputs.description
+    }
+    const res = await fetch("http://localhost:8080/api/product/" + inputs.id, 
+      {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      },
+    credentials: "include",
+    body: JSON.stringify(updateProduct),
     });
+  console.log(res);
+  const data = await res.json();
+  } 
+  catch (error) {
+    console.log("kan ej uppdatera produkt", error.message);
+  }
+}
 
     // setCollections(updatedCollections);
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
@@ -285,7 +324,7 @@ const ProductAdmin:  FC<IProps> = () => {
                 height="large"
               >
                 <Heading size="xsmall">{category}</Heading>
-      <Text>ID: {}item.id</Text>
+      <Text>ID: {inputs.id}</Text>
                 <FormFieldLabel
                   name="ProductName"
                   label="Product name"
@@ -312,10 +351,10 @@ const ProductAdmin:  FC<IProps> = () => {
                 />
                 <Text>Sizes</Text>
                 <Box direction="row">
-                  <CheckBox label="small" />
-                  <CheckBox label="medium" onChange={() => {}} />
-                  <CheckBox label="large" onChange={() => {}} />
-                  <CheckBox label="xlarge" onChange={() => {}} />
+                  <FormFieldLabel name="SizeSmall" label="Small" required value={inputs.inventory.small}/>
+                  <FormFieldLabel name="SizeSmall" label="Medium" required value={inputs.inventory.medium} onChange={() => {}} />
+                  <FormFieldLabel name="SizeSmall" label="Large" required value={inputs.inventory.large} onChange={() => {}} />
+                  <FormFieldLabel name="SizeSmall" label="XLarge" required value={inputs.inventory.xlarge} onChange={() => {}} />
                 </Box>
                 <Text>Seasons</Text>
                 <Box direction="row">
@@ -332,9 +371,9 @@ const ProductAdmin:  FC<IProps> = () => {
                   onChange={e => handleInputs("description", e.target.value)}
                 />
                 {editOrAdd === "add" ? (
-                  <Button onClick={addToCollection} label="Add to collection" />
+                  <Button onClick={updateProductToDb} label="Add to collection" />
                 ) : (
-                  <Button onClick={editItem} label="Submit edit" />
+                  <Button onClick={updateProductToDb} label="Submit edit" />
                 )}
               </Box>
             </Form>
