@@ -40,6 +40,8 @@ const UserContextProvider: FC<IProps> = (props) => {
 
   //UPDATE
   const updateUser = (key: string, value: string) => {
+    console.log(key, value);
+    
     setUser((prev) => ({
       ...prev,
       [key]: value,

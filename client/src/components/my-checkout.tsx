@@ -38,6 +38,20 @@ const MyCheckOut = () => {
     const validShippingInfo = () => 
     selectedShippingMethod;
 
+    const validPayment = () => {
+      if(paymentMethod === "card"){
+       return user.card.length === 16 
+      } else if(paymentMethod === "swish"){
+        return user.phoneNumber.length > 8
+      } else {
+        return validateEmail(user.email)
+      }
+    }
+
+    const validateEmail = (email: string) => {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+  }
 
   const closeModal = () => {
     history.push("/");
@@ -88,21 +102,18 @@ const MyCheckOut = () => {
             <Button
               alignSelf="center"
               primary
-              disabled={!validShippingInfo()}
+              disabled={!validPayment()}
               onClick={() => setActiveIndex(3)}
               label="NEXT"
               margin={{ top: "medium" }}
             />
           </Box>
         </AccordionPanel>
-        <AccordionPanel onClick={() => setActiveIndex(3)} label="Place prder">
+        <AccordionPanel onClick={() => setActiveIndex(3)} label="Place order">
           <Box pad="medium" background="light-2">
           {activeIndex === 3 &&
         !loading &&
-        validUserInformation() &&
-        (paymentMethod === "card" ||
-          paymentMethod === "swish" ||
-          paymentMethod === "invoice") ? (
+        validUserInformation() ? (
           <Button
             margin="medium"
             primary
