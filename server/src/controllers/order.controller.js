@@ -1,10 +1,11 @@
 const Order = require("../models/order.model");
-const User = require("../models/user.model");
 
 // GET ALL
 getAllOrders = async (req, res) => {
   const order = await Order.find()
     .populate("userId")
+    .populate("freightId")
+
     .then((order) => res.status(200).json(order))
     .catch((err) => res.status(500).json(err));
   console.log("orders", order);
