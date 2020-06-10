@@ -2,17 +2,19 @@ const Order = require("../models/order.model");
 
 // GET ALL
 getAllOrders = async (req, res) => {
-  try {
-    const orders = await Order.find();
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  await Order.find()
+    .populate("userId")
+    .populate("freightId")
+
+    .then((order) => res.status(200).json(order))
+    .catch((err) => res.status(500).json(err));
 };
 
 // GET ONE
 getOneOrder = async (req, res) => {
-  Order.findById(req.params.orderId)
+  await Order.findById(req.params.orderId)
+    .populate("userId")
+
     .then((post) => res.status(200).json(post))
     .catch((err) => res.status(500).json(err));
 };
@@ -20,7 +22,6 @@ getOneOrder = async (req, res) => {
 // CREATE
 createNewOrder = (req, res) => {
   const order = new Order(req.body);
-  console.log("får vi något kul?", order);
 
   order.save((err, order) => {
     if (err) {
