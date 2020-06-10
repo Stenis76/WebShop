@@ -40,6 +40,8 @@ const UserContextProvider: FC<IProps> = (props) => {
 
   //UPDATE
   const updateUser = (key: string, value: string) => {
+    console.log(key, value);
+    
     setUser((prev) => ({
       ...prev,
       [key]: value,
@@ -68,16 +70,14 @@ const UserContextProvider: FC<IProps> = (props) => {
   };
 
   const logout = async () => {
-    console.log("id", user._id);
-
-    fetch("http://localhost:3002/api/logout/" + user._id, {
+    fetch("http://localhost:3002/api/logout", {
       method: "POST",
       credentials: "include",
     });
-
-    await setUser(initialUser)
-    console.log('gislaved')
+    await setUser(initialUser);
     setIsAuthenticated(false);
+    console.log("hit?");
+    window.location.reload()
   };
 
   const checkForUser = async () => {

@@ -1,7 +1,7 @@
 // ----- ODER ------ // 
 ###
 // GET ONE ORDER BY ID. 
-GET http://localhost:3002/api/order/5ecbabd42d66c51f0f9cf74b
+GET http://localhost:3002/api/order/5ee07adf17a06a1394a44311
 
 ###
 // GET ALL ORDERS. 
