@@ -41,6 +41,7 @@ const PaymentForm = (props: IProps) => {
           required={true}
           type="email"
           value={user.email}
+          onChange={(e) => updateUser("email", e.target.value)}
         />
       ) : paymentMethod === "swish" ? (
         <FormFieldLabel
@@ -50,6 +51,7 @@ const PaymentForm = (props: IProps) => {
           required={true}
           type="number"
           value={user.phoneNumber}
+          onChange={(e) => updateUser("phoneNumber", e.target.value)}
         />
       ) : (
         <FormFieldLabel

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Box, Accordion, AccordionPanel, Button, Layer } from "grommet";
@@ -38,9 +38,25 @@ const MyCheckOut = () => {
     const validShippingInfo = () => 
     selectedShippingMethod;
 
+    
 
-    const validPayment = () => 
-     user.card != undefined 
+    const validPayment = () => {
+      if(paymentMethod === "card"){
+        if (undefined !== user.card && user.card.length) {
+       return user.card.length === 16 
+      }} else if(paymentMethod === "swish"){
+        return user.phoneNumber.length > 8
+      } else {
+        return validateEmail(user.email)
+      }
+    }
+
+
+
+    const validateEmail = (email: string) => {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+  }
 
   const closeModal = () => {
     history.push("/");
@@ -54,12 +70,9 @@ const MyCheckOut = () => {
     setShowModal(true);
   };
 
-  console.log(user.phoneNumber, "detta är telenr");
-
-
   return (
     <Box gridArea="myCheckOut" background="light-6" round="small">
-      <Accordion multiple={false} activeIndex={activeIndex} gridArea="myCheckOut">
+      <Accordion activeIndex={activeIndex} gridArea="myCheckOut">
         <AccordionPanel onClick={() => setActiveIndex(0)} label="Contacts">
           <Box pad="medium" background="light-2">
             <ContactFormField>
@@ -85,35 +98,39 @@ const MyCheckOut = () => {
               onClick={() => setActiveIndex(2)}
               label="NEXT"
               margin={{ top: "medium" }}
-              type="submit"
             />
           </Box>
         </AccordionPanel>
         <AccordionPanel onClick={() => setActiveIndex(2)} label="Payment">
           <Box pad="medium" background="light-2">
             <PaymentForm />
+            <Button
+              alignSelf="center"
+              primary
+              disabled={!validPayment()}
+              onClick={() => setActiveIndex(3)}
+              label="NEXT"
+              margin={{ top: "medium" }}
+            />
           </Box>
         </AccordionPanel>
-        {activeIndex === 2 &&
+        <AccordionPanel onClick={() => setActiveIndex(3)} label="Place order">
+          <Box pad="medium" background="light-2">
+          {activeIndex === 3 &&
         !loading &&
-        validUserInformation() &&
-        (paymentMethod === "card"
-         ) ? (
+        validUserInformation() ? (
           <Button
             margin="medium"
             primary
             label="Place your order"
-            disabled={!validPayment()}
             onClick={pay}
           />
         ) : (
-          <Button
-            margin="medium"
-            primary
-            label="Place your order"
-            onClick={pay}
-          />
+          <Button margin="medium" primary disabled label="Place your order" />
         )}
+          </Box>
+        </AccordionPanel>
+        
       </Accordion>
 
       {showModal && (
