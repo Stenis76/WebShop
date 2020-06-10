@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Nav, Text, Box, ResponsiveContext, Menu } from "grommet";
 import { userInfo } from "os";
-import { initialUser } from "../contexts/user-context/context"
+import UserContext from "../contexts/user-context/context";
 
 const MyMenu = () => {
   const history = useHistory();
-  // const [user, setUser] = useState(initialUser);
-  console.log(initialUser.role)
+  const { user } = useContext(UserContext);
+  console.log(user.role)
 
   return (
     <Box
@@ -81,7 +81,7 @@ const MyMenu = () => {
         }
       </ResponsiveContext.Consumer>
       <Text size="medium">
-        {initialUser.role ? <Link className="link" to="/admin/product">Admin</Link> : null }
+        {user.role ? <Link className="link" to="/admin/product">Admin</Link> : null }
           
       </Text>
     </Box>
