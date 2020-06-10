@@ -9,9 +9,9 @@ import Checkout from "./pages/checkout";
 import { Grommet, Box, grommet } from "grommet";
 import { deepMerge } from "grommet/utils";
 import ProductAdmin from "./pages/productAdminPage";
-import OrderAdmin from "./pages/orderAdminPage"
-import UserAdmin from "./pages/userAdminPage"
-import Login from "./pages/logInPage"
+import OrderAdmin from "./pages/orderAdminPage";
+import UserAdmin from "./pages/userAdminPage";
+import Login from "./pages/logInPage";
 
 const myTheme = {
   global: {
@@ -39,19 +39,17 @@ type Item = {
   price: number;
 };
 
-
 function App() {
-  
-  useEffect(() => {
-    axios
-      .get("http://localhost:3002/api/product")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3002/api/product")
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <Grommet theme={deepMerge(grommet, myTheme)} full>
