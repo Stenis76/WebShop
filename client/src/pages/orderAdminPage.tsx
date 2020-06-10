@@ -20,9 +20,10 @@ import {
   TableHeader,
 } from "grommet";
 import FormFieldLabel from "../components/form-field-fabel";
-
+import axios from "axios";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
+import Axios from "axios";
 
 const initialInputs = {
   name: "",
@@ -32,8 +33,28 @@ const initialInputs = {
   season: [""],
   description: "",
 };
+const OrderAdmin = (props) => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(false);
+  const [results, setResults] = useState();
 
-const OrderAdmin = () => {
+  useEffect(() => {
+    console.log("useeffect");
+
+    axios
+      .get("http://localhost:3002/api/order")
+      .then((res) => {
+        console.log("data från server - order", res);
+        setResults(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const step = 25;
+
   const size = useContext(ResponsiveContext) as
     | "small"
     | "medium"
@@ -53,21 +74,7 @@ const OrderAdmin = () => {
     large: ["auto", "auto"],
     xlarge: ["auto", "auto"],
   };
-
-  const [open, setOpen] = React.useState<boolean>(false);
-  const onOpen = () => setOpen(true);
-  const onClose = () => setOpen(false);
-
-  const step = 25;
-  const [results, setResults] = useState(
-    Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
-  );
-  const load = () => {
-    setResults([
-      ...results,
-      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000)),
-    ]);
-  };
+  console.log("data är sparad i state", results);
 
   return (
     <Main>
@@ -99,29 +106,23 @@ const OrderAdmin = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <InfiniteScroll
-              renderMarker={(marker) => (
-                <TableRow>
-                  <TableCell>{marker}</TableCell>
-                </TableRow>
-              )}
-              scrollableAncestor="window"
-              items={results}
-              onMore={() => load()}
-              step={step}
-            >
-              {(result) => (
-                <TableRow key={result}>
+            <InfiniteScroll items={results} {...props}>
+              {(item) => (
+                <TableRow key={item._id}>
                   <TableCell
                     border="bottom"
                     onClick={() => {
                       onOpen();
                     }}
                   >
-                    {result}
+                    {item._id}
                   </TableCell>
-                  <TableCell border="bottom">{result}</TableCell>
-                  <TableCell border="bottom">{result}</TableCell>
+                  <TableCell border="bottom">
+                    {item.userId.firstName} {item.userId.lastName}{" "}
+                  </TableCell>
+                  <TableCell border="bottom">
+                    {item.freightId.shipmentCompany}
+                  </TableCell>
                   {/* <TableCell border="bottom">2020-01-07</TableCell> */}
                 </TableRow>
               )}
