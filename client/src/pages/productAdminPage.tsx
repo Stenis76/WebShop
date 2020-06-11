@@ -177,7 +177,7 @@ const ProductAdmin: FC<IProps> = (props) => {
         ))}
       </Box>
       {open && (
-        <Layer position="center" onClick={onClose} onClickOutside={onClose}>
+        <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large" overflow="auto">
             <Form validate="blur">
               <Box
@@ -221,7 +221,13 @@ const ProductAdmin: FC<IProps> = (props) => {
                   required
                   onChange={(e) => handleInputs("description", e.target.value)}
                 />
-                <Button onClick={submitProductChanges} label="Submit edit" />
+                <Button
+                  onClick={() => {
+                    submitProductChanges();
+                    onClose();
+                  }}
+                  label="Submit edit"
+                />
               </Box>
             </Form>
           </Box>
