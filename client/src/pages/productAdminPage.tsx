@@ -187,7 +187,6 @@ const ProductAdmin: FC<IProps> = () => {
     });
   };
 
-   let inventory: string = "";
    const updateInventory = {
      inventory: inputs.inventory.small
    };
