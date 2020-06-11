@@ -51,7 +51,6 @@ const CartContextProvider: FC<IProps> = (props) => {
       freightId: selectedShippingMethod._id,
       paymentMethod: paymentMethod,
     };
-    console.log(order);
 
     const options: RequestInit = {
       method: "POST",
@@ -64,7 +63,6 @@ const CartContextProvider: FC<IProps> = (props) => {
 
     const res = await fetch("http://localhost:3002/api/neworder", options);
     const data = await res.json();
-    console.log(data);
     return data.message;
   };
 
@@ -122,7 +120,6 @@ const CartContextProvider: FC<IProps> = (props) => {
 
   const setPayment = (method: PaymentMethod) => {
     setPaymentMethod(method);
-    console.log(method);
   };
 
   const filterCartToServer = () => {

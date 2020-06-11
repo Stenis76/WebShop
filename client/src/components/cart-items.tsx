@@ -38,14 +38,14 @@ const CartItems = () => {
     return total + shippingCost;
   };
   let banest;
-  
+
   const calculateVat = () => {
     let total = calculateTotal();
     let vat = total * 0.25;
-    
+
     return vat;
   };
-  
+
   return (
     <Box responsive>
       <Table>
@@ -53,7 +53,7 @@ const CartItems = () => {
           <TableRow>
             {responsive !== "small" ? (
               <TableCell scope="col" border="bottom"></TableCell>
-              ) : null}
+            ) : null}
             <TableCell scope="col" border="bottom">
               Name
             </TableCell>
@@ -67,7 +67,6 @@ const CartItems = () => {
         </TableHeader>
         <TableBody>
           {cart.map((item: CollectionItem) => (
-            
             <TableRow key={item._id}>
               {responsive !== "small" ? (
                 <TableCell>

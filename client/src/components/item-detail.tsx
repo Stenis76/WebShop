@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Box, Button, Text, Heading, Image, ResponsiveContext } from "grommet";
-
 import CartContext from "../contexts/cart-context/context";
 
 interface Iprops {
@@ -27,7 +26,6 @@ const ItemDetails = (props: Iprops) => {
           size={responsive === "small" ? "small" : "large"}
         >
           {props.item.name}
-          {console.log(props.item)}
         </Heading>
         <Heading
           color="#c96d36"
@@ -51,24 +49,7 @@ const ItemDetails = (props: Iprops) => {
         </Box>
         <Box justify="between">
           <Text style={{ fontWeight: "bold" }}>Sizes: </Text>
-          <Box margin={{ vertical: "small" }}>
-            {/* <Text>
-              {props.item.inventory.map((sizeUnit: any, index: any) => (
-                <Text
-                  key={index}
-                  style={{
-                    backgroundColor: "#e0e0e0",
-                    padding: responsive === "small" ? "0.1rem" : "0.3rem",
-                    border: "1px solid black",
-                    color: "black",
-                    marginRight: "0.3rem"
-                  }}
-                >
-                  {sizeUnit}
-                </Text>
-              ))}
-            </Text> */}
-          </Box>
+
           <Text style={{ fontWeight: "bold" }}>Seasons: </Text>
           <Box margin={{ vertical: "small" }}>
             <Text>
@@ -80,7 +61,7 @@ const ItemDetails = (props: Iprops) => {
                     padding: responsive === "small" ? "0.1rem" : "0.3rem",
                     border: "1px solid black",
                     color: "black",
-                    marginRight: "0.3rem"
+                    marginRight: "0.3rem",
                   }}
                 >
                   {seasonUnit}

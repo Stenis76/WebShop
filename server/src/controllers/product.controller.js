@@ -1,5 +1,4 @@
 const { Product, ProductSchema } = require("../models/product.model");
-const { uploadedImg, ImgSchema } = require("../models/image.model");
 
 // GET ALL
 getAllProducts = async (req, res) => {
