@@ -85,7 +85,6 @@ const OrderAdmin = (props) => {
         <Heading level={3}>
           <Box gap="small">
             <strong>Orders</strong>
-            <Text>Here are all orders</Text>
           </Box>
         </Heading>
         <Table>
@@ -123,7 +122,6 @@ const OrderAdmin = (props) => {
                   <TableCell border="bottom">
                     {item.freightId.shipmentCompany}
                   </TableCell>
-                  {/* <TableCell border="bottom">2020-01-07</TableCell> */}
                 </TableRow>
               )}
             </InfiniteScroll>
