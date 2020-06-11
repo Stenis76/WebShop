@@ -29,9 +29,7 @@ router.delete("/api/product/:productId", async (req, res) => {
 });
 
 // UPDATE
-router.put("/api/product/:productId", async (req, res) => {
-  updateProduct(req, res);
-});
+router.put("/api/product/:productId", updateProduct);
 
 // CREATE
 router.post("/api/newproduct", (req, res) => {
