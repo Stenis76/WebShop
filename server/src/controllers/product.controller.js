@@ -55,30 +55,36 @@ deleteOneProduct = async (req, res) => {
 
 // UPDATE
 updateProduct = async (req, res) => {
-  console.log("here")
-  console.log(req.body.product.inventory.small)
-
+  console.log("here nu körskhgsjhys kjbskjsb");
   try {
-    let updatedProduct = await Product.updateOne(
-      { _id: req.params.productId },
-      {
-         $set: {
-          name: req.body.product.name,
-          image: req.body.product.image,
-          price: req.body.product.price,
-          category: req.body.product.category,
-          season: req.body.product.season,
-          inventory: {
-            small: req.body.product.inventory.small,
-            medium: req.body.product.inventory.medium,
-            large: req.body.product.inventory.large,
-            xlarge: req.body.product.inventory.xlarge,
-          },
-          description: req.body.product.description,
-        },
-      }
-    );
-    res.status(200).json(updatedProduct);
+    console.log(req.body);
+    let productUpdate = await Product.findById(req.params.productId);
+
+    productUpdate.inventory.small = req.body.inventory.small;
+
+    await productUpdate.save();
+    res.status(200).json({ message: "ok" });
+
+    // let updatedProduct = await Product.updateOne(
+
+    //   {
+    //     $set: {
+    //       name: req.body.product.name,
+    //       image: req.body.product.image,
+    //       price: req.body.product.price,
+    //       category: req.body.product.category,
+    //       season: req.body.product.season,
+    //       inventory: {
+    //         small: req.body.product.inventory.small,
+    //         medium: req.body.product.inventory.medium,
+    //         large: req.body.product.inventory.large,
+    //         xlarge: req.body.product.inventory.xlarge,
+    //       },
+    //       description: req.body.product.description,
+    //     },
+    //   }
+    // );
+    // res.status(200).json(updatedProduct);
   } catch (err) {
     res.status(500).json(err);
   }
