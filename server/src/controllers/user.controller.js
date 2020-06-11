@@ -104,7 +104,7 @@ const logOutUser = async (req, res) => {
   } catch {
     res.status(400).send("Could not log out user");
   }
-}
+};
 
 // DELETE USER
 const deleteUser = async (req, res) => {

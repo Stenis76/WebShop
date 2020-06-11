@@ -90,7 +90,7 @@ const OrderAdmin = (props) => {
         <Table>
           <TableHeader>
             <TableRow className="removeProductid">
-            <TableCell scope="col" border="bottom">
+              <TableCell scope="col" border="bottom">
                 User Id
               </TableCell>
               <TableCell scope="col" border="bottom">
@@ -99,18 +99,13 @@ const OrderAdmin = (props) => {
               <TableCell scope="col" border="bottom">
                 Customer
               </TableCell>
-              {/* <TableCell scope="col" border="bottom">
-                  Order Date
-                </TableCell> */}
             </TableRow>
           </TableHeader>
           <TableBody>
             <InfiniteScroll items={results} {...props}>
               {(item) => (
                 <TableRow key={item._id}>
-                  <TableCell border="bottom">
-                    {item.userId._id}
-                  </TableCell>
+                  <TableCell border="bottom">{item.userId._id}</TableCell>
                   <TableCell
                     border="bottom"
                     onClick={() => {
@@ -122,7 +117,6 @@ const OrderAdmin = (props) => {
                   <TableCell border="bottom">
                     {item.userId.firstName} {item.userId.lastName}{" "}
                   </TableCell>
-                  
                 </TableRow>
               )}
             </InfiniteScroll>
@@ -130,37 +124,37 @@ const OrderAdmin = (props) => {
         </Table>
       </Box>
       {open && (
-        <Layer responsive position="center" onClick={onClose} onClickOutside={onClose}>
+        <Layer
+          responsive
+          position="center"
+          onClick={onClose}
+          onClickOutside={onClose}
+        >
           <Box width="large" height="large">
-              <Box
-                responsive
-                background="light-3"
-                width="large"
-                pad="xsmall"
-                justify="between"
-                height="large"
-              >
-                <Heading size="xsmall">Order</Heading>
-                <Box direction="column">
+            <Box
+              responsive
+              background="light-3"
+              width="large"
+              pad="xsmall"
+              justify="between"
+              height="large"
+            >
+              <Heading size="xsmall">Order</Heading>
+              <Box direction="column">
                 <Text>Order ID: 0323289238</Text>
                 <Text> User ID: 1987627376</Text>
                 <Text>Freight ID: 7384582734</Text>
                 <Text>Products</Text>
-                  <Text>Black Shoes</Text>
-                  <Text>White Hat</Text>
-                  <Text>Orange Shirt</Text>
-                </Box>
-                <Text>Shipped?</Text>
-                  <CheckBox label="Yes" onChange={() => {}} />
-                  <CheckBox label="No" onChange={() => {}} />
-                <Text>Total Price: 6724 SEK</Text>
-                <Text>Order Date: 2020-05-05</Text>
-                {/* {editOrAdd === "add" ? (
-                  <Button onClick={addToCollection} label="Add to collection" />
-                ) : (
-                  <Button onClick={editItem} label="Submit edit" />
-                )} */}
+                <Text>Black Shoes</Text>
+                <Text>White Hat</Text>
+                <Text>Orange Shirt</Text>
               </Box>
+              <Text>Shipped?</Text>
+              <CheckBox label="Yes" onChange={() => {}} />
+              <CheckBox label="No" onChange={() => {}} />
+              <Text>Total Price: 6724 SEK</Text>
+              <Text>Order Date: 2020-05-05</Text>
+            </Box>
           </Box>
         </Layer>
       )}
