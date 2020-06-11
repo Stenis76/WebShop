@@ -47,7 +47,7 @@ const Header = (props: Iprops) => {
         size="large"
       >
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          ADAM FREEDICK
+          ADAM FREDICK
         </Link>
       </Heading>
       <Box direction="row">
