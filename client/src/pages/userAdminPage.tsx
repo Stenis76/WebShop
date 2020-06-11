@@ -81,20 +81,19 @@ const UserAdmin = (props) => {
         <Heading level={3}>
           <Box gap="small">
             <strong>Users</strong>
-            <Text>Here are all users</Text>
           </Box>
         </Heading>
         <Table>
           <TableHeader>
             <TableRow>
               <TableCell scope="col" border="bottom">
-                User Id
+                User-Id
               </TableCell>
               <TableCell scope="col" border="bottom">
-                First name
+                Name
               </TableCell>
               <TableCell scope="col" border="bottom">
-                Last name
+                Role
               </TableCell>
               {/* <TableCell scope="col" border="bottom">
                   Phone number
@@ -131,10 +130,11 @@ const UserAdmin = (props) => {
                   >
                     {item._id}
                   </TableCell>
-                  <TableCell border="bottom">{item.firstName}</TableCell>
-                  <TableCell border="bottom">{item.LastName}</TableCell>
-                  {/* <TableCell border="bottom">073-370 88 17</TableCell> */}
-                  {/* <TableCell border="bottom">philip.arvidsson@medieinstitutet.se</TableCell> */}
+                  <TableCell border="bottom">
+                    {item.firstName + " "}
+                    {item.lastName}
+                  </TableCell>
+                  <TableCell border="bottom">{item.role}</TableCell>
                 </TableRow>
               )}
             </InfiniteScroll>
