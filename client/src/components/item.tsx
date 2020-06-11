@@ -27,8 +27,6 @@ const Item = ({ item, history, match, location }: Iprops) => {
     setShow(false);
   };
 
-
-
   const openModal = () => {
     history.push(
       match.url +
@@ -51,7 +49,6 @@ const Item = ({ item, history, match, location }: Iprops) => {
       margin="small"
     >
       <Box
-      
         direction="row"
         background="rgba(255,255,255,0.8)"
         width="100%"

@@ -1,6 +1,6 @@
-const Image = require('../models/image.model');
+const Image = require("../models/image.model");
 
-// GET 
+// GET
 getImg = async (req, res) => {
   try {
     const image = await Image.findById(req.params.id);
@@ -8,34 +8,33 @@ getImg = async (req, res) => {
       // todo....
     }
 
-    res.contentType(image.contentType)
-    res.send(image.data)
-
+    res.contentType(image.contentType);
+    res.send(image.data);
   } catch (error) {
-    res.status(200).send({get_error: 'Error while getting image'});
+    res.status(200).send({ get_error: "Error while getting image" });
   }
 };
 
 // POST
 newImage = (req, res) => {
-  if (!req.files || !req.files.image) {
+  if (!req.files || !req.files.image) {
     // Ingen fil har skickats med... Se till använda namn:image på input fältet...
   }
 
   const image = new Image({
     data: req.files.image.data,
-    contentType: req.files.image.mimetype
-  })
+    contentType: req.files.image.mimetype,
+  });
 
-  console.log('UPLOAD', image)
+  console.log("UPLOAD", image);
   image.save((err, image) => {
     if (err) {
       res.status(400).json(err);
     } else {
-      image.data = undefined
+      image.data = undefined;
       res.status(201).json(image);
     }
   });
 };
 
-module.exports = { newImage, getImg }
+module.exports = { newImage, getImg };

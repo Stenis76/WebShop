@@ -13,14 +13,7 @@ interface IProps {}
 
 const Shop: FC<IProps> = () => {
   const [collections, setCollection] = useState<Collection[]>([]);
-  // const [cart, setCart] = useState<CollectionItem[]>([]);
   const { category, query = "" } = useParams();
-
-  // useEffect(() => {
-  //   const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
-  //   console.log("cart", cartFromLocalStorage);
-  //   setCart(cartFromLocalStorage);
-  // }, []);
 
   useEffect(() => {
     axios
@@ -135,16 +128,6 @@ const Shop: FC<IProps> = () => {
           ))}
     </Box>
   );
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3002/api/product")
-  //     .then((res) => {
-  //       console.log(res.data[0].inventory.small);
-  //       res.data[0].inventory.small --;
-  //       console.log(res.data[0].inventory.small);
-  //     })
-  // }, []);
-
   const directory = <Directory key="1" />;
 
   const components = {

@@ -40,7 +40,7 @@ const updateFreightMethod = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}
+};
 
 // DELETE
 const deleteFreightMethod = async (req, res) => {

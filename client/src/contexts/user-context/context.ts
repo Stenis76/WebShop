@@ -32,7 +32,7 @@ export const initialUser: IUser = {
   postCode: "",
   city: "",
   card: "",
-  role: ""
+  role: "",
 };
 
 export default React.createContext<IState>({
