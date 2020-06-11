@@ -15,7 +15,7 @@ Du får då ett meddelande i terminalen att "Server is running". Gå till din we
 
 ## För att logga in som Admin
 
-Email: isabel.blomstrom@gmail.com
+Email: david@tech.com
 Lösenord: 1234
 
 
@@ -47,6 +47,12 @@ Lösenord: 1234
 
 ## Avgränsningar
 
+STORLEK: Vi har flera storlekar på produkterna i vår databas, men då det blev alldeles för mycket jobb valde vi att bara hämta en av storlekarna, så att alla produkter på hemsidan tillhör "small". Det är även "small" som updateras i databasen när admin uppdaterar lagersaldot. Man kan jämföra det med att vi skulle haft en hemsida med bara one size. I framtiden skulle detta kunna utvecklas så att besökaren själv kan välja storlek och att alla uppdateras i databasen, men det har vi alltså valt att vänta med nu. 
 
+ORDER: När man klickar på "freight" inne i admins order-meny, ser man en sammanställning av ordern. Där finns front end med rubriken "shipped?". Denna del är inte i bruk, utan finns där för att det är snyggt. I version 2.0 skulle man kunna inplementera dessa checkboxes 
+för att uppdatera statusen på ordrar. 
+
+MODALER: I order och user på adminsidan kommer en modal upp med mer detaljerad information. Denna information är för tillfället hårdkodad, 
+och enbart till för att visa hur det kan komma att se ut i framtiden. Modalen för product fungerar att uppdatera lagersaldot med, enligt G-krav. 
 
 
