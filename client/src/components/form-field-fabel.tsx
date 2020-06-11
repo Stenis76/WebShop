@@ -28,14 +28,13 @@ const FormFieldLabel = (props: Iprops) => {
       }
       name={name}
       required
-      // placeholder={label}
       {...rest}
       validate={[
         { regexp: /^[A-Z]/gi },
-        name => {
+        (name) => {
           if (name && name.length === 1) return "must be more than 1 character";
           return undefined;
-        }
+        },
       ]}
     />
   );

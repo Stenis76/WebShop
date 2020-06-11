@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import UserContext, { IUser, initialUser } from "./context";
-import Loader from "react-loader-spinner";
 
 interface IProps {}
 
@@ -40,8 +39,6 @@ const UserContextProvider: FC<IProps> = (props) => {
 
   //UPDATE
   const updateUser = (key: string, value: string) => {
-    console.log(key, value);
-    
     setUser((prev) => ({
       ...prev,
       [key]: value,
@@ -74,15 +71,12 @@ const UserContextProvider: FC<IProps> = (props) => {
       method: "POST",
       credentials: "include",
     });
-    await setUser(initialUser);
+    setUser(initialUser);
     setIsAuthenticated(false);
-    console.log("hit?");
-    window.location.reload()
+    window.location.reload();
   };
 
   const checkForUser = async () => {
-    console.log("kollar efter cookies");
-
     const res = await fetch("http://localhost:3002/api/users/auth", {
       method: "POST",
       headers: {
@@ -91,11 +85,9 @@ const UserContextProvider: FC<IProps> = (props) => {
       credentials: "include",
     });
     const data = await res.json();
-    console.log("fräsch data från serven", data);
 
     if (data.message === "Auth successful") {
       setUser(data.user);
-      console.log("kollat");
       setIsAuthenticated(true);
     }
   };

@@ -1,6 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
-import axios from "axios";
 import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
@@ -32,25 +31,7 @@ const myTheme = {
   },
 };
 
-type Item = {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-};
-
 function App() {
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3002/api/product")
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   return (
     <Grommet theme={deepMerge(grommet, myTheme)} full>
       <Header />

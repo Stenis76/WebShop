@@ -19,10 +19,7 @@ import {
   TableCell,
   TableHeader,
 } from "grommet";
-import FormFieldLabel from "../components/form-field-fabel";
 import axios from "axios";
-import { Collection, CollectionItem } from "../shop.data";
-import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
 
 const initialInputs = {
