@@ -154,38 +154,6 @@ const ProductAdmin: FC<IProps> = () => {
     });
   };
   ///
-  const updateProductToDb = async () => {
-    console.log("update product");
-
-    try {
-      const updateProduct = {
-        id: inputs.id,
-        name: inputs.name,
-        image: inputs.image,
-        price: inputs.price,
-        category: inputs.category,
-        inventory: inputs.inventory,
-        season: inputs.season,
-        description: inputs.description,
-      };
-      const res = await fetch(
-        "http://localhost:8080/api/product/" + inputs.id,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(updateProduct),
-        }
-      );
-      console.log(res);
-      const data = await res.json();
-    } catch (error) {
-      console.log("kan ej uppdatera produkt", error.message);
-    }
-  };
-
   //  const calculateNextItemId = () => {
   //    let highestId =
   //      collections
@@ -209,15 +177,43 @@ const ProductAdmin: FC<IProps> = () => {
       price: item.price + "",
       category: item.category,
       inventory: {
-        small: "",
-        medium: "",
-        large: "",
-        xlarge: "",
+        small: item.inventory.small,
+        medium: item.inventory.medium,
+        large: item.inventory.large,
+        xlarge: item.inventory.xlarge,
       },
       season: item.season,
       description: item.description,
     });
   };
+
+  const updateInventory = {
+    inventory: item.inventory.small
+  };
+
+  const updateProductToDb = async () => {
+    console.log("http://localhost:3002/api/product/" + inputs.id);
+    console.log(updateInventory);
+    
+    // try {
+      const res = await fetch("http://localhost:3002/api/product/" + inputs.id,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({updateInventory}),
+        }
+      );
+      console.log(updateInventory);
+      const data = await res.json();
+      return data;
+    // } catch (error) {
+    //   console.log("We failed" + updateInventory);
+    //   console.log("kan ej uppdatera produkt", error.message);
+    // }
+  };
+
 
   const length = 1;
   const [results, setResults] = useState(
@@ -248,9 +244,6 @@ const ProductAdmin: FC<IProps> = () => {
                 <TableCell scope="col" border="bottom">
                   Price
                 </TableCell>
-                {/* <TableCell scope="col" border="bottom">
-             Category
-            </TableCell> */}
               </TableRow>
             </TableHeader>
             {collection.items.map((item: CollectionItem) => (
@@ -291,7 +284,7 @@ const ProductAdmin: FC<IProps> = () => {
       </Box>
       {open && (
         <Layer position="center" onClickOutside={onClose}>
-          <Box width="large" height="large">
+          <Box width="large" height="large" overflow="auto">
             <Form validate="blur">
               <Box
                 background="light-3"
@@ -300,7 +293,6 @@ const ProductAdmin: FC<IProps> = () => {
                 justify="between"
                 height="large"
               >
-                <Heading size="xsmall">{category}</Heading>
                 <Text>ID: {inputs.id}</Text>
                 <FormFieldLabel
                   name="ProductName"
@@ -335,27 +327,6 @@ const ProductAdmin: FC<IProps> = () => {
                     value={item.inventory.small}
                     onChange={(e) => handleInputs("SizeSmall", e.target.value)}
                   />
-                  <FormFieldLabel
-                    name="SizeMedium"
-                    label="Medium"
-                    required
-                    value={item.inventory.medium}
-                    onChange={(e) => handleInputs("SizeMedium", e.target.value)}
-                  />
-                  <FormFieldLabel
-                    name="SizeLarge"
-                    label="Large"
-                    required
-                    value={inputs.inventory.large}
-                    onChange={(e) => handleInputs("SizeLarge", e.target.value)}
-                  />
-                  <FormFieldLabel
-                    name="SizeXLarge"
-                    label="XLarge"
-                    required
-                    value={inputs.inventory.xlarge}
-                    onChange={(e) => handleInputs("SizeXLarge", e.target.value)}
-                  />
                 </Box>
                 <Text>Seasons</Text>
                 <Box direction="row">
@@ -371,11 +342,7 @@ const ProductAdmin: FC<IProps> = () => {
                   required
                   onChange={(e) => handleInputs("description", e.target.value)}
                 />
-                 {editOrAdd === "add" ? (
-                   <Button onClick={updateProductToDb} label="Add to collection" />
-                ) : (
-                   <Button onClick={updateProductToDb} label="Submit edit" />
-                )}
+                <Button onClick={updateProductToDb} label="Submit edit" />
               </Box>
             </Form>
           </Box>
