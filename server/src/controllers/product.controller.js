@@ -1,5 +1,4 @@
 const { Product, ProductSchema } = require("../models/product.model");
-const { uploadedImg, ImgSchema } = require("../models/image.model");
 
 // GET ALL
 getAllProducts = async (req, res) => {
@@ -56,27 +55,19 @@ deleteOneProduct = async (req, res) => {
 
 // UPDATE
 updateProduct = async (req, res) => {
+  console.log("here nu körskhgsjhys kjbskjsb");
   try {
-    const updatedProduct = await Product.updateOne(
-      { _id: req.params.productId },
-      {
-        $set: {
-          name: req.body.name,
-          image: req.body.image,
-          price: req.body.price,
-          category: req.body.category,
-          season: req.body.season,
-          inventory: {
-            small: req.body.inventory.small,
-            medium: req.body.inventory.medium,
-            large: req.body.inventory.large,
-            xlarge: req.body.inventory.xlarge,
-          },
-          description: req.body.description,
-        },
-      }
-    );
-    res.status(200).json(updatedProduct);
+    console.log(req.body);
+    let productUpdate = await Product.findById(req.params.productId);
+
+    productUpdate.inventory.small = req.body.inventory.small;
+    productUpdate.price = req.body.price;
+    productUpdate.name = req.body.name;
+    productUpdate.description = req.body.description;
+
+    await productUpdate.save();
+    res.status(200).json({ message: "ok" });
+    console.log("upsaterat");
   } catch (err) {
     res.status(500).json(err);
   }

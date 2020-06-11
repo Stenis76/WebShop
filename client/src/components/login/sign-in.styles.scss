@@ -1,20 +1,11 @@
-.welcome-page {
-  background-image: url("../../resources/fashion.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .sign-in, .sign-up {
-  background: #F2F2F2; /* fallback for old browsers */
   background-blend-mode: overlay, hard-light, normal;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 50vw;
-  min-width: 600px;
+  width: 70vw;
   height: fit-content;
-  min-height: 600px;
   border-radius: 0.3rem;
 
   .buttons {
@@ -24,15 +15,6 @@
 
   .buttons button {
     margin: 1rem;
-  }
-
-  @media screen and (max-width: 450px) {
-    margin: auto 2rem;
-
-    .sign-in-form {
-      width: 100%;
-      padding: 0 2rem 2rem 2rem;
-    }
   }
 
   @media screen and (max-width: 768px) {

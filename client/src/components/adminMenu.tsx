@@ -15,19 +15,22 @@ const AdminMenu = () => {
       pad="small"
     >
       <ResponsiveContext.Consumer>
-        {responsive =>
+        {(responsive) =>
           responsive === "small" ? (
             <Menu
               label="Menu"
               items={[
-                { label: "Product", onClick: () => history.push("/admin/product") },
+                {
+                  label: "Product",
+                  onClick: () => history.push("/admin/product"),
+                },
                 { label: "Order", onClick: () => history.push("/admin/order") },
-                { label: "Users", onClick: () => history.push("/admin/users") }
+                { label: "Users", onClick: () => history.push("/admin/users") },
               ]}
             />
           ) : (
             <Nav direction="row" background="mainText">
-                <header>Admin Menu</header>
+              <header>Admin Menu</header>
               <Text margin={{ left: "small" }} size="medium">
                 <Link className="link" to="/admin/product">
                   Product

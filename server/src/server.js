@@ -6,7 +6,6 @@ const cookieSession = require("cookie-session");
 
 const { run } = require("./controllers/mongo");
 
-
 /* Import routes */
 
 const userRouter = require("./routers/user.router");
@@ -25,13 +24,14 @@ app.use(
   })
 );
 
-app.use(cookieSession({
-  name: 'GaryLovesCookies',
-  maxAge: 1000 * 1000, // short duration to check easily while developing
-  secret: 'apskda9s8d7236uvjbkajdnfhoias89d70f62t3yhdjhvfuastadcych',
-  httpOnly: true,
-}))
-
+app.use(
+  cookieSession({
+    name: "GaryLovesCookies",
+    maxAge: 1000 * 1000, // short duration to check easily while developing
+    secret: "apskda9s8d7236uvjbkajdnfhoias89d70f62t3yhdjhvfuastadcych",
+    httpOnly: true,
+  })
+);
 
 // Make sure to parse req.body as JSON
 app.use(express.json());

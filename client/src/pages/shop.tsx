@@ -13,7 +13,6 @@ interface IProps {}
 
 const Shop: FC<IProps> = () => {
   const [collections, setCollection] = useState<Collection[]>([]);
-
   const { category, query = "" } = useParams();
 
   useEffect(() => {
@@ -32,11 +31,11 @@ const Shop: FC<IProps> = () => {
     let idIndex = 1;
 
     for (const product of products) {
-      
       for (const productCategory of product.category) {
+        let selectedCollection = mappedCollection.find(
+          (c) => c.title === productCategory
+        );
 
-        let selectedCollection = mappedCollection.find((c) => c.title === productCategory)
-  
         if (!selectedCollection) {
           selectedCollection = {
             id: idIndex,
@@ -48,7 +47,6 @@ const Shop: FC<IProps> = () => {
           idIndex++;
         }
         selectedCollection.items.push(product);
-
       }
     }
     setCollection(mappedCollection);
@@ -118,8 +116,7 @@ const Shop: FC<IProps> = () => {
       }}
     >
       {category === "search" && query
-        ? collections.map((collection: Collection) => {          
-
+        ? collections.map((collection: Collection) => {
             return collection.items
               .filter(matchWithQuery)
               .map((item: CollectionItem) => (

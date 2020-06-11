@@ -13,9 +13,6 @@ const PaymentForm = (props: IProps) => {
   const { user, updateUser } = useContext(UserContext);
   const { paymentMethod, setPaymentMethod } = useContext(CartContext);
 
-  console.log(user.card, "detta är user.card");
-  
-
   return (
     <Form validate="submit" style={{ gridArea: "name" }}>
       <RadioButtonGroup
@@ -41,6 +38,7 @@ const PaymentForm = (props: IProps) => {
           required={true}
           type="email"
           value={user.email}
+          onChange={(e) => updateUser("email", e.target.value)}
         />
       ) : paymentMethod === "swish" ? (
         <FormFieldLabel
@@ -50,6 +48,7 @@ const PaymentForm = (props: IProps) => {
           required={true}
           type="number"
           value={user.phoneNumber}
+          onChange={(e) => updateUser("phoneNumber", e.target.value)}
         />
       ) : (
         <FormFieldLabel

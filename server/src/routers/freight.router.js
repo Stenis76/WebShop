@@ -20,7 +20,7 @@ router.post("/api/freight", async (req, res) => {
 // UPDATE freight method
 router.put("/api/freight/:freightId", async (req, res) => {
   updateFreightMethod(req, res);
-})
+});
 
 // DELETE
 router.delete("/api/freight/:freightId", async (req, res) => {

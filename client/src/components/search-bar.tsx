@@ -6,7 +6,7 @@ import {
   Button,
   Form,
   Box,
-  ResponsiveContext
+  ResponsiveContext,
 } from "grommet";
 import { Search } from "grommet-icons";
 
@@ -20,11 +20,11 @@ const SearchBar = ({ history, match }: RouteComponentProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="hiddenSearchbar" onSubmit={handleSubmit}>
       <Box direction="row">
         <FormField>
           <TextInput
-            onChange={e => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
             value={input}
             placeholder="Sök"
             size="medium"

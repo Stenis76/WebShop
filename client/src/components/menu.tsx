@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Nav, Text, Box, ResponsiveContext, Menu } from "grommet";
-import { userInfo } from "os";
 import UserContext from "../contexts/user-context/context";
 
 const MyMenu = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  console.log(user.role)
 
   return (
     <Box
@@ -19,7 +17,7 @@ const MyMenu = () => {
       pad="small"
     >
       <ResponsiveContext.Consumer>
-        {responsive =>
+        {(responsive) =>
           responsive === "small" ? (
             <Menu
               label="Menu"
@@ -27,21 +25,21 @@ const MyMenu = () => {
                 { label: "Mens", onClick: () => history.push("/shop/mens") },
                 {
                   label: "Womens",
-                  onClick: () => history.push("/shop/womens")
+                  onClick: () => history.push("/shop/womens"),
                 },
                 { label: "Hats", onClick: () => history.push("/shop/hats") },
                 {
                   label: "Jackets",
-                  onClick: () => history.push("/shop/jackets")
+                  onClick: () => history.push("/shop/jackets"),
                 },
                 {
                   label: "Sneakers",
-                  onClick: () => history.push("/shop/sneakers")
+                  onClick: () => history.push("/shop/sneakers"),
                 },
                 {
                   label: "All",
-                  onClick: () => history.push("/shop/all")
-                }
+                  onClick: () => history.push("/shop/all"),
+                },
               ]}
             />
           ) : (
@@ -81,8 +79,11 @@ const MyMenu = () => {
         }
       </ResponsiveContext.Consumer>
       <Text size="medium">
-        {user.role === "admin" ? <Link className="link" to="/admin/product">Admin</Link> : null }
-          
+        {user.role === "admin" ? (
+          <Link className="link" to="/admin/product">
+            Admin
+          </Link>
+        ) : null}
       </Text>
     </Box>
   );

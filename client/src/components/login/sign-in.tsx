@@ -1,12 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-
 import Loader from "react-loader-spinner";
 import UserContext from "../../contexts/user-context/context";
-// import FormInput from "../form_input/form_input";
-import { Form, FormField, Button } from "grommet";
-
-import "./sign-in.styles.scss";
+import { FormField, Button, Form } from "grommet";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -67,17 +63,9 @@ const SignIn = () => {
           />
 
           <div className="buttons">
-            <Button 
-            type="submit"
-            margin="medium"
-            label="Log in"
-            />
+            <Button type="submit" margin="medium" label="Log in" />
             <Link to="/login/register">
-              <Button
-              type="submit"
-              margin="medium"
-              label="Sign up"
-              />
+              <Button type="submit" margin="medium" label="Sign up" />
             </Link>
           </div>
         </Form>

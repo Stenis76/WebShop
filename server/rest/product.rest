@@ -1,4 +1,4 @@
-// ----- PRODUCTS ------ // 
+// ----- PRODUCTS ------ //
 ###
 // GET ONE PRODUCT BY ID. 
 GET http://localhost:3002/api/product/5ec7853e1f3a4e16bcf55bea
@@ -33,20 +33,11 @@ DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
 
 ###
 // UPDATE PRODUCT
-PUT   http://localhost:3002/api/product/5ecb7fc7160eb8556158611b
+PUT   http://localhost:3002/api/product/5ede78383aaed446464f5c8e
 Content-Type: application/json
 
 {
-  "name": "Grey Jean Jacket",
-  "imageUrl": "https://i.ibb.co/N71k1ML/grey-jean-jacket.png",
-  "price": 90,
-  "category": "Jackets",
-  "season": ["vår", "sommar"],
   "inventory": {
-    "small": 50,
-    "medium": 50,
-    "large": 92,
-    "xlarge": 88
-  },
-  "description": "Jackan som får alla andra att vända sig om och vissla när du går förbi."
+    "small": 50
+  }
 }
