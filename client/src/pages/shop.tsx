@@ -6,13 +6,21 @@ import Directory from "../components/directory";
 import Item from "../components/item";
 
 import { Collection, CollectionItem } from "../interfaces";
+import { ProductHunt } from "grommet-icons";
+import item from "../components/item";
 
 interface IProps {}
 
 const Shop: FC<IProps> = () => {
   const [collections, setCollection] = useState<Collection[]>([]);
-
+  // const [cart, setCart] = useState<CollectionItem[]>([]);
   const { category, query = "" } = useParams();
+
+  // useEffect(() => {
+  //   const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart"));
+  //   console.log("cart", cartFromLocalStorage);
+  //   setCart(cartFromLocalStorage);
+  // }, []);
 
   useEffect(() => {
     axios
@@ -30,11 +38,11 @@ const Shop: FC<IProps> = () => {
     let idIndex = 1;
 
     for (const product of products) {
-      
       for (const productCategory of product.category) {
+        let selectedCollection = mappedCollection.find(
+          (c) => c.title === productCategory
+        );
 
-        let selectedCollection = mappedCollection.find((c) => c.title === productCategory)
-  
         if (!selectedCollection) {
           selectedCollection = {
             id: idIndex,
@@ -46,7 +54,6 @@ const Shop: FC<IProps> = () => {
           idIndex++;
         }
         selectedCollection.items.push(product);
-
       }
     }
     setCollection(mappedCollection);
@@ -116,8 +123,7 @@ const Shop: FC<IProps> = () => {
       }}
     >
       {category === "search" && query
-        ? collections.map((collection: Collection) => {          
-
+        ? collections.map((collection: Collection) => {
             return collection.items
               .filter(matchWithQuery)
               .map((item: CollectionItem) => (
@@ -126,10 +132,19 @@ const Shop: FC<IProps> = () => {
           })
         : getCurrentCollectionItems().map((item: CollectionItem) => (
             <Item key={item._id} item={item} />
-            ))}
+          ))}
     </Box>
   );
-  
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3002/api/product")
+  //     .then((res) => {
+  //       console.log(res.data[0].inventory.small);
+  //       res.data[0].inventory.small --;
+  //       console.log(res.data[0].inventory.small);
+  //     })
+  // }, []);
+
   const directory = <Directory key="1" />;
 
   const components = {

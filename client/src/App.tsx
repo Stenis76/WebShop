@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useContext, Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import axios from "axios";
 import Header from "./components/header";
 import Menu from "./components/menu";
 import Home from "./pages/home";
@@ -29,6 +30,13 @@ const myTheme = {
       height: "20px",
     },
   },
+};
+
+type Item = {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
 };
 
 function App() {

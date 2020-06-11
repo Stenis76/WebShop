@@ -5,6 +5,7 @@ import { CollectionItem } from "../../interfaces";
 
 interface IState {
   cart: CollectionItem[];
+  setCart: (cart: CollectionItem[]) => void;
   shippingMethods: ShippingMethod[];
   selectedShippingMethod?: ShippingMethod;
   setSelectedShippingMethod: (_id: string) => void;
@@ -20,6 +21,7 @@ interface IState {
 
 export default createContext<IState>({
   cart: [],
+  setCart: () => [],
   shippingMethods: [],
   selectedShippingMethod: undefined,
   setSelectedShippingMethod: () => { },

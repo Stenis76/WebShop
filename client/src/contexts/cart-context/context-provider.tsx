@@ -19,7 +19,8 @@ export type ShippingMethod = {
 export type PaymentMethod = "card" | "invoice" | "swish";
 
 const CartContextProvider: FC<IProps> = (props) => {
-  const [cart, setCart] = useState<CollectionItem[]>([]);
+  const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+  const [cart, setCart] = useState<CollectionItem[]>(cartFromLocalStorage);
   const { user } = useContext(UserContext);
   const [shippingCost, setShippingCost] = useState(0);
   const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
@@ -38,6 +39,10 @@ const CartContextProvider: FC<IProps> = (props) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const createOrder = async () => {
     const order = {
@@ -128,6 +133,7 @@ const CartContextProvider: FC<IProps> = (props) => {
         {...props}
         value={{
           cart,
+          setCart,
           shippingMethods,
           selectedShippingMethod,
           setSelectedShippingMethod: setShipping,
