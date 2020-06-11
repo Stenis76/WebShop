@@ -20,7 +20,7 @@ const SearchBar = ({ history, match }: RouteComponentProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="hiddenSearchbar" onSubmit={handleSubmit}>
       <Box direction="row">
         <FormField>
           <TextInput

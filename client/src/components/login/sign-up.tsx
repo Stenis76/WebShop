@@ -64,13 +64,13 @@ const SignUp = () => {
 
   return (
     <div className="sign-up">
-      <h1>Create an account</h1>
+      <h2 style={{margin: "0.5 2rem"}}>Create account</h2>
       {loading ? (
         <Loader type="TailSpin" color="#00BFFF" height={70} width={70} />
       ) : (
         <Form
           validate="submit"
-          style={{ width: "20rem" }}
+          style={{ width: "auto" }}
           onSubmit={handleSubmit}
         >
           <FormField

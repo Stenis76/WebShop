@@ -8,6 +8,8 @@ import {
   Layer,
   Form,
   TextArea,
+  CheckBox,
+  InfiniteScroll,
   Table,
   TableRow,
   TableBody,
@@ -19,6 +21,7 @@ import FormFieldLabel from "../components/form-field-fabel";
 import axios from "axios";
 import { Collection, CollectionItem } from "../interfaces";
 import AdminMenu from "../components/adminMenu";
+import item from "../components/item";
 
 interface IProps {}
 const initialInputs = {
@@ -34,6 +37,7 @@ const initialInputs = {
 const ProductAdmin: FC<IProps> = (props) => {
   const [collections, setCollection] = useState<Collection[]>([]);
   const [open, setOpen] = React.useState<boolean>(false);
+  const [category, setCategory] = useState("none");
   const [itemToEdit, setItemToEdit] = useState<CollectionItem>();
   const [inputs, setInputs] = useState(initialInputs);
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
@@ -80,6 +84,83 @@ const ProductAdmin: FC<IProps> = (props) => {
     return;
   };
 
+  // const getCurrentCollectionItems = (): CollectionItem[] => {
+  //   if (collections.length) {
+  //     const col = collections.find((collection) => {
+  //       return collection.routeName.toLowerCase() === category!.toLowerCase();
+  //     });
+
+  //     if (col) return col.items;
+  //   }
+  //   return [];
+  // };
+
+  //
+
+  // const addToCollection = () => {
+  //   const item: CollectionItem = {
+  //     _id: inputs.id,
+  //     name: inputs.name,
+  //     imageUrl: inputs.image,
+  //     price: Number(inputs.price),
+  //     category: inputs.category,
+  //     inventory: inputs.inventory,
+  //     description: inputs.description,
+  //   };
+
+  //   const updatedCollections = collections.map((collection) => {
+  //     if (collection.routeName === category) {
+  //       return {
+  //         ...collection,
+  //         items: [...collection.items, item],
+  //       };
+  //     } else {
+  //       return { ...collection };
+  //     }
+  //   });
+
+  //   setCollection(updatedCollections);
+  //   localStorage.setItem("collection", JSON.stringify(updatedCollections));
+  //   onClose();
+  // };
+
+  // const removeFromCollection = (itemId: string) => {
+  //   const updatedCollections = collections.map((collection) => ({
+  //     ...collection,
+  //     items: collection.items.filter((item) => item._id !== itemId),
+  //   }));
+
+  //   setCollection(updatedCollections);
+  //   localStorage.setItem("collection", JSON.stringify(updatedCollections));
+  // };
+
+  // const editItem = () => {
+  //   const updatedCollections = collections.map((collection) => {
+  //     if (itemToEdit !== undefined) {
+  //       let itemIndex = collection.items.findIndex(
+  //         (item) => item._id === itemToEdit._id
+  //       );
+
+  //       if (itemIndex !== -1) {
+  //         // if we found the index of the item
+  //         collection.items[itemIndex] = {
+  //           ...itemToEdit,
+  //           name: inputs.name,
+  //           // imageUrl: inputs.imageUrl,
+  //           price: Number(inputs.price),
+  //           inventory: inputs.inventory,
+  //           description: inputs.description,
+  //         };
+  //       }
+  //     }
+  //     return collection;
+  //   });
+
+  // setCollections(updatedCollections);
+  //   localStorage.setItem("collection", JSON.stringify(updatedCollections));
+  //   onClose();
+  // };
+
   const handleInputs = (name: string, value: string) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
     console.log(inputs);
@@ -95,6 +176,17 @@ const ProductAdmin: FC<IProps> = (props) => {
       inventory: item.inventory.small,
       description: item.description,
     });
+  };
+
+  const length = 1;
+  const [results, setResults] = useState(
+    Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
+  );
+  const load = () => {
+    setResults([
+      ...results,
+      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000)),
+    ]);
   };
 
   const submitProductChanges = async () => {
@@ -139,7 +231,7 @@ const ProductAdmin: FC<IProps> = (props) => {
           <Table>
             <TableHeader>
               <Heading level="3">{collection.title}</Heading>
-              <TableRow>
+              <TableRow className="removeProductid">
                 <TableCell scope="col" border="bottom">
                   Product Id
                 </TableCell>
@@ -149,6 +241,9 @@ const ProductAdmin: FC<IProps> = (props) => {
                 <TableCell scope="col" border="bottom">
                   Price
                 </TableCell>
+                {/* <TableCell scope="col" border="bottom">
+             Category
+            </TableCell> */}
               </TableRow>
             </TableHeader>
             {collection.items.map((item: CollectionItem) => (
@@ -165,8 +260,14 @@ const ProductAdmin: FC<IProps> = (props) => {
                   >
                     {item._id}
                   </TableCell>
-                  <TableCell border="bottom">{item.name}</TableCell>
-                  <TableCell border="bottom">${item.price}</TableCell>
+                  <TableCell onClick={() => {
+                      setEditOrAdd("edit");
+                      setInputsToItemData(item);
+                      setItemToEdit(item);
+                      onOpen();
+                    }}
+                    border="bottom">{item.name}</TableCell>
+                  <TableCell border="bottom">{item.price}$</TableCell>
                 </TableRow>
               </TableBody>
             ))}
@@ -174,7 +275,7 @@ const ProductAdmin: FC<IProps> = (props) => {
         ))}
       </Box>
       {open && (
-        <Layer position="center" onClickOutside={onClose}>
+        <Layer position="center" onClick={onClose} onClickOutside={onClose}>
           <Box width="large" height="large" overflow="auto">
             <Form validate="blur">
               <Box
@@ -196,7 +297,7 @@ const ProductAdmin: FC<IProps> = (props) => {
                 />
                 <FormFieldLabel
                   name="Price"
-                  label="Price $"
+                  label="Price"
                   required
                   type="text"
                   value={inputs.price}
@@ -218,6 +319,7 @@ const ProductAdmin: FC<IProps> = (props) => {
                   required
                   onChange={(e) => handleInputs("description", e.target.value)}
                 />
+
                 <Button onClick={submitProductChanges} label="Submit edit" />
               </Box>
             </Form>
@@ -227,5 +329,6 @@ const ProductAdmin: FC<IProps> = (props) => {
     </Main>
   );
 };
+
 
 export default ProductAdmin;
