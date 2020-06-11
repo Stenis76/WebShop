@@ -76,8 +76,6 @@ const logInUser = async (req, res) => {
         }
         if (result) {
           req.session.userId = user[0].id;
-          console.log(req.session.userId);
-          console.log(user);
 
           user[0].password = "";
 
@@ -103,7 +101,6 @@ const logOutUser = async (req, res) => {
   try {
     req.session = null;
     res.status(200).send("Successfully logged out user");
-    console.log('cookiesession off', req.session)
   } catch {
     res.status(400).send("Could not log out user");
   }

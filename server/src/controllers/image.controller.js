@@ -19,7 +19,7 @@ getImg = async (req, res) => {
 // POST
 newImage = (req, res) => {
   if (!req.files || !req.files.image) {
-    // Ingen fil har skickatws med... Se till använda namn:image på input fältet...
+    // Ingen fil har skickats med... Se till använda namn:image på input fältet...
   }
 
   const image = new Image({

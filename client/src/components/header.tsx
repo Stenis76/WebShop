@@ -15,8 +15,6 @@ import UserContext from "../contexts/user-context/context";
 import { Cart } from "grommet-icons";
 import MyCart from "./my-cart";
 import SearchBar from "./search-bar";
-import { userInfo } from "os";
-import SignIn from "./login/sign-in";
 
 interface Iprops {}
 
@@ -24,14 +22,10 @@ const Header = (props: Iprops) => {
   const { cart } = useContext(CartContext);
   const responsive = useContext(ResponsiveContext);
   const { isAuthenticated } = useContext(UserContext);
-  const { user, logout } = useContext(UserContext);
+  const { logout } = useContext(UserContext);
   const [open, setOpen] = React.useState<boolean>();
-
   const onOpen = () => setOpen(true);
-
   const onClose = () => setOpen(undefined);
-
-  let logInPressed = false;
 
   return (
     <Box

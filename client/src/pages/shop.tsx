@@ -6,8 +6,6 @@ import Directory from "../components/directory";
 import Item from "../components/item";
 
 import { Collection, CollectionItem } from "../interfaces";
-import { ProductHunt } from "grommet-icons";
-import item from "../components/item";
 
 interface IProps {}
 
@@ -131,15 +129,6 @@ const Shop: FC<IProps> = () => {
             ))}
     </Box>
   );
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3002/api/product")
-  //     .then((res) => {
-  //       console.log(res.data[0].inventory.small);
-  //       res.data[0].inventory.small --;
-  //       console.log(res.data[0].inventory.small);
-  //     })
-  // }, []);
   
   const directory = <Directory key="1" />;
 

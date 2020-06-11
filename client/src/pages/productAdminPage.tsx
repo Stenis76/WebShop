@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Main,
   Text,
@@ -21,7 +21,6 @@ import {
 } from "grommet";
 
 import FormFieldLabel from "../components/form-field-fabel";
-// import { Collection, CollectionItem } from "../shop.data";
 import axios from "axios";
 import { Collection, CollectionItem } from "../interfaces";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";

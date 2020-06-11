@@ -29,7 +29,6 @@ const ShippingForm = (props: IProps) => {
     return date.toLocaleDateString();
   };
 
-
   return (
     <div>
       <Text weight="bold" alignSelf="start">
@@ -60,7 +59,6 @@ const ShippingForm = (props: IProps) => {
                     value={freight._id}
                     onChange={(event) => {
                       const method: any = event.target.value;
-                      console.log(method);
 
                       setSelectedShippingMethod(method);
                     }}

@@ -19,9 +19,7 @@ import {
   TableCell,
   TableHeader,
 } from "grommet";
-import FormFieldLabel from "../components/form-field-fabel";
-import { Collection, CollectionItem } from "../shop.data";
-import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
+import axios from "axios";
 import AdminMenu from "../components/adminMenu";
 
 const initialInputs = {
@@ -33,7 +31,7 @@ const initialInputs = {
   description: "",
 };
 
-const UserAdmin = () => {
+const UserAdmin = (props) => {
   const size = useContext(ResponsiveContext) as
     | "small"
     | "medium"
@@ -55,20 +53,24 @@ const UserAdmin = () => {
   };
 
   const step = 50;
-  const [results, setResults] = useState(
-    Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000))
-  );
-  const load = () => {
-    setResults([
-      ...results,
-      ...Array.from({ length: 50 }, () => Math.floor(Math.random() * 1000000)),
-    ]);
-  };
-
+  const [results, setResults] = useState();
   const [open, setOpen] = React.useState<boolean>(false);
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
 
+  useEffect(() => {
+    console.log("useeffect");
+
+    axios
+      .get("http://localhost:3002/api/users")
+      .then((res) => {
+        console.log("data från server - order", res);
+        setResults(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <Main>
       <AdminMenu />
@@ -76,20 +78,19 @@ const UserAdmin = () => {
         <Heading level={3}>
           <Box gap="small">
             <strong>Users</strong>
-            <Text>Here are all users</Text>
           </Box>
         </Heading>
         <Table>
           <TableHeader>
             <TableRow>
               <TableCell scope="col" border="bottom">
-                User Id
+                User-Id
               </TableCell>
               <TableCell scope="col" border="bottom">
-                First name
+                Name
               </TableCell>
               <TableCell scope="col" border="bottom">
-                Last name
+                Role
               </TableCell>
               {/* <TableCell scope="col" border="bottom">
                   Phone number
@@ -115,31 +116,22 @@ const UserAdmin = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <InfiniteScroll
-              renderMarker={(marker) => (
-                <TableRow>
-                  <TableCell>{marker}</TableCell>
-                </TableRow>
-              )}
-              scrollableAncestor="window"
-              items={results}
-              onMore={() => load()}
-              step={step}
-            >
-              {(result) => (
-                <TableRow key={result}>
+            <InfiniteScroll items={results} {...props}>
+              {(item) => (
+                <TableRow key={item._id}>
                   <TableCell
                     border="bottom"
                     onClick={() => {
                       onOpen();
                     }}
                   >
-                    {result}
+                    {item._id}
                   </TableCell>
-                  <TableCell border="bottom">Philip</TableCell>
-                  <TableCell border="bottom">Arvidsson</TableCell>
-                  {/* <TableCell border="bottom">073-370 88 17</TableCell> */}
-                  {/* <TableCell border="bottom">philip.arvidsson@medieinstitutet.se</TableCell> */}
+                  <TableCell border="bottom">
+                    {item.firstName + " "}
+                    {item.lastName}
+                  </TableCell>
+                  <TableCell border="bottom">{item.role}</TableCell>
                 </TableRow>
               )}
             </InfiniteScroll>
