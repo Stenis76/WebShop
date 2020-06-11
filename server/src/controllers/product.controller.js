@@ -61,30 +61,13 @@ updateProduct = async (req, res) => {
     let productUpdate = await Product.findById(req.params.productId);
 
     productUpdate.inventory.small = req.body.inventory.small;
+    productUpdate.price = req.body.price;
+    productUpdate.name = req.body.name;
+    productUpdate.description = req.body.description;
 
     await productUpdate.save();
     res.status(200).json({ message: "ok" });
-
-    // let updatedProduct = await Product.updateOne(
-
-    //   {
-    //     $set: {
-    //       name: req.body.product.name,
-    //       image: req.body.product.image,
-    //       price: req.body.product.price,
-    //       category: req.body.product.category,
-    //       season: req.body.product.season,
-    //       inventory: {
-    //         small: req.body.product.inventory.small,
-    //         medium: req.body.product.inventory.medium,
-    //         large: req.body.product.inventory.large,
-    //         xlarge: req.body.product.inventory.xlarge,
-    //       },
-    //       description: req.body.product.description,
-    //     },
-    //   }
-    // );
-    // res.status(200).json(updatedProduct);
+    console.log("upsaterat");
   } catch (err) {
     res.status(500).json(err);
   }
