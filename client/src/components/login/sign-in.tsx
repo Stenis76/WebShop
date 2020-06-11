@@ -2,8 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import UserContext from "../../contexts/user-context/context";
-import { Form, FormField, Button } from "grommet";
-import "./sign-in.styles.scss";
+import { FormField, Button, Form } from "grommet";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");

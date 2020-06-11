@@ -24,26 +24,20 @@ import axios from "axios";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
 import Axios from "axios";
-import { Order, CollectionItem } from "../interfaces";
-import item from "../components/item";
 
-// const initialInputs = {
-//   id: "",
-//   activeOrder: true,
-//   freightId: "",
-//   products: [{}],
-//   userId: {},
-// };
-
+const initialInputs = {
+  name: "",
+  imageUrl: "",
+  price: "",
+  size: [""],
+  season: [""],
+  description: "",
+};
 const OrderAdmin = (props) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
   const [results, setResults] = useState();
-
-  const [itemToEdit, setItemToEdit] = useState();
-  const [order, setOrder] = useState<Order>();
-  const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
 
   useEffect(() => {
     console.log("useeffect");
@@ -82,20 +76,12 @@ const OrderAdmin = (props) => {
   };
   console.log("data är sparad i state", results);
 
-  // const handleInputs = (name: string, value: string) => {
-  //   setInputs((prev) => ({ ...prev, [name]: value }));
-  // };
-
-  // const setInputsToItemData = (item) => {
-  //   setOrderItems(item);
-  // };
-
   return (
     <Main>
       <header>
         <AdminMenu />
       </header>
-      <Box pad="small" basis="small" gap="none">
+      <Box pad="small" basis="small">
         <Heading level={3}>
           <Box gap="small">
             <strong>Orders</strong>
@@ -104,14 +90,14 @@ const OrderAdmin = (props) => {
         <Table>
           <TableHeader>
             <TableRow className="removeProductid">
-              <TableCell scope="col" border="bottom">
-                Freight Id
-              </TableCell>
-              <TableCell scope="col" border="bottom">
+            <TableCell scope="col" border="bottom">
                 User Id
               </TableCell>
               <TableCell scope="col" border="bottom">
-                Order Id
+                Freight
+              </TableCell>
+              <TableCell scope="col" border="bottom">
+                Customer
               </TableCell>
               {/* <TableCell scope="col" border="bottom">
                   Order Date
@@ -123,19 +109,15 @@ const OrderAdmin = (props) => {
               {(item) => (
                 <TableRow key={item._id}>
                   <TableCell border="bottom">
-                    {item.freightId._id}
+                    {item.userId._id}
                   </TableCell>
                   <TableCell
                     border="bottom"
                     onClick={() => {
-                      setEditOrAdd("edit");
-                      setOrder(item);
-                      // setInputsToItemData(item);
-                      // setItemToEdit(item);
                       onOpen();
                     }}
                   >
-                    {item._id}
+                    {item.freightId.shipmentCompany}
                   </TableCell>
                   <TableCell border="bottom">
                     {item.userId.firstName} {item.userId.lastName}{" "}
@@ -158,16 +140,11 @@ const OrderAdmin = (props) => {
                 justify="between"
                 height="large"
               >
-                <Heading size="xsmall">Order: {"" + order._id}</Heading>
-                <Text>
-                  User: {order.userId.firstName + " "}
-                  {order.userId.lastName}
-                </Text>
-                <Text>Freight: {order.freightId.shipmentCompany}</Text>
-                <Text>Products </Text>
-                {order.products.map((item: CollectionItem) => (
-                  <TableRow key={item._id}>{item.name}</TableRow>
-                ))}
+                <Heading size="xsmall">Order</Heading>
+                <Text>Order ID: 0323289238</Text>
+                <Text> User ID: 1987627376</Text>
+                <Text>Freight ID: 7384582734</Text>
+                <Text>Products</Text>
                 <Box direction="column">
                   <Text>Black Shoes</Text>
                   <Text>White Hat</Text>
