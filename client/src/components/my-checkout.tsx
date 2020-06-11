@@ -19,9 +19,13 @@ const MyCheckOut = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
 
-  const { cart, clearCart, paymentMethod, createOrder, selectedShippingMethod } = useContext(
-    CartContext
-  );
+  const {
+    cart,
+    clearCart,
+    paymentMethod,
+    createOrder,
+    selectedShippingMethod,
+  } = useContext(CartContext);
   const history = useHistory();
 
   const validUserInformation = () =>
@@ -35,28 +39,24 @@ const MyCheckOut = () => {
     user.city.length > 1 &&
     user.postCode.length > 1;
 
-    const validShippingInfo = () => 
-    selectedShippingMethod;
+  const validShippingInfo = () => selectedShippingMethod;
 
-    
-
-    const validPayment = () => {
-      if(paymentMethod === "card"){
-        if (undefined !== user.card && user.card.length) {
-       return user.card.length === 16 
-      }} else if(paymentMethod === "swish"){
-        return user.phoneNumber.length > 8
-      } else {
-        return validateEmail(user.email)
+  const validPayment = () => {
+    if (paymentMethod === "card") {
+      if (undefined !== user.card && user.card.length) {
+        return user.card.length === 16;
       }
+    } else if (paymentMethod === "swish") {
+      return user.phoneNumber.length > 8;
+    } else {
+      return validateEmail(user.email);
     }
+  };
 
-
-
-    const validateEmail = (email: string) => {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-  }
+  const validateEmail = (email: string) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
 
   const closeModal = () => {
     history.push("/");
@@ -116,21 +116,23 @@ const MyCheckOut = () => {
         </AccordionPanel>
         <AccordionPanel onClick={() => setActiveIndex(3)} label="Place order">
           <Box pad="medium" background="light-2">
-          {activeIndex === 3 &&
-        !loading &&
-        validUserInformation() ? (
-          <Button
-            margin="medium"
-            primary
-            label="Place your order"
-            onClick={pay}
-          />
-        ) : (
-          <Button margin="medium" primary disabled label="Place your order" />
-        )}
+            {activeIndex === 3 && !loading && validUserInformation() ? (
+              <Button
+                margin="medium"
+                primary
+                label="Place your order"
+                onClick={pay}
+              />
+            ) : (
+              <Button
+                margin="medium"
+                primary
+                disabled
+                label="Place your order"
+              />
+            )}
           </Box>
         </AccordionPanel>
-        
       </Accordion>
 
       {showModal && (

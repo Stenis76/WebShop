@@ -24,7 +24,7 @@ import axios from "axios";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
 import Axios from "axios";
-import { Order } from "../interfaces";
+import { Order, CollectionItem } from "../interfaces";
 import item from "../components/item";
 
 // const initialInputs = {
@@ -42,7 +42,7 @@ const OrderAdmin = (props) => {
   const [results, setResults] = useState();
 
   const [itemToEdit, setItemToEdit] = useState();
-  const [order, setOrder] = useState();
+  const [order, setOrder] = useState<Order>();
   const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
 
   useEffect(() => {
@@ -162,8 +162,11 @@ const OrderAdmin = (props) => {
                   User: {order.userId.firstName + " "}
                   {order.userId.lastName}
                 </Text>
-                <Text>Freight ID: 7384582734</Text>
-                <Text>Products</Text>
+                <Text>Freight: {order.freightId.shipmentCompany}</Text>
+                <Text>Products </Text>
+                {order.products.map((item: CollectionItem) => (
+                  <TableRow key={item._id}>{item.name}</TableRow>
+                ))}
                 <Box direction="column">
                   <Text>Black Shoes</Text>
                   <Text>White Hat</Text>
