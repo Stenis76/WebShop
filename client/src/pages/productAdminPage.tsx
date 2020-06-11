@@ -214,6 +214,7 @@ const ProductAdmin: FC<IProps> = (props) => {
                     onChange={(e) => handleInputs("inventory", e.target.value)}
                   />
                 </Box>
+
                 <Text>Description</Text>
                 <TextArea
                   value={inputs.description}
