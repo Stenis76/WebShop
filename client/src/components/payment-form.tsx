@@ -13,9 +13,6 @@ const PaymentForm = (props: IProps) => {
   const { user, updateUser } = useContext(UserContext);
   const { paymentMethod, setPaymentMethod } = useContext(CartContext);
 
-  console.log(user.card, "detta är user.card");
-  
-
   return (
     <Form validate="submit" style={{ gridArea: "name" }}>
       <RadioButtonGroup

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Main,
   Text,
@@ -9,8 +9,6 @@ import {
   Form,
   TextArea,
   CheckBox, 
-  Grid,
-  ResponsiveContext,
   InfiniteScroll,
   Table,
   TableRow,
@@ -20,10 +18,8 @@ import {
 } from "grommet";
 
 import FormFieldLabel from "../components/form-field-fabel";
-// import { Collection, CollectionItem } from "../shop.data";
 import axios from "axios";
 import { Collection, CollectionItem } from "../interfaces";
-import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import  AdminMenu  from "../components/adminMenu";
 
 interface IProps {}
@@ -171,17 +167,6 @@ const ProductAdmin:  FC<IProps> = () => {
     localStorage.setItem("collection", JSON.stringify(updatedCollections));
     onClose();
   };
-
-  //  const calculateNextItemId = () => {
-  //    let highestId =
-  //      collections
-  //        .map(collection => collection.items.map(item => item.id))
-  //        .flat()
-  //        .sort((a, b) => a - b)
-  //        .pop() || 0;
-
-  //    return highestId + 1;
-  //  };
 
   const handleInputs = (name: string, value: string) => {
     setInputs(prev => ({ ...prev, [name]: value }));

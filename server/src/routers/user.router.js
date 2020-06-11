@@ -34,7 +34,7 @@ router.post("/api/users/login", async (req, res) => {
   logInUser(req, res);
 });
 
-// CHECKAUTH
+// CHECK-AUTH
 router.post("/api/users/auth", async (req, res) => {
   console.log("session", req.session.userId);
 
@@ -42,12 +42,9 @@ router.post("/api/users/auth", async (req, res) => {
     try {
       // find userid i dabasen
       const user = await User.findById(req.session.userId);
-      console.log("användarkoll", user);
 
       if (user) {
         // req.session.userId = user[0]._id;
-        console.log("userid", req.session.userId);
-        console.log("användarkoll", user);
 
         user.password = "";
 
@@ -63,7 +60,7 @@ router.post("/api/users/auth", async (req, res) => {
   }
 });
 // LOGOUT
-router.post("/api/logout", isAuthenticated,logOutUser);
+router.post("/api/logout", isAuthenticated, logOutUser);
 
 // DELETE
 router.delete("/api/users/:userId", isAuthenticated, async (req, res) => {
