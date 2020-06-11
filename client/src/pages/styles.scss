@@ -1,8 +1,22 @@
 
 .welcome-page {
+  background: #F2F2F2; 
+
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   height: auto;
+}
+
+@media screen and (max-width: 600px) {
+  td:nth-of-type(1) {
+    display: none;
+    }
+    .removeProductid {
+      display: none;
+    }
+    .hiddenSearchbar {
+      display: none;
+    }
 }

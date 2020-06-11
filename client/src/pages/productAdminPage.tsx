@@ -231,7 +231,7 @@ const ProductAdmin: FC<IProps> = (props) => {
           <Table>
             <TableHeader>
               <Heading level="3">{collection.title}</Heading>
-              <TableRow>
+              <TableRow className="removeProductid">
                 <TableCell scope="col" border="bottom">
                   Product Id
                 </TableCell>
@@ -239,7 +239,7 @@ const ProductAdmin: FC<IProps> = (props) => {
                   Product name
                 </TableCell>
                 <TableCell scope="col" border="bottom">
-                  Stock
+                  Price
                 </TableCell>
                 {/* <TableCell scope="col" border="bottom">
              Category
@@ -260,8 +260,14 @@ const ProductAdmin: FC<IProps> = (props) => {
                   >
                     {item._id}
                   </TableCell>
-                  <TableCell border="bottom">{item.name}</TableCell>
-                  <TableCell border="bottom">{item.price}</TableCell>
+                  <TableCell onClick={() => {
+                      setEditOrAdd("edit");
+                      setInputsToItemData(item);
+                      setItemToEdit(item);
+                      onOpen();
+                    }}
+                    border="bottom">{item.name}</TableCell>
+                  <TableCell border="bottom">{item.price}$</TableCell>
                 </TableRow>
               </TableBody>
             ))}
@@ -269,7 +275,7 @@ const ProductAdmin: FC<IProps> = (props) => {
         ))}
       </Box>
       {open && (
-        <Layer position="center" onClickOutside={onClose}>
+        <Layer position="center" onClick={onClose} onClickOutside={onClose}>
           <Box width="large" height="large" overflow="auto">
             <Form validate="blur">
               <Box
@@ -323,5 +329,6 @@ const ProductAdmin: FC<IProps> = (props) => {
     </Main>
   );
 };
+
 
 export default ProductAdmin;
