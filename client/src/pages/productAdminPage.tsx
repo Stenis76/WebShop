@@ -260,13 +260,17 @@ const ProductAdmin: FC<IProps> = (props) => {
                   >
                     {item._id}
                   </TableCell>
-                  <TableCell onClick={() => {
+                  <TableCell
+                    onClick={() => {
                       setEditOrAdd("edit");
                       setInputsToItemData(item);
                       setItemToEdit(item);
                       onOpen();
                     }}
-                    border="bottom">{item.name}</TableCell>
+                    border="bottom"
+                  >
+                    {item.name}
+                  </TableCell>
                   <TableCell border="bottom">{item.price}$</TableCell>
                 </TableRow>
               </TableBody>
@@ -275,7 +279,7 @@ const ProductAdmin: FC<IProps> = (props) => {
         ))}
       </Box>
       {open && (
-        <Layer position="center" onClick={onClose} onClickOutside={onClose}>
+        <Layer position="center" onClickOutside={onClose}>
           <Box width="large" height="large" overflow="auto">
             <Form validate="blur">
               <Box
@@ -320,7 +324,13 @@ const ProductAdmin: FC<IProps> = (props) => {
                   onChange={(e) => handleInputs("description", e.target.value)}
                 />
 
-                <Button onClick={submitProductChanges} label="Submit edit" />
+                <Button
+                  onClick={() => {
+                    submitProductChanges();
+                    onClose();
+                  }}
+                  label="Submit edit"
+                />
               </Box>
             </Form>
           </Box>
@@ -329,6 +339,5 @@ const ProductAdmin: FC<IProps> = (props) => {
     </Main>
   );
 };
-
 
 export default ProductAdmin;
