@@ -13,6 +13,7 @@ router.get("/api/images/:id", async (req, res) => {
   getImg(req, res);
 });
 
+// POST IMAGE
 router.post("/api/images", async (req, res) => {
     newImage(req, res)
   });

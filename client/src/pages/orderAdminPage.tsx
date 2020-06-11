@@ -24,20 +24,26 @@ import axios from "axios";
 import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
 import Axios from "axios";
+import { Order, CollectionItem } from "../interfaces";
+import item from "../components/item";
 
-const initialInputs = {
-  name: "",
-  imageUrl: "",
-  price: "",
-  size: [""],
-  season: [""],
-  description: "",
-};
+// const initialInputs = {
+//   id: "",
+//   activeOrder: true,
+//   freightId: "",
+//   products: [{}],
+//   userId: {},
+// };
+
 const OrderAdmin = (props) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
   const [results, setResults] = useState();
+
+  const [itemToEdit, setItemToEdit] = useState();
+  const [order, setOrder] = useState<Order>();
+  const [editOrAdd, setEditOrAdd] = useState<"edit" | "add">("add");
 
   useEffect(() => {
     console.log("useeffect");
@@ -75,6 +81,14 @@ const OrderAdmin = (props) => {
     xlarge: ["auto", "auto"],
   };
   console.log("data är sparad i state", results);
+
+  // const handleInputs = (name: string, value: string) => {
+  //   setInputs((prev) => ({ ...prev, [name]: value }));
+  // };
+
+  // const setInputsToItemData = (item) => {
+  //   setOrderItems(item);
+  // };
 
   return (
     <Main>
@@ -114,6 +128,10 @@ const OrderAdmin = (props) => {
                   <TableCell
                     border="bottom"
                     onClick={() => {
+                      setEditOrAdd("edit");
+                      setOrder(item);
+                      // setInputsToItemData(item);
+                      // setItemToEdit(item);
                       onOpen();
                     }}
                   >
@@ -140,11 +158,16 @@ const OrderAdmin = (props) => {
                 justify="between"
                 height="large"
               >
-                <Heading size="xsmall">Order</Heading>
-                <Text>Order ID: 0323289238</Text>
-                <Text> User ID: 1987627376</Text>
-                <Text>Freight ID: 7384582734</Text>
-                <Text>Products</Text>
+                <Heading size="xsmall">Order: {"" + order._id}</Heading>
+                <Text>
+                  User: {order.userId.firstName + " "}
+                  {order.userId.lastName}
+                </Text>
+                <Text>Freight: {order.freightId.shipmentCompany}</Text>
+                <Text>Products </Text>
+                {order.products.map((item: CollectionItem) => (
+                  <TableRow key={item._id}>{item.name}</TableRow>
+                ))}
                 <Box direction="column">
                   <Text>Black Shoes</Text>
                   <Text>White Hat</Text>

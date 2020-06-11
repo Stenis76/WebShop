@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/header";
@@ -40,17 +40,6 @@ type Item = {
 };
 
 function App() {
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3002/api/product")
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   return (
     <Grommet theme={deepMerge(grommet, myTheme)} full>
       <Header />
