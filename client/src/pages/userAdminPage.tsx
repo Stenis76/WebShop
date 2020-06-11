@@ -4,13 +4,8 @@ import {
   Text,
   Heading,
   Box,
-  Image,
-  Button,
   Layer,
   Form,
-  TextArea,
-  CheckBox,
-  Grid,
   ResponsiveContext,
   InfiniteScroll,
   Table,
@@ -92,27 +87,6 @@ const UserAdmin = (props) => {
               <TableCell scope="col" border="bottom">
                 Role
               </TableCell>
-              {/* <TableCell scope="col" border="bottom">
-                  Phone number
-                </TableCell> */}
-              {/* <TableCell scope="col" border="bottom">
-                  Email
-                </TableCell> */}
-              {/* <TableCell scope="col" border="bottom">
-                  Adress
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Post code
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  City
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Password
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Role
-                </TableCell> */}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -160,11 +134,6 @@ const UserAdmin = (props) => {
                 <Text>City: Gothenburg</Text>
                 <Text>Password: ElloEllo</Text>
                 <Text>Role: Admin</Text>
-                {/* {editOrAdd === "add" ? (
-                  <Button onClick={addToCollection} label="Add to collection" />
-                ) : (
-                  <Button onClick={editItem} label="Submit edit" />
-                )} */}
               </Box>
             </Form>
           </Box>

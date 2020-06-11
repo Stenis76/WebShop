@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import UserContext, { IUser, initialUser } from "./context";
+import UserContext, { initialUser } from "./context";
 
 interface IProps {}
 

@@ -8,7 +8,7 @@ import {
   Text,
   RangeSelector,
   TextInput,
-  Button
+  Button,
 } from "grommet";
 
 const Directory = () => {
@@ -59,7 +59,7 @@ const Directory = () => {
       <Text style={{ fontWeight: "bold" }}>Price</Text>
       <Stack>
         <Box direction="row" justify="between">
-          {[0, 50, 100, 150, 200, 250].map(value => (
+          {[0, 50, 100, 150, 200, 250].map((value) => (
             <Box key={value} pad="small" border={false}>
               <Text style={{ fontFamily: "monospace" }}>{value}</Text>
             </Box>
