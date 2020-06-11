@@ -85,7 +85,7 @@ const UserAdmin = (props) => {
         </Heading>
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="removeProductid">
               <TableCell scope="col" border="bottom">
                 User-Id
               </TableCell>

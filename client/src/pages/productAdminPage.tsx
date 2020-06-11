@@ -221,12 +221,12 @@ const ProductAdmin:  FC<IProps> = () => {
   return (
     <Main>
     <AdminMenu />
-    <Box basis="large" pad="small">
+    <Box overflow="auto" flex="shrink" basis="auto" pad="small">
     {collections.map((collection: Collection) => (
       <Table >
         <TableHeader>
           <Heading level="3">{collection.title}</Heading>
-          <TableRow>
+          <TableRow  className="removeProductid">
             <TableCell scope="col" border="bottom">
              Product Id
             </TableCell>
@@ -263,7 +263,7 @@ const ProductAdmin:  FC<IProps> = () => {
                       onOpen();
                     }}>{item._id}</TableCell>
                 <TableCell border="bottom">{item.name}</TableCell>
-                <TableCell border="bottom">{item.price}</TableCell>
+                <TableCell border="bottom">{item.price}$</TableCell>
               </TableRow>
               
             )}
@@ -344,5 +344,6 @@ const ProductAdmin:  FC<IProps> = () => {
     </Main>
   );
 };
+
 
 export default ProductAdmin;

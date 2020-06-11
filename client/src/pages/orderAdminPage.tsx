@@ -81,7 +81,7 @@ const OrderAdmin = (props) => {
       <header>
         <AdminMenu />
       </header>
-      <Box pad="small" basis="small">
+      <Box pad="small" basis="small" gap="none">
         <Heading level={3}>
           <Box gap="small">
             <strong>Orders</strong>
@@ -89,15 +89,15 @@ const OrderAdmin = (props) => {
         </Heading>
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="removeProductid">
               <TableCell scope="col" border="bottom">
-                Order Id
+                Freight Id
               </TableCell>
               <TableCell scope="col" border="bottom">
                 User Id
               </TableCell>
               <TableCell scope="col" border="bottom">
-                Freight Id
+                Order Id
               </TableCell>
               {/* <TableCell scope="col" border="bottom">
                   Order Date
@@ -108,6 +108,9 @@ const OrderAdmin = (props) => {
             <InfiniteScroll items={results} {...props}>
               {(item) => (
                 <TableRow key={item._id}>
+                  <TableCell border="bottom">
+                    {item.freightId._id}
+                  </TableCell>
                   <TableCell
                     border="bottom"
                     onClick={() => {
@@ -119,9 +122,7 @@ const OrderAdmin = (props) => {
                   <TableCell border="bottom">
                     {item.userId.firstName} {item.userId.lastName}{" "}
                   </TableCell>
-                  <TableCell border="bottom">
-                    {item.freightId.shipmentCompany}
-                  </TableCell>
+                  
                 </TableRow>
               )}
             </InfiniteScroll>
