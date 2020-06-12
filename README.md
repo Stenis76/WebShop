@@ -1,79 +1,58 @@
 # Projektarbete: Webbshop
 
-Dynamiskwebbutveckling
+Front end och back end i kursen Dynamisk webbutveckling.
 
-## Mål:
-Ni skall bygga en webbshops-applikation inkluderande en klient och en server. Servern ska vara kopplad till en mongodb databas och vara strukturerad baserad på ett REST-API med resurser. Till er hjälp har ni en uppgiftsbeskrivning samt en kravspecifikation.
-Regler
-Projektet genomförs i grupper om 4 eller 5 personer
-Ert projekt ska skötas från ett gemensamt Github repo. Ni skall använda er av issues och pull request för att strukturera upp erat arbete. I början av projektet skall ni presentera två diagram. Ett ER-diagram över er datastruktur och ett diagram över er kodstruktur. Diagrammen skall uppdateras under projektets gång och lämnas in tillsammans med er kodbas - diagrammen och koden skall stämma överens.
-Ett gruppkontrakt skall skrivas på och lämnas in.
+## Hur du kör projektet
+Kör först npm install i din terminal:
 
-Projektledare
-Er grupp skall utse en projektledare vars roll utöver alla andras är att samla ihop gruppen och försöka ha en mer övergripande roll över projektet. Det här ansvarar projektledaren för:
+´npm install´
 
-- att alla i gruppen har läst och förstått det här dokumentet.
-- att projektet flyter på enligt planering och samla gruppen till ev. möten.
-- att fokus är på rätt saker och att alla har något att göra.
-- ta kontakt med gruppmedlemmar om dom är frånvarande utan att ha meddelat gruppen.
- 
- ## Betyg
-  Projektarbetets betyg beror på er givna idépresentation tillsammans med ert resultat. Alla VG krav behöver inte uppfyllas för betyget VG.
-  Redovisningar
-  Idégodkännande
-  I slutet av veckan ska er grupp presentera en färdig idé på er webbshop tillsammans med en grov sketch på er databasmodell i form av ett enklare ER-Diagram, samt en grov sketch över eran kod i form av ett enklare koddiagram.
-  Ni skall även presentera gruppens namn, vem som kommer vara projektledare samt lämna in påskriva gruppkontrakt.
-  Inlämning av projektet
-  Projektet (kodbas & diagram) skall lämnas in på Zenit.
-  Förutom att uppfylla kravspecen, skall erat projekt innehålla en README.md fil där det tydligt skall framgå:
-  Hur projektet installeras och körs
-  Vid behov: uppgifter att testa med, så som inloggningsuppgifter.
-  OBS: Readme filen ska framförallt innehålla en lista över alla kraven i kravspecen nedanför samt en kort kommentar från er - har ni uppfyllt kravet? I så fall, hur?
+Starta sedan servern:
 
-## Presentation
-Fredag den 12:e Juni ska ni presentera ert projektarbete med en presentation och genomgång av ert slutresultat. Ni ska i presentationen svara på följande frågor:
+´node server.js´
 
-- Hur ser ert första ER diagram ut.
-- Ert färdiga och normaliserade databasdiagram.
-- Vad skiljer sig från när ni gjorde slutarbetet i Javascript 1 kursen - Hur har ni delat upp projektet i moduler, klasser etc?
-- Vad känner ni att ni framförallt har lärt er under den här kursen?
-  Efter er presentation ska ni vara beredda att svara på ytterligare frågor från lärare och från andra elever.
-  Tips när ni sätter igång
-  • Prata med varandra - gör en enkel planering - bestäm upplägg, dagar, tider mm. • Läs hela det här dokumentet, det gäller alla i gruppen!
-  • Viktigt att ni bestämmer er för en mappstruktur, se tips nedan.
-  • Börja inte koda för tidigt.
-  • Lägg upp det ni väljer att genomföra från kravspecifikationen som issues på Github. • Gör er egen grupp i Teams för kommunikation.
-  • Jobba agilt, stäm av med teamet varje dag och kolla PR’s ofta.
-  Hjälp oss lärare hjälpa er!
-  Fundera ut bra frågor och ställ dem till oss under handledningen så vi kan förklara för er.
+Du får då ett meddelande i terminalen att "Server is running". Gå till din webbläsare och skriv in localhost:3000. Sidan öppnas då i din webbläsare. Alternativt kan du i terminalens rot navigera till client ´cd client´ och sedan skriva ´npm start´.
 
-## Bakgrund till projektet:
-Året är 1992, Waynes World och Charlie Moon går på biograferna. Janne Kemi är en finsk ultramiljonär som bestämt sig för att satsa på en ny e-handeln. Han vill investera i nya hemsidor. Han har anlitat er för att ta fram dessa sidor.
-Han har vissa specifika krav från sin IT avdelning som han bifogat som en kravspecifikation. Förutom det har ni fria händer att ta fram en grym idé och tjäna sjuka pengar (åt Janne).
+## För att logga in som Admin
+
+Email: david@tech.com
+Lösenord: 1234
+
 
 ## Kravspecifikation på projektet:
-• Alla sidor skall vara responsiva. (G)
-• Arbetet ska implementeras med en React frontend och en Express backend. (G)
-• Skapa ett ER diagram och koddiagram, detta ska lämnas in vid idégodkännandet G)
-• Beskriv er företagsidé i en kort textuell presentation, detta ska lämnas in vid idégodkännandet (G)
-• All data som programmet utnyttjar ska vara sparat i en Mongo-databas (produkter, beställningar, konton mm) (G)
-• Man ska kunna logga in som administratör i systemet (G)
-• Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen (VG)
+• Alla sidor skall vara responsiva. (G) **KLAR**
+• Arbetet ska implementeras med en React-frontend och en Express-backend. (G) **KLAR**
+• Skapa ett ER-diagram och koddiagram, detta ska lämnas in vid idégodkännandet G) **KLAR**
+• Beskriv er företagsidé i en kort textuell presentation, detta ska lämnas in vid idégodkännandet (G) **KLAR**
+• All data som programmet utnyttjar ska vara sparat i en Mongo-databas (produkter, beställningar, konton mm) (G) **KLAR**
+• Man ska kunna logga in som administratör i systemet (G) **KLAR (admin-behörighet är sparat i atlas)**
+• Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen (VG) 
 • En administratör behöver godkännas av en tidigare administratör innan man kan logga in fösta gången (VG)
-• Inga Lösenord får sparas i klartext i databasen (G)
-• En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G)
-• Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan (G)
-• Administratörer ska kunna se en lista på alla gjorda beställningar (G)
+• Inga lösenord får sparas i klartext i databasen (G) **KLAR**
+• En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G) **KLAR**
+• Administratörer ska kunna uppdatera antalet produkter i lager från admindelen av sidan (G) **KLAR**
+• Administratörer ska kunna se en lista på alla gjorda beställningar (G) **KLAR**
 • Administratörer ska kunna markera beställningar som skickade (VG)
-• Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G)
-
-• Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori (G)
-• Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten (G)
-• En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas (G)
+• Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G) **KLAR**
+• Från sidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara de produkter som tillhör en kategori (G) **KLAR**
+• Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten (G) **KLAR**
+• En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas (G) **KLAR (kommer ej till utcheckning utan att logga in)**
 • När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG)
-• Besökare ska kunna välja ett av flera fraktalternativ (G)
-• Tillgängliga fraktalternativ ska vara hämtade från databasen (G)
+• Besökare ska kunna välja ett av flera fraktalternativ (G) **KLAR**
+• Tillgängliga fraktalternativ ska vara hämtade från databasen (G) **KLAR**
 • Administratörer ska kunna redigera vilka kategorier en produkt tillhör (VG)
 • Administratörer ska kunna lägga till och ta bort produkter (VG)
 • Backendapplikationen måste ha en fungerande global felhantering (VG)
-• Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält (G)
+• Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält (G) **KLAR**
+
+## Avgränsningar
+
+STORLEK: Vi har flera storlekar på produkterna i vår databas, men då det blev alldeles för mycket jobb valde vi att bara hämta en av storlekarna, så att alla produkter på hemsidan tillhör "small". Det är även "small" som updateras i databasen när admin uppdaterar lagersaldot. Man kan jämföra det med att vi skulle haft en hemsida med bara one size. I framtiden skulle detta kunna utvecklas så att besökaren själv kan välja storlek och att alla uppdateras i databasen, men det har vi alltså valt att vänta med nu. 
+
+ORDER: När man klickar på "freight" inne i admins order-meny, ser man en sammanställning av ordern. Där finns front end med rubriken "shipped?". Denna del är inte i bruk, utan finns där för att det är snyggt. I version 2.0 skulle man kunna inplementera dessa checkboxes 
+för att uppdatera statusen på ordrar. 
+
+MODALER: I order och user på adminsidan kommer en modal upp med mer detaljerad information. Denna information är för tillfället hårdkodad, 
+och enbart till för att visa hur det kan komma att se ut i framtiden. Modalen för product fungerar att uppdatera lagersaldot med, enligt G-krav. 
+
+
