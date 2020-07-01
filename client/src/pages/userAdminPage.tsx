@@ -54,8 +54,6 @@ const UserAdmin = (props) => {
   const onClose = () => setOpen(false);
 
   useEffect(() => {
-    console.log("useeffect");
-
     axios
       .get("http://localhost:3002/api/users")
       .then((res) => {

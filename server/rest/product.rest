@@ -35,9 +35,3 @@ DELETE http://localhost:3002/api/product/5ec3c7c41201c80fe7f5e022
 // UPDATE PRODUCT
 PUT   http://localhost:3002/api/product/5ede799b3aaed446464f5c90
 Content-Type: application/json
-
-{
-  "inventory": {
-    "small": 50
-  }
-}

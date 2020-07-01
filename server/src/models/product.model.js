@@ -56,6 +56,10 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    quantity: {
+      type: String,
+      require: false,
+    },
   },
   {
     toJSON: {

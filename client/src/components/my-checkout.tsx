@@ -13,6 +13,7 @@ import CartContext from "../contexts/cart-context/context";
 import SignIn from "./login/sign-in";
 import { Cart } from "grommet-icons";
 
+
 const MyCheckOut = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);

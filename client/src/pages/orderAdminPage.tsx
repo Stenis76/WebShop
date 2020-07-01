@@ -40,7 +40,6 @@ const OrderAdmin = (props) => {
   const [results, setResults] = useState();
 
   useEffect(() => {
-    console.log("useeffect");
 
     axios
       .get("http://localhost:3002/api/order")
@@ -74,7 +73,7 @@ const OrderAdmin = (props) => {
     large: ["auto", "auto"],
     xlarge: ["auto", "auto"],
   };
-  console.log("data är sparad i state", results);
+  
 
   return (
     <Main>

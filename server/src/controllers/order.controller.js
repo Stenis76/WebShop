@@ -1,4 +1,5 @@
 const Order = require("../models/order.model");
+const {Product} = require("../models/product.model");
 
 // GET ALL
 getAllOrders = async (req, res) => {
@@ -20,15 +21,27 @@ getOneOrder = async (req, res) => {
 };
 
 // CREATE
-createNewOrder = (req, res) => {
-  const order = new Order(req.body);
-
-  order.save((err, order) => {
-    if (err) {
-      console.log("error", err);
-      res.status(400).json(err);
-    } else res.status(201).json(order);
-  });
+createNewOrder = async (req, res) => {
+  try {
+    const order = new Order(req.body);
+    order.products.forEach(product => {
+      product.inventory = undefined
+    });
+    await order.save()
+    // loop över produkterna i ordern och uppdatera lagerstatus
+    for (const product of order.products) {
+      console.log(product)
+      const dbProduct = await Product.findById(product._id)
+      dbProduct.inventory.small -= product.quantity
+      console.log(dbProduct)
+      await dbProduct.save()
+    }
+    console.log('trettiosju')
+    res.status(201).json(order);
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
 };
 
 // DELETE
