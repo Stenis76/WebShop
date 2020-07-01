@@ -1,5 +1,5 @@
 const Order = require("../models/order.model");
-const {Product} = require("../models/product.model");
+const { Product } = require("../models/product.model");
 
 // GET ALL
 getAllOrders = async (req, res) => {
@@ -36,7 +36,6 @@ createNewOrder = async (req, res) => {
       console.log(dbProduct)
       await dbProduct.save()
     }
-    console.log('trettiosju')
     res.status(201).json(order);
   } catch (err) {
     console.log(err)

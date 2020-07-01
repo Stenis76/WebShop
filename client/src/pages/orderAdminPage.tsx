@@ -1,17 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Main,
   Text,
   Heading,
   Box,
-  Image,
-  Button,
   Layer,
-  Form,
-  TextArea,
   CheckBox,
-  Grid,
-  ResponsiveContext,
   InfiniteScroll,
   Table,
   TableRow,
@@ -19,20 +13,17 @@ import {
   TableCell,
   TableHeader,
 } from "grommet";
-import FormFieldLabel from "../components/form-field-fabel";
 import axios from "axios";
-import { AddCircle, SubtractCircle, FormEdit, Split } from "grommet-icons";
 import AdminMenu from "../components/adminMenu";
-import Axios from "axios";
 
-const initialInputs = {
-  name: "",
-  imageUrl: "",
-  price: "",
-  size: [""],
-  season: [""],
-  description: "",
-};
+// const initialInputs = {
+//   name: "",
+//   imageUrl: "",
+//   price: "",
+//   size: [""],
+//   season: [""],
+//   description: "",
+// };
 const OrderAdmin = (props) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const onOpen = () => setOpen(true);
@@ -40,7 +31,6 @@ const OrderAdmin = (props) => {
   const [results, setResults] = useState();
 
   useEffect(() => {
-
     axios
       .get("http://localhost:3002/api/order")
       .then((res) => {
@@ -52,28 +42,27 @@ const OrderAdmin = (props) => {
       });
   }, []);
 
-  const step = 25;
+  // const step = 25;
 
-  const size = useContext(ResponsiveContext) as
-    | "small"
-    | "medium"
-    | "large"
-    | "xlarge";
+  // const size = useContext(ResponsiveContext) as
+  //   | "small"
+  //   | "medium"
+  //   | "large"
+  //   | "xlarge";
 
-  const columns = {
-    small: ["auto"],
-    medium: ["auto", "auto"],
-    large: ["auto", "auto"],
-    xlarge: ["auto", "auto"],
-  };
+  // const columns = {
+  //   small: ["auto"],
+  //   medium: ["auto", "auto"],
+  //   large: ["auto", "auto"],
+  //   xlarge: ["auto", "auto"],
+  // };
 
-  const rows = {
-    small: ["auto"],
-    medium: ["auto", "auto"],
-    large: ["auto", "auto"],
-    xlarge: ["auto", "auto"],
-  };
-  
+  // const rows = {
+  //   small: ["auto"],
+  //   medium: ["auto", "auto"],
+  //   large: ["auto", "auto"],
+  //   xlarge: ["auto", "auto"],
+  // };
 
   return (
     <Main>

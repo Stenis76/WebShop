@@ -19,7 +19,7 @@ const OrderConfirmation = (props: IProps) => {
   let outOfStock = false;
   let ChosenWares: any = "";
   let ChosenWareId: any = "";
-  let ChosenWareNumber: any;
+  // let ChosenWareNumber: any;
 
   {
     cart.map(
@@ -39,36 +39,7 @@ const OrderConfirmation = (props: IProps) => {
     if (item.inventory.small < 0) {
       outOfStock = true;
     }
-
-    fetch("http://localhost:3002/api/product")
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        for (let i = 0; i < res.length; i++) {
-          if (res[i]._id === item._id) {
-            ChosenWareNumber = i;
-            testing(item);
-          }
-        }
-      });
   }
-
-  const testing = async (item: any) => {
-    const product: any = item;
-    const res = await fetch(
-      "http://localhost:3002/api/product/" + ChosenWareId,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ product }),
-      }
-    );
-    const data = await res.json();
-    return data;
-  };
 
   return (
     <Box background="light-3" pad="large">
