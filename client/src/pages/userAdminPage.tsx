@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Main,
   Text,
@@ -6,7 +6,6 @@ import {
   Box,
   Layer,
   Form,
-  ResponsiveContext,
   InfiniteScroll,
   Table,
   TableRow,
@@ -17,45 +16,14 @@ import {
 import axios from "axios";
 import AdminMenu from "../components/adminMenu";
 
-const initialInputs = {
-  name: "",
-  imageUrl: "",
-  price: "",
-  size: [""],
-  season: [""],
-  description: "",
-};
-
 const UserAdmin = (props) => {
-  const size = useContext(ResponsiveContext) as
-    | "small"
-    | "medium"
-    | "large"
-    | "xlarge";
-
-  const columns = {
-    small: ["auto"],
-    medium: ["auto", "auto"],
-    large: ["auto", "auto"],
-    xlarge: ["auto", "auto"],
-  };
-
-  const rows = {
-    small: ["auto"],
-    medium: ["auto", "auto"],
-    large: ["auto", "auto"],
-    xlarge: ["auto", "auto"],
-  };
-
-  const step = 50;
+ 
   const [results, setResults] = useState();
   const [open, setOpen] = React.useState<boolean>(false);
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
 
   useEffect(() => {
-    console.log("useeffect");
-
     axios
       .get("http://localhost:3002/api/users")
       .then((res) => {

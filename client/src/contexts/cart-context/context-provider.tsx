@@ -51,7 +51,6 @@ const CartContextProvider: FC<IProps> = (props) => {
       freightId: selectedShippingMethod._id,
       paymentMethod: paymentMethod,
     };
-
     const options: RequestInit = {
       method: "POST",
       headers: {
@@ -124,7 +123,6 @@ const CartContextProvider: FC<IProps> = (props) => {
 
   const filterCartToServer = () => {
     const cartItemsId = cart.map((item) => item._id);
-    console.log("cartarray", cartItemsId);
   };
 
   return (

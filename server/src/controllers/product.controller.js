@@ -55,9 +55,7 @@ deleteOneProduct = async (req, res) => {
 
 // UPDATE
 updateProduct = async (req, res) => {
-  console.log("here nu körskhgsjhys kjbskjsb");
   try {
-    console.log(req.body);
     let productUpdate = await Product.findById(req.params.productId);
 
     productUpdate.inventory.small = req.body.inventory.small;
@@ -67,7 +65,6 @@ updateProduct = async (req, res) => {
 
     await productUpdate.save();
     res.status(200).json({ message: "ok" });
-    console.log("upsaterat");
   } catch (err) {
     res.status(500).json(err);
   }

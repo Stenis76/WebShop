@@ -26,7 +26,6 @@ newImage = (req, res) => {
     contentType: req.files.image.mimetype,
   });
 
-  console.log("UPLOAD", image);
   image.save((err, image) => {
     if (err) {
       res.status(400).json(err);
